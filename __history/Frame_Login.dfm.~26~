@@ -66,22 +66,32 @@ object AceLogin: TAceLogin
         Height = 160
         Align = alTop
       end
-      object Label1: TLabel
+      object JvHTLabel1: TJvHTLabel
         Left = 1
         Top = 161
         Width = 398
-        Height = 100
+        Height = 51
         Align = alTop
-        Alignment = taCenter
         Caption = 'Gym App'
+        BiDiMode = bdLeftToRight
+        ParentBiDiMode = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -80
+        Font.Height = -40
         Font.Name = 'Hammersmith One'
         Font.Style = []
         ParentFont = False
+        SuperSubScriptRatio = 0.666666666666666600
         Layout = tlCenter
-        ExplicitWidth = 328
+        ExplicitLeft = 50
+      end
+      object Label1: TLabel
+        Left = 1
+        Top = 212
+        Width = 398
+        Height = 53
+        Align = alTop
+        Caption = 'Label1'
       end
     end
   end

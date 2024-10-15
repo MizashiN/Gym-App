@@ -13,7 +13,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     Image1: TImage;
-    Label1: TLabel;
+    JvHTLabel1: TJvHTLabel;
   private
     { Private declarations }
   public
