@@ -2,13 +2,14 @@ program GymApp;
 
 uses
   Vcl.Forms,
-  Login in 'Login.pas' {Form7};
+  Login in 'Login.pas' {AceInitial},
+  Frame_Login in 'Frame_Login.pas' {AceLogin: TFrame};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm7, Form7);
+  Application.CreateForm(TAceInitial, AceInitial);
   Application.Run;
 end.

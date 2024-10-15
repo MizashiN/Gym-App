@@ -1,0 +1,29 @@
+object Frame1: TFrame1
+  Left = 0
+  Top = 0
+  Width = 550
+  Height = 774
+  Color = clBlack
+  ParentBackground = False
+  ParentColor = False
+  TabOrder = 0
+  object Shape1: TShape
+    AlignWithMargins = True
+    Left = 15
+    Top = 30
+    Width = 520
+    Height = 714
+    Margins.Left = 15
+    Margins.Top = 30
+    Margins.Right = 15
+    Margins.Bottom = 30
+    Align = alClient
+    Brush.Color = clBlack
+    Pen.Color = clWhite
+    Pen.Width = 2
+    ExplicitLeft = 40
+    ExplicitTop = 216
+    ExplicitWidth = 65
+    ExplicitHeight = 65
+  end
+end

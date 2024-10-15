@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2024/10/14 17:20:26.215,=C:\Users\fanma\OneDrive\Documents\Embarcadero\Studio\Projects\Unit7.pas</Transaction>
-    <Transaction>2024/10/14 17:23:45.497,C:\GitHub\Gym-App\Login.dfm=C:\Users\fanma\OneDrive\Documents\Embarcadero\Studio\Projects\Unit7.dfm</Transaction>
-    <Transaction>2024/10/14 17:23:45.497,C:\GitHub\Gym-App\Login.pas=C:\Users\fanma\OneDrive\Documents\Embarcadero\Studio\Projects\Unit7.pas</Transaction>
-    <Transaction>2024/10/14 17:24:38.117,C:\GitHub\Gym-App\GymApp.dproj=C:\Users\fanma\OneDrive\Documents\Embarcadero\Studio\Projects\Project4.dproj</Transaction>
+	<Transactions>
+    <Transaction>2024/10/14 17:20:26.000.215,=C:\Users\fanma\OneDrive\Documents\Embarcadero\Studio\Projects\Unit7.pas</Transaction>
+    <Transaction>2024/10/14 17:23:45.000.497,C:\Users\fanma\OneDrive\Documents\Embarcadero\Studio\Projects\Unit7.pas=C:\GitHub\Gym-App\Login.pas</Transaction>
+    <Transaction>2024/10/14 17:23:45.000.497,C:\Users\fanma\OneDrive\Documents\Embarcadero\Studio\Projects\Unit7.dfm=C:\GitHub\Gym-App\Login.dfm</Transaction>
+    <Transaction>2024/10/14 17:24:38.000.117,C:\Users\fanma\OneDrive\Documents\Embarcadero\Studio\Projects\Project4.dproj=C:\GitHub\Gym-App\GymApp.dproj</Transaction>
+    <Transaction>2024/10/15 17:23:59.537,=C:\GitHub\Gym-App\Unit1.pas</Transaction>
+    <Transaction>2024/10/15 17:24:58.037,C:\GitHub\Gym-App\Frame_Login.dfm=C:\GitHub\Gym-App\Unit1.dfm</Transaction>
+    <Transaction>2024/10/15 17:24:58.037,C:\GitHub\Gym-App\Frame_Login.pas=C:\GitHub\Gym-App\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

@@ -1,0 +1,42 @@
+object Form7: TForm7
+  Left = 0
+  Top = 0
+  Caption = 'Form7'
+  ClientHeight = 900
+  ClientWidth = 1600
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  inline Frame11: TFrame1
+    Left = 869
+    Top = 0
+    Width = 731
+    Height = 900
+    Align = alRight
+    Color = clBlack
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 0
+    ExplicitLeft = 1096
+    ExplicitWidth = 731
+    ExplicitHeight = 831
+    inherited Panel1: TPanel
+      Width = 671
+      Height = 840
+      ExplicitLeft = 30
+      ExplicitTop = 30
+      ExplicitWidth = 671
+      ExplicitHeight = 771
+      inherited Shape1: TShape
+        Width = 671
+        Height = 840
+      end
+    end
+  end
+end
