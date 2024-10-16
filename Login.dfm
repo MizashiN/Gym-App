@@ -2,8 +2,8 @@ object AceInitial: TAceInitial
   Left = 0
   Top = 0
   Caption = 'AceInitial'
-  ClientHeight = 768
-  ClientWidth = 1024
+  ClientHeight = 859
+  ClientWidth = 1596
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,29 +14,59 @@ object AceInitial: TAceInitial
   Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
-  inline Login: TAceLogin
-    Left = 536
+  inline AceLogin1: TAceLogin
+    Left = 1021
     Top = 0
-    Width = 488
-    Height = 768
+    Width = 575
+    Height = 859
     Align = alRight
     Color = clBlack
     ParentBackground = False
     ParentColor = False
     TabOrder = 0
-    ExplicitLeft = 536
-    ExplicitWidth = 488
-    ExplicitHeight = 768
+    ExplicitLeft = 1021
+    ExplicitTop = -28
     inherited Panel1: TPanel
-      Width = 428
-      Height = 708
-      ExplicitLeft = 30
-      ExplicitTop = 30
-      ExplicitWidth = 671
-      ExplicitHeight = 771
+      Height = 789
+      ExplicitHeight = 810
       inherited Shape1: TShape
-        Width = 428
-        Height = 708
+        Height = 789
+      end
+      inherited Panel2: TPanel
+        Height = 724
+        ExplicitTop = 25
+        ExplicitHeight = 745
+        inherited Label1: TLabel
+          ExplicitLeft = 0
+          ExplicitTop = 220
+          ExplicitWidth = 357
+        end
+        inherited Panel3: TPanel
+          ExplicitTop = 328
+          inherited Label2: TLabel
+            ExplicitTop = 177
+            ExplicitWidth = 144
+          end
+          inherited Label3: TLabel
+            ExplicitTop = 52
+            ExplicitWidth = 69
+          end
+          inherited Label4: TLabel
+            ExplicitLeft = 94
+            ExplicitTop = 375
+          end
+          inherited Panel6: TPanel
+            ExplicitLeft = 3
+            ExplicitTop = 307
+            ExplicitWidth = 379
+          end
+          inherited Panel5: TPanel
+            ExplicitTop = 219
+          end
+          inherited Panel4: TPanel
+            ExplicitTop = 94
+          end
+        end
       end
     end
   end

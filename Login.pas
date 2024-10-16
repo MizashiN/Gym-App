@@ -8,7 +8,7 @@ uses
 
 type
   TAceInitial = class(TForm)
-    Login: TAceLogin;
+    AceLogin1: TAceLogin;
   private
     { Private declarations }
   public
