@@ -94,8 +94,10 @@ begin
   // Esconde e desabilita ambos os frames
   AceLogin.Visible := False;
   AceLogin.Enabled := False;
+
   AceRegister.Visible := False;
   AceRegister.Enabled := False;
+
 
   // Mostra o frame alvo
   TargetFrame.Visible := True;

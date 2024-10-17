@@ -568,9 +568,9 @@ object AceLogin: TAceLogin
       object Panel3: TPanel
         AlignWithMargins = True
         Left = 45
-        Top = 331
+        Top = 352
         Width = 385
-        Height = 374
+        Height = 353
         Margins.Left = 45
         Margins.Top = 0
         Margins.Right = 45

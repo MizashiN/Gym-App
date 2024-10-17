@@ -9,8 +9,6 @@ function CheckIfUserExists(nameUser: TEdit): Boolean;
 function CheckIfUserAndPasswordIsCorrect(name_user, passwordUser: TEdit): Boolean;
 procedure SignUpUser(nameUser, passwordUser: TEdit);
 function EncryptPassword(const passwordUser: string): string;
-function CheckPasswordCharacters(passwordEdit, passwordConfirmEdit: TEdit): Boolean;
-function CheckUserCharacters(userEdit: TEdit): Boolean;
 
 implementation
 

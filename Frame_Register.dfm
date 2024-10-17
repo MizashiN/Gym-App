@@ -57,7 +57,7 @@ object AceRegister: TAceRegister
         Left = 0
         Top = 0
         Width = 475
-        Height = 220
+        Height = 193
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
@@ -549,7 +549,7 @@ object AceRegister: TAceRegister
       end
       object Label1: TLabel
         Left = 0
-        Top = 220
+        Top = 193
         Width = 475
         Height = 75
         Align = alTop
@@ -567,9 +567,9 @@ object AceRegister: TAceRegister
       object Panel3: TPanel
         AlignWithMargins = True
         Left = 45
-        Top = 298
+        Top = 264
         Width = 385
-        Height = 467
+        Height = 501
         Margins.Left = 45
         Margins.Top = 0
         Margins.Right = 45
@@ -597,7 +597,6 @@ object AceRegister: TAceRegister
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 225
           ExplicitWidth = 270
         end
         object Label3: TLabel
@@ -641,7 +640,6 @@ object AceRegister: TAceRegister
           OnMouseEnter = HaveAccountSignInButtonMouseEnter
           OnMouseLeave = HaveAccountSignInButtonMouseLeave
           ExplicitLeft = 160
-          ExplicitTop = 417
           ExplicitWidth = 220
         end
         object Label4: TLabel
@@ -661,10 +659,9 @@ object AceRegister: TAceRegister
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 114
           ExplicitWidth = 144
         end
-        object Label5: TLabel
+        object PasswordWarningLabel: TLabel
           AlignWithMargins = True
           Left = 0
           Top = 358
@@ -689,7 +686,7 @@ object AceRegister: TAceRegister
           ExplicitLeft = 221
           ExplicitWidth = 159
         end
-        object Label6: TLabel
+        object UserWarningLabel: TLabel
           AlignWithMargins = True
           Left = 0
           Top = 108
@@ -725,7 +722,6 @@ object AceRegister: TAceRegister
           Color = clNone
           ParentBackground = False
           TabOrder = 0
-          ExplicitTop = 275
           object Shape3: TShape
             AlignWithMargins = True
             Left = 3
@@ -838,7 +834,6 @@ object AceRegister: TAceRegister
           ButtonStyleHot.BorderColor = 10250544
           ButtonStyleHot.FontColor = clWhite
           ButtonStyleHot.ButtonColor = 10250544
-          ExplicitTop = 348
         end
         object Panel6: TPanel
           Left = 0
@@ -851,7 +846,6 @@ object AceRegister: TAceRegister
           Color = clNone
           ParentBackground = False
           TabOrder = 3
-          ExplicitTop = 160
           object Shape4: TShape
             AlignWithMargins = True
             Left = 3
@@ -864,7 +858,7 @@ object AceRegister: TAceRegister
             Pen.Width = 2
             ExplicitHeight = 38
           end
-          object PasswordEdit: TEdit
+          object SignInPasswordEdit: TEdit
             AlignWithMargins = True
             Left = 10
             Top = 16

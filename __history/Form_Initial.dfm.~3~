@@ -11605,12 +11605,6 @@ object AceInitial: TAceInitial
             inherited Label4: TLabel
               Width = 344
             end
-            inherited PasswordWarningLabel: TLabel
-              Width = 345
-            end
-            inherited UserWarningLabel: TLabel
-              Width = 345
-            end
             inherited Panel5: TPanel
               Width = 350
               ExplicitWidth = 350
@@ -11647,7 +11641,7 @@ object AceInitial: TAceInitial
                 Width = 344
                 ExplicitWidth = 344
               end
-              inherited SignInPasswordEdit: TEdit
+              inherited PasswordEdit: TEdit
                 Width = 330
                 ExplicitWidth = 330
               end
@@ -11692,29 +11686,28 @@ object AceInitial: TAceInitial
             Width = 440
           end
           inherited Panel3: TPanel
-            Top = 351
+            Top = 372
             Width = 350
-            ExplicitTop = 351
+            ExplicitTop = 372
             ExplicitWidth = 350
             inherited Label2: TLabel
+              Top = 128
               Width = 344
             end
             inherited Label3: TLabel
               Width = 344
             end
             inherited DontHaveAccountSignUpButton: TLabel
+              Left = 0
+              Top = 324
               Width = 345
               OnClick = AceLoginDontHaveAccountSignUpButtonClick
-              ExplicitLeft = 59
-            end
-            inherited UserPassWarningLabel: TLabel
-              Width = 345
-              OnMouseEnter = nil
-              OnMouseLeave = nil
-              ExplicitLeft = 154
+              ExplicitLeft = 153
             end
             inherited Panel5: TPanel
+              Top = 170
               Width = 350
+              ExplicitTop = 170
               ExplicitWidth = 350
               inherited Shape3: TShape
                 Width = 344
@@ -11723,11 +11716,15 @@ object AceInitial: TAceInitial
               inherited PasswordEdit: TEdit
                 Width = 330
                 Text = ''
+                ExplicitLeft = 10
                 ExplicitWidth = 330
+                ExplicitHeight = 37
               end
             end
             inherited Panel4: TPanel
+              Top = 45
               Width = 350
+              ExplicitTop = 45
               ExplicitWidth = 350
               inherited Shape2: TShape
                 Width = 344
@@ -11736,12 +11733,16 @@ object AceInitial: TAceInitial
               inherited UserEdit: TEdit
                 Width = 330
                 Text = ''
+                ExplicitLeft = 10
+                ExplicitTop = 13
                 ExplicitWidth = 330
               end
             end
             inherited SignInButton: TStyledButton
+              Top = 243
               Width = 344
               OnClick = AceLoginSignInButtonClick
+              ExplicitTop = 243
               ExplicitWidth = 344
             end
           end

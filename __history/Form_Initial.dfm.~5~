@@ -11647,7 +11647,7 @@ object AceInitial: TAceInitial
                 Width = 344
                 ExplicitWidth = 344
               end
-              inherited SignInPasswordEdit: TEdit
+              inherited PasswordEdit: TEdit
                 Width = 330
                 ExplicitWidth = 330
               end

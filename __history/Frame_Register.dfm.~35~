@@ -1,8 +1,8 @@
-object AceLogin: TAceLogin
+object AceRegister: TAceRegister
   Left = 0
   Top = 0
   Width = 575
-  Height = 880
+  Height = 900
   Color = clBlack
   ParentBackground = False
   ParentColor = False
@@ -12,7 +12,7 @@ object AceLogin: TAceLogin
     Left = 30
     Top = 30
     Width = 515
-    Height = 810
+    Height = 830
     Margins.Left = 30
     Margins.Top = 30
     Margins.Right = 30
@@ -26,7 +26,7 @@ object AceLogin: TAceLogin
       Left = 0
       Top = 0
       Width = 515
-      Height = 810
+      Height = 830
       Margins.Left = 0
       Margins.Top = 0
       Margins.Right = 0
@@ -42,7 +42,7 @@ object AceLogin: TAceLogin
       Left = 20
       Top = 25
       Width = 475
-      Height = 745
+      Height = 765
       Margins.Left = 20
       Margins.Top = 25
       Margins.Right = 20
@@ -57,7 +57,7 @@ object AceLogin: TAceLogin
         Left = 0
         Top = 0
         Width = 475
-        Height = 220
+        Height = 193
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
@@ -546,35 +546,34 @@ object AceLogin: TAceLogin
           65000A4587A10C40A1E830940128141D86320085A2C35006A0507418CA00148A
           0E43198042D161280350283A0C65000A4587A10C40A1E830FE1FA3A7B74B8986
           51820000000049454E44AE426082}
-        ExplicitTop = -3
       end
       object Label1: TLabel
         Left = 0
-        Top = 220
+        Top = 193
         Width = 475
-        Height = 108
+        Height = 75
         Align = alTop
         Alignment = taCenter
         Caption = 'Gym App'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -87
+        Font.Height = -60
         Font.Name = 'Hammersmith One'
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 357
+        ExplicitWidth = 245
       end
       object Panel3: TPanel
         AlignWithMargins = True
         Left = 45
-        Top = 331
+        Top = 264
         Width = 385
-        Height = 374
+        Height = 501
         Margins.Left = 45
         Margins.Top = 0
         Margins.Right = 45
-        Margins.Bottom = 40
+        Margins.Bottom = 0
         Align = alBottom
         BevelOuter = bvNone
         Caption = 'Panel2'
@@ -584,13 +583,13 @@ object AceLogin: TAceLogin
         object Label2: TLabel
           AlignWithMargins = True
           Left = 3
-          Top = 128
+          Top = 253
           Width = 379
           Height = 42
-          Margins.Top = 20
+          Margins.Top = 10
           Margins.Bottom = 0
           Align = alTop
-          Caption = 'Password'
+          Caption = 'Confirm Password'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -33
@@ -598,7 +597,7 @@ object AceLogin: TAceLogin
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 144
+          ExplicitWidth = 270
         end
         object Label3: TLabel
           AlignWithMargins = True
@@ -618,10 +617,10 @@ object AceLogin: TAceLogin
           Layout = tlCenter
           ExplicitWidth = 69
         end
-        object DontHaveAccountSignUpButton: TLabel
+        object HaveAccountSignInButton: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 344
+          Top = 469
           Width = 380
           Height = 26
           Cursor = crHandPoint
@@ -631,23 +630,41 @@ object AceLogin: TAceLogin
           Margins.Bottom = 0
           Align = alTop
           Alignment = taRightJustify
-          Caption = 'Don'#8217't have account? Sign Up'
+          Caption = 'Have account? Sign In'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -21
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
-          OnMouseEnter = DontHaveAccountSignUpButtonMouseEnter
-          OnMouseLeave = DontHaveAccountSignUpButtonMouseLeave
-          ExplicitLeft = 94
-          ExplicitTop = 324
-          ExplicitWidth = 286
+          OnMouseEnter = HaveAccountSignInButtonMouseEnter
+          OnMouseLeave = HaveAccountSignInButtonMouseLeave
+          ExplicitLeft = 160
+          ExplicitWidth = 220
         end
-        object UserPassWarningLabel: TLabel
+        object Label4: TLabel
+          AlignWithMargins = True
+          Left = 3
+          Top = 138
+          Width = 379
+          Height = 42
+          Margins.Top = 10
+          Margins.Bottom = 0
+          Align = alTop
+          Caption = 'Password'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -33
+          Font.Name = 'Hammersmith One'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+          ExplicitWidth = 144
+        end
+        object PasswordLabel: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 233
+          Top = 358
           Width = 380
           Height = 20
           Cursor = crHandPoint
@@ -657,19 +674,46 @@ object AceLogin: TAceLogin
           Margins.Bottom = 0
           Align = alTop
           Alignment = taRightJustify
-          Caption = 'User or Password is wrong'
+          Caption = 'Passwords isn'#39't equal'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 14266242
           Font.Height = -16
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
-          ExplicitLeft = 189
-          ExplicitWidth = 191
+          OnMouseEnter = HaveAccountSignInButtonMouseEnter
+          OnMouseLeave = HaveAccountSignInButtonMouseLeave
+          ExplicitLeft = 221
+          ExplicitWidth = 159
+        end
+        object UserWarningLabel: TLabel
+          AlignWithMargins = True
+          Left = 0
+          Top = 108
+          Width = 380
+          Height = 20
+          Cursor = crHandPoint
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 5
+          Margins.Bottom = 0
+          Align = alTop
+          Alignment = taRightJustify
+          Caption = 'Your user don'#39't have five words and one number'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 14266242
+          Font.Height = -16
+          Font.Name = 'Hammersmith One'
+          Font.Style = []
+          ParentFont = False
+          OnMouseEnter = HaveAccountSignInButtonMouseEnter
+          OnMouseLeave = HaveAccountSignInButtonMouseLeave
+          ExplicitLeft = 26
+          ExplicitWidth = 354
         end
         object Panel5: TPanel
           Left = 0
-          Top = 170
+          Top = 295
           Width = 385
           Height = 63
           Align = alTop
@@ -690,7 +734,7 @@ object AceLogin: TAceLogin
             Pen.Width = 2
             ExplicitHeight = 38
           end
-          object PasswordEdit: TEdit
+          object ConfirmPasswordEdit: TEdit
             AlignWithMargins = True
             Left = 10
             Top = 16
@@ -711,7 +755,6 @@ object AceLogin: TAceLogin
             ParentFont = False
             PasswordChar = '*'
             TabOrder = 0
-            Text = '0'
           end
         end
         object Panel4: TPanel
@@ -758,18 +801,17 @@ object AceLogin: TAceLogin
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            Text = 'Edit1'
           end
         end
-        object SignInButton: TStyledButton
+        object SignUpButton: TStyledButton
           AlignWithMargins = True
           Left = 3
-          Top = 263
+          Top = 388
           Width = 379
           Height = 78
           Margins.Top = 10
           Align = alTop
-          Caption = 'Sign In'
+          Caption = 'Sign Up'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -35
@@ -792,7 +834,52 @@ object AceLogin: TAceLogin
           ButtonStyleHot.BorderColor = 10250544
           ButtonStyleHot.FontColor = clWhite
           ButtonStyleHot.ButtonColor = 10250544
-          ExplicitTop = 243
+        end
+        object Panel6: TPanel
+          Left = 0
+          Top = 180
+          Width = 385
+          Height = 63
+          Align = alTop
+          BevelOuter = bvNone
+          Caption = '0'
+          Color = clNone
+          ParentBackground = False
+          TabOrder = 3
+          object Shape4: TShape
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 379
+            Height = 57
+            Align = alClient
+            Brush.Color = clBlack
+            Pen.Color = clWhite
+            Pen.Width = 2
+            ExplicitHeight = 38
+          end
+          object PasswordEdit: TEdit
+            AlignWithMargins = True
+            Left = 10
+            Top = 16
+            Width = 365
+            Height = 37
+            Margins.Left = 10
+            Margins.Top = 16
+            Margins.Right = 10
+            Margins.Bottom = 10
+            Align = alClient
+            BorderStyle = bsNone
+            Color = clBlack
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -27
+            Font.Name = 'Hammersmith One'
+            Font.Style = []
+            ParentFont = False
+            PasswordChar = '*'
+            TabOrder = 0
+          end
         end
       end
     end

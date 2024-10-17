@@ -35,8 +35,6 @@ implementation
 procedure TAceInitial.AceLoginDontHaveAccountSignUpButtonClick(Sender: TObject);
 begin
 SwitchToFrame(AceRegister)
-PasswordWarningLabel.Visible := False;
-UserWarningLabel.Visible := False;
 end;
 
 procedure TAceInitial.AceLoginSignInButtonClick(Sender: TObject);
@@ -54,14 +52,14 @@ end;
 procedure TAceInitial.AceRegisterHaveAccountSignInButtonClick(Sender: TObject);
 begin
 SwitchToFrame(AceLogin)
-UserPassWarningLabel.Visible := False;
 end;
 
 procedure TAceInitial.AceRegisterSignUpButtonClick(Sender: TObject);
 begin
-  if CheckUserCharacter(UserEdit) and CheckPasswordCharacter(SignUpPasswordEdit, ConfirmPasswordEdit) then
+  if CheckUserCharacter and CheckPasswordCharacter then
     begin
-      if not CheckIfUserExists(UserEdit) then
+      begin
+      if CheckIfUserExists(UserEdit) == True then
       begin
         SignUpUser(UserEdit, ConfirmPasswordEdit);
       end
@@ -86,7 +84,6 @@ end;
 procedure TAceInitial.FormCreate(Sender: TObject);
 begin
 SwitchToFrame(AceLogin)
-UserPassWarningLabel.Visible := False;
 end;
 
 procedure TAceInitial.SwitchToFrame(TargetFrame: TFrame);
@@ -94,8 +91,10 @@ begin
   // Esconde e desabilita ambos os frames
   AceLogin.Visible := False;
   AceLogin.Enabled := False;
+
   AceRegister.Visible := False;
   AceRegister.Enabled := False;
+
 
   // Mostra o frame alvo
   TargetFrame.Visible := True;

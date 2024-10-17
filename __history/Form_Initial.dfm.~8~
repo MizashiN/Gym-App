@@ -11709,6 +11709,7 @@ object AceInitial: TAceInitial
             end
             inherited UserPassWarningLabel: TLabel
               Width = 345
+              Visible = False
               OnMouseEnter = nil
               OnMouseLeave = nil
               ExplicitLeft = 154

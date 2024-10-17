@@ -568,9 +568,9 @@ object AceLogin: TAceLogin
       object Panel3: TPanel
         AlignWithMargins = True
         Left = 45
-        Top = 331
+        Top = 352
         Width = 385
-        Height = 374
+        Height = 353
         Margins.Left = 45
         Margins.Top = 0
         Margins.Right = 45
@@ -621,7 +621,7 @@ object AceLogin: TAceLogin
         object DontHaveAccountSignUpButton: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 344
+          Top = 340
           Width = 380
           Height = 26
           Cursor = crHandPoint
@@ -649,7 +649,7 @@ object AceLogin: TAceLogin
           Left = 0
           Top = 233
           Width = 380
-          Height = 20
+          Height = 16
           Cursor = crHandPoint
           Margins.Left = 0
           Margins.Top = 0
@@ -657,15 +657,13 @@ object AceLogin: TAceLogin
           Margins.Bottom = 0
           Align = alTop
           Alignment = taRightJustify
-          Caption = 'User or Password is wrong'
+          Caption = 'Passwords isn'#39't equal'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 14266242
           Font.Height = -16
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
-          ExplicitLeft = 189
-          ExplicitWidth = 191
         end
         object Panel5: TPanel
           Left = 0
@@ -764,7 +762,7 @@ object AceLogin: TAceLogin
         object SignInButton: TStyledButton
           AlignWithMargins = True
           Left = 3
-          Top = 263
+          Top = 259
           Width = 379
           Height = 78
           Margins.Top = 10

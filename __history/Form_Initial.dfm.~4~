@@ -11605,7 +11605,7 @@ object AceInitial: TAceInitial
             inherited Label4: TLabel
               Width = 344
             end
-            inherited PasswordWarningLabel: TLabel
+            inherited PasswordLabel: TLabel
               Width = 345
             end
             inherited UserWarningLabel: TLabel
@@ -11647,7 +11647,7 @@ object AceInitial: TAceInitial
                 Width = 344
                 ExplicitWidth = 344
               end
-              inherited SignInPasswordEdit: TEdit
+              inherited PasswordEdit: TEdit
                 Width = 330
                 ExplicitWidth = 330
               end

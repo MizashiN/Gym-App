@@ -29,9 +29,9 @@ type
     Label4: TLabel;
     Panel6: TPanel;
     Shape4: TShape;
-    SignInPasswordEdit: TEdit;
-    PasswordWarningLabel: TLabel;
-    UserWarningLabel: TLabel;
+    PasswordEdit: TEdit;
+    PasswordLabel: TLabel;
+    Label6: TLabel;
     procedure HaveAccountSignInButtonMouseEnter(Sender: TObject);
     procedure HaveAccountSignInButtonMouseLeave(Sender: TObject);
   private

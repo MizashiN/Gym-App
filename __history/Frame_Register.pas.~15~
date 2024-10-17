@@ -29,7 +29,7 @@ type
     Label4: TLabel;
     Panel6: TPanel;
     Shape4: TShape;
-    SignInPasswordEdit: TEdit;
+    PasswordEdit: TEdit;
     PasswordWarningLabel: TLabel;
     UserWarningLabel: TLabel;
     procedure HaveAccountSignInButtonMouseEnter(Sender: TObject);

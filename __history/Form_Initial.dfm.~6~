@@ -11607,9 +11607,11 @@ object AceInitial: TAceInitial
             end
             inherited PasswordWarningLabel: TLabel
               Width = 345
+              Visible = False
             end
             inherited UserWarningLabel: TLabel
               Width = 345
+              Visible = False
             end
             inherited Panel5: TPanel
               Width = 350
@@ -11647,7 +11649,7 @@ object AceInitial: TAceInitial
                 Width = 344
                 ExplicitWidth = 344
               end
-              inherited SignInPasswordEdit: TEdit
+              inherited PasswordEdit: TEdit
                 Width = 330
                 ExplicitWidth = 330
               end
