@@ -30,8 +30,6 @@ type
     Panel6: TPanel;
     Shape4: TShape;
     PasswordEdit: TEdit;
-    Label5: TLabel;
-    Label6: TLabel;
     procedure HaveAccountSignInButtonMouseEnter(Sender: TObject);
     procedure HaveAccountSignInButtonMouseLeave(Sender: TObject);
   private

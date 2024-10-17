@@ -621,7 +621,7 @@ object AceRegister: TAceRegister
         object HaveAccountSignInButton: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 469
+          Top = 449
           Width = 380
           Height = 26
           Cursor = crHandPoint
@@ -667,31 +667,6 @@ object AceRegister: TAceRegister
         object Label5: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 358
-          Width = 380
-          Height = 20
-          Cursor = crHandPoint
-          Margins.Left = 0
-          Margins.Top = 0
-          Margins.Right = 5
-          Margins.Bottom = 0
-          Align = alTop
-          Alignment = taRightJustify
-          Caption = 'Passwords isn'#39't equal'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = 14266242
-          Font.Height = -16
-          Font.Name = 'Hammersmith One'
-          Font.Style = []
-          ParentFont = False
-          OnMouseEnter = HaveAccountSignInButtonMouseEnter
-          OnMouseLeave = HaveAccountSignInButtonMouseLeave
-          ExplicitLeft = 221
-          ExplicitWidth = 159
-        end
-        object Label6: TLabel
-          AlignWithMargins = True
-          Left = 0
           Top = 108
           Width = 380
           Height = 20
@@ -702,17 +677,17 @@ object AceRegister: TAceRegister
           Margins.Bottom = 0
           Align = alTop
           Alignment = taRightJustify
-          Caption = 'Your user don'#39't have five words and one number'
+          Caption = 'Have account? Sign In'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = 14266242
+          Font.Color = clWhite
           Font.Height = -16
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
           OnMouseEnter = HaveAccountSignInButtonMouseEnter
           OnMouseLeave = HaveAccountSignInButtonMouseLeave
-          ExplicitLeft = 26
-          ExplicitWidth = 354
+          ExplicitLeft = 216
+          ExplicitWidth = 164
         end
         object Panel5: TPanel
           Left = 0
@@ -810,7 +785,7 @@ object AceRegister: TAceRegister
         object SignUpButton: TStyledButton
           AlignWithMargins = True
           Left = 3
-          Top = 388
+          Top = 368
           Width = 379
           Height = 78
           Margins.Top = 10
