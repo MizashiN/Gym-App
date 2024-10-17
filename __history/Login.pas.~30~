@@ -1,0 +1,40 @@
+unit Login;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Frame_Login, Vcl.ExtCtrls,
+  Vcl.Imaging.jpeg, Frame_Register;
+
+type
+  TAceInitial = class(TForm)
+    AceLogin: TAceLogin;
+    WomanBackgroundImage: TImage;
+    Panel1: TPanel;
+    AceRegister: TAceRegister;
+
+  private
+    { Private declarations }
+    procedure SwitchToFrame(TargetFrame: TFrame);
+  public
+    { Public declarations }
+  end;
+
+var
+  AceInitial: TAceInitial;
+
+implementation
+
+{$R *.dfm}
+procedure TAceInitial.SwitchToFrame(TargetFrame: TFrame);
+begin
+  // Esconde ambos os frames
+  Acelogin.Visible := False;
+  AceRegister.Visible := False;
+
+  // Mostra o frame alvo
+  TargetFrame.Visible := True;
+end;
+
+end.

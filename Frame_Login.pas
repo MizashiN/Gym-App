@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  JvExStdCtrls, JvHtControls, dxGDIPlusClasses, JvEdit, Vcl.Buttons;
+  Vcl.Buttons, Vcl.Imaging.pngimage, Vcl.ButtonStylesAttributes,
+  Vcl.StyledButton;
 
 type
   TAceLogin = class(TFrame)
@@ -17,16 +18,16 @@ type
     Label2: TLabel;
     Label1: TLabel;
     Label3: TLabel;
-    Panel6: TPanel;
-    Shape4: TShape;
-    SpeedButton1: TSpeedButton;
-    Label4: TLabel;
+    DontHaveAccountSignUpButton: TLabel;
     Panel5: TPanel;
     Shape3: TShape;
-    Edit1: TEdit;
+    PasswordEdit: TEdit;
     Panel4: TPanel;
     Shape2: TShape;
-    Edit2: TEdit;
+    UserEdit: TEdit;
+    SignInButton: TStyledButton;
+    procedure DontHaveAccountSignUpButtonMouseEnter(Sender: TObject);
+    procedure DontHaveAccountSignUpButtonMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,5 +37,15 @@ type
 implementation
 
 {$R *.dfm}
+
+procedure TAceLogin.DontHaveAccountSignUpButtonMouseEnter(Sender: TObject);
+begin
+  DontHaveAccountSignUpButton.Font.Color := $00D6AA7A;
+end;
+
+procedure TAceLogin.DontHaveAccountSignUpButtonMouseLeave(Sender: TObject);
+begin
+  DontHaveAccountSignUpButton.Font.Color := clWhite;
+end;
 
 end.
