@@ -15,13 +15,13 @@
     <Transaction>2024/10/16 22:12:36.000.597,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Register.dfm=C:\Users\Parafal\Documents\GitHub\Gym-App\Frame_Register.dfm</Transaction>
     <Transaction>2024/10/17 16:52:32.000.575,=C:\GitHub\Gym-App\Global_Functions.pas</Transaction>
     <Transaction>2024/10/17 16:52:38.000.638,=C:\GitHub\Gym-App\DM_Connection.pas</Transaction>
-    <Transaction>2024/10/17 22:29:42.710,=C:\Users\Parafal\Documents\GitHub\Gym-App\Unit1.pas</Transaction>
-    <Transaction>2024/10/17 23:13:40.452,=C:\Users\Parafal\Documents\GitHub\Gym-App\Unit1.pas</Transaction>
-    <Transaction>2024/10/17 23:13:49.702,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Home.pas=C:\Users\Parafal\Documents\GitHub\Gym-App\Unit1.pas</Transaction>
-    <Transaction>2024/10/17 23:13:49.702,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Home.dfm=C:\Users\Parafal\Documents\GitHub\Gym-App\Unit1.dfm</Transaction>
-    <Transaction>2024/10/17 23:14:31.257,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Principal.pas=C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Home.pas</Transaction>
-    <Transaction>2024/10/17 23:14:31.257,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Principal.dfm=C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Home.dfm</Transaction>
-    <Transaction>2024/10/17 23:14:49.076,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Main.pas=C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Principal.pas</Transaction>
-    <Transaction>2024/10/17 23:14:49.076,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Main.dfm=C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Principal.dfm</Transaction>
+    <Transaction>2024/10/17 22:29:42.000.710,=C:\Users\Parafal\Documents\GitHub\Gym-App\Unit1.pas</Transaction>
+    <Transaction>2024/10/17 23:13:40.000.452,=C:\Users\Parafal\Documents\GitHub\Gym-App\Unit1.pas</Transaction>
+    <Transaction>2024/10/17 23:13:49.000.702,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Home.pas=C:\Users\Parafal\Documents\GitHub\Gym-App\Unit1.pas</Transaction>
+    <Transaction>2024/10/17 23:13:49.000.702,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Home.dfm=C:\Users\Parafal\Documents\GitHub\Gym-App\Unit1.dfm</Transaction>
+    <Transaction>2024/10/17 23:14:31.000.257,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Principal.pas=C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Home.pas</Transaction>
+    <Transaction>2024/10/17 23:14:31.000.257,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Principal.dfm=C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Home.dfm</Transaction>
+    <Transaction>2024/10/17 23:14:49.000.076,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Main.pas=C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Principal.pas</Transaction>
+    <Transaction>2024/10/17 23:14:49.000.076,C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Main.dfm=C:\Users\Parafal\Documents\GitHub\Gym-App\Form_Principal.dfm</Transaction>
   </Transactions>
 </BorlandProject>

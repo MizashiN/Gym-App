@@ -26,6 +26,7 @@ type
     SignInUserEdit: TEdit;
     SignInButton: TStyledButton;
     UserPassWarningLabel: TLabel;
+    Label4: TLabel;
     procedure DontHaveAccountSignUpButtonMouseEnter(Sender: TObject);
     procedure DontHaveAccountSignUpButtonMouseLeave(Sender: TObject);
   private

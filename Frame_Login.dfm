@@ -553,25 +553,25 @@ object AceSignIn: TAceSignIn
         Left = 0
         Top = 220
         Width = 475
-        Height = 108
+        Height = 86
         Align = alTop
         Alignment = taCenter
         Caption = 'Gym App'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -87
+        Font.Height = -73
         Font.Name = 'Hammersmith One'
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 357
+        ExplicitTop = 223
       end
       object Panel3: TPanel
         AlignWithMargins = True
         Left = 45
-        Top = 349
+        Top = 336
         Width = 385
-        Height = 374
+        Height = 387
         Margins.Left = 45
         Margins.Top = 0
         Margins.Right = 45
@@ -582,14 +582,13 @@ object AceSignIn: TAceSignIn
         Color = clNone
         ParentBackground = False
         TabOrder = 0
-        ExplicitTop = 331
         object Label2: TLabel
           AlignWithMargins = True
           Left = 3
-          Top = 128
+          Top = 138
           Width = 379
           Height = 42
-          Margins.Top = 20
+          Margins.Top = 10
           Margins.Bottom = 0
           Align = alTop
           Caption = 'Password'
@@ -600,6 +599,7 @@ object AceSignIn: TAceSignIn
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
+          ExplicitTop = 128
           ExplicitWidth = 144
         end
         object Label3: TLabel
@@ -623,7 +623,7 @@ object AceSignIn: TAceSignIn
         object DontHaveAccountSignUpButton: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 344
+          Top = 354
           Width = 380
           Height = 26
           Cursor = crHandPoint
@@ -643,15 +643,15 @@ object AceSignIn: TAceSignIn
           OnMouseEnter = DontHaveAccountSignUpButtonMouseEnter
           OnMouseLeave = DontHaveAccountSignUpButtonMouseLeave
           ExplicitLeft = 94
+          ExplicitTop = 344
           ExplicitWidth = 286
         end
         object UserPassWarningLabel: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 233
+          Top = 108
           Width = 380
           Height = 20
-          Cursor = crHandPoint
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 5
@@ -665,12 +665,35 @@ object AceSignIn: TAceSignIn
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
-          ExplicitLeft = 189
-          ExplicitWidth = 191
+          ExplicitLeft = 24
+        end
+        object Label4: TLabel
+          AlignWithMargins = True
+          Left = 0
+          Top = 243
+          Width = 380
+          Height = 20
+          Cursor = crHandPoint
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 5
+          Margins.Bottom = 0
+          Align = alTop
+          Alignment = taRightJustify
+          Caption = 'Forget the password?'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -16
+          Font.Name = 'Hammersmith One'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+          ExplicitLeft = 221
+          ExplicitWidth = 159
         end
         object Panel5: TPanel
           Left = 0
-          Top = 170
+          Top = 180
           Width = 385
           Height = 63
           Align = alTop
@@ -679,6 +702,7 @@ object AceSignIn: TAceSignIn
           Color = clNone
           ParentBackground = False
           TabOrder = 1
+          ExplicitTop = 170
           object Shape3: TShape
             AlignWithMargins = True
             Left = 3
@@ -763,7 +787,7 @@ object AceSignIn: TAceSignIn
         object SignInButton: TStyledButton
           AlignWithMargins = True
           Left = 3
-          Top = 263
+          Top = 273
           Width = 379
           Height = 78
           Margins.Top = 10
@@ -791,6 +815,7 @@ object AceSignIn: TAceSignIn
           ButtonStyleHot.BorderColor = 10250544
           ButtonStyleHot.FontColor = clWhite
           ButtonStyleHot.ButtonColor = 10250544
+          ExplicitTop = 263
         end
       end
     end
