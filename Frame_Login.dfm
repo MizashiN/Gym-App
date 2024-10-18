@@ -553,7 +553,7 @@ object AceSignIn: TAceSignIn
         Left = 0
         Top = 220
         Width = 475
-        Height = 86
+        Height = 92
         Align = alTop
         Alignment = taCenter
         Caption = 'Gym App'
@@ -564,7 +564,7 @@ object AceSignIn: TAceSignIn
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        ExplicitTop = 223
+        ExplicitWidth = 300
       end
       object Panel3: TPanel
         AlignWithMargins = True
@@ -599,7 +599,6 @@ object AceSignIn: TAceSignIn
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 128
           ExplicitWidth = 144
         end
         object Label3: TLabel
@@ -643,7 +642,6 @@ object AceSignIn: TAceSignIn
           OnMouseEnter = DontHaveAccountSignUpButtonMouseEnter
           OnMouseLeave = DontHaveAccountSignUpButtonMouseLeave
           ExplicitLeft = 94
-          ExplicitTop = 344
           ExplicitWidth = 286
         end
         object UserPassWarningLabel: TLabel
@@ -665,9 +663,10 @@ object AceSignIn: TAceSignIn
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
-          ExplicitLeft = 24
+          ExplicitLeft = 189
+          ExplicitWidth = 191
         end
-        object Label4: TLabel
+        object ForgetPasswordButtonLabel: TLabel
           AlignWithMargins = True
           Left = 0
           Top = 243
@@ -702,7 +701,6 @@ object AceSignIn: TAceSignIn
           Color = clNone
           ParentBackground = False
           TabOrder = 1
-          ExplicitTop = 170
           object Shape3: TShape
             AlignWithMargins = True
             Left = 3
@@ -815,7 +813,6 @@ object AceSignIn: TAceSignIn
           ButtonStyleHot.BorderColor = 10250544
           ButtonStyleHot.FontColor = clWhite
           ButtonStyleHot.ButtonColor = 10250544
-          ExplicitTop = 263
         end
       end
     end

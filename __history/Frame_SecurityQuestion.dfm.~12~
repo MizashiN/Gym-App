@@ -1,0 +1,17 @@
+object SecurityQuestion: TSecurityQuestion
+  Left = 0
+  Top = 0
+  Width = 389
+  Height = 334
+  Color = clBlack
+  ParentBackground = False
+  ParentColor = False
+  TabOrder = 0
+  object Q_Questions: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    Left = 296
+    Top = 256
+  end
+end

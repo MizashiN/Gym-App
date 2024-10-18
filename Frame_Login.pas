@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Buttons, Vcl.Imaging.pngimage, Vcl.StyledButton, Vcl.ButtonStylesAttributes, Global_Functions;
+  Vcl.Buttons, Vcl.Imaging.pngimage, Vcl.ButtonStylesAttributes, Global_Functions,
+  Vcl.StyledButton;
 
 type
   TAceSignIn = class(TFrame)
@@ -26,7 +27,7 @@ type
     SignInUserEdit: TEdit;
     SignInButton: TStyledButton;
     UserPassWarningLabel: TLabel;
-    Label4: TLabel;
+    ForgetPasswordButtonLabel: TLabel;
     procedure DontHaveAccountSignUpButtonMouseEnter(Sender: TObject);
     procedure DontHaveAccountSignUpButtonMouseLeave(Sender: TObject);
   private

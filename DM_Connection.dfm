@@ -9,7 +9,6 @@ object DM_Con: TDM_Con
       'Password=@D3adlift'
       'Server=gym-app.mysql.uhserver.com'
       'DriverID=MySQL')
-    Connected = True
     LoginPrompt = False
     Transaction = Transaction
     UpdateTransaction = Transaction

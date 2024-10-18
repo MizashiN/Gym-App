@@ -7,7 +7,8 @@ uses
   Frame_Register in 'Frame_Register.pas' {AceSignUp: TFrame},
   Global_Functions in 'Global_Functions.pas',
   DM_Connection in 'DM_Connection.pas' {DM_Con: TDataModule},
-  Form_Main in 'Form_Main.pas' {Main};
+  Form_Main in 'Form_Main.pas' {Main},
+  Frame_SecurityQuestion in 'Frame_SecurityQuestion.pas' {SecurityQuestion: TFrame};
 
 {$R *.res}
 
