@@ -11,10 +11,9 @@ object AceInitial: TAceInitial
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = True
   Position = poDesktopCenter
+  OnClose = FormClose
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object WomanBackgroundImage: TImage
     Left = 0
@@ -11559,7 +11558,7 @@ object AceInitial: TAceInitial
     Color = clNone
     ParentBackground = False
     TabOrder = 0
-    inline AceRegister: TAceRegister
+    inline AceSignUp: TAceSignUp
       Left = 0
       Top = 0
       Width = 540
@@ -11573,6 +11572,7 @@ object AceInitial: TAceInitial
       ExplicitWidth = 540
       inherited Panel1: TPanel
         Width = 480
+        StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 480
         inherited Shape1: TShape
           Width = 480
@@ -11580,6 +11580,7 @@ object AceInitial: TAceInitial
         end
         inherited Panel2: TPanel
           Width = 440
+          StyleElements = [seFont, seClient, seBorder]
           ExplicitWidth = 440
           inherited Image1: TImage
             Width = 440
@@ -11587,68 +11588,96 @@ object AceInitial: TAceInitial
           end
           inherited Label1: TLabel
             Width = 440
+            StyleElements = [seFont, seClient, seBorder]
           end
           inherited Panel3: TPanel
             Width = 350
+            StyleElements = [seFont, seClient, seBorder]
             ExplicitWidth = 350
             inherited Label2: TLabel
+              Top = 253
               Width = 344
+              StyleElements = [seFont, seClient, seBorder]
             end
             inherited Label3: TLabel
               Width = 344
+              StyleElements = [seFont, seClient, seBorder]
             end
             inherited HaveAccountSignInButton: TLabel
+              Left = 0
+              Top = 469
               Width = 345
-              OnClick = AceRegisterHaveAccountSignInButtonClick
+              StyleElements = [seFont, seClient, seBorder]
+              OnClick = AceSignUpHaveAccountSignInButtonClick
               ExplicitLeft = 285
             end
             inherited Label4: TLabel
+              Top = 138
               Width = 344
+              StyleElements = [seFont, seClient, seBorder]
             end
             inherited PasswordWarningLabel: TLabel
+              Left = 0
+              Top = 358
               Width = 345
+              StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 407
             end
             inherited UserWarningLabel: TLabel
+              Left = 0
+              Top = 108
               Width = 345
+              StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 87
             end
             inherited Panel5: TPanel
+              Top = 295
               Width = 350
+              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 350
               inherited Shape3: TShape
                 Width = 344
                 ExplicitWidth = 344
               end
-              inherited ConfirmPasswordEdit: TEdit
+              inherited SignUpConfirmPasswordEdit: TEdit
                 Width = 330
+                StyleElements = [seFont, seClient, seBorder]
                 ExplicitWidth = 330
               end
             end
             inherited Panel4: TPanel
+              Top = 45
               Width = 350
+              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 350
               inherited Shape2: TShape
                 Width = 344
                 ExplicitWidth = 344
               end
-              inherited UserEdit: TEdit
+              inherited SignUpUserEdit: TEdit
                 Width = 330
+                StyleElements = [seFont, seClient, seBorder]
                 ExplicitWidth = 330
               end
             end
             inherited SignUpButton: TStyledButton
+              Top = 388
               Width = 344
-              OnClick = AceRegisterSignUpButtonClick
+              OnClick = AceSignUpSignUpButtonClick
               ExplicitWidth = 344
             end
             inherited Panel6: TPanel
+              Top = 180
               Width = 350
+              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 350
               inherited Shape4: TShape
                 Width = 344
                 ExplicitWidth = 344
               end
-              inherited SignInPasswordEdit: TEdit
+              inherited SignUpPasswordEdit: TEdit
                 Width = 330
+                StyleElements = [seFont, seClient, seBorder]
                 ExplicitWidth = 330
               end
             end
@@ -11656,7 +11685,7 @@ object AceInitial: TAceInitial
         end
       end
     end
-    inline AceLogin: TAceLogin
+    inline AceSignIn: TAceSignIn
       Left = 0
       Top = 0
       Width = 540
@@ -11671,6 +11700,7 @@ object AceInitial: TAceInitial
       inherited Panel1: TPanel
         Width = 480
         Height = 830
+        StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 480
         ExplicitHeight = 830
         inherited Shape1: TShape
@@ -11682,6 +11712,7 @@ object AceInitial: TAceInitial
         inherited Panel2: TPanel
           Width = 440
           Height = 765
+          StyleElements = [seFont, seClient, seBorder]
           ExplicitWidth = 440
           ExplicitHeight = 765
           inherited Image1: TImage
@@ -11690,58 +11721,66 @@ object AceInitial: TAceInitial
           end
           inherited Label1: TLabel
             Width = 440
+            StyleElements = [seFont, seClient, seBorder]
           end
           inherited Panel3: TPanel
-            Top = 351
+            Top = 369
             Width = 350
-            ExplicitTop = 351
+            StyleElements = [seFont, seClient, seBorder]
+            ExplicitTop = 369
             ExplicitWidth = 350
             inherited Label2: TLabel
               Width = 344
+              StyleElements = [seFont, seClient, seBorder]
             end
             inherited Label3: TLabel
               Width = 344
+              StyleElements = [seFont, seClient, seBorder]
             end
             inherited DontHaveAccountSignUpButton: TLabel
+              Left = 0
               Width = 345
-              OnClick = AceLoginDontHaveAccountSignUpButtonClick
-              ExplicitLeft = 59
+              StyleElements = [seFont, seClient, seBorder]
+              OnClick = AceSignInDontHaveAccountSignUpButtonClick
+              ExplicitLeft = 153
             end
             inherited UserPassWarningLabel: TLabel
+              Left = 0
               Width = 345
-              OnMouseEnter = nil
-              OnMouseLeave = nil
-              ExplicitLeft = 154
+              StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 343
             end
             inherited Panel5: TPanel
               Width = 350
+              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 350
               inherited Shape3: TShape
                 Width = 344
                 ExplicitWidth = 344
               end
-              inherited PasswordEdit: TEdit
+              inherited SignInPasswordEdit: TEdit
                 Width = 330
-                Text = ''
+                StyleElements = [seFont, seClient, seBorder]
                 ExplicitWidth = 330
               end
             end
             inherited Panel4: TPanel
               Width = 350
+              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 350
               inherited Shape2: TShape
                 Width = 344
                 ExplicitWidth = 344
               end
-              inherited UserEdit: TEdit
+              inherited SignInUserEdit: TEdit
                 Width = 330
-                Text = ''
+                StyleElements = [seFont, seClient, seBorder]
                 ExplicitWidth = 330
               end
             end
             inherited SignInButton: TStyledButton
               Width = 344
-              OnClick = AceLoginSignInButtonClick
+              OnClick = AceSignInSignInButtonClick
               ExplicitWidth = 344
             end
           end

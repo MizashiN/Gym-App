@@ -6,10 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.ButtonStylesAttributes, Vcl.StyledButton, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage, Vcl.ExtCtrls;
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Global_Functions;
 
 type
-  TAceRegister = class(TFrame)
+  TAceSignUp = class(TFrame)
     Panel1: TPanel;
     Shape1: TShape;
     Panel2: TPanel;
@@ -21,15 +21,15 @@ type
     HaveAccountSignInButton: TLabel;
     Panel5: TPanel;
     Shape3: TShape;
-    ConfirmPasswordEdit: TEdit;
+    SignUpConfirmPasswordEdit: TEdit;
     Panel4: TPanel;
     Shape2: TShape;
-    UserEdit: TEdit;
+    SignUpUserEdit: TEdit;
     SignUpButton: TStyledButton;
     Label4: TLabel;
     Panel6: TPanel;
     Shape4: TShape;
-    SignInPasswordEdit: TEdit;
+    SignUpPasswordEdit: TEdit;
     PasswordWarningLabel: TLabel;
     UserWarningLabel: TLabel;
     procedure HaveAccountSignInButtonMouseEnter(Sender: TObject);
@@ -44,12 +44,12 @@ implementation
 
 {$R *.dfm}
 
-procedure TAceRegister.HaveAccountSignInButtonMouseEnter(Sender: TObject);
+procedure TAceSignUp.HaveAccountSignInButtonMouseEnter(Sender: TObject);
 begin
   HaveAccountSignInButton.Font.Color := $00D6AA7A;
 end;
 
-procedure TAceRegister.HaveAccountSignInButtonMouseLeave(Sender: TObject);
+procedure TAceSignUp.HaveAccountSignInButtonMouseLeave(Sender: TObject);
 begin
   HaveAccountSignInButton.Font.Color := clWhite;
 end;

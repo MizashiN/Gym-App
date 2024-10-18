@@ -1,4 +1,4 @@
-object AceLogin: TAceLogin
+object AceSignIn: TAceSignIn
   Left = 0
   Top = 0
   Width = 575
@@ -53,6 +53,7 @@ object AceLogin: TAceLogin
       Color = clNone
       ParentBackground = False
       TabOrder = 0
+      TabStop = True
       object Image1: TImage
         Left = 0
         Top = 0
@@ -568,19 +569,20 @@ object AceLogin: TAceLogin
       object Panel3: TPanel
         AlignWithMargins = True
         Left = 45
-        Top = 331
+        Top = 349
         Width = 385
         Height = 374
         Margins.Left = 45
         Margins.Top = 0
         Margins.Right = 45
-        Margins.Bottom = 40
+        Margins.Bottom = 22
         Align = alBottom
         BevelOuter = bvNone
         Caption = 'Panel2'
         Color = clNone
         ParentBackground = False
         TabOrder = 0
+        ExplicitTop = 331
         object Label2: TLabel
           AlignWithMargins = True
           Left = 3
@@ -641,7 +643,6 @@ object AceLogin: TAceLogin
           OnMouseEnter = DontHaveAccountSignUpButtonMouseEnter
           OnMouseLeave = DontHaveAccountSignUpButtonMouseLeave
           ExplicitLeft = 94
-          ExplicitTop = 324
           ExplicitWidth = 286
         end
         object UserPassWarningLabel: TLabel
@@ -677,7 +678,7 @@ object AceLogin: TAceLogin
           Caption = '0'
           Color = clNone
           ParentBackground = False
-          TabOrder = 0
+          TabOrder = 1
           object Shape3: TShape
             AlignWithMargins = True
             Left = 3
@@ -688,9 +689,9 @@ object AceLogin: TAceLogin
             Brush.Color = clBlack
             Pen.Color = clWhite
             Pen.Width = 2
-            ExplicitHeight = 38
+            ExplicitLeft = 0
           end
-          object PasswordEdit: TEdit
+          object SignInPasswordEdit: TEdit
             AlignWithMargins = True
             Left = 10
             Top = 16
@@ -711,7 +712,6 @@ object AceLogin: TAceLogin
             ParentFont = False
             PasswordChar = '*'
             TabOrder = 0
-            Text = '0'
           end
         end
         object Panel4: TPanel
@@ -724,7 +724,7 @@ object AceLogin: TAceLogin
           Caption = '0'
           Color = clNone
           ParentBackground = False
-          TabOrder = 1
+          TabOrder = 0
           object Shape2: TShape
             AlignWithMargins = True
             Left = 3
@@ -737,7 +737,7 @@ object AceLogin: TAceLogin
             Pen.Width = 2
             ExplicitHeight = 38
           end
-          object UserEdit: TEdit
+          object SignInUserEdit: TEdit
             AlignWithMargins = True
             Left = 10
             Top = 13
@@ -758,7 +758,6 @@ object AceLogin: TAceLogin
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            Text = 'Edit1'
           end
         end
         object SignInButton: TStyledButton
@@ -786,13 +785,12 @@ object AceLogin: TAceLogin
           ButtonStylePressed.BorderColor = 7424802
           ButtonStylePressed.FontColor = clWhite
           ButtonStylePressed.ButtonColor = 7424802
-          ButtonStyleSelected.BorderColor = 10250544
+          ButtonStyleSelected.BorderColor = clWhite
           ButtonStyleSelected.FontColor = clWhite
           ButtonStyleSelected.ButtonColor = 10250544
           ButtonStyleHot.BorderColor = 10250544
           ButtonStyleHot.FontColor = clWhite
           ButtonStyleHot.ButtonColor = 10250544
-          ExplicitTop = 243
         end
       end
     end

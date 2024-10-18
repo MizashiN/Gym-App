@@ -3,10 +3,11 @@ program GymApp;
 uses
   Vcl.Forms,
   Form_Initial in 'Form_Initial.pas' {AceInitial},
-  Frame_Login in 'Frame_Login.pas' {AceLogin: TFrame},
-  Frame_Register in 'Frame_Register.pas' {AceRegister: TFrame},
+  Frame_Login in 'Frame_Login.pas' {AceSignIn: TFrame},
+  Frame_Register in 'Frame_Register.pas' {AceSignUp: TFrame},
   Global_Functions in 'Global_Functions.pas',
-  DM_Connection in 'DM_Connection.pas' {DM_Con: TDataModule};
+  DM_Connection in 'DM_Connection.pas' {DM_Con: TDataModule},
+  Form_Main in 'Form_Main.pas' {Main};
 
 {$R *.res}
 
@@ -15,5 +16,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TAceInitial, AceInitial);
   Application.CreateForm(TDM_Con, DM_Con);
+  Application.CreateForm(TMain, Main);
   Application.Run;
 end.

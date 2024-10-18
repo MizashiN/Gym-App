@@ -3,11 +3,14 @@ unit Global_Functions;
 interface
 
 uses
-System.SysUtils, System.Hash, DM_Connections;
+  System.SysUtils, System.RegularExpressions, System.Hash, Vcl.Dialogs, Vcl.StdCtrls,FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, DM_Connection;
 
 function CheckIfUserExists(nameUser: TEdit): Boolean;
 function CheckIfUserAndPasswordIsCorrect(name_user, passwordUser: TEdit): Boolean;
-procedure SignUpUser(nameUser, passwordUser: TEdit);
+function SignUpUser(nameUser, passwordUser: TEdit): Boolean;
 function EncryptPassword(const passwordUser: string): string;
 function CheckPasswordCharacters(passwordEdit, passwordConfirmEdit: TEdit): Boolean;
 function CheckUserCharacters(userEdit: TEdit): Boolean;
@@ -36,10 +39,8 @@ begin
       begin
       ShowMessage('Erro: ' + E.Message);
       end;
-    end;
-  finally
-    queryTemp.Free;
   end;
+  queryTemp.Free;
 end;
 
 function CheckIfUserAndPasswordIsCorrect(name_user, passwordUser: TEdit): Boolean;
@@ -68,20 +69,22 @@ begin
     end;
   except
     on E: Exception do
+    begin
       ShowMessage('Erro: ' + E.Message);
-  finally
-    queryTemp.Free;
+   end;
   end;
+   queryTemp.Free;
 end;
 
 
-procedure SignUpUser(nameUser, passwordUser: TEdit);
+function SignUpUser(nameUser, passwordUser: TEdit): Boolean;
 var
   queryTemp: TFDQuery;
   passwordUserEncrypted: string;
 begin
+  Result := False;
   queryTemp := TFDQuery.Create(nil);
-  passwordUserEncrypted := EncryptPassword(passwordUser);
+  passwordUserEncrypted := EncryptPassword(passwordUser.Text);
   try
     queryTemp.Connection := DM_Con.Connection;
 
@@ -89,11 +92,12 @@ begin
     try
       queryTemp.SQL.Text := 'INSERT INTO users (name_user, password_user) VALUES (:name_user, :password_user)';
       queryTemp.ParamByName('name_user').AsString := nameUser.Text;
-      queryTemp.ParamByName('password_user').AsString := passwordUserEncrypted.Text;
+      queryTemp.ParamByName('password_user').AsString := passwordUserEncrypted;
 
       queryTemp.ExecSQL;
-
       DM_Con.Connection.Commit;
+
+      Result := True;
     except
       on E: Exception do
       begin
@@ -119,7 +123,7 @@ begin
   inputPass := passwordEdit.Text;
   inputPassConfirm := passwordConfirmEdit.Text;
 
-  if inputPass == inputPassConfirm then
+  if inputPass = inputPassConfirm then
     begin
       if Length(InputPassConfirm) < 8 then
         Exit(False);

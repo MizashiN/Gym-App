@@ -1,4 +1,4 @@
-object AceRegister: TAceRegister
+object AceSignUp: TAceSignUp
   Left = 0
   Top = 0
   Width = 575
@@ -583,7 +583,7 @@ object AceRegister: TAceRegister
         object Label2: TLabel
           AlignWithMargins = True
           Left = 3
-          Top = 253
+          Top = 257
           Width = 379
           Height = 42
           Margins.Top = 10
@@ -597,6 +597,7 @@ object AceRegister: TAceRegister
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
+          ExplicitTop = 253
           ExplicitWidth = 270
         end
         object Label3: TLabel
@@ -604,7 +605,7 @@ object AceRegister: TAceRegister
           Left = 3
           Top = 3
           Width = 379
-          Height = 42
+          Height = 46
           Margins.Bottom = 0
           Align = alTop
           Caption = 'User'
@@ -615,12 +616,11 @@ object AceRegister: TAceRegister
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 69
         end
         object HaveAccountSignInButton: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 469
+          Top = 473
           Width = 380
           Height = 26
           Cursor = crHandPoint
@@ -640,12 +640,13 @@ object AceRegister: TAceRegister
           OnMouseEnter = HaveAccountSignInButtonMouseEnter
           OnMouseLeave = HaveAccountSignInButtonMouseLeave
           ExplicitLeft = 160
+          ExplicitTop = 469
           ExplicitWidth = 220
         end
         object Label4: TLabel
           AlignWithMargins = True
           Left = 3
-          Top = 138
+          Top = 142
           Width = 379
           Height = 42
           Margins.Top = 10
@@ -659,12 +660,13 @@ object AceRegister: TAceRegister
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
+          ExplicitTop = 138
           ExplicitWidth = 144
         end
         object PasswordWarningLabel: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 358
+          Top = 362
           Width = 380
           Height = 20
           Cursor = crHandPoint
@@ -684,12 +686,13 @@ object AceRegister: TAceRegister
           OnMouseEnter = HaveAccountSignInButtonMouseEnter
           OnMouseLeave = HaveAccountSignInButtonMouseLeave
           ExplicitLeft = 221
+          ExplicitTop = 358
           ExplicitWidth = 159
         end
         object UserWarningLabel: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 108
+          Top = 112
           Width = 380
           Height = 20
           Cursor = crHandPoint
@@ -699,7 +702,7 @@ object AceRegister: TAceRegister
           Margins.Bottom = 0
           Align = alTop
           Alignment = taRightJustify
-          Caption = 'Your user don'#39't have five words and one number'
+          Caption = 'User don'#39't have five words and one number'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 14266242
           Font.Height = -16
@@ -708,12 +711,13 @@ object AceRegister: TAceRegister
           ParentFont = False
           OnMouseEnter = HaveAccountSignInButtonMouseEnter
           OnMouseLeave = HaveAccountSignInButtonMouseLeave
-          ExplicitLeft = 26
-          ExplicitWidth = 354
+          ExplicitLeft = 61
+          ExplicitTop = 108
+          ExplicitWidth = 319
         end
         object Panel5: TPanel
           Left = 0
-          Top = 295
+          Top = 299
           Width = 385
           Height = 63
           Align = alTop
@@ -721,7 +725,8 @@ object AceRegister: TAceRegister
           Caption = '0'
           Color = clNone
           ParentBackground = False
-          TabOrder = 0
+          TabOrder = 2
+          ExplicitTop = 295
           object Shape3: TShape
             AlignWithMargins = True
             Left = 3
@@ -734,7 +739,7 @@ object AceRegister: TAceRegister
             Pen.Width = 2
             ExplicitHeight = 38
           end
-          object ConfirmPasswordEdit: TEdit
+          object SignUpConfirmPasswordEdit: TEdit
             AlignWithMargins = True
             Left = 10
             Top = 16
@@ -759,7 +764,7 @@ object AceRegister: TAceRegister
         end
         object Panel4: TPanel
           Left = 0
-          Top = 45
+          Top = 49
           Width = 385
           Height = 63
           Align = alTop
@@ -767,7 +772,8 @@ object AceRegister: TAceRegister
           Caption = '0'
           Color = clNone
           ParentBackground = False
-          TabOrder = 1
+          TabOrder = 0
+          ExplicitTop = 45
           object Shape2: TShape
             AlignWithMargins = True
             Left = 3
@@ -780,7 +786,7 @@ object AceRegister: TAceRegister
             Pen.Width = 2
             ExplicitHeight = 38
           end
-          object UserEdit: TEdit
+          object SignUpUserEdit: TEdit
             AlignWithMargins = True
             Left = 10
             Top = 13
@@ -806,7 +812,7 @@ object AceRegister: TAceRegister
         object SignUpButton: TStyledButton
           AlignWithMargins = True
           Left = 3
-          Top = 388
+          Top = 392
           Width = 379
           Height = 78
           Margins.Top = 10
@@ -818,7 +824,7 @@ object AceRegister: TAceRegister
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
-          TabOrder = 2
+          TabOrder = 3
           WordWrap = True
           StyleElements = [seFont, seBorder]
           StyleRadius = 1
@@ -828,16 +834,17 @@ object AceRegister: TAceRegister
           ButtonStylePressed.BorderColor = 7424802
           ButtonStylePressed.FontColor = clWhite
           ButtonStylePressed.ButtonColor = 7424802
-          ButtonStyleSelected.BorderColor = 10250544
+          ButtonStyleSelected.BorderColor = clWhite
           ButtonStyleSelected.FontColor = clWhite
           ButtonStyleSelected.ButtonColor = 10250544
           ButtonStyleHot.BorderColor = 10250544
           ButtonStyleHot.FontColor = clWhite
           ButtonStyleHot.ButtonColor = 10250544
+          ExplicitTop = 388
         end
         object Panel6: TPanel
           Left = 0
-          Top = 180
+          Top = 184
           Width = 385
           Height = 63
           Align = alTop
@@ -845,7 +852,8 @@ object AceRegister: TAceRegister
           Caption = '0'
           Color = clNone
           ParentBackground = False
-          TabOrder = 3
+          TabOrder = 1
+          ExplicitTop = 180
           object Shape4: TShape
             AlignWithMargins = True
             Left = 3
@@ -858,7 +866,7 @@ object AceRegister: TAceRegister
             Pen.Width = 2
             ExplicitHeight = 38
           end
-          object SignInPasswordEdit: TEdit
+          object SignUpPasswordEdit: TEdit
             AlignWithMargins = True
             Left = 10
             Top = 16

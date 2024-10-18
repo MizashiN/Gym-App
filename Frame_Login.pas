@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Buttons, Vcl.Imaging.pngimage, Vcl.StyledButton, Vcl.ButtonStylesAttributes;
+  Vcl.Buttons, Vcl.Imaging.pngimage, Vcl.StyledButton, Vcl.ButtonStylesAttributes, Global_Functions;
 
 type
-  TAceLogin = class(TFrame)
+  TAceSignIn = class(TFrame)
     Shape1: TShape;
     Panel1: TPanel;
     Panel2: TPanel;
@@ -20,10 +20,10 @@ type
     DontHaveAccountSignUpButton: TLabel;
     Panel5: TPanel;
     Shape3: TShape;
-    PasswordEdit: TEdit;
+    SignInPasswordEdit: TEdit;
     Panel4: TPanel;
     Shape2: TShape;
-    UserEdit: TEdit;
+    SignInUserEdit: TEdit;
     SignInButton: TStyledButton;
     UserPassWarningLabel: TLabel;
     procedure DontHaveAccountSignUpButtonMouseEnter(Sender: TObject);
@@ -38,12 +38,12 @@ implementation
 
 {$R *.dfm}
 
-procedure TAceLogin.DontHaveAccountSignUpButtonMouseEnter(Sender: TObject);
+procedure TAceSignIn.DontHaveAccountSignUpButtonMouseEnter(Sender: TObject);
 begin
   DontHaveAccountSignUpButton.Font.Color := $00D6AA7A;
 end;
 
-procedure TAceLogin.DontHaveAccountSignUpButtonMouseLeave(Sender: TObject);
+procedure TAceSignIn.DontHaveAccountSignUpButtonMouseLeave(Sender: TObject);
 begin
   DontHaveAccountSignUpButton.Font.Color := clWhite;
 end;
