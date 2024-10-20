@@ -30,6 +30,8 @@ type
     ForgetPasswordButtonLabel: TLabel;
     procedure DontHaveAccountSignUpButtonMouseEnter(Sender: TObject);
     procedure DontHaveAccountSignUpButtonMouseLeave(Sender: TObject);
+    procedure ForgetPasswordButtonLabelMouseEnter(Sender: TObject);
+    procedure ForgetPasswordButtonLabelMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,6 +50,16 @@ end;
 procedure TAceSignIn.DontHaveAccountSignUpButtonMouseLeave(Sender: TObject);
 begin
   DontHaveAccountSignUpButton.Font.Color := clWhite;
+end;
+
+procedure TAceSignIn.ForgetPasswordButtonLabelMouseEnter(Sender: TObject);
+begin
+  ForgetPasswordButtonLabel.Font.Color := $00D6AA7A;
+end;
+
+procedure TAceSignIn.ForgetPasswordButtonLabelMouseLeave(Sender: TObject);
+begin
+  ForgetPasswordButtonLabel.Font.Color := clWhite;
 end;
 
 end.

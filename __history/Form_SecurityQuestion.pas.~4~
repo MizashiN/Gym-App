@@ -1,0 +1,43 @@
+unit Form_SecurityQuestion;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ButtonStylesAttributes,
+  Vcl.StyledButton, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TSecurityQuestion = class(TForm)
+    Panel1: TPanel;
+    Shape1: TShape;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Label3: TLabel;
+    Label4: TLabel;
+    QuestionWarningLabel: TLabel;
+    Panel4: TPanel;
+    Shape2: TShape;
+    SecurityQuestionEdit: TEdit;
+    SignUpButton: TStyledButton;
+    Panel6: TPanel;
+    Shape4: TShape;
+    SecurityQuestionAnswerEdit: TEdit;
+    Panel5: TPanel;
+    Shape3: TShape;
+    Edit1: TEdit;
+    Label1: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  SecurityQuestion: TSecurityQuestion;
+
+implementation
+
+{$R *.dfm}
+
+end.

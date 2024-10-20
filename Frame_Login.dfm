@@ -609,7 +609,7 @@ object AceSignIn: TAceSignIn
           Height = 42
           Margins.Bottom = 0
           Align = alTop
-          Caption = 'User'
+          Caption = 'Username'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -33
@@ -617,7 +617,7 @@ object AceSignIn: TAceSignIn
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 69
+          ExplicitWidth = 154
         end
         object DontHaveAccountSignUpButton: TLabel
           AlignWithMargins = True
@@ -687,6 +687,8 @@ object AceSignIn: TAceSignIn
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
+          OnMouseEnter = ForgetPasswordButtonLabelMouseEnter
+          OnMouseLeave = ForgetPasswordButtonLabelMouseLeave
           ExplicitLeft = 221
           ExplicitWidth = 159
         end

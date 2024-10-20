@@ -1,0 +1,52 @@
+unit Frame_SecurityQuestion;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.ButtonStylesAttributes, Vcl.StyledButton, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TFrame1 = class(TFrame)
+    Panel1: TPanel;
+    Shape1: TShape;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Label3: TLabel;
+    Label4: TLabel;
+    QuestionWarningLabel: TLabel;
+    Label1: TLabel;
+    Panel4: TPanel;
+    Shape2: TShape;
+    SecurityQuestionEdit: TEdit;
+    SignUpButton: TStyledButton;
+    Panel6: TPanel;
+    Shape4: TShape;
+    SecurityQuestionAnswerEdit: TEdit;
+    Panel5: TPanel;
+    Shape3: TShape;
+    Edit1: TEdit;
+    procedure SignUpButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrame1.SignUpButtonClick(Sender: TObject);
+begin
+//          if SignUpUser(AceSignUp.SignUpUserEdit, AceSignUp.SignUpConfirmPasswordEdit) then
+            begin
+              AceSignUp.SignUpUserEdit.Text := '';
+              AceSignUp.SignUpPasswordEdit.Text := '';
+              AceSignUp.SignUpConfirmPasswordEdit.Text := '';
+              SwitchToFrame(AceSignIn);
+            end
+end;
+
+end.

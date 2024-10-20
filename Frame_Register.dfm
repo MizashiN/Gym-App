@@ -57,7 +57,7 @@ object AceSignUp: TAceSignUp
         Left = 0
         Top = 0
         Width = 475
-        Height = 193
+        Height = 177
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
@@ -549,9 +549,9 @@ object AceSignUp: TAceSignUp
       end
       object Label1: TLabel
         Left = 0
-        Top = 193
+        Top = 177
         Width = 475
-        Height = 75
+        Height = 93
         Align = alTop
         Alignment = taCenter
         Caption = 'Gym App'
@@ -562,7 +562,7 @@ object AceSignUp: TAceSignUp
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 245
+        ExplicitTop = 180
       end
       object Panel3: TPanel
         AlignWithMargins = True
@@ -583,7 +583,7 @@ object AceSignUp: TAceSignUp
         object Label2: TLabel
           AlignWithMargins = True
           Left = 3
-          Top = 257
+          Top = 253
           Width = 379
           Height = 42
           Margins.Top = 10
@@ -597,7 +597,7 @@ object AceSignUp: TAceSignUp
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 253
+          ExplicitTop = 257
           ExplicitWidth = 270
         end
         object Label3: TLabel
@@ -605,10 +605,10 @@ object AceSignUp: TAceSignUp
           Left = 3
           Top = 3
           Width = 379
-          Height = 46
+          Height = 42
           Margins.Bottom = 0
           Align = alTop
-          Caption = 'User'
+          Caption = 'Username'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -33
@@ -616,11 +616,12 @@ object AceSignUp: TAceSignUp
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 154
         end
         object HaveAccountSignInButton: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 473
+          Top = 466
           Width = 380
           Height = 26
           Cursor = crHandPoint
@@ -640,13 +641,13 @@ object AceSignUp: TAceSignUp
           OnMouseEnter = HaveAccountSignInButtonMouseEnter
           OnMouseLeave = HaveAccountSignInButtonMouseLeave
           ExplicitLeft = 160
-          ExplicitTop = 469
+          ExplicitTop = 473
           ExplicitWidth = 220
         end
         object Label4: TLabel
           AlignWithMargins = True
           Left = 3
-          Top = 142
+          Top = 138
           Width = 379
           Height = 42
           Margins.Top = 10
@@ -660,15 +661,15 @@ object AceSignUp: TAceSignUp
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 138
+          ExplicitTop = 142
           ExplicitWidth = 144
         end
         object PasswordWarningLabel: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 362
+          Top = 358
           Width = 380
-          Height = 20
+          Height = 17
           Cursor = crHandPoint
           Margins.Left = 0
           Margins.Top = 0
@@ -676,23 +677,22 @@ object AceSignUp: TAceSignUp
           Margins.Bottom = 0
           Align = alTop
           Alignment = taRightJustify
-          Caption = 'Passwords isn'#39't equal'
+          Caption = 'Passwords do not match'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 14266242
-          Font.Height = -16
+          Font.Height = -13
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
           OnMouseEnter = HaveAccountSignInButtonMouseEnter
           OnMouseLeave = HaveAccountSignInButtonMouseLeave
-          ExplicitLeft = 221
-          ExplicitTop = 358
-          ExplicitWidth = 159
+          ExplicitLeft = 226
+          ExplicitWidth = 154
         end
         object UserWarningLabel: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 112
+          Top = 108
           Width = 380
           Height = 20
           Cursor = crHandPoint
@@ -712,12 +712,12 @@ object AceSignUp: TAceSignUp
           OnMouseEnter = HaveAccountSignInButtonMouseEnter
           OnMouseLeave = HaveAccountSignInButtonMouseLeave
           ExplicitLeft = 61
-          ExplicitTop = 108
+          ExplicitTop = 112
           ExplicitWidth = 319
         end
         object Panel5: TPanel
           Left = 0
-          Top = 299
+          Top = 295
           Width = 385
           Height = 63
           Align = alTop
@@ -726,7 +726,6 @@ object AceSignUp: TAceSignUp
           Color = clNone
           ParentBackground = False
           TabOrder = 2
-          ExplicitTop = 295
           object Shape3: TShape
             AlignWithMargins = True
             Left = 3
@@ -764,7 +763,7 @@ object AceSignUp: TAceSignUp
         end
         object Panel4: TPanel
           Left = 0
-          Top = 49
+          Top = 45
           Width = 385
           Height = 63
           Align = alTop
@@ -773,7 +772,6 @@ object AceSignUp: TAceSignUp
           Color = clNone
           ParentBackground = False
           TabOrder = 0
-          ExplicitTop = 45
           object Shape2: TShape
             AlignWithMargins = True
             Left = 3
@@ -812,7 +810,7 @@ object AceSignUp: TAceSignUp
         object SignUpButton: TStyledButton
           AlignWithMargins = True
           Left = 3
-          Top = 392
+          Top = 385
           Width = 379
           Height = 78
           Margins.Top = 10
@@ -844,7 +842,7 @@ object AceSignUp: TAceSignUp
         end
         object Panel6: TPanel
           Left = 0
-          Top = 184
+          Top = 180
           Width = 385
           Height = 63
           Align = alTop
@@ -853,7 +851,6 @@ object AceSignUp: TAceSignUp
           Color = clNone
           ParentBackground = False
           TabOrder = 1
-          ExplicitTop = 180
           object Shape4: TShape
             AlignWithMargins = True
             Left = 3
