@@ -22,7 +22,6 @@ object ForgotPassword: TForgotPassword
     Color = clNone
     ParentBackground = False
     TabOrder = 0
-    ExplicitHeight = 810
     object Shape1: TShape
       Left = 0
       Top = 0
@@ -54,12 +53,13 @@ object ForgotPassword: TForgotPassword
       Color = clNone
       ParentBackground = False
       TabOrder = 0
-      ExplicitHeight = 745
+      ExplicitLeft = 28
+      ExplicitTop = 17
       object Image1: TImage
         Left = 0
         Top = 0
         Width = 475
-        Height = 220
+        Height = 241
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
@@ -548,13 +548,12 @@ object ForgotPassword: TForgotPassword
           65000A4587A10C40A1E830940128141D86320085A2C35006A0507418CA00148A
           0E43198042D161280350283A0C65000A4587A10C40A1E830FE1FA3A7B74B8986
           51820000000049454E44AE426082}
-        ExplicitTop = -3
       end
       object Label1: TLabel
         Left = 0
-        Top = 220
+        Top = 241
         Width = 475
-        Height = 117
+        Height = 96
         Align = alTop
         Alignment = taCenter
         Caption = 'Gym App'
@@ -565,6 +564,7 @@ object ForgotPassword: TForgotPassword
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
+        ExplicitTop = 193
       end
       object Panel3: TPanel
         AlignWithMargins = True
@@ -582,7 +582,7 @@ object ForgotPassword: TForgotPassword
         Color = clNone
         ParentBackground = False
         TabOrder = 0
-        ExplicitTop = 336
+        ExplicitTop = 348
         object Label2: TLabel
           AlignWithMargins = True
           Left = 3
@@ -600,7 +600,6 @@ object ForgotPassword: TForgotPassword
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 138
           ExplicitWidth = 110
         end
         object Label3: TLabel
@@ -640,8 +639,32 @@ object ForgotPassword: TForgotPassword
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
+          Visible = False
           ExplicitLeft = 258
           ExplicitWidth = 122
+        end
+        object BackToLoginButton: TLabel
+          AlignWithMargins = True
+          Left = 0
+          Top = 339
+          Width = 385
+          Height = 26
+          Cursor = crHandPoint
+          Margins.Left = 0
+          Margins.Top = 5
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Back to Log-In'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -21
+          Font.Name = 'Hammersmith One'
+          Font.Style = []
+          ParentFont = False
+          ExplicitTop = 334
+          ExplicitWidth = 144
         end
         object Panel5: TPanel
           Left = 0
@@ -654,7 +677,6 @@ object ForgotPassword: TForgotPassword
           Color = clNone
           ParentBackground = False
           TabOrder = 1
-          ExplicitTop = 180
           object Shape3: TShape
             AlignWithMargins = True
             Left = 3
@@ -765,7 +787,6 @@ object ForgotPassword: TForgotPassword
           ButtonStyleHot.BorderColor = 10250544
           ButtonStyleHot.FontColor = clWhite
           ButtonStyleHot.ButtonColor = 10250544
-          ExplicitTop = 273
         end
       end
     end

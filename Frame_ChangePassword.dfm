@@ -1,7 +1,7 @@
 object ChangePassword: TChangePassword
   Left = 0
   Top = 0
-  Width = 575
+  Width = 540
   Height = 900
   Color = clBlack
   ParentBackground = False
@@ -11,7 +11,7 @@ object ChangePassword: TChangePassword
     AlignWithMargins = True
     Left = 30
     Top = 30
-    Width = 515
+    Width = 480
     Height = 830
     Margins.Left = 30
     Margins.Top = 30
@@ -22,12 +22,11 @@ object ChangePassword: TChangePassword
     Color = clNone
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = -330
-    ExplicitHeight = 810
+    ExplicitWidth = 515
     object Shape1: TShape
       Left = 0
       Top = 0
-      Width = 515
+      Width = 480
       Height = 830
       Margins.Left = 0
       Margins.Top = 0
@@ -37,13 +36,14 @@ object ChangePassword: TChangePassword
       Brush.Color = clBlack
       Pen.Color = clWhite
       Pen.Width = 2
+      ExplicitWidth = 515
       ExplicitHeight = 769
     end
     object Panel2: TPanel
       AlignWithMargins = True
       Left = 20
       Top = 25
-      Width = 475
+      Width = 440
       Height = 765
       Margins.Left = 20
       Margins.Top = 25
@@ -55,12 +55,12 @@ object ChangePassword: TChangePassword
       Color = clNone
       ParentBackground = False
       TabOrder = 0
-      ExplicitHeight = 745
+      ExplicitWidth = 475
       object Image1: TImage
         Left = 0
         Top = 0
-        Width = 475
-        Height = 220
+        Width = 440
+        Height = 273
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
@@ -549,13 +549,12 @@ object ChangePassword: TChangePassword
           65000A4587A10C40A1E830940128141D86320085A2C35006A0507418CA00148A
           0E43198042D161280350283A0C65000A4587A10C40A1E830FE1FA3A7B74B8986
           51820000000049454E44AE426082}
-        ExplicitTop = -3
       end
       object Label1: TLabel
         Left = 0
-        Top = 220
-        Width = 475
-        Height = 117
+        Top = 273
+        Width = 440
+        Height = 88
         Align = alTop
         Alignment = taCenter
         Caption = 'Gym App'
@@ -566,13 +565,14 @@ object ChangePassword: TChangePassword
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
+        ExplicitTop = 241
       end
       object Panel3: TPanel
         AlignWithMargins = True
         Left = 45
-        Top = 356
-        Width = 385
-        Height = 387
+        Top = 400
+        Width = 350
+        Height = 343
         Margins.Left = 45
         Margins.Top = 0
         Margins.Right = 45
@@ -583,50 +583,49 @@ object ChangePassword: TChangePassword
         Color = clNone
         ParentBackground = False
         TabOrder = 0
-        ExplicitTop = 336
         object Label2: TLabel
           AlignWithMargins = True
           Left = 3
-          Top = 128
-          Width = 379
-          Height = 42
+          Top = 126
+          Width = 344
+          Height = 40
           Margins.Top = 20
           Margins.Bottom = 0
           Align = alTop
           Caption = 'Confirm New Password'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
-          Font.Height = -33
+          Font.Height = -32
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 138
-          ExplicitWidth = 347
+          ExplicitTop = 128
+          ExplicitWidth = 340
         end
         object Label3: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 379
-          Height = 42
+          Width = 344
+          Height = 40
           Margins.Bottom = 0
           Align = alTop
           Caption = 'New Password'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
-          Font.Height = -33
+          Font.Height = -32
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 221
+          ExplicitWidth = 215
         end
         object PasswordWarningLabel: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 233
-          Width = 380
+          Top = 229
+          Width = 345
           Height = 20
           Margins.Left = 0
           Margins.Top = 0
@@ -644,12 +643,13 @@ object ChangePassword: TChangePassword
           Layout = tlCenter
           Visible = False
           ExplicitLeft = 200
+          ExplicitTop = 233
           ExplicitWidth = 180
         end
         object Panel5: TPanel
           Left = 0
-          Top = 170
-          Width = 385
+          Top = 166
+          Width = 350
           Height = 63
           Align = alTop
           BevelOuter = bvNone
@@ -657,24 +657,26 @@ object ChangePassword: TChangePassword
           Color = clNone
           ParentBackground = False
           TabOrder = 1
-          ExplicitTop = 180
+          ExplicitTop = 170
+          ExplicitWidth = 385
           object Shape3: TShape
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 379
+            Width = 344
             Height = 57
             Align = alClient
             Brush.Color = clBlack
             Pen.Color = clWhite
             Pen.Width = 2
             ExplicitLeft = 0
+            ExplicitWidth = 379
           end
           object ConfirmNewPasswordEdit: TEdit
             AlignWithMargins = True
             Left = 10
             Top = 13
-            Width = 365
+            Width = 330
             Height = 40
             Margins.Left = 10
             Margins.Top = 13
@@ -691,14 +693,13 @@ object ChangePassword: TChangePassword
             ParentFont = False
             PasswordChar = '*'
             TabOrder = 0
-            ExplicitTop = 16
-            ExplicitHeight = 37
+            ExplicitWidth = 365
           end
         end
         object Panel4: TPanel
           Left = 0
-          Top = 45
-          Width = 385
+          Top = 43
+          Width = 350
           Height = 63
           Align = alTop
           BevelOuter = bvNone
@@ -706,23 +707,26 @@ object ChangePassword: TChangePassword
           Color = clNone
           ParentBackground = False
           TabOrder = 0
+          ExplicitTop = 45
+          ExplicitWidth = 385
           object Shape2: TShape
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 379
+            Width = 344
             Height = 57
             Align = alClient
             Brush.Color = clBlack
             Pen.Color = clWhite
             Pen.Width = 2
+            ExplicitWidth = 379
             ExplicitHeight = 38
           end
           object NewPasswordEdit: TEdit
             AlignWithMargins = True
             Left = 10
             Top = 13
-            Width = 365
+            Width = 330
             Height = 40
             Margins.Left = 10
             Margins.Top = 13
@@ -740,13 +744,14 @@ object ChangePassword: TChangePassword
             ParentFont = False
             PasswordChar = '*'
             TabOrder = 0
+            ExplicitWidth = 365
           end
         end
         object ChangePasswordButton: TStyledButton
           AlignWithMargins = True
           Left = 3
-          Top = 263
-          Width = 379
+          Top = 259
+          Width = 344
           Height = 78
           Margins.Top = 10
           Align = alTop
@@ -773,7 +778,8 @@ object ChangePassword: TChangePassword
           ButtonStyleHot.BorderColor = 10250544
           ButtonStyleHot.FontColor = clWhite
           ButtonStyleHot.ButtonColor = 10250544
-          ExplicitLeft = 0
+          ExplicitTop = 263
+          ExplicitWidth = 379
         end
       end
     end

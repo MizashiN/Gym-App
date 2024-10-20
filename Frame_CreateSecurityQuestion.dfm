@@ -22,8 +22,6 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
     Color = clNone
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 384
-    ExplicitHeight = 398
     object Shape1: TShape
       Left = 0
       Top = 0
@@ -56,13 +54,11 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
       Color = clNone
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 344
-      ExplicitHeight = 328
       object Image1: TImage
         Left = 0
         Top = 0
         Width = 475
-        Height = 193
+        Height = 209
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
@@ -551,13 +547,12 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
           65000A4587A10C40A1E830940128141D86320085A2C35006A0507418CA00148A
           0E43198042D161280350283A0C65000A4587A10C40A1E830FE1FA3A7B74B8986
           51820000000049454E44AE426082}
-        ExplicitTop = 8
       end
       object Label2: TLabel
         Left = 0
-        Top = 193
+        Top = 209
         Width = 475
-        Height = 96
+        Height = 75
         Align = alTop
         Alignment = taCenter
         Caption = 'Gym App'
@@ -568,6 +563,8 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
+        ExplicitTop = 193
+        ExplicitWidth = 245
       end
       object Panel3: TPanel
         AlignWithMargins = True
@@ -585,7 +582,6 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
         Color = clNone
         ParentBackground = False
         TabOrder = 0
-        ExplicitTop = 312
         object Label3: TLabel
           AlignWithMargins = True
           Left = 3
@@ -621,7 +617,6 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 245
           ExplicitWidth = 196
         end
         object AnswerWarningLabel: TLabel
@@ -665,7 +660,6 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 134
           ExplicitWidth = 100
         end
         object QuestionWarningLabel: TLabel
@@ -703,7 +697,6 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
           Color = clNone
           ParentBackground = False
           TabOrder = 0
-          ExplicitTop = 31
           object Shape2: TShape
             AlignWithMargins = True
             Left = 3
@@ -738,8 +731,6 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            ExplicitTop = 13
-            ExplicitHeight = 28
           end
         end
         object DoneButton: TStyledButton
@@ -773,7 +764,7 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
           ButtonStyleHot.BorderColor = 10250544
           ButtonStyleHot.FontColor = clWhite
           ButtonStyleHot.ButtonColor = 10250544
-          ExplicitTop = 356
+          ExplicitLeft = 0
         end
         object Panel6: TPanel
           Left = 0
@@ -786,7 +777,6 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
           Color = clNone
           ParentBackground = False
           TabOrder = 2
-          ExplicitTop = 247
           object Shape4: TShape
             AlignWithMargins = True
             Left = 3
@@ -820,9 +810,6 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
             ParentFont = False
             PasswordChar = '*'
             TabOrder = 0
-            ExplicitTop = 15
-            ExplicitWidth = 274
-            ExplicitHeight = 23
           end
         end
         object Panel5: TPanel
@@ -836,7 +823,6 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
           Color = clNone
           ParentBackground = False
           TabOrder = 1
-          ExplicitTop = 149
           object Shape3: TShape
             AlignWithMargins = True
             Left = 3
@@ -870,9 +856,6 @@ object CreateSecurityQuestion: TCreateSecurityQuestion
             ParentFont = False
             PasswordChar = '*'
             TabOrder = 0
-            ExplicitTop = 15
-            ExplicitWidth = 274
-            ExplicitHeight = 23
           end
         end
       end

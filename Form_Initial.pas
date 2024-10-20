@@ -5,8 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Frame_Login, Vcl.ExtCtrls,
-  Vcl.Imaging.jpeg, Frame_Register, DM_Connection, Global_Functions, Form_Main, Frame_CreateSecurityQuestion,
-  Frame_ForgotPassword, Frame_ChangePassword;
+  Frame_ChangePassword, Frame_ForgotPassword, Frame_CreateSecurityQuestion,
+  Frame_Register, Vcl.Imaging.jpeg, Vcl.StdCtrls, DM_Connection, Global_Functions, Form_Main;
 
 type
   TAceInitial = class(TForm)
@@ -22,11 +22,11 @@ type
     procedure AceSignUpHaveAccountSignInButtonClick(Sender: TObject);
     procedure AceSignUpSignUpButtonClick(Sender: TObject);
     procedure AceSignInSignInButtonClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CreateSecurityQuestionDoneButtonClick(Sender: TObject);
     procedure AceSignInForgetPasswordButtonLabelClick(Sender: TObject);
     procedure ForgotPasswordVerifyButtonClick(Sender: TObject);
     procedure ChangePasswordChangePasswordButtonClick(Sender: TObject);
+    procedure ForgotPasswordBackToLoginButtonClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -72,8 +72,16 @@ var
 begin
   if CheckIfUserAndPasswordIsCorrect(AceSignIn.SignInUserEdit, AceSignIn.SignInPasswordEdit) then
     begin
-    ModalResult := mrOk;
-    Close;
+      ModalResult := mrOk;
+
+      Main := TMain.Create(nil);
+      try
+        Main.ShowModal; // Exibe o formulário principal
+      finally
+        Main.Free; // Libera o recurso após o fechamento
+      end;
+
+      Close;
     end
     else
     begin
@@ -134,12 +142,8 @@ begin
         begin
           if UpdatePasswordUser(AceSignIn.SignInUserEdit, ChangePassword.ConfirmNewPasswordEdit) then
             begin
-              ChangePassword.NewPasswordEdit.Text := '';
-              ChangePassword.ConfirmNewPasswordEdit.Text := '';
-              ChangePassword.PasswordWarningLabel.Visible := False;
 
-              ForgotPassword.SecurityQuestionLabel.Caption := '';
-              ForgotPassword.AnswerQuestionEdit.Text := '';
+              ChangePassword.PasswordWarningLabel.Visible := False;
               ForgotPassword.IncorrectAnswerWarningLabel.Visible := False;
 
               SwitchToFrame(AceSignIn)
@@ -158,6 +162,13 @@ begin
     end;
 end;
 
+procedure TAceInitial.ForgotPasswordBackToLoginButtonClick(
+  Sender: TObject);
+begin
+  ForgotPassword.IncorrectAnswerWarningLabel.Visible := False;
+  SwitchToFrame(AceSignIn);
+end;
+
 procedure TAceInitial.ForgotPasswordVerifyButtonClick(Sender: TObject);
 begin
   if CheckIfAnswerSecurityQuestionIsCorrect(AceSignIn.SignInUserEdit, ForgotPassword.AnswerQuestionEdit) then
@@ -169,19 +180,6 @@ begin
     begin
       ForgotPassword.IncorrectAnswerWarningLabel.Visible := True;
     end;
-end;
-
-procedure TAceInitial.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  if ModalResult = mrOk then
-  begin
-    Main := TMain.Create(nil);
-    try
-      Main.ShowModal;
-    finally
-      Main.Free;
-    end;
-  end;
 end;
 
 procedure TAceInitial.FormCreate(Sender: TObject);
@@ -200,16 +198,11 @@ begin
             begin
               if SignUpUser(AceSignUp.SignUpUserEdit, AceSignUp.SignUpConfirmPasswordEdit, CreateSecurityQuestion.SecurityQuestionEdit, CreateSecurityQuestion.ConfirmAnswerEdit) then
                 begin
-                  AceSignUp.SignUpUserEdit.Text := '';
-                  AceSignUp.SignUpPasswordEdit.Text := '';
-                  AceSignUp.SignUpConfirmPasswordEdit.Text := '';
                   AceSignUp.UserWarningLabel.Visible := False;
                   AceSignUp.PasswordWarningLabel.Visible := False;
 
-
-                  CreateSecurityQuestion.SecurityQuestionEdit.Text := '';
-                  CreateSecurityQuestion.AnswerEdit.Text := '';
-                  CreateSecurityQuestion.ConfirmAnswerEdit.Text := '';
+                  CreateSecurityQuestion.QuestionWarningLabel.Visible := False;
+                  CreateSecurityQuestion.AnswerWarningLabel.Visible := False;
 
                   SwitchToFrame(AceSignIn);
                 end
@@ -233,16 +226,34 @@ begin
 end;
 
 procedure TAceInitial.SwitchToFrame(TargetFrame: TFrame);
+
+  // Procedimento recursivo para iterar sobre os componentes dentro dos frames
+  procedure ClearEditsInFrame(Frame: TFrame);
+  var
+    J: Integer;
+  begin
+    for J := 0 to Frame.ComponentCount - 1 do
+    begin
+      if Frame.Components[J] is TEdit then
+      begin
+        TEdit(Frame.Components[J]).Text := '';
+      end;
+    end;
+  end;
+
 var
   I: Integer;
 begin
-  // Itera sobre todos os componentes do formulário para ocultar e desabilitar frames
+  // Itera sobre todos os componentes do formulário para ocultar e desabilitar TFrame e limpar os TEdit
   for I := 0 to ComponentCount - 1 do
   begin
     if Components[I] is TFrame then
     begin
       TFrame(Components[I]).Visible := False;
       TFrame(Components[I]).Enabled := False;
+
+      // Limpa os TEdit dentro do frame
+      ClearEditsInFrame(TFrame(Components[I]));
     end;
   end;
 
@@ -250,6 +261,7 @@ begin
   TargetFrame.Visible := True;
   TargetFrame.Enabled := True;
 end;
+
 
 
 

@@ -26,6 +26,7 @@ type
     Shape2: TShape;
     VerifyButton: TStyledButton;
     SecurityQuestionLabel: TLabel;
+    BackToLoginButton: TLabel;
   private
     { Private declarations }
   public

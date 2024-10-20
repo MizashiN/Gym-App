@@ -663,6 +663,7 @@ object AceSignIn: TAceSignIn
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
+          Visible = False
           ExplicitLeft = 189
           ExplicitWidth = 191
         end

@@ -12,7 +12,6 @@ object AceInitial: TAceInitial
   Font.Name = 'Tahoma'
   Font.Style = []
   Position = poDesktopCenter
-  OnClose = FormClose
   OnCreate = FormCreate
   TextHeight = 13
   object WomanBackgroundImage: TImage
@@ -11616,7 +11615,7 @@ object AceInitial: TAceInitial
             inherited PasswordWarningLabel: TLabel
               Width = 345
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitLeft = 191
+              ExplicitLeft = 417
             end
             inherited UserWarningLabel: TLabel
               Width = 345
@@ -11731,18 +11730,18 @@ object AceInitial: TAceInitial
               Width = 345
               StyleElements = [seFont, seClient, seBorder]
               OnClick = AceSignInDontHaveAccountSignUpButtonClick
-              ExplicitLeft = 59
+              ExplicitLeft = 153
             end
             inherited UserPassWarningLabel: TLabel
               Width = 345
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitLeft = 154
+              ExplicitLeft = 343
             end
             inherited ForgetPasswordButtonLabel: TLabel
               Width = 345
               StyleElements = [seFont, seClient, seBorder]
               OnClick = AceSignInForgetPasswordButtonLabelClick
-              ExplicitLeft = 186
+              ExplicitLeft = 407
             end
             inherited Panel5: TPanel
               Width = 350
@@ -11792,31 +11791,32 @@ object AceInitial: TAceInitial
       ParentColor = False
       TabOrder = 2
       Visible = False
-      ExplicitLeft = -35
+      ExplicitWidth = 540
       inherited Panel1: TPanel
         Width = 480
         StyleElements = [seFont, seClient, seBorder]
-        ExplicitWidth = 515
-        ExplicitHeight = 830
+        ExplicitWidth = 480
         inherited Shape1: TShape
           Width = 480
+          ExplicitWidth = 480
         end
         inherited Panel2: TPanel
           Width = 440
           StyleElements = [seFont, seClient, seBorder]
-          ExplicitWidth = 475
-          ExplicitHeight = 760
+          ExplicitWidth = 440
           inherited Image1: TImage
             Width = 440
+            ExplicitWidth = 440
           end
           inherited Label2: TLabel
             Width = 440
             StyleElements = [seFont, seClient, seBorder]
+            ExplicitWidth = 440
           end
           inherited Panel3: TPanel
             Width = 390
             StyleElements = [seFont, seClient, seBorder]
-            ExplicitTop = 306
+            ExplicitWidth = 390
             inherited Label3: TLabel
               Width = 384
               StyleElements = [seFont, seClient, seBorder]
@@ -11824,68 +11824,66 @@ object AceInitial: TAceInitial
             inherited Label4: TLabel
               Width = 384
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitTop = 235
             end
             inherited AnswerWarningLabel: TLabel
               Width = 385
               StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 525
             end
             inherited Label1: TLabel
               Width = 384
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitTop = 124
             end
             inherited QuestionWarningLabel: TLabel
               Width = 385
               StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 431
             end
             inherited Panel4: TPanel
               Width = 390
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitTop = 36
+              ExplicitWidth = 390
               inherited Shape2: TShape
                 Width = 384
+                ExplicitWidth = 384
               end
               inherited SecurityQuestionEdit: TEdit
                 Width = 370
                 StyleElements = [seFont, seClient, seBorder]
-                ExplicitTop = 20
-                ExplicitHeight = 38
+                ExplicitWidth = 370
               end
             end
             inherited DoneButton: TStyledButton
               Width = 384
               OnClick = CreateSecurityQuestionDoneButtonClick
-              ExplicitTop = 363
+              ExplicitWidth = 384
             end
             inherited Panel6: TPanel
               Width = 390
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitTop = 268
+              ExplicitWidth = 390
               inherited Shape4: TShape
                 Width = 384
+                ExplicitWidth = 384
               end
               inherited ConfirmAnswerEdit: TEdit
                 Width = 370
                 StyleElements = [seFont, seClient, seBorder]
-                ExplicitTop = 20
-                ExplicitWidth = 405
-                ExplicitHeight = 38
+                ExplicitWidth = 370
               end
             end
             inherited Panel5: TPanel
               Width = 390
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitTop = 157
+              ExplicitWidth = 390
               inherited Shape3: TShape
                 Width = 384
+                ExplicitWidth = 384
               end
               inherited AnswerEdit: TEdit
                 Width = 370
                 StyleElements = [seFont, seClient, seBorder]
-                ExplicitTop = 20
-                ExplicitWidth = 405
-                ExplicitHeight = 38
+                ExplicitWidth = 370
               end
             end
           end
@@ -11903,33 +11901,36 @@ object AceInitial: TAceInitial
       ParentColor = False
       TabOrder = 3
       Visible = False
-      ExplicitLeft = -35
+      ExplicitWidth = 540
       inherited Panel1: TPanel
         Width = 480
         StyleElements = [seFont, seClient, seBorder]
-        ExplicitHeight = 830
+        ExplicitWidth = 480
         inherited Shape1: TShape
           Width = 480
+          ExplicitWidth = 480
         end
         inherited Panel2: TPanel
           Width = 440
           StyleElements = [seFont, seClient, seBorder]
-          ExplicitHeight = 765
+          ExplicitWidth = 440
           inherited Image1: TImage
             Width = 440
+            ExplicitWidth = 440
           end
           inherited Label1: TLabel
             Width = 440
             StyleElements = [seFont, seClient, seBorder]
+            ExplicitWidth = 440
           end
           inherited Panel3: TPanel
             Width = 350
             StyleElements = [seFont, seClient, seBorder]
             ExplicitTop = 356
+            ExplicitWidth = 350
             inherited Label2: TLabel
               Width = 344
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitTop = 118
             end
             inherited Label3: TLabel
               Width = 344
@@ -11937,38 +11938,48 @@ object AceInitial: TAceInitial
             end
             inherited IncorrectAnswerWarningLabel: TLabel
               Width = 345
-              Visible = False
               StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 481
+            end
+            inherited BackToLoginButton: TLabel
+              Width = 350
+              StyleElements = [seFont, seClient, seBorder]
+              OnClick = ForgotPasswordBackToLoginButtonClick
+              OnMouseEnter = nil
+              OnMouseLeave = nil
             end
             inherited Panel5: TPanel
               Width = 350
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitTop = 160
+              ExplicitWidth = 350
               inherited Shape3: TShape
                 Width = 344
+                ExplicitWidth = 344
               end
               inherited AnswerQuestionEdit: TEdit
                 Width = 330
                 StyleElements = [seFont, seClient, seBorder]
-                ExplicitTop = 13
                 ExplicitWidth = 330
               end
             end
             inherited Panel4: TPanel
               Width = 350
               StyleElements = [seFont, seClient, seBorder]
+              ExplicitWidth = 350
               inherited Shape2: TShape
                 Width = 344
+                ExplicitWidth = 344
               end
               inherited SecurityQuestionLabel: TLabel
                 Width = 330
                 StyleElements = [seFont, seClient, seBorder]
+                ExplicitWidth = 330
               end
             end
             inherited VerifyButton: TStyledButton
               Width = 344
               OnClick = ForgotPasswordVerifyButtonClick
-              ExplicitTop = 253
+              ExplicitWidth = 344
             end
           end
         end
@@ -11985,75 +11996,65 @@ object AceInitial: TAceInitial
       ParentColor = False
       TabOrder = 4
       Visible = False
-      ExplicitLeft = -35
       inherited Panel1: TPanel
-        Width = 480
         StyleElements = [seFont, seClient, seBorder]
-        ExplicitTop = 30
-        ExplicitHeight = 830
+        ExplicitWidth = 480
         inherited Shape1: TShape
-          Width = 480
+          ExplicitWidth = 480
         end
         inherited Panel2: TPanel
-          Width = 440
           StyleElements = [seFont, seClient, seBorder]
-          ExplicitHeight = 765
-          inherited Image1: TImage
-            Width = 440
-          end
+          ExplicitWidth = 440
           inherited Label1: TLabel
-            Width = 440
             StyleElements = [seFont, seClient, seBorder]
           end
           inherited Panel3: TPanel
-            Width = 350
             StyleElements = [seFont, seClient, seBorder]
-            ExplicitTop = 356
             inherited Label2: TLabel
-              Width = 344
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitTop = 128
             end
             inherited Label3: TLabel
-              Width = 344
               StyleElements = [seFont, seClient, seBorder]
             end
             inherited PasswordWarningLabel: TLabel
-              Width = 345
               Height = 17
               Font.Height = -13
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitLeft = 191
-              ExplicitWidth = 154
+              ExplicitLeft = 0
+              ExplicitWidth = 345
               ExplicitHeight = 17
             end
             inherited Panel5: TPanel
-              Width = 350
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitTop = 170
+              ExplicitTop = 166
+              ExplicitWidth = 350
               inherited Shape3: TShape
-                Width = 344
+                ExplicitWidth = 344
               end
               inherited ConfirmNewPasswordEdit: TEdit
-                Width = 330
                 StyleElements = [seFont, seClient, seBorder]
+                ExplicitTop = 16
+                ExplicitWidth = 330
+                ExplicitHeight = 37
               end
             end
             inherited Panel4: TPanel
-              Width = 350
               StyleElements = [seFont, seClient, seBorder]
+              ExplicitWidth = 350
               inherited Shape2: TShape
-                Width = 344
+                ExplicitWidth = 344
               end
               inherited NewPasswordEdit: TEdit
-                Width = 330
                 StyleElements = [seFont, seClient, seBorder]
+                ExplicitWidth = 330
               end
             end
             inherited ChangePasswordButton: TStyledButton
-              Top = 260
-              Width = 344
+              Top = 256
               OnClick = ChangePasswordChangePasswordButtonClick
+              ExplicitLeft = 0
+              ExplicitTop = 260
+              ExplicitWidth = 344
             end
           end
         end

@@ -57,7 +57,7 @@ object AceSignUp: TAceSignUp
         Left = 0
         Top = 0
         Width = 475
-        Height = 177
+        Height = 201
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
@@ -549,9 +549,9 @@ object AceSignUp: TAceSignUp
       end
       object Label1: TLabel
         Left = 0
-        Top = 177
+        Top = 201
         Width = 475
-        Height = 93
+        Height = 65
         Align = alTop
         Alignment = taCenter
         Caption = 'Gym App'
@@ -562,14 +562,14 @@ object AceSignUp: TAceSignUp
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        ExplicitTop = 180
+        ExplicitTop = 184
       end
       object Panel3: TPanel
         AlignWithMargins = True
         Left = 45
-        Top = 264
+        Top = 272
         Width = 385
-        Height = 501
+        Height = 493
         Margins.Left = 45
         Margins.Top = 0
         Margins.Right = 45
@@ -597,7 +597,6 @@ object AceSignUp: TAceSignUp
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 257
           ExplicitWidth = 270
         end
         object Label3: TLabel
@@ -641,7 +640,6 @@ object AceSignUp: TAceSignUp
           OnMouseEnter = HaveAccountSignInButtonMouseEnter
           OnMouseLeave = HaveAccountSignInButtonMouseLeave
           ExplicitLeft = 160
-          ExplicitTop = 473
           ExplicitWidth = 220
         end
         object Label4: TLabel
@@ -661,7 +659,6 @@ object AceSignUp: TAceSignUp
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 142
           ExplicitWidth = 144
         end
         object PasswordWarningLabel: TLabel
@@ -684,6 +681,7 @@ object AceSignUp: TAceSignUp
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
+          Visible = False
           OnMouseEnter = HaveAccountSignInButtonMouseEnter
           OnMouseLeave = HaveAccountSignInButtonMouseLeave
           ExplicitLeft = 226
@@ -709,10 +707,10 @@ object AceSignUp: TAceSignUp
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
+          Visible = False
           OnMouseEnter = HaveAccountSignInButtonMouseEnter
           OnMouseLeave = HaveAccountSignInButtonMouseLeave
           ExplicitLeft = 61
-          ExplicitTop = 112
           ExplicitWidth = 319
         end
         object Panel5: TPanel
@@ -838,7 +836,6 @@ object AceSignUp: TAceSignUp
           ButtonStyleHot.BorderColor = 10250544
           ButtonStyleHot.FontColor = clWhite
           ButtonStyleHot.ButtonColor = 10250544
-          ExplicitTop = 388
         end
         object Panel6: TPanel
           Left = 0
