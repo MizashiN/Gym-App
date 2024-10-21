@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
   Vcl.ButtonStylesAttributes, Vcl.StyledButton, Vcl.Imaging.jpeg, Vcl.StdCtrls,
-  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, Vcl.ComCtrls;
+  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, Vcl.ComCtrls,
+  AdvPageControl;
 
 type
   TMain = class(TForm)
@@ -28,9 +29,6 @@ type
     UserNameLabel: TLabel;
     Panel4: TPanel;
     StyledButton1: TStyledButton;
-    PageControl1: TPageControl;
-    TabSheet1: TTabSheet;
-    Panel5: TPanel;
     procedure StatusButton(Button: TStyledButton);
     procedure SideBarButtonClick(Sender: TObject);
   private

@@ -25,10 +25,14 @@ object Main: TMain
     TabOrder = 0
     object HomeSideBarButton: TStyledButton
       AlignWithMargins = True
-      Left = 3
-      Top = 3
-      Width = 294
-      Height = 75
+      Left = 10
+      Top = 8
+      Width = 280
+      Height = 65
+      Margins.Left = 10
+      Margins.Top = 8
+      Margins.Right = 10
+      Margins.Bottom = 8
       Align = alTop
       Caption = 'Home'
       Font.Charset = DEFAULT_CHARSET
@@ -52,13 +56,18 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
+      ExplicitTop = 10
     end
     object RoutineSideBarButton: TStyledButton
       AlignWithMargins = True
-      Left = 3
-      Top = 84
-      Width = 294
-      Height = 75
+      Left = 10
+      Top = 89
+      Width = 280
+      Height = 65
+      Margins.Left = 10
+      Margins.Top = 8
+      Margins.Right = 10
+      Margins.Bottom = 8
       Align = alTop
       Caption = 'Routines'
       Font.Charset = DEFAULT_CHARSET
@@ -82,13 +91,18 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
+      ExplicitTop = 95
     end
     object ExercisesSideBarButton: TStyledButton
       AlignWithMargins = True
-      Left = 3
-      Top = 165
-      Width = 294
-      Height = 75
+      Left = 10
+      Top = 170
+      Width = 280
+      Height = 65
+      Margins.Left = 10
+      Margins.Top = 8
+      Margins.Right = 10
+      Margins.Bottom = 8
       Align = alTop
       Caption = 'Exercises'
       Font.Charset = DEFAULT_CHARSET
@@ -112,14 +126,18 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 155
+      ExplicitTop = 180
     end
     object DietSideBarButton: TStyledButton
       AlignWithMargins = True
-      Left = 3
-      Top = 246
-      Width = 294
-      Height = 75
+      Left = 10
+      Top = 251
+      Width = 280
+      Height = 65
+      Margins.Left = 10
+      Margins.Top = 8
+      Margins.Right = 10
+      Margins.Bottom = 8
       Align = alTop
       Caption = 'Diet'
       Font.Charset = DEFAULT_CHARSET
@@ -143,14 +161,18 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 231
+      ExplicitTop = 265
     end
     object GoalsSideBarButton: TStyledButton
       AlignWithMargins = True
-      Left = 3
-      Top = 327
-      Width = 294
-      Height = 75
+      Left = 10
+      Top = 332
+      Width = 280
+      Height = 65
+      Margins.Left = 10
+      Margins.Top = 8
+      Margins.Right = 10
+      Margins.Bottom = 8
       Align = alTop
       Caption = 'Goals'
       Font.Charset = DEFAULT_CHARSET
@@ -174,14 +196,18 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 317
+      ExplicitTop = 350
     end
     object GuideAndTipsSideBarButton: TStyledButton
       AlignWithMargins = True
-      Left = 3
-      Top = 408
-      Width = 294
-      Height = 75
+      Left = 10
+      Top = 413
+      Width = 280
+      Height = 65
+      Margins.Left = 10
+      Margins.Top = 8
+      Margins.Right = 10
+      Margins.Bottom = 8
       Align = alTop
       Caption = 'Guide and Tips'
       Font.Charset = DEFAULT_CHARSET
@@ -205,14 +231,18 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 398
+      ExplicitTop = 435
     end
     object SupplementsSideBarButton: TStyledButton
       AlignWithMargins = True
-      Left = 3
-      Top = 489
-      Width = 294
-      Height = 75
+      Left = 10
+      Top = 494
+      Width = 280
+      Height = 65
+      Margins.Left = 10
+      Margins.Top = 8
+      Margins.Right = 10
+      Margins.Bottom = 8
       Align = alTop
       Caption = 'Supplements'
       Font.Charset = DEFAULT_CHARSET
@@ -236,13 +266,18 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
+      ExplicitTop = 520
     end
     object AcessoriesSideBarButton: TStyledButton
       AlignWithMargins = True
-      Left = 3
-      Top = 651
-      Width = 294
-      Height = 75
+      Left = 10
+      Top = 656
+      Width = 280
+      Height = 65
+      Margins.Left = 10
+      Margins.Top = 8
+      Margins.Right = 10
+      Margins.Bottom = 8
       Align = alTop
       Caption = 'Acessories'
       Font.Charset = DEFAULT_CHARSET
@@ -266,14 +301,18 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 611
+      ExplicitTop = 690
     end
     object HistorySideBarButton: TStyledButton
       AlignWithMargins = True
-      Left = 3
-      Top = 732
-      Width = 294
-      Height = 75
+      Left = 10
+      Top = 737
+      Width = 280
+      Height = 65
+      Margins.Left = 10
+      Margins.Top = 8
+      Margins.Right = 10
+      Margins.Bottom = 8
       Align = alTop
       Caption = 'History'
       Font.Charset = DEFAULT_CHARSET
@@ -297,14 +336,18 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 717
+      ExplicitTop = 775
     end
     object AnabolSideBarButton: TStyledButton
       AlignWithMargins = True
-      Left = 3
-      Top = 570
-      Width = 294
-      Height = 75
+      Left = 10
+      Top = 575
+      Width = 280
+      Height = 65
+      Margins.Left = 10
+      Margins.Top = 8
+      Margins.Right = 10
+      Margins.Bottom = 8
       Align = alTop
       Caption = 'Anabol'
       Font.Charset = DEFAULT_CHARSET
@@ -328,7 +371,7 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 535
+      ExplicitTop = 605
     end
     object Panel2: TPanel
       Left = 0
@@ -341,10 +384,6 @@ object Main: TMain
       Color = 1184274
       ParentBackground = False
       TabOrder = 10
-      ExplicitLeft = 1
-      ExplicitTop = 751
-      ExplicitWidth = 298
-      ExplicitHeight = 148
       object Shape1: TShape
         Left = 0
         Top = 0
@@ -368,8 +407,6 @@ object Main: TMain
         Color = 1184274
         ParentBackground = False
         TabOrder = 0
-        ExplicitTop = 12
-        ExplicitHeight = 68
         object Image1: TImage
           Left = 0
           Top = 0
@@ -452,6 +489,9 @@ object Main: TMain
           ParentFont = False
           Layout = tlCenter
           WordWrap = True
+          ExplicitLeft = 98
+          ExplicitTop = -11
+          ExplicitHeight = 139
         end
         object Panel4: TPanel
           AlignWithMargins = True
@@ -997,42 +1037,8 @@ object Main: TMain
             ButtonStyleHot.ButtonColor = 1184274
             ButtonStyleDisabled.BorderColor = 1184274
             ButtonStyleDisabled.ButtonColor = 1184274
-            ExplicitLeft = 8
-            ExplicitTop = 24
-            ExplicitWidth = 75
-            ExplicitHeight = 25
           end
         end
-      end
-    end
-  end
-  object PageControl1: TPageControl
-    Left = 300
-    Top = 0
-    Width = 1400
-    Height = 900
-    ActivePage = TabSheet1
-    Align = alClient
-    TabOrder = 1
-    ExplicitLeft = 768
-    ExplicitTop = 304
-    ExplicitWidth = 289
-    ExplicitHeight = 193
-    object TabSheet1: TTabSheet
-      Caption = 'TabSheet1'
-      TabVisible = False
-      object Panel5: TPanel
-        Left = 0
-        Top = 0
-        Width = 1392
-        Height = 890
-        Align = alClient
-        BevelOuter = bvNone
-        Color = clBlack
-        ParentBackground = False
-        TabOrder = 0
-        ExplicitLeft = 3
-        ExplicitTop = -1
       end
     end
   end
