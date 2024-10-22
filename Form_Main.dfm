@@ -12,6 +12,7 @@ object Main: TMain
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
+  OnCreate = FormCreate
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
@@ -24,6 +25,7 @@ object Main: TMain
     ParentBackground = False
     TabOrder = 0
     object HomeSideBarButton: TStyledButton
+      Tag = 1
       AlignWithMargins = True
       Left = 10
       Top = 8
@@ -56,9 +58,9 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 10
     end
     object RoutineSideBarButton: TStyledButton
+      Tag = 2
       AlignWithMargins = True
       Left = 10
       Top = 89
@@ -91,9 +93,9 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 95
     end
     object ExercisesSideBarButton: TStyledButton
+      Tag = 3
       AlignWithMargins = True
       Left = 10
       Top = 170
@@ -126,9 +128,9 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 180
     end
     object DietSideBarButton: TStyledButton
+      Tag = 4
       AlignWithMargins = True
       Left = 10
       Top = 251
@@ -161,9 +163,9 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 265
     end
     object GoalsSideBarButton: TStyledButton
+      Tag = 5
       AlignWithMargins = True
       Left = 10
       Top = 332
@@ -196,9 +198,9 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 350
     end
     object GuideAndTipsSideBarButton: TStyledButton
+      Tag = 6
       AlignWithMargins = True
       Left = 10
       Top = 413
@@ -231,9 +233,9 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 435
     end
     object SupplementsSideBarButton: TStyledButton
+      Tag = 7
       AlignWithMargins = True
       Left = 10
       Top = 494
@@ -266,9 +268,9 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 520
     end
     object AcessoriesSideBarButton: TStyledButton
+      Tag = 9
       AlignWithMargins = True
       Left = 10
       Top = 656
@@ -301,9 +303,9 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 690
     end
     object HistorySideBarButton: TStyledButton
+      Tag = 10
       AlignWithMargins = True
       Left = 10
       Top = 737
@@ -336,9 +338,9 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 775
     end
     object AnabolSideBarButton: TStyledButton
+      Tag = 8
       AlignWithMargins = True
       Left = 10
       Top = 575
@@ -371,7 +373,6 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 605
     end
     object Panel2: TPanel
       Left = 0
@@ -489,9 +490,8 @@ object Main: TMain
           ParentFont = False
           Layout = tlCenter
           WordWrap = True
-          ExplicitLeft = 98
-          ExplicitTop = -11
-          ExplicitHeight = 139
+          ExplicitWidth = 65
+          ExplicitHeight = 25
         end
         object Panel4: TPanel
           AlignWithMargins = True
@@ -1039,6 +1039,60 @@ object Main: TMain
             ButtonStyleDisabled.ButtonColor = 1184274
           end
         end
+      end
+    end
+  end
+  inline Home: THome
+    Left = 300
+    Top = 0
+    Width = 1400
+    Height = 900
+    Align = alClient
+    Color = clBlack
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 1
+    ExplicitLeft = 300
+    inherited Panel1: TPanel
+      StyleElements = [seFont, seClient, seBorder]
+      ExplicitLeft = 15
+      ExplicitTop = 15
+      ExplicitWidth = 1370
+      ExplicitHeight = 870
+      inherited Panel2: TPanel
+        StyleElements = [seFont, seClient, seBorder]
+        ExplicitTop = 0
+        inherited Panel5: TPanel
+          StyleElements = [seFont, seClient, seBorder]
+        end
+        inherited Panel6: TPanel
+          StyleElements = [seFont, seClient, seBorder]
+          inherited Label2: TLabel
+            StyleElements = [seFont, seClient, seBorder]
+          end
+        end
+        inherited Panel9: TPanel
+          StyleElements = [seFont, seClient, seBorder]
+          inherited Panel7: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+          end
+          inherited Panel8: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+          end
+        end
+      end
+      inherited Panel4: TPanel
+        StyleElements = [seFont, seClient, seBorder]
+        ExplicitLeft = 970
+        ExplicitTop = 410
+        ExplicitWidth = 400
+        ExplicitHeight = 460
+      end
+      inherited Panel3: TPanel
+        StyleElements = [seFont, seClient, seBorder]
+        ExplicitLeft = 970
+        ExplicitWidth = 400
+        ExplicitHeight = 400
       end
     end
   end

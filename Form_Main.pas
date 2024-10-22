@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
   Vcl.ButtonStylesAttributes, Vcl.StyledButton, Vcl.Imaging.jpeg, Vcl.StdCtrls,
   System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, Vcl.ComCtrls,
-  AdvPageControl;
+  AdvPageControl, Frame_Home;
 
 type
   TMain = class(TForm)
@@ -29,8 +29,11 @@ type
     UserNameLabel: TLabel;
     Panel4: TPanel;
     StyledButton1: TStyledButton;
+    Home: THome;
     procedure StatusButton(Button: TStyledButton);
     procedure SideBarButtonClick(Sender: TObject);
+    procedure SwitchToFrame(TargetFrame: TFrame);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,10 +52,54 @@ begin
   Button.Down := not Button.Down;
 end;
 
+procedure TMain.FormCreate(Sender: TObject);
+begin
+SideBarButtonClick(HomeSideBarButton);
+end;
+
 procedure TMain.SideBarButtonClick(Sender: TObject);
+var
+  TargetFrame: TFrame;
 begin
   if Sender is TStyledButton then
+  begin
+    // Atualiza o estado do botão
     StatusButton(TStyledButton(Sender));
+
+    // Verifica qual Frame será ativado baseado na propriedade Tag do botão
+    case TStyledButton(Sender).Tag of
+      1: TargetFrame := Home; // Supondo que você tenha um TFrame chamado Frame1
+      else
+        Exit; // Se o Tag não corresponder a nenhum Frame, sai do método
+    end;
+
+    // Chama o método para alternar para o Frame selecionado
+    SwitchToFrame(TargetFrame);
+  end;
+end;
+
+
+procedure TMain.SwitchToFrame(TargetFrame: TFrame);
+var
+  I: Integer;
+begin
+  // Verifica se o TargetFrame já está visível e habilitado
+  if TargetFrame.Visible and TargetFrame.Enabled then
+    Exit; // Se já estiver ativo, sai do método
+
+  // Itera sobre todos os componentes do formulário para ocultar e desabilitar TFrame
+  for I := 0 to ComponentCount - 1 do
+  begin
+    if Components[I] is TFrame then
+    begin
+      TFrame(Components[I]).Visible := False;
+      TFrame(Components[I]).Enabled := False;
+    end;
+  end;
+
+  // Torna o TargetFrame visível e habilitado
+  TargetFrame.Visible := True;
+  TargetFrame.Enabled := True;
 end;
 
 end.

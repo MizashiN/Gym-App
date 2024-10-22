@@ -10,7 +10,8 @@ uses
   Form_Main in 'Form_Main.pas' {Main},
   Frame_CreateSecurityQuestion in 'Frame_CreateSecurityQuestion.pas' {CreateSecurityQuestion: TFrame},
   Frame_ForgotPassword in 'Frame_ForgotPassword.pas' {ForgotPassword: TFrame},
-  Frame_ChangePassword in 'Frame_ChangePassword.pas' {ChangePassword: TFrame};
+  Frame_ChangePassword in 'Frame_ChangePassword.pas' {ChangePassword: TFrame},
+  Frame_Home in 'Frame_Home.pas' {Home: TFrame};
 
 {$R *.res}
 
