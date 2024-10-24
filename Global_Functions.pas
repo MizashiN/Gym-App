@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.RegularExpressions, System.Hash, Vcl.Dialogs, Vcl.StdCtrls,FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.DApt,
-  Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, DM_Connection;
+  Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, DM_Connection,
+  System.JSON, REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope;
 
 function CheckIfUserExists(nameUser: TEdit): Boolean;
 function CheckIfUserAndPasswordIsCorrect(nameUser, passwordUser: TEdit): Boolean;
@@ -21,6 +22,8 @@ function CheckIfAnswerSecurityQuestionIsCorrect(nameUser, answerSecurityQuestion
 function UpdatePasswordUser(nameUser, newPasswordUser: TEdit): Boolean;
 function CheckMatchPasswords(passwordEdit, passwordConfirmEdit: TEdit): Boolean;
 function CheckMatchAnswers(answerEdit, answerConfirmEdit: TEdit): Boolean;
+procedure GetMotivationMessageAPI(MessageLabel, AuthorLabel: TLabel);
+procedure GetMaxTitaniumProducts;
 
 implementation
 
@@ -247,6 +250,140 @@ begin
   end;
   queryTemp.Free;
 end;
+
+procedure GetMotivationMessageAPI(MessageLabel, AuthorLabel: TLabel);
+var
+  RESTClient: TRESTClient;
+  RESTRequest: TRESTRequest;
+  RESTResponse: TRESTResponse;
+  JSONValue: TJSONValue;
+  JSONObject: TJSONObject;
+  Author, Quote: string;
+begin
+  // Cria os componentes REST temporariamente
+  RESTClient := TRESTClient.Create(nil);
+  RESTRequest := TRESTRequest.Create(nil);
+  RESTResponse := TRESTResponse.Create(nil);
+
+  try
+    // Configura o RESTClient
+    RESTClient.BaseURL := 'http://127.0.0.1:5000/motivationmessage'; // Substitua pela URL da API
+
+    // Configura o RESTRequest
+    RESTRequest.Client := RESTClient;
+    RESTRequest.Response := RESTResponse;
+    RESTRequest.Method := rmGET; // Define o método como GET
+
+    // Executa a requisição
+    RESTRequest.Execute;
+
+    // Obtém a resposta como JSON
+    JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
+    try
+      if JSONValue is TJSONObject then
+      begin
+        JSONObject := TJSONObject(JSONValue);
+
+        // Acessa o valor da chave "Quote"
+        if JSONObject.TryGetValue('quote', Quote) then
+        begin
+          MessageLabel.Caption := Quote;
+        end
+        else
+        begin
+          MessageLabel.Caption := 'Quote não encontrado';
+        end;
+
+        // Acessa o valor da chave "Author"
+        if JSONObject.TryGetValue('author', Author) then
+        begin
+          AuthorLabel.Caption := Author;
+        end
+        else
+        begin
+          AuthorLabel.Caption := 'Author não encontrado';
+        end;
+      end
+      else
+      begin
+        MessageLabel.Caption := 'Resposta inválida';
+        AuthorLabel.Caption := 'Resposta inválida';
+      end;
+    finally
+      JSONValue.Free;
+    end;
+
+  finally
+    // Libera os componentes REST
+    RESTClient.Free;
+    RESTRequest.Free;
+    RESTResponse.Free;
+  end;
+end;
+
+procedure GetMaxTitaniumProducts;
+var
+  RESTClient: TRESTClient;
+  RESTRequest: TRESTRequest;
+  RESTResponse: TRESTResponse;
+  JSONValue: TJSONValue;
+  JSONProducts: TJSONArray;
+  Product: TJSONObject;
+  Price, Title: string;
+begin
+  // Cria os componentes REST temporariamente
+  RESTClient := TRESTClient.Create(nil);
+  RESTRequest := TRESTRequest.Create(nil);
+  RESTResponse := TRESTResponse.Create(nil);
+
+  try
+    // Configura o RESTClient
+    RESTClient.BaseURL := 'http://127.0.0.1:5000/maxtitanium?category=proteinas&subcategory=concentrada'; // Ajuste conforme necessário
+
+    // Configura o RESTRequest
+    RESTRequest.Client := RESTClient;
+    RESTRequest.Response := RESTResponse;
+    RESTRequest.Method := rmGET; // Define o método como GET
+
+    // Executa a requisição
+    RESTRequest.Execute;
+
+    // Obtém a resposta como JSON
+    JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
+    try
+      if JSONValue is TJSONArray then
+      begin
+        JSONProducts := TJSONArray(JSONValue);
+        var ProductsList: string := ''; // String para armazenar os produtos
+
+        // Itera sobre cada produto no JSONArray
+        for var i := 0 to JSONProducts.Count - 1 do
+        begin
+          Product := JSONProducts.Items[i] as TJSONObject;
+          Title := Product.GetValue<string>('title');
+          Price := Product.GetValue<string>('price');
+
+          // Adiciona o título e o preço à lista
+          ProductsList := ProductsList + Format('Produto: %s, Preço: %s'#13#10, [Title, Price]);
+        end;
+
+        // Exibe todos os produtos em um ShowMessage
+        ShowMessage(ProductsList);
+      end
+      else
+        ShowMessage('Formato JSON inesperado.');
+    finally
+      JSONValue.Free;
+    end;
+
+  finally
+    // Libera os componentes REST
+    RESTClient.Free;
+    RESTRequest.Free;
+    RESTResponse.Free;
+  end;
+end;
+
 
 function CheckIfAnswerSecurityQuestionIsCorrect(nameUser, answerSecurityQuestionUser: TEdit): Boolean;
 var

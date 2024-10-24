@@ -1055,13 +1055,8 @@ object Main: TMain
     ExplicitLeft = 300
     inherited Panel1: TPanel
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 15
-      ExplicitTop = 15
-      ExplicitWidth = 1370
-      ExplicitHeight = 870
       inherited Panel2: TPanel
         StyleElements = [seFont, seClient, seBorder]
-        ExplicitTop = 0
         inherited Panel5: TPanel
           StyleElements = [seFont, seClient, seBorder]
         end
@@ -1078,21 +1073,26 @@ object Main: TMain
           end
           inherited Panel8: TPanel
             StyleElements = [seFont, seClient, seBorder]
+            inherited Panel10: TPanel
+              StyleElements = [seFont, seClient, seBorder]
+              inherited AuthorLabel: TLabel
+                StyleElements = [seFont, seClient, seBorder]
+              end
+              inherited QuoteLabel: TLabel
+                StyleElements = [seFont, seClient, seBorder]
+              end
+              inherited Label4: TLabel
+                StyleElements = [seFont, seClient, seBorder]
+              end
+            end
           end
         end
       end
       inherited Panel4: TPanel
         StyleElements = [seFont, seClient, seBorder]
-        ExplicitLeft = 970
-        ExplicitTop = 410
-        ExplicitWidth = 400
-        ExplicitHeight = 460
       end
       inherited Panel3: TPanel
         StyleElements = [seFont, seClient, seBorder]
-        ExplicitLeft = 970
-        ExplicitWidth = 400
-        ExplicitHeight = 400
       end
     end
   end

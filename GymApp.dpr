@@ -20,6 +20,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TAceInitial, AceInitial);
   Application.CreateForm(TDM_Con, DM_Con);
-  Application.CreateForm(TMain, Main);
   Application.Run;
 end.

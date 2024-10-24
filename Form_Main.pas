@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
   Vcl.ButtonStylesAttributes, Vcl.StyledButton, Vcl.Imaging.jpeg, Vcl.StdCtrls,
   System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, Vcl.ComCtrls,
-  AdvPageControl, Frame_Home;
+  AdvPageControl, Frame_Home, Global_Functions;
 
 type
   TMain = class(TForm)
@@ -85,7 +85,11 @@ var
 begin
   // Verifica se o TargetFrame já está visível e habilitado
   if TargetFrame.Visible and TargetFrame.Enabled then
+  begin
+    GetMotivationMessageAPI(Home.QuoteLabel, Home.AuthorLabel);
+    GetMaxTitaniumProducts;
     Exit; // Se já estiver ativo, sai do método
+  end;
 
   // Itera sobre todos os componentes do formulário para ocultar e desabilitar TFrame
   for I := 0 to ComponentCount - 1 do
@@ -100,6 +104,12 @@ begin
   // Torna o TargetFrame visível e habilitado
   TargetFrame.Visible := True;
   TargetFrame.Enabled := True;
+
+  if TargetFrame = Home then
+  begin
+    GetMotivationMessageAPI(Home.QuoteLabel, Home.AuthorLabel);
+  end;
+
 end;
 
 end.

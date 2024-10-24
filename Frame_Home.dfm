@@ -22,10 +22,6 @@ object Home: THome
     Color = clBlack
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 344
-    ExplicitTop = 376
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object Panel2: TPanel
       AlignWithMargins = True
       Left = 0
@@ -41,7 +37,6 @@ object Home: THome
       Color = 1184274
       ParentBackground = False
       TabOrder = 0
-      ExplicitTop = 40
       object Panel5: TPanel
         AlignWithMargins = True
         Left = 20
@@ -154,8 +149,8 @@ object Home: THome
             Brush.Color = 1184274
             Pen.Color = 10658466
             Pen.Width = 2
-            ExplicitWidth = 464
-            ExplicitHeight = 289
+            ExplicitLeft = -2
+            ExplicitTop = 4
           end
         end
         object Panel8: TPanel
@@ -182,7 +177,85 @@ object Home: THome
             Brush.Color = 1184274
             Pen.Color = 10658466
             Pen.Width = 2
-            ExplicitTop = 4
+            ExplicitHeight = 289
+          end
+          object Panel10: TPanel
+            AlignWithMargins = True
+            Left = 20
+            Top = 20
+            Width = 457
+            Height = 245
+            Margins.Left = 20
+            Margins.Top = 20
+            Margins.Right = 20
+            Margins.Bottom = 20
+            Align = alClient
+            BevelOuter = bvNone
+            Color = 1184274
+            ParentBackground = False
+            TabOrder = 0
+            ExplicitLeft = 312
+            ExplicitTop = 96
+            ExplicitWidth = 185
+            ExplicitHeight = 41
+            object AuthorLabel: TLabel
+              Left = 0
+              Top = 215
+              Width = 457
+              Height = 30
+              Align = alBottom
+              Caption = 'Motivation Message'
+              Color = clWhite
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -24
+              Font.Name = 'Hammersmith One'
+              Font.Style = []
+              ParentColor = False
+              ParentFont = False
+              ExplicitTop = 74
+              ExplicitWidth = 224
+            end
+            object QuoteLabel: TLabel
+              AlignWithMargins = True
+              Left = 0
+              Top = 54
+              Width = 457
+              Height = 151
+              Margins.Left = 0
+              Margins.Top = 10
+              Margins.Right = 0
+              Margins.Bottom = 10
+              Align = alClient
+              Color = clWhite
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -24
+              Font.Name = 'Hammersmith One'
+              Font.Style = []
+              ParentColor = False
+              ParentFont = False
+              WordWrap = True
+              ExplicitTop = 44
+              ExplicitHeight = 165
+            end
+            object Label4: TLabel
+              Left = 0
+              Top = 0
+              Width = 457
+              Height = 44
+              Align = alTop
+              Caption = 'Motivation Message'
+              Color = clWhite
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -35
+              Font.Name = 'Hammersmith One'
+              Font.Style = []
+              ParentColor = False
+              ParentFont = False
+              ExplicitWidth = 326
+            end
           end
         end
       end
@@ -202,10 +275,6 @@ object Home: THome
       Color = 1184274
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 185
-      ExplicitHeight = 41
     end
     object Panel3: TPanel
       AlignWithMargins = True
@@ -222,9 +291,6 @@ object Home: THome
       Color = 1184274
       ParentBackground = False
       TabOrder = 2
-      ExplicitLeft = 0
-      ExplicitWidth = 185
-      ExplicitHeight = 65
     end
   end
 end
