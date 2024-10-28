@@ -622,7 +622,7 @@ object AceSignIn: TAceSignIn
         object DontHaveAccountSignUpButton: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 356
+          Top = 354
           Width = 380
           Height = 26
           Cursor = crHandPoint
@@ -642,7 +642,7 @@ object AceSignIn: TAceSignIn
           OnMouseEnter = DontHaveAccountSignUpButtonMouseEnter
           OnMouseLeave = DontHaveAccountSignUpButtonMouseLeave
           ExplicitLeft = 94
-          ExplicitTop = 354
+          ExplicitTop = 356
           ExplicitWidth = 286
         end
         object UserPassWarningLabel: TLabel
@@ -673,7 +673,7 @@ object AceSignIn: TAceSignIn
           Left = 0
           Top = 243
           Width = 380
-          Height = 22
+          Height = 20
           Cursor = crHandPoint
           Margins.Left = 0
           Margins.Top = 0
@@ -691,6 +691,8 @@ object AceSignIn: TAceSignIn
           Layout = tlCenter
           OnMouseEnter = ForgetPasswordButtonLabelMouseEnter
           OnMouseLeave = ForgetPasswordButtonLabelMouseLeave
+          ExplicitLeft = 221
+          ExplicitWidth = 159
         end
         object Panel5: TPanel
           Left = 0
@@ -787,7 +789,7 @@ object AceSignIn: TAceSignIn
         object SignInButton: TStyledButton
           AlignWithMargins = True
           Left = 3
-          Top = 275
+          Top = 273
           Width = 379
           Height = 78
           Margins.Top = 10
@@ -815,7 +817,6 @@ object AceSignIn: TAceSignIn
           ButtonStyleHot.BorderColor = 10250544
           ButtonStyleHot.FontColor = clWhite
           ButtonStyleHot.ButtonColor = 10250544
-          ExplicitTop = 273
         end
       end
     end

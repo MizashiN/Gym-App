@@ -24,6 +24,7 @@ function CheckMatchPasswords(passwordEdit, passwordConfirmEdit: TEdit): Boolean;
 function CheckMatchAnswers(answerEdit, answerConfirmEdit: TEdit): Boolean;
 procedure GetMotivationMessageAPI(MessageLabel, AuthorLabel: TLabel);
 procedure GetMaxTitaniumProducts;
+procedure GetNewsAPI(titleLabel, paragraphLabel: TLabel);
 
 implementation
 
@@ -338,7 +339,7 @@ begin
 
   try
     // Configura o RESTClient
-    RESTClient.BaseURL := 'http://127.0.0.1:5000/maxtitanium?category=proteinas&subcategory=concentrada'; // Ajuste conforme necessário
+    RESTClient.BaseURL := 'http://127.0.0.1:5000/all?category=proteins'; // Ajuste conforme necessário
 
     // Configura o RESTRequest
     RESTRequest.Client := RESTClient;
@@ -349,26 +350,31 @@ begin
     RESTRequest.Execute;
 
     // Obtém a resposta como JSON
+  // Obtém a resposta como JSON
     JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
     try
-      if JSONValue is TJSONArray then
+      if JSONValue is TJSONObject then
       begin
-        JSONProducts := TJSONArray(JSONValue);
-        var ProductsList: string := ''; // String para armazenar os produtos
-
-        // Itera sobre cada produto no JSONArray
-        for var i := 0 to JSONProducts.Count - 1 do
+        // Acesse o array "products" dentro do objeto JSON
+        var ProductsArray := JSONValue.GetValue<TJSONArray>('products');
+        if Assigned(ProductsArray) then
         begin
-          Product := JSONProducts.Items[i] as TJSONObject;
-          Title := Product.GetValue<string>('title');
-          Price := Product.GetValue<string>('price');
+          var ProductsList: string := ''; // String para armazenar os produtos
 
-          // Adiciona o título e o preço à lista
-          ProductsList := ProductsList + Format('Produto: %s, Preço: %s'#13#10, [Title, Price]);
+          // Itera sobre cada produto no JSONArray
+          for var i := 0 to ProductsArray.Count - 1 do
+          begin
+            Product := ProductsArray.Items[i] as TJSONObject;
+            Title := Product.GetValue<string>('title');
+            Price := Product.GetValue<string>('price');
+
+            // Adiciona o título e o preço à lista
+            ProductsList := ProductsList + Format('Produto: %s, Preço: %s'#13#10, [Title, Price]);
+          end;
+
+          // Exibe todos os produtos em um ShowMessage
+          ShowMessage(ProductsList);
         end;
-
-        // Exibe todos os produtos em um ShowMessage
-        ShowMessage(ProductsList);
       end
       else
         ShowMessage('Formato JSON inesperado.');
@@ -384,6 +390,87 @@ begin
   end;
 end;
 
+procedure GetNewsAPI(titleLabel, paragraphLabel: TLabel);
+var
+  RESTClient: TRESTClient;
+  RESTRequest: TRESTRequest;
+  RESTResponse: TRESTResponse;
+  JSONValue: TJSONValue;
+  JSONObject: TJSONObject;
+  title, paragraph, url, url_value, cleanedText: string;
+begin
+  // Cria os componentes REST temporariamente
+  RESTClient := TRESTClient.Create(nil);
+  RESTRequest := TRESTRequest.Create(nil);
+  RESTResponse := TRESTResponse.Create(nil);
+
+  try
+    // Configura o RESTClient
+    RESTClient.BaseURL := 'http://127.0.0.1:5000/news'; // Substitua pela URL da API
+
+    // Configura o RESTRequest
+    RESTRequest.Client := RESTClient;
+    RESTRequest.Response := RESTResponse;
+    RESTRequest.Method := rmGET; // Define o método como GET
+
+    // Executa a requisição
+    RESTRequest.Execute;
+
+    // Obtém a resposta como JSON
+    JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
+    try
+      if JSONValue is TJSONObject then
+      begin
+        JSONObject := TJSONObject(JSONValue);
+
+        // Acessa o valor da chave "Quote"
+        if JSONObject.TryGetValue('title', title) then
+        begin
+          titleLabel.Caption := title;
+        end
+        else
+        begin
+          titleLabel.Caption := 'Title not found';
+        end;
+
+        // Acessa o valor da chave "Author"
+        if JSONObject.TryGetValue('paragraph', paragraph) then
+        begin
+          cleanedText := StringReplace(Trim(paragraph), #13#10, ' ', [rfReplaceAll]);
+          cleanedText := StringReplace(cleanedText, #9, ' ', [rfReplaceAll]); // remover tabulações, se houver
+          paragraphLabel.Caption := cleanedText;
+        end
+        else
+        begin
+          paragraphLabel.Caption := 'paragraph not found';
+        end;
+
+        if JSONObject.TryGetValue('url', url) then
+        begin
+          url_value := url
+        end
+        else
+        begin
+          ShowMessage('Url not found');
+        end;
+
+      end
+      else
+      begin
+        titleLabel.Caption := 'Resposta inválida';
+        paragraphLabel.Caption := 'Resposta inválida';
+      end;
+    finally
+      JSONValue.Free;
+    end;
+
+  finally
+    // Libera os componentes REST
+    RESTClient.Free;
+    RESTRequest.Free;
+    RESTResponse.Free;
+  end;
+end;
 
 function CheckIfAnswerSecurityQuestionIsCorrect(nameUser, answerSecurityQuestionUser: TEdit): Boolean;
 var

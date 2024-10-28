@@ -1057,9 +1057,6 @@ object Main: TMain
       StyleElements = [seFont, seClient, seBorder]
       inherited Panel2: TPanel
         StyleElements = [seFont, seClient, seBorder]
-        inherited Panel5: TPanel
-          StyleElements = [seFont, seClient, seBorder]
-        end
         inherited Panel6: TPanel
           StyleElements = [seFont, seClient, seBorder]
           inherited Label2: TLabel
@@ -1070,6 +1067,12 @@ object Main: TMain
           StyleElements = [seFont, seClient, seBorder]
           inherited Panel7: TPanel
             StyleElements = [seFont, seClient, seBorder]
+            inherited Panel14: TPanel
+              StyleElements = [seFont, seClient, seBorder]
+              inherited Label3: TLabel
+                StyleElements = [seFont, seClient, seBorder]
+              end
+            end
           end
           inherited Panel8: TPanel
             StyleElements = [seFont, seClient, seBorder]
@@ -1081,7 +1084,7 @@ object Main: TMain
               inherited QuoteLabel: TLabel
                 StyleElements = [seFont, seClient, seBorder]
               end
-              inherited Label4: TLabel
+              inherited Label1: TLabel
                 StyleElements = [seFont, seClient, seBorder]
               end
             end
@@ -1090,9 +1093,34 @@ object Main: TMain
       end
       inherited Panel4: TPanel
         StyleElements = [seFont, seClient, seBorder]
+        ExplicitLeft = 953
+        ExplicitTop = 266
       end
       inherited Panel3: TPanel
         StyleElements = [seFont, seClient, seBorder]
+        inherited Panel11: TPanel
+          StyleElements = [seFont, seClient, seBorder]
+          inherited Image1: TImage
+            ExplicitHeight = 178
+          end
+        end
+        inherited Panel12: TPanel
+          StyleElements = [seFont, seClient, seBorder]
+          inherited SignInButton: TStyledButton
+            Top = 15
+            Height = 74
+            Margins.Top = 15
+            Margins.Bottom = 15
+            ExplicitTop = 15
+            ExplicitHeight = 74
+          end
+        end
+        inherited Panel13: TPanel
+          StyleElements = [seFont, seClient, seBorder]
+          inherited Label4: TLabel
+            StyleElements = [seFont, seClient, seBorder]
+          end
+        end
       end
     end
   end

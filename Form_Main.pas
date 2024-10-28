@@ -87,7 +87,6 @@ begin
   if TargetFrame.Visible and TargetFrame.Enabled then
   begin
     GetMotivationMessageAPI(Home.QuoteLabel, Home.AuthorLabel);
-    GetMaxTitaniumProducts;
     Exit; // Se já estiver ativo, sai do método
   end;
 
