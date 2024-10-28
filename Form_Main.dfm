@@ -1090,18 +1090,47 @@ object Main: TMain
             end
           end
         end
+        inherited Panel5: TPanel
+          StyleElements = [seFont, seClient, seBorder]
+          inherited Shape1: TShape
+            ExplicitTop = -3
+            ExplicitWidth = 920
+            ExplicitHeight = 444
+          end
+          inherited Panel15: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+            inherited Label5: TLabel
+              StyleElements = [seFont, seClient, seBorder]
+            end
+            inherited TitleLabel: TLabel
+              Height = 138
+              AutoSize = False
+              StyleElements = [seFont, seClient, seBorder]
+              ExplicitHeight = 138
+            end
+            inherited ParagraphLabel: TLabel
+              Top = 203
+              Height = 201
+              Align = alClient
+              StyleElements = [seFont, seClient, seBorder]
+              ExplicitTop = 203
+              ExplicitHeight = 201
+            end
+          end
+        end
       end
       inherited Panel4: TPanel
         StyleElements = [seFont, seClient, seBorder]
-        ExplicitLeft = 953
-        ExplicitTop = 266
       end
       inherited Panel3: TPanel
         StyleElements = [seFont, seClient, seBorder]
         inherited Panel11: TPanel
           StyleElements = [seFont, seClient, seBorder]
           inherited Image1: TImage
-            ExplicitHeight = 178
+            ExplicitLeft = 8
+            ExplicitTop = 0
+            ExplicitWidth = 400
+            ExplicitHeight = 210
           end
         end
         inherited Panel12: TPanel
@@ -1117,7 +1146,7 @@ object Main: TMain
         end
         inherited Panel13: TPanel
           StyleElements = [seFont, seClient, seBorder]
-          inherited Label4: TLabel
+          inherited UsernameLabel: TLabel
             StyleElements = [seFont, seClient, seBorder]
           end
         end

@@ -34,10 +34,12 @@ type
     procedure SideBarButtonClick(Sender: TObject);
     procedure SwitchToFrame(TargetFrame: TFrame);
     procedure FormCreate(Sender: TObject);
+    procedure FrameHomeShow;
   private
     { Private declarations }
   public
     { Public declarations }
+    username: string;
   end;
 
 var
@@ -78,6 +80,12 @@ begin
   end;
 end;
 
+procedure TMain.FrameHomeShow;
+begin
+  GetMotivationMessageAPI(Home.QuoteLabel, Home.AuthorLabel);
+  GetNewsAPI(Home.TitleLabel, Home.ParagraphLabel);
+  Home.UsernameLabel.Caption := username;
+end;
 
 procedure TMain.SwitchToFrame(TargetFrame: TFrame);
 var
@@ -86,7 +94,7 @@ begin
   // Verifica se o TargetFrame já está visível e habilitado
   if TargetFrame.Visible and TargetFrame.Enabled then
   begin
-    GetMotivationMessageAPI(Home.QuoteLabel, Home.AuthorLabel);
+    FrameHomeSHow;
     Exit; // Se já estiver ativo, sai do método
   end;
 

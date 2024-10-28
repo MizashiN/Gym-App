@@ -7,7 +7,7 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
   REST.Types, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
   Vcl.MPlayer, Vcl.Imaging.pngimage, Vcl.ButtonStylesAttributes,
-  Vcl.StyledButton;
+  Vcl.StyledButton, Global_Functions, ShellAPI;
 
 type
   THome = class(TFrame)
@@ -31,12 +31,19 @@ type
     Panel11: TPanel;
     Panel12: TPanel;
     Panel13: TPanel;
-    Label4: TLabel;
+    UsernameLabel: TLabel;
     SignInButton: TStyledButton;
     Panel14: TPanel;
     Label3: TLabel;
     Image2: TImage;
     StyledButton1: TStyledButton;
+    Panel5: TPanel;
+    Shape1: TShape;
+    Panel15: TPanel;
+    Label5: TLabel;
+    TitleLabel: TLabel;
+    ParagraphLabel: TLabel;
+    procedure TitleLabelClick(Sender: TObject);
   private
     { Private declaration }
   public
@@ -46,5 +53,10 @@ type
 implementation
 
 {$R *.dfm}
+
+procedure THome.TitleLabelClick(Sender: TObject);
+begin
+  ShellExecute(0, 'open', PChar(Global_Functions.url_value) , nil, nil, SW_SHOWNORMAL);
+end;
 
 end.

@@ -1,4 +1,4 @@
-unit Form_Initial;
+ï»¿unit Form_Initial;
 
 interface
 
@@ -33,6 +33,7 @@ type
     procedure SwitchToFrame(TargetFrame: TFrame);
   public
     { Public declarations }
+    username: string;
   end;
 
 var
@@ -75,10 +76,11 @@ begin
       ModalResult := mrOk;
 
       Main := TMain.Create(nil);
+      Main.username := AceSignIn.SignInUserEdit.Text;
       try
-        Main.ShowModal; // Exibe o formulário principal
+        Main.ShowModal; // Exibe o formulï¿½rio principal
       finally
-        Main.Free; // Libera o recurso após o fechamento
+        Main.Free; // Libera o recurso apï¿½s o fechamento
       end;
 
       Close;
@@ -244,7 +246,7 @@ procedure TAceInitial.SwitchToFrame(TargetFrame: TFrame);
 var
   I: Integer;
 begin
-  // Itera sobre todos os componentes do formulário para ocultar e desabilitar TFrame e limpar os TEdit
+  // Itera sobre todos os componentes do formulï¿½rio para ocultar e desabilitar TFrame e limpar os TEdit
   for I := 0 to ComponentCount - 1 do
   begin
     if Components[I] is TFrame then

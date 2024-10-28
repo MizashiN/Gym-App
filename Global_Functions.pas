@@ -9,6 +9,9 @@ uses
   Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, DM_Connection,
   System.JSON, REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope;
 
+var
+  url_value: string;
+
 function CheckIfUserExists(nameUser: TEdit): Boolean;
 function CheckIfUserAndPasswordIsCorrect(nameUser, passwordUser: TEdit): Boolean;
 function SignUpUser(nameUser, passwordUser, questionUser, questionAnswerUser: TEdit): Boolean;
@@ -25,6 +28,7 @@ function CheckMatchAnswers(answerEdit, answerConfirmEdit: TEdit): Boolean;
 procedure GetMotivationMessageAPI(MessageLabel, AuthorLabel: TLabel);
 procedure GetMaxTitaniumProducts;
 procedure GetNewsAPI(titleLabel, paragraphLabel: TLabel);
+procedure GetUserName(usernameLabel: TLabel);
 
 implementation
 
@@ -52,6 +56,11 @@ begin
       end;
   end;
   queryTemp.Free;
+end;
+
+procedure GetUserName(usernameLabel: TLabel);
+begin
+
 end;
 
 function CheckIfUserAndPasswordIsCorrect(nameUser, passwordUser: TEdit): Boolean;
@@ -397,7 +406,7 @@ var
   RESTResponse: TRESTResponse;
   JSONValue: TJSONValue;
   JSONObject: TJSONObject;
-  title, paragraph, url, url_value, cleanedText: string;
+  title, paragraph, url, cleanedText: string;
 begin
   // Cria os componentes REST temporariamente
   RESTClient := TRESTClient.Create(nil);

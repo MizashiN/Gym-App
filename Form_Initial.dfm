@@ -11729,25 +11729,20 @@ object AceInitial: TAceInitial
               StyleElements = [seFont, seClient, seBorder]
             end
             inherited DontHaveAccountSignUpButton: TLabel
-              Left = 0
-              Top = 354
               Width = 345
               StyleElements = [seFont, seClient, seBorder]
               OnClick = AceSignInDontHaveAccountSignUpButtonClick
-              ExplicitLeft = 153
-              ExplicitTop = 354
+              ExplicitLeft = 59
             end
             inherited UserPassWarningLabel: TLabel
-              Left = 0
               Width = 345
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitLeft = 343
+              ExplicitLeft = 154
             end
             inherited ForgetPasswordButtonLabel: TLabel
-              Left = 0
               Width = 345
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitLeft = 407
+              ExplicitLeft = 186
             end
             inherited Panel5: TPanel
               Width = 350
@@ -11778,7 +11773,6 @@ object AceInitial: TAceInitial
               end
             end
             inherited SignInButton: TStyledButton
-              Top = 273
               Width = 344
               OnClick = AceSignInSignInButtonClick
               ExplicitWidth = 344
