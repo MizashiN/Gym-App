@@ -33,13 +33,13 @@ type
     procedure StatusButton(Button: TStyledButton);
     procedure SideBarButtonClick(Sender: TObject);
     procedure SwitchToFrame(TargetFrame: TFrame);
-    procedure FormCreate(Sender: TObject);
     procedure FrameHomeShow;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    username: string;
+    userID: integer;
   end;
 
 var
@@ -52,11 +52,6 @@ implementation
 procedure TMain.StatusButton(Button: TStyledButton);
 begin
   Button.Down := not Button.Down;
-end;
-
-procedure TMain.FormCreate(Sender: TObject);
-begin
-SideBarButtonClick(HomeSideBarButton);
 end;
 
 procedure TMain.SideBarButtonClick(Sender: TObject);
@@ -80,11 +75,16 @@ begin
   end;
 end;
 
+procedure TMain.FormShow(Sender: TObject);
+begin
+SideBarButtonClick(HomeSideBarButton);
+end;
+
 procedure TMain.FrameHomeShow;
 begin
   GetMotivationMessageAPI(Home.QuoteLabel, Home.AuthorLabel);
   GetNewsAPI(Home.TitleLabel, Home.ParagraphLabel);
-  Home.UsernameLabel.Caption := username;
+  Home.usernameLabel.Caption := GetUserName(userID);
 end;
 
 procedure TMain.SwitchToFrame(TargetFrame: TFrame);
@@ -94,7 +94,7 @@ begin
   // Verifica se o TargetFrame já está visível e habilitado
   if TargetFrame.Visible and TargetFrame.Enabled then
   begin
-    FrameHomeSHow;
+    FrameHomeShow;
     Exit; // Se já estiver ativo, sai do método
   end;
 

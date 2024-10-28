@@ -9,6 +9,9 @@ uses
   Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, DM_Connection,
   System.JSON, REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope;
 
+var
+  url_value: string;
+
 function CheckIfUserExists(nameUser: TEdit): Boolean;
 function CheckIfUserAndPasswordIsCorrect(nameUser, passwordUser: TEdit): Boolean;
 function SignUpUser(nameUser, passwordUser, questionUser, questionAnswerUser: TEdit): Boolean;
@@ -25,16 +28,9 @@ function CheckMatchAnswers(answerEdit, answerConfirmEdit: TEdit): Boolean;
 procedure GetMotivationMessageAPI(MessageLabel, AuthorLabel: TLabel);
 procedure GetMaxTitaniumProducts;
 procedure GetNewsAPI(titleLabel, paragraphLabel: TLabel);
-type
+function GetUserID(nameUser: TEdit): integer;
 
-  public
-
-    url_value: string;
-
-  end;
 implementation
-
-
 
 function CheckIfUserExists(nameUser: TEdit): Boolean;
 var
@@ -61,6 +57,53 @@ begin
   end;
   queryTemp.Free;
 end;
+
+function GetUserID(nameUser: TEdit): integer;
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.Connection;
+
+    queryTemp.SQL.Text := 'SELECT id_user FROM users WHERE name_user = :name_user';
+    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
+    queryTemp.Open;
+
+    Result := queryTemp.FieldByName('id_user').AsInteger;
+
+    except
+      on E: Exception do
+      begin
+      ShowMessage('Erro: ' + E.Message);
+      end;
+  end;
+  queryTemp.Free;
+end;
+
+function GetUserName(id_user: integer): string;
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.Connection;
+
+    queryTemp.SQL.Text := 'SELECT name_user FROM users WHERE id_user = :id_user';
+    queryTemp.ParamByName('id_user').AsInteger := nameUser.Text;
+    queryTemp.Open;
+
+    Result := queryTemp.FieldByName('name_user').AsString;
+
+    except
+      on E: Exception do
+      begin
+      ShowMessage('Erro: ' + E.Message);
+      end;
+  end;
+  queryTemp.Free;
+end;
+
 
 function CheckIfUserAndPasswordIsCorrect(nameUser, passwordUser: TEdit): Boolean;
 var

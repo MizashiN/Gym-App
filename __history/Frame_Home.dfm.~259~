@@ -497,9 +497,6 @@ object Home: THome
           Color = 1184274
           ParentBackground = False
           TabOrder = 0
-          ExplicitTop = 406
-          ExplicitWidth = 920
-          ExplicitHeight = 444
           object Label5: TLabel
             Left = 0
             Top = 0
@@ -522,7 +519,8 @@ object Home: THome
             Left = 0
             Top = 55
             Width = 880
-            Height = 130
+            Height = 50
+            Cursor = crHandPoint
             Margins.Left = 0
             Margins.Top = 10
             Margins.Right = 0
@@ -531,34 +529,36 @@ object Home: THome
             Color = clWhite
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
-            Font.Height = -24
+            Font.Height = -40
             Font.Name = 'Hammersmith One'
-            Font.Style = []
+            Font.Style = [fsUnderline]
             ParentColor = False
             ParentFont = False
             WordWrap = True
+            OnClick = TitleLabelClick
+            ExplicitWidth = 13
           end
           object ParagraphLabel: TLabel
             AlignWithMargins = True
             Left = 0
-            Top = 205
+            Top = 115
             Width = 880
-            Height = 30
+            Height = 33
             Margins.Left = 0
-            Margins.Top = 10
+            Margins.Top = 0
             Margins.Right = 0
-            Margins.Bottom = 10
+            Margins.Bottom = 0
             Align = alTop
             Color = clWhite
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
-            Font.Height = -24
+            Font.Height = -27
             Font.Name = 'Hammersmith One'
             Font.Style = []
             ParentColor = False
             ParentFont = False
             WordWrap = True
-            ExplicitWidth = 8
+            ExplicitWidth = 9
           end
         end
       end
@@ -2423,7 +2423,7 @@ object Home: THome
         Color = 1184274
         ParentBackground = False
         TabOrder = 2
-        object Label4: TLabel
+        object UsernameLabel: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 3

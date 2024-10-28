@@ -74,9 +74,8 @@ begin
   if CheckIfUserAndPasswordIsCorrect(AceSignIn.SignInUserEdit, AceSignIn.SignInPasswordEdit) then
     begin
       ModalResult := mrOk;
-
       Main := TMain.Create(nil);
-      Main.username := AceSignIn.SignInUserEdit.Text;
+      Main.userID := GetUserID(AceSignIn.SignInUserEdit);
       try
         Main.ShowModal; // Exibe o formul�rio principal
       finally

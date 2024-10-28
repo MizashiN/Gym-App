@@ -25,10 +25,12 @@ function CheckIfAnswerSecurityQuestionIsCorrect(nameUser, answerSecurityQuestion
 function UpdatePasswordUser(nameUser, newPasswordUser: TEdit): Boolean;
 function CheckMatchPasswords(passwordEdit, passwordConfirmEdit: TEdit): Boolean;
 function CheckMatchAnswers(answerEdit, answerConfirmEdit: TEdit): Boolean;
+function GetUserID(nameUser: TEdit): integer;
+function GetUserName(id_user: integer): string;
 procedure GetMotivationMessageAPI(MessageLabel, AuthorLabel: TLabel);
 procedure GetMaxTitaniumProducts;
 procedure GetNewsAPI(titleLabel, paragraphLabel: TLabel);
-procedure GetUserName(usernameLabel: TLabel);
+
 
 implementation
 
@@ -58,10 +60,54 @@ begin
   queryTemp.Free;
 end;
 
-procedure GetUserName(usernameLabel: TLabel);
+function GetUserID(nameUser: TEdit): integer;
+var
+  queryTemp: TFDQuery;
 begin
+  queryTemp := TFDQuery.Create(nil);
+  Result := 0;
+  try
+    queryTemp.Connection := DM_Con.Connection;
 
+    queryTemp.SQL.Text := 'SELECT id_user FROM users WHERE name_user = :name_user';
+    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
+    queryTemp.Open;
+
+    Result := queryTemp.FieldByName('id_user').AsInteger;
+
+    except
+      on E: Exception do
+      begin
+      ShowMessage('Erro: ' + E.Message);
+      end;
+  end;
+  queryTemp.Free;
 end;
+
+function GetUserName(id_user: integer): string;
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  Result := '';
+  try
+    queryTemp.Connection := DM_Con.Connection;
+
+    queryTemp.SQL.Text := 'SELECT name_user FROM users WHERE id_user = :id_user';
+    queryTemp.ParamByName('id_user').AsInteger := id_user;
+    queryTemp.Open;
+
+    Result := queryTemp.FieldByName('name_user').AsString;
+
+    except
+      on E: Exception do
+      begin
+      ShowMessage('Erro: ' + E.Message);
+      end;
+  end;
+  queryTemp.Free;
+end;
+
 
 function CheckIfUserAndPasswordIsCorrect(nameUser, passwordUser: TEdit): Boolean;
 var

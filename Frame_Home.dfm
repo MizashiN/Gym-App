@@ -2431,14 +2431,13 @@ object Home: THome
           Height = 50
           Align = alClient
           Alignment = taCenter
-          Caption = 'Parafal'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -40
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
-          ExplicitWidth = 125
+          ExplicitWidth = 13
         end
       end
     end

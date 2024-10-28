@@ -12,7 +12,7 @@ object Main: TMain
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
-  OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
