@@ -16,16 +16,17 @@ type
     Label2: TLabel;
     Shape2: TShape;
     Panel5: TPanel;
+    Shape1: TShape;
     Panel15: TPanel;
     Panel4: TPanel;
     Panel3: TPanel;
     Panel11: TPanel;
     Panel12: TPanel;
     Panel13: TPanel;
-    UsernameLabel: TLabel;
-    Image1: TImage;
     Image2: TImage;
-    procedure Image2Click(Sender: TObject);
+    UsernameLabel: TLabel;
+    ChangePasswordButton: TStyledButton;
+    StyledButton1: TStyledButton;
   private
     { Private declarations }
   public
@@ -35,10 +36,5 @@ type
 implementation
 
 {$R *.dfm}
-
-procedure TProfile.Image2Click(Sender: TObject);
-begin
-//alterar imagem
-end;
 
 end.

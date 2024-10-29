@@ -2422,8 +2422,8 @@ object Profile: TProfile
           end
           object Image2: TImage
             AlignWithMargins = True
-            Left = 272
-            Top = 160
+            Left = 264
+            Top = 152
             Width = 48
             Height = 48
             Margins.Left = 0
@@ -2476,7 +2476,6 @@ object Profile: TProfile
               1E0A06E8B2475769973D22C454BB6EE3AEDCC844CE5DB9C9F5BACD7F74F22B3E
               39193B290000000049454E44AE426082}
             Proportional = True
-            OnClick = Image2Click
           end
         end
       end

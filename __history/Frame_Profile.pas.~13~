@@ -25,7 +25,6 @@ type
     UsernameLabel: TLabel;
     Image1: TImage;
     Image2: TImage;
-    procedure Image2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,10 +34,5 @@ type
 implementation
 
 {$R *.dfm}
-
-procedure TProfile.Image2Click(Sender: TObject);
-begin
-//alterar imagem
-end;
 
 end.
