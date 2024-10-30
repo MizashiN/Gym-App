@@ -12,7 +12,8 @@ uses
   Frame_ForgotPassword in 'Frame_ForgotPassword.pas' {ForgotPassword: TFrame},
   Frame_ChangePassword in 'Frame_ChangePassword.pas' {ChangePassword: TFrame},
   Frame_Home in 'Frame_Home.pas' {Home: TFrame},
-  Frame_Profile in 'Frame_Profile.pas' {Profile: TFrame};
+  Frame_Profile in 'Frame_Profile.pas' {Profile: TFrame},
+  Frame_Supplements in 'Frame_Supplements.pas' {Supplements: TFrame};
 
 {$R *.res}
 

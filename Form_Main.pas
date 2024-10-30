@@ -7,13 +7,12 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
   Vcl.ButtonStylesAttributes, Vcl.StyledButton, Vcl.Imaging.jpeg, Vcl.StdCtrls,
   System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, Vcl.ComCtrls,
-  AdvPageControl, Frame_Home, Global_Functions;
+  AdvPageControl, Frame_Home, Global_Functions, Frame_Supplements;
 
 type
   TMain = class(TForm)
     Panel1: TPanel;
     HomeSideBarButton: TStyledButton;
-    DietSideBarButton: TStyledButton;
     GuideAndTipsSideBarButton: TStyledButton;
     SupplementsSideBarButton: TStyledButton;
     AcessoriesSideBarButton: TStyledButton;
@@ -25,6 +24,8 @@ type
     UserNameLabel: TLabel;
     StyledButton1: TStyledButton;
     Home: THome;
+    Panel4: TPanel;
+    Supplements: TSupplements;
     procedure StatusButton(Button: TStyledButton);
     procedure SideBarButtonClick(Sender: TObject);
     procedure SwitchToFrame(TargetFrame: TFrame);
@@ -52,23 +53,37 @@ end;
 procedure TMain.SideBarButtonClick(Sender: TObject);
 var
   TargetFrame: TFrame;
+  Frame: TFrame;
 begin
   if Sender is TStyledButton then
   begin
     // Atualiza o estado do botão
     StatusButton(TStyledButton(Sender));
 
+    // Desativa e oculta todos os frames antes de ativar o selecionado
+    for Frame in [Home, Supplements] do
+    begin
+      Frame.Visible := False;
+      Frame.Enabled := False;
+    end;
+
     // Verifica qual Frame será ativado baseado na propriedade Tag do botão
     case TStyledButton(Sender).Tag of
-      1: TargetFrame := Home; // Supondo que você tenha um TFrame chamado Frame1
+      1: TargetFrame := Home;
+      2: TargetFrame := Supplements;
       else
         Exit; // Se o Tag não corresponder a nenhum Frame, sai do método
     end;
+
+    // Ativa e exibe o frame selecionado
+    TargetFrame.Visible := True;
+    TargetFrame.Enabled := True;
 
     // Chama o método para alternar para o Frame selecionado
     SwitchToFrame(TargetFrame);
   end;
 end;
+
 
 procedure TMain.FormShow(Sender: TObject);
 begin
@@ -77,8 +92,6 @@ end;
 
 procedure TMain.FrameHomeShow;
 begin
-  GetMotivationMessageAPI(Home.QuoteLabel, Home.AuthorLabel);
-  GetNewsAPI(Home.TitleLabel, Home.ParagraphLabel);
   Home.usernameLabel.Caption := GetUserName(userID);
 end;
 
@@ -89,7 +102,10 @@ begin
   // Verifica se o TargetFrame já está visível e habilitado
   if TargetFrame.Visible and TargetFrame.Enabled then
   begin
-    FrameHomeShow;
+    if TargetFrame = Home then
+    begin
+         FrameHomeShow;
+    end;
     Exit; // Se já estiver ativo, sai do método
   end;
 

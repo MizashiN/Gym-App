@@ -24,7 +24,7 @@ object Main: TMain
     Color = 1184274
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -3
+    ExplicitHeight = 905
     object HomeSideBarButton: TStyledButton
       Tag = 1
       AlignWithMargins = True
@@ -60,11 +60,11 @@ object Main: TMain
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
     end
-    object DietSideBarButton: TStyledButton
-      Tag = 4
+    object GuideAndTipsSideBarButton: TStyledButton
+      Tag = 6
       AlignWithMargins = True
       Left = 10
-      Top = 89
+      Top = 332
       Width = 280
       Height = 65
       Margins.Left = 10
@@ -72,7 +72,7 @@ object Main: TMain
       Margins.Right = 10
       Margins.Bottom = 8
       Align = alTop
-      Caption = 'Diet'
+      Caption = 'Guide and Tips'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -27
@@ -94,12 +94,13 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
+      ExplicitTop = 281
     end
-    object GuideAndTipsSideBarButton: TStyledButton
-      Tag = 6
+    object SupplementsSideBarButton: TStyledButton
+      Tag = 2
       AlignWithMargins = True
       Left = 10
-      Top = 170
+      Top = 89
       Width = 280
       Height = 65
       Margins.Left = 10
@@ -107,7 +108,7 @@ object Main: TMain
       Margins.Right = 10
       Margins.Bottom = 8
       Align = alTop
-      Caption = 'Guide and Tips'
+      Caption = 'Supplements'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -27
@@ -131,8 +132,8 @@ object Main: TMain
       ButtonStyleDisabled.ButtonColor = 1184274
       ExplicitTop = 251
     end
-    object SupplementsSideBarButton: TStyledButton
-      Tag = 7
+    object AcessoriesSideBarButton: TStyledButton
+      Tag = 9
       AlignWithMargins = True
       Left = 10
       Top = 251
@@ -143,7 +144,7 @@ object Main: TMain
       Margins.Right = 10
       Margins.Bottom = 8
       Align = alTop
-      Caption = 'Supplements'
+      Caption = 'Acessories'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -27
@@ -165,13 +166,13 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 332
+      ExplicitTop = 150
     end
-    object AcessoriesSideBarButton: TStyledButton
-      Tag = 9
+    object AnabolSideBarButton: TStyledButton
+      Tag = 8
       AlignWithMargins = True
       Left = 10
-      Top = 413
+      Top = 170
       Width = 280
       Height = 65
       Margins.Left = 10
@@ -179,7 +180,7 @@ object Main: TMain
       Margins.Right = 10
       Margins.Bottom = 8
       Align = alTop
-      Caption = 'Acessories'
+      Caption = 'Anabol'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -27
@@ -201,43 +202,8 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 494
-    end
-    object AnabolSideBarButton: TStyledButton
-      Tag = 8
-      AlignWithMargins = True
-      Left = 10
-      Top = 332
-      Width = 280
-      Height = 65
-      Margins.Left = 10
-      Margins.Top = 8
-      Margins.Right = 10
-      Margins.Bottom = 8
-      Align = alTop
-      Caption = 'Anabol'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -27
-      Font.Name = 'Hammersmith One'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 5
-      OnClick = SideBarButtonClick
-      StyleFamily = 'Basic-Colors'
-      StyleClass = 'clBlack'
-      ButtonStyleNormal.BorderColor = 1184274
-      ButtonStyleNormal.ButtonColor = 1184274
-      ButtonStylePressed.BorderColor = 10250544
-      ButtonStylePressed.FontColor = 16765775
-      ButtonStylePressed.ButtonColor = 10250544
-      ButtonStyleSelected.BorderColor = 1184274
-      ButtonStyleSelected.ButtonColor = 1184274
-      ButtonStyleHot.BorderColor = 1184274
-      ButtonStyleHot.ButtonColor = 1184274
-      ButtonStyleDisabled.BorderColor = 1184274
-      ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 413
+      ExplicitLeft = 0
+      ExplicitTop = 130
     end
     object Panel2: TPanel
       AlignWithMargins = True
@@ -254,7 +220,7 @@ object Main: TMain
       BevelOuter = bvNone
       Color = 1184274
       ParentBackground = False
-      TabOrder = 6
+      TabOrder = 5
       object Shape1: TShape
         Left = 0
         Top = 0
@@ -279,8 +245,6 @@ object Main: TMain
         Color = 1184274
         ParentBackground = False
         TabOrder = 0
-        ExplicitTop = 0
-        ExplicitHeight = 66
         object Image1: TImage
           Left = 0
           Top = 0
@@ -348,7 +312,7 @@ object Main: TMain
           AlignWithMargins = True
           Left = 74
           Top = 3
-          Width = 120
+          Width = 65
           Height = 55
           Margins.Left = 10
           Align = alLeft
@@ -364,13 +328,11 @@ object Main: TMain
           ParentFont = False
           Layout = tlCenter
           WordWrap = True
-          ExplicitLeft = 77
-          ExplicitTop = 6
-          ExplicitHeight = 54
+          ExplicitHeight = 25
         end
         object StyledButton1: TStyledButton
           AlignWithMargins = True
-          Left = 200
+          Left = 145
           Top = 3
           Width = 57
           Height = 55
@@ -902,127 +864,156 @@ object Main: TMain
           ButtonStyleHot.ButtonColor = 1184274
           ButtonStyleDisabled.BorderColor = 1184274
           ButtonStyleDisabled.ButtonColor = 1184274
-          ExplicitHeight = 54
         end
       end
     end
   end
-  inline Home: THome
+  object Panel4: TPanel
     Left = 300
     Top = 0
     Width = 1400
     Height = 900
     Align = alClient
-    Color = clBlack
+    BevelOuter = bvNone
+    Color = 1184274
     ParentBackground = False
-    ParentColor = False
     TabOrder = 1
-    ExplicitLeft = 300
-    inherited Panel1: TPanel
-      StyleElements = [seFont, seClient, seBorder]
-      inherited Panel2: TPanel
+    ExplicitLeft = 336
+    ExplicitTop = 520
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    inline Home: THome
+      Left = 0
+      Top = 0
+      Width = 1400
+      Height = 900
+      Align = alClient
+      Color = clBlack
+      ParentBackground = False
+      ParentColor = False
+      TabOrder = 0
+      ExplicitLeft = 300
+      inherited Panel1: TPanel
         StyleElements = [seFont, seClient, seBorder]
-        inherited Panel6: TPanel
+        inherited Panel2: TPanel
           StyleElements = [seFont, seClient, seBorder]
-          inherited Label2: TLabel
-            Width = 470
+          inherited Panel6: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+            inherited Label2: TLabel
+              StyleElements = [seFont, seClient, seBorder]
+            end
+          end
+          inherited Panel9: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+            inherited Panel7: TPanel
+              StyleElements = [seFont, seClient, seBorder]
+              inherited Panel14: TPanel
+                StyleElements = [seFont, seClient, seBorder]
+                inherited Label3: TLabel
+                  StyleElements = [seFont, seClient, seBorder]
+                end
+              end
+            end
+            inherited Panel8: TPanel
+              StyleElements = [seFont, seClient, seBorder]
+              inherited Panel10: TPanel
+                StyleElements = [seFont, seClient, seBorder]
+                inherited AuthorLabel: TLabel
+                  StyleElements = [seFont, seClient, seBorder]
+                end
+                inherited QuoteLabel: TLabel
+                  StyleElements = [seFont, seClient, seBorder]
+                end
+                inherited Label1: TLabel
+                  StyleElements = [seFont, seClient, seBorder]
+                end
+              end
+            end
+          end
+          inherited Panel5: TPanel
             StyleElements = [seFont, seClient, seBorder]
           end
         end
-        inherited Panel9: TPanel
+        inherited Panel4: TPanel
           StyleElements = [seFont, seClient, seBorder]
-          inherited Panel7: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-            inherited Panel14: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              inherited Label3: TLabel
-                Width = 369
-                StyleElements = [seFont, seClient, seBorder]
-              end
-            end
-          end
-          inherited Panel8: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-            inherited Panel10: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              inherited AuthorLabel: TLabel
-                Width = 457
-                StyleElements = [seFont, seClient, seBorder]
-              end
-              inherited QuoteLabel: TLabel
-                Width = 457
-                Height = 150
-                StyleElements = [seFont, seClient, seBorder]
-              end
-              inherited Label1: TLabel
-                Width = 457
-                StyleElements = [seFont, seClient, seBorder]
-              end
-            end
-          end
         end
-        inherited Panel5: TPanel
+        inherited Panel3: TPanel
           StyleElements = [seFont, seClient, seBorder]
-          inherited Shape1: TShape
-            ExplicitTop = -3
-            ExplicitWidth = 920
-            ExplicitHeight = 444
-          end
-          inherited Panel15: TPanel
+          inherited Panel11: TPanel
             StyleElements = [seFont, seClient, seBorder]
-            inherited Label5: TLabel
-              Width = 880
-              StyleElements = [seFont, seClient, seBorder]
+            inherited Image1: TImage
+              ExplicitLeft = 8
+              ExplicitHeight = 210
             end
-            inherited TitleLabel: TLabel
-              Width = 880
-              Height = 138
-              AutoSize = False
-              StyleElements = [seFont, seClient, seBorder]
-              ExplicitWidth = 880
-              ExplicitHeight = 138
+          end
+          inherited Panel12: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+            inherited SignInButton: TStyledButton
+              Top = 15
+              Height = 74
+              Margins.Top = 15
+              Margins.Bottom = 15
+              ExplicitTop = 15
+              ExplicitHeight = 74
             end
-            inherited ParagraphLabel: TLabel
-              Top = 203
-              Width = 880
-              Height = 201
-              Align = alClient
+          end
+          inherited Panel13: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+            inherited UsernameLabel: TLabel
               StyleElements = [seFont, seClient, seBorder]
-              ExplicitTop = 203
             end
           end
         end
       end
-      inherited Panel4: TPanel
+    end
+    inline Supplements: TSupplements
+      Left = 0
+      Top = 0
+      Width = 1400
+      Height = 900
+      Align = alClient
+      Color = -1
+      ParentBackground = False
+      ParentColor = False
+      TabOrder = 1
+      inherited Panel1: TPanel
         StyleElements = [seFont, seClient, seBorder]
-      end
-      inherited Panel3: TPanel
-        StyleElements = [seFont, seClient, seBorder]
-        inherited Panel11: TPanel
+        inherited Panel2: TPanel
           StyleElements = [seFont, seClient, seBorder]
-          inherited Image1: TImage
-            ExplicitLeft = 8
-            ExplicitTop = 0
-            ExplicitWidth = 400
-            ExplicitHeight = 210
-          end
-        end
-        inherited Panel12: TPanel
-          StyleElements = [seFont, seClient, seBorder]
-          inherited SignInButton: TStyledButton
-            Top = 15
-            Height = 74
-            Margins.Top = 15
-            Margins.Bottom = 15
-            ExplicitTop = 15
-            ExplicitHeight = 74
-          end
-        end
-        inherited Panel13: TPanel
-          StyleElements = [seFont, seClient, seBorder]
-          inherited UsernameLabel: TLabel
-            Width = 394
+          ExplicitTop = 0
+          inherited Panel6: TPanel
             StyleElements = [seFont, seClient, seBorder]
+            ExplicitWidth = 880
+            inherited Label2: TLabel
+              StyleElements = [seFont, seClient, seBorder]
+            end
+          end
+          inherited Panel3: TPanel
+            StyleElements = [seFont, seClient, seBorder]
+            inherited Panel5: TPanel
+              StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 193
+            end
+            inherited Panel7: TPanel
+              StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 0
+              inherited ComboBox1: TComboBox
+                StyleElements = [seFont, seClient, seBorder]
+              end
+            end
+            inherited Panel8: TPanel
+              StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 1137
+            end
+            inherited Panel9: TPanel
+              StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 944
+            end
+            inherited Panel4: TPanel
+              StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 193
+              ExplicitHeight = 86
+            end
           end
         end
       end

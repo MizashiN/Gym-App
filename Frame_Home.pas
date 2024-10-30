@@ -38,11 +38,6 @@ type
     Image2: TImage;
     StyledButton1: TStyledButton;
     Panel5: TPanel;
-    Shape1: TShape;
-    Panel15: TPanel;
-    Label5: TLabel;
-    TitleLabel: TLabel;
-    ParagraphLabel: TLabel;
     procedure TitleLabelClick(Sender: TObject);
   private
     { Private declaration }

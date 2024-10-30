@@ -470,97 +470,6 @@ object Home: THome
         Color = 1184274
         ParentBackground = False
         TabOrder = 2
-        object Shape1: TShape
-          Left = 0
-          Top = 0
-          Width = 920
-          Height = 444
-          Align = alClient
-          Brush.Color = 1184274
-          Pen.Color = 10658466
-          Pen.Width = 2
-          ExplicitWidth = 497
-          ExplicitHeight = 289
-        end
-        object Panel15: TPanel
-          AlignWithMargins = True
-          Left = 20
-          Top = 20
-          Width = 880
-          Height = 404
-          Margins.Left = 20
-          Margins.Top = 20
-          Margins.Right = 20
-          Margins.Bottom = 20
-          Align = alClient
-          BevelOuter = bvNone
-          Color = 1184274
-          ParentBackground = False
-          TabOrder = 0
-          object Label5: TLabel
-            Left = 0
-            Top = 0
-            Width = 880
-            Height = 45
-            Align = alTop
-            Caption = 'News'
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -36
-            Font.Name = 'Hammersmith One'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            ExplicitWidth = 90
-          end
-          object TitleLabel: TLabel
-            AlignWithMargins = True
-            Left = 0
-            Top = 55
-            Width = 880
-            Height = 50
-            Cursor = crHandPoint
-            Margins.Left = 0
-            Margins.Top = 10
-            Margins.Right = 0
-            Margins.Bottom = 10
-            Align = alTop
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -40
-            Font.Name = 'Hammersmith One'
-            Font.Style = [fsUnderline]
-            ParentColor = False
-            ParentFont = False
-            WordWrap = True
-            OnClick = TitleLabelClick
-            ExplicitWidth = 13
-          end
-          object ParagraphLabel: TLabel
-            AlignWithMargins = True
-            Left = 0
-            Top = 115
-            Width = 880
-            Height = 33
-            Margins.Left = 0
-            Margins.Top = 0
-            Margins.Right = 0
-            Margins.Bottom = 0
-            Align = alTop
-            Color = clWhite
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -27
-            Font.Name = 'Hammersmith One'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            WordWrap = True
-            ExplicitWidth = 9
-          end
-        end
       end
     end
     object Panel4: TPanel
@@ -2353,10 +2262,7 @@ object Home: THome
             B2F4849A30300D0723F2F7FE5F93C25271B1D8102D0000000049454E44AE4260
             82}
           Proportional = True
-          ExplicitLeft = 1
-          ExplicitTop = 20
-          ExplicitWidth = 398
-          ExplicitHeight = 204
+          ExplicitHeight = 193
         end
       end
       object Panel12: TPanel
