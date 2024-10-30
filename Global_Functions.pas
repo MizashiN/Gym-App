@@ -31,7 +31,7 @@ procedure GetMotivationMessageAPI(MessageLabel, AuthorLabel: TLabel);
 procedure GetMaxTitaniumProducts;
 procedure GetNewsAPI(titleLabel, paragraphLabel: TLabel);
 procedure GetImageUser(id_user: integer; Image: TImage);
-procedure InsertImageUser(id_user: integer; blob: TBytes);
+procedure InsertImageUser(id_user: integer);
 function GetImageIcon(FileName: string): string;
 
 
@@ -117,6 +117,8 @@ var
   queryTemp: TFDQuery;
 begin
 
+  queryTemp := TFDQuery.Create(nil);
+
   queryTemp.Close;
   queryTemp.SQL.Text := 'SELECT image_user FROM users WHERE id_user = :id_user';
   queryTemp.ParamByName('id_user').AsInteger := id_user; // Exemplo de ID
@@ -142,11 +144,13 @@ begin
     ShowMessage('Imagem not found');
 end;
 
-procedure InsertImageUser(id_user: integer; blob: TBytes);
+procedure InsertImageUser(id_user: integer);
 var
-  FileStream: TFileStream;
+  FileStream:  TFileStream;
   queryTemp: TFDQuery;
 begin
+   FileStream := nil;
+  queryTemp := TFDQuery.Create(nil);
 
   queryTemp.Close;
   queryTemp.SQL.Text := 'INSERT INTO image_user  VALUES :image_user FROM users WHERE id_user = :id_user';
@@ -186,7 +190,7 @@ begin
       // Aqui você terá o caminho do arquivo selecionado
 
 
-      InsertImageUser(id_user, OpenDialog.FileName); // passando o caminho do arquivo selecionado
+      InsertImageUser(id_user); // passando o caminho do arquivo selecionado
     end;
   finally
     OpenDialog.Free;
@@ -426,7 +430,7 @@ begin
   RESTRequest := TRESTRequest.Create(nil);
   RESTResponse := TRESTResponse.Create(nil);
 
-  RESTClient.BaseURL := 'http://127.0.0.1:5000/motivationmessage'
+  RESTClient.BaseURL := 'http://127.0.0.1:5000/motivationmessage';
 
   try
     // Configura o RESTClient

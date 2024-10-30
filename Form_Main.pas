@@ -13,13 +13,9 @@ type
   TMain = class(TForm)
     Panel1: TPanel;
     HomeSideBarButton: TStyledButton;
-    RoutineSideBarButton: TStyledButton;
-    ExercisesSideBarButton: TStyledButton;
     DietSideBarButton: TStyledButton;
-    GoalsSideBarButton: TStyledButton;
     GuideAndTipsSideBarButton: TStyledButton;
     SupplementsSideBarButton: TStyledButton;
-    HistorySideBarButton: TStyledButton;
     AcessoriesSideBarButton: TStyledButton;
     AnabolSideBarButton: TStyledButton;
     Panel2: TPanel;
@@ -27,7 +23,6 @@ type
     Panel3: TPanel;
     Image1: TImage;
     UserNameLabel: TLabel;
-    Panel4: TPanel;
     StyledButton1: TStyledButton;
     Home: THome;
     procedure StatusButton(Button: TStyledButton);
