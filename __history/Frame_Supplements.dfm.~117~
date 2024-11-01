@@ -199,11 +199,11 @@ object Supplements: TSupplements
             TabOrder = 0
           end
         end
-        object MaxPricePanel: TPanel
+        object Panel8: TPanel
           AlignWithMargins = True
-          Left = 1192
+          Left = 1137
           Top = 0
-          Width = 138
+          Width = 193
           Height = 86
           Margins.Left = 0
           Margins.Top = 0
@@ -218,10 +218,10 @@ object Supplements: TSupplements
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 132
+            Width = 187
             Height = 36
             Align = alClient
-            Caption = 'Max Price'
+            Caption = 'Subcategories'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
             Font.Height = -27
@@ -229,53 +229,51 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             Layout = tlBottom
-            ExplicitWidth = 119
+            ExplicitWidth = 183
             ExplicitHeight = 33
           end
-          object MaxPriceEdit: TEdit
+          object DBComboBox2: TDBComboBox
             AlignWithMargins = True
             Left = 3
             Top = 45
-            Width = 132
+            Width = 187
             Height = 38
+            Style = csDropDownList
             Align = alBottom
+            Color = clWhite
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
+            Font.Color = clWhite
             Font.Height = -24
             Font.Name = 'Hammersmith One'
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            Text = '0'
-            ExplicitLeft = 6
             ExplicitTop = 48
-            ExplicitWidth = 187
           end
         end
-        object MinPricePanel: TPanel
+        object Panel9: TPanel
           AlignWithMargins = True
-          Left = 1052
+          Left = 944
           Top = 0
-          Width = 120
+          Width = 193
           Height = 86
           Margins.Left = 0
           Margins.Top = 0
-          Margins.Right = 20
+          Margins.Right = 0
           Margins.Bottom = 0
           Align = alRight
           BevelOuter = bvNone
           Color = 1184274
           ParentBackground = False
           TabOrder = 3
-          ExplicitLeft = 1072
           object Label5: TLabel
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 114
-            Height = 36
+            Width = 187
+            Height = 39
             Align = alClient
-            Caption = 'Min Price'
+            Caption = 'Subcategories'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
             Font.Height = -27
@@ -283,15 +281,14 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             Layout = tlBottom
-            ExplicitWidth = 112
+            ExplicitWidth = 183
             ExplicitHeight = 33
           end
-          object MinPriceEdit: TEdit
-            AlignWithMargins = True
-            Left = 3
+          object Edit1: TEdit
+            Left = 0
             Top = 45
-            Width = 114
-            Height = 38
+            Width = 193
+            Height = 41
             Align = alBottom
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -300,9 +297,7 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            Text = '0'
-            ExplicitLeft = 27
-            ExplicitWidth = 154
+            Text = 'Edit1'
           end
         end
         object CategoryPanel: TPanel
