@@ -11,8 +11,10 @@ object Main: TMain
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OldCreateOrder = True
   Position = poDesktopCenter
   OnShow = FormShow
+  PixelsPerInch = 96
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
@@ -24,7 +26,6 @@ object Main: TMain
     Color = 1184274
     ParentBackground = False
     TabOrder = 0
-    ExplicitHeight = 905
     object HomeSideBarButton: TStyledButton
       Tag = 1
       AlignWithMargins = True
@@ -94,7 +95,6 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 281
     end
     object SupplementsSideBarButton: TStyledButton
       Tag = 2
@@ -130,7 +130,6 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 251
     end
     object AcessoriesSideBarButton: TStyledButton
       Tag = 9
@@ -166,7 +165,6 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitTop = 150
     end
     object AnabolSideBarButton: TStyledButton
       Tag = 8
@@ -202,8 +200,6 @@ object Main: TMain
       ButtonStyleHot.ButtonColor = 1184274
       ButtonStyleDisabled.BorderColor = 1184274
       ButtonStyleDisabled.ButtonColor = 1184274
-      ExplicitLeft = 0
-      ExplicitTop = 130
     end
     object Panel2: TPanel
       AlignWithMargins = True
@@ -878,10 +874,6 @@ object Main: TMain
     Color = 1184274
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 336
-    ExplicitTop = 520
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     inline Home: THome
       Left = 0
       Top = 0
@@ -892,62 +884,45 @@ object Main: TMain
       ParentBackground = False
       ParentColor = False
       TabOrder = 0
-      ExplicitLeft = 300
       inherited Panel1: TPanel
-        StyleElements = [seFont, seClient, seBorder]
         inherited Panel2: TPanel
-          StyleElements = [seFont, seClient, seBorder]
           inherited Panel6: TPanel
-            StyleElements = [seFont, seClient, seBorder]
             inherited Label2: TLabel
-              StyleElements = [seFont, seClient, seBorder]
+              Width = 470
             end
           end
           inherited Panel9: TPanel
-            StyleElements = [seFont, seClient, seBorder]
             inherited Panel7: TPanel
-              StyleElements = [seFont, seClient, seBorder]
               inherited Panel14: TPanel
-                StyleElements = [seFont, seClient, seBorder]
                 inherited Label3: TLabel
-                  StyleElements = [seFont, seClient, seBorder]
+                  Width = 369
                 end
               end
             end
             inherited Panel8: TPanel
-              StyleElements = [seFont, seClient, seBorder]
               inherited Panel10: TPanel
-                StyleElements = [seFont, seClient, seBorder]
                 inherited AuthorLabel: TLabel
-                  StyleElements = [seFont, seClient, seBorder]
+                  Width = 457
                 end
                 inherited QuoteLabel: TLabel
-                  StyleElements = [seFont, seClient, seBorder]
+                  Width = 457
+                  Height = 150
                 end
                 inherited Label1: TLabel
-                  StyleElements = [seFont, seClient, seBorder]
+                  Width = 457
                 end
               end
             end
           end
-          inherited Panel5: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-          end
-        end
-        inherited Panel4: TPanel
-          StyleElements = [seFont, seClient, seBorder]
         end
         inherited Panel3: TPanel
-          StyleElements = [seFont, seClient, seBorder]
           inherited Panel11: TPanel
-            StyleElements = [seFont, seClient, seBorder]
             inherited Image1: TImage
               ExplicitLeft = 8
               ExplicitHeight = 210
             end
           end
           inherited Panel12: TPanel
-            StyleElements = [seFont, seClient, seBorder]
             inherited SignInButton: TStyledButton
               Top = 15
               Height = 74
@@ -958,9 +933,8 @@ object Main: TMain
             end
           end
           inherited Panel13: TPanel
-            StyleElements = [seFont, seClient, seBorder]
             inherited UsernameLabel: TLabel
-              StyleElements = [seFont, seClient, seBorder]
+              Width = 394
             end
           end
         end
@@ -971,48 +945,31 @@ object Main: TMain
       Top = 0
       Width = 1400
       Height = 900
-      Align = alClient
-      Color = -1
+      Color = clBlack
       ParentBackground = False
       ParentColor = False
       TabOrder = 1
+      Visible = False
       inherited Panel1: TPanel
-        StyleElements = [seFont, seClient, seBorder]
         inherited Panel2: TPanel
-          StyleElements = [seFont, seClient, seBorder]
-          ExplicitTop = 0
-          inherited Panel6: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-            ExplicitWidth = 880
-            inherited Label2: TLabel
-              StyleElements = [seFont, seClient, seBorder]
+          inherited Panel3: TPanel
+            inherited SubcategoriesPanel: TPanel
+              ExplicitLeft = 426
+            end
+            inherited CategoryPanel: TPanel
+              ExplicitLeft = 213
             end
           end
-          inherited Panel3: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-            inherited Panel5: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              ExplicitLeft = 193
-            end
-            inherited Panel7: TPanel
-              StyleElements = [seFont, seClient, seBorder]
+          inherited CardsPanel: TPanel
+            ExplicitLeft = 20
+            ExplicitTop = 221
+            ExplicitWidth = 1330
+            ExplicitHeight = 629
+            inherited CardsBox: TScrollBox
               ExplicitLeft = 0
-              inherited ComboBox1: TComboBox
-                StyleElements = [seFont, seClient, seBorder]
-              end
-            end
-            inherited Panel8: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              ExplicitLeft = 1137
-            end
-            inherited Panel9: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              ExplicitLeft = 944
-            end
-            inherited Panel4: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              ExplicitLeft = 193
-              ExplicitHeight = 86
+              ExplicitTop = 0
+              ExplicitWidth = 1330
+              ExplicitHeight = 629
             end
           end
         end

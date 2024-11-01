@@ -61,11 +61,11 @@ begin
     StatusButton(TStyledButton(Sender));
 
     // Desativa e oculta todos os frames antes de ativar o selecionado
-    for Frame in [Home, Supplements] do
-    begin
-      Frame.Visible := False;
-      Frame.Enabled := False;
-    end;
+//    for Frame in [Home, Supplements] do
+//    begin
+//      Frame.Visible := False;
+//      Frame.Enabled := False;
+//    end;
 
     // Verifica qual Frame será ativado baseado na propriedade Tag do botão
     case TStyledButton(Sender).Tag of

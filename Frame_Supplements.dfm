@@ -37,7 +37,6 @@ object Supplements: TSupplements
       Color = 1184274
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 32
       object Panel6: TPanel
         AlignWithMargins = True
         Left = 20
@@ -98,11 +97,11 @@ object Supplements: TSupplements
         TabOrder = 1
         object SubcategoriesPanel: TPanel
           AlignWithMargins = True
-          Left = 386
+          Left = 426
           Top = 0
           Width = 193
           Height = 86
-          Margins.Left = 0
+          Margins.Left = 20
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 0
@@ -111,6 +110,7 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 0
+          ExplicitLeft = 386
           object Label4: TLabel
             AlignWithMargins = True
             Left = 3
@@ -145,7 +145,6 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            ExplicitTop = 48
           end
         end
         object BrandPanel: TPanel
@@ -201,19 +200,20 @@ object Supplements: TSupplements
         end
         object MaxPricePanel: TPanel
           AlignWithMargins = True
-          Left = 1192
+          Left = 639
           Top = 0
           Width = 138
           Height = 86
-          Margins.Left = 0
+          Margins.Left = 20
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 0
-          Align = alRight
+          Align = alLeft
           BevelOuter = bvNone
           Color = 1184274
           ParentBackground = False
           TabOrder = 2
+          ExplicitLeft = 1192
           object Label6: TLabel
             AlignWithMargins = True
             Left = 3
@@ -247,27 +247,24 @@ object Supplements: TSupplements
             ParentFont = False
             TabOrder = 0
             Text = '0'
-            ExplicitLeft = 6
-            ExplicitTop = 48
-            ExplicitWidth = 187
           end
         end
         object MinPricePanel: TPanel
           AlignWithMargins = True
-          Left = 1052
+          Left = 797
           Top = 0
           Width = 120
           Height = 86
-          Margins.Left = 0
+          Margins.Left = 20
           Margins.Top = 0
-          Margins.Right = 20
+          Margins.Right = 0
           Margins.Bottom = 0
-          Align = alRight
+          Align = alLeft
           BevelOuter = bvNone
           Color = 1184274
           ParentBackground = False
           TabOrder = 3
-          ExplicitLeft = 1072
+          ExplicitLeft = 1052
           object Label5: TLabel
             AlignWithMargins = True
             Left = 3
@@ -301,17 +298,15 @@ object Supplements: TSupplements
             ParentFont = False
             TabOrder = 0
             Text = '0'
-            ExplicitLeft = 27
-            ExplicitWidth = 154
           end
         end
         object CategoryPanel: TPanel
           AlignWithMargins = True
-          Left = 193
+          Left = 213
           Top = 0
           Width = 193
           Height = 86
-          Margins.Left = 0
+          Margins.Left = 20
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 0
@@ -320,6 +315,7 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 4
+          ExplicitLeft = 193
           object Label3: TLabel
             AlignWithMargins = True
             Left = 3
@@ -354,10 +350,74 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            ExplicitTop = 48
+          end
+        end
+        object Panel4: TPanel
+          AlignWithMargins = True
+          Left = 1210
+          Top = 0
+          Width = 120
+          Height = 86
+          Margins.Left = 20
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alRight
+          BevelOuter = bvNone
+          Color = 1184274
+          ParentBackground = False
+          TabOrder = 5
+          ExplicitLeft = 1052
+          object Button1: TButton
+            Left = 0
+            Top = 0
+            Width = 120
+            Height = 86
+            Align = alClient
+            Caption = 'Button1'
+            TabOrder = 0
+            OnClick = Button1Click
+            ExplicitLeft = 56
+            ExplicitTop = 40
+            ExplicitWidth = 75
+            ExplicitHeight = 25
           end
         end
       end
+      object CardsPanel: TPanel
+        AlignWithMargins = True
+        Left = 20
+        Top = 221
+        Width = 1330
+        Height = 629
+        Margins.Left = 20
+        Margins.Top = 20
+        Margins.Right = 20
+        Margins.Bottom = 20
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 2
+        ExplicitLeft = 0
+        ExplicitTop = 204
+        ExplicitWidth = 1364
+        ExplicitHeight = 663
+        object CardsBox: TScrollBox
+          Left = 0
+          Top = 0
+          Width = 1330
+          Height = 629
+          HorzScrollBar.ButtonSize = 10
+          HorzScrollBar.Visible = False
+          Align = alClient
+          Color = 1184274
+          ParentColor = False
+          TabOrder = 0
+        end
+      end
     end
+  end
+  object ImageList1: TImageList
+    Left = 200
+    Top = 40
   end
 end
