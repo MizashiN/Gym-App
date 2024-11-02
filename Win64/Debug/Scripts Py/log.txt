@@ -1,0 +1,5 @@
+Verificando se o arquivo Python existe: C:\Users\Parafal\Documents\GitHub\Gym-App\Win64\Debug\Scripts Py\resizeimage.py
+Tentando carregar a DLL do Python.
+DLL do Python carregada com sucesso.
+Executando o script Python: C:\Users\Parafal\Documents\GitHub\Gym-App\Win64\Debug\Scripts Py\resizeimage.py
+Script Python executado com sucesso.
