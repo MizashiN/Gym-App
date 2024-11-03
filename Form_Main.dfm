@@ -889,7 +889,6 @@ object Main: TMain
           inherited Panel6: TPanel
             StyleElements = [seFont, seClient, seBorder]
             inherited Label2: TLabel
-              Width = 470
               StyleElements = [seFont, seClient, seBorder]
             end
           end
@@ -900,7 +899,6 @@ object Main: TMain
               inherited Panel14: TPanel
                 StyleElements = [seFont, seClient, seBorder]
                 inherited Label3: TLabel
-                  Width = 369
                   StyleElements = [seFont, seClient, seBorder]
                 end
               end
@@ -910,16 +908,12 @@ object Main: TMain
               inherited Panel10: TPanel
                 StyleElements = [seFont, seClient, seBorder]
                 inherited AuthorLabel: TLabel
-                  Width = 457
                   StyleElements = [seFont, seClient, seBorder]
                 end
                 inherited QuoteLabel: TLabel
-                  Width = 457
-                  Height = 150
                   StyleElements = [seFont, seClient, seBorder]
                 end
                 inherited Label1: TLabel
-                  Width = 457
                   StyleElements = [seFont, seClient, seBorder]
                 end
               end
@@ -955,7 +949,6 @@ object Main: TMain
           inherited Panel13: TPanel
             StyleElements = [seFont, seClient, seBorder]
             inherited UsernameLabel: TLabel
-              Width = 394
               StyleElements = [seFont, seClient, seBorder]
             end
           end
@@ -986,6 +979,7 @@ object Main: TMain
             StyleElements = [seFont, seClient, seBorder]
             inherited SubcategoriesPanel: TPanel
               StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 480
               inherited Label4: TLabel
                 StyleElements = [seFont, seClient, seBorder]
               end
@@ -1000,10 +994,12 @@ object Main: TMain
               end
               inherited BrandsCombobox: TDBComboBox
                 StyleElements = [seFont, seClient, seBorder]
+                ExplicitWidth = 214
               end
             end
             inherited MaxPricePanel: TPanel
               StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 693
               inherited Label6: TLabel
                 StyleElements = [seFont, seClient, seBorder]
               end
@@ -1013,6 +1009,7 @@ object Main: TMain
             end
             inherited MinPricePanel: TPanel
               StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 851
               inherited Label5: TLabel
                 StyleElements = [seFont, seClient, seBorder]
               end
@@ -1022,11 +1019,13 @@ object Main: TMain
             end
             inherited CategoryPanel: TPanel
               StyleElements = [seFont, seClient, seBorder]
+              ExplicitLeft = 240
               inherited Label3: TLabel
                 StyleElements = [seFont, seClient, seBorder]
               end
               inherited CategoryCombobox: TDBComboBox
                 StyleElements = [seFont, seClient, seBorder]
+                ExplicitWidth = 214
               end
             end
             inherited Panel4: TPanel
@@ -1035,9 +1034,6 @@ object Main: TMain
           end
           inherited CardsPanel: TPanel
             StyleElements = [seFont, seClient, seBorder]
-            inherited CardsBox: TScrollBox
-              BevelOuter = bvNone
-            end
           end
         end
       end

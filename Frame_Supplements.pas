@@ -26,7 +26,7 @@ type
     Label1: TLabel;
     CategoryCombobox: TDBComboBox;
     Label3: TLabel;
-    SubcategoriesCombobox: TDBComboBox;
+    SubcategoryCombobox: TDBComboBox;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
@@ -34,10 +34,8 @@ type
     MaxPriceEdit: TEdit;
     CardsPanel: TPanel;
     CardsBox: TScrollBox;
-    ImageList1: TImageList;
     Panel4: TPanel;
     Button1: TButton;
-    procedure CreateCards;
     procedure GetProducts;
     procedure Button1Click(Sender: TObject);
   private
@@ -50,206 +48,24 @@ implementation
 
 {$R *.dfm}
 
-
 procedure TSupplements.Button1Click(Sender: TObject);
 begin
 GetProducts;
 end;
 
-procedure TSupplements.CreateCards;
-var
- i, col, row: Integer;
-  Panel: TPanel;
-  titleText: TLabel;
-  priceText: TLabel;
-  Image: TImage;
-  PanelWidth, PanelHeight, Padding, Columns: Integer;
-begin
-  PanelWidth := 250;
-  PanelHeight := 300;
-  Padding := 10;
-  Columns := 5;
-
-  for i := 0 to 30 do
-  begin
-    // Calcula a coluna e a linha com base no índice e no número de colunas
-    col := i mod Columns;
-    row := i div Columns;
-
-    // Cria o TPanel dinamicamente
-    Panel := TPanel.Create(Self);
-    Panel.Parent := CardsBox;
-    Panel.Width := PanelWidth;
-    Panel.Height := PanelHeight;
-    Panel.Left := col * (PanelWidth + Padding);
-    Panel.Top := row * (PanelHeight + Padding);
-    Panel.BevelOuter := bvNone;
-    Panel.Color := clBlack;
-
-    // Adiciona uma imagem no painel (simulação)
-    Image := TImage.Create(Panel);
-    Image.Parent := Panel;
-    Image.Align := alTop;
-    Image.Proportional := True;
-    Image.Stretch := True;
-    Image.Height := 120;
-
-    // Adiciona o TLabel abaixo da imagem
-    titleText := TLabel.Create(Panel);
-    titleText.Parent := Panel;
-    titleText.Caption := '';
-    titleText.Font.Style := [fsBold];
-    titleText.Font.Color := clWhite;
-    titleText.Alignment := taCenter;
-    titleText.Align := alClient;
-
-    priceText := TLabel.Create(Panel);
-    priceText.Parent := Panel;
-    priceText.Caption := '';
-    priceText.Font.Style := [fsBold];
-    priceText.Font.Color := clWhite;
-    priceText.Alignment := taCenter;
-    priceText.Align := alClient;
-  end;
-end;
-
 procedure TSupplements.GetProducts;
 var
-  RESTClient: TRESTClient;
-  RESTRequest: TRESTRequest;
-  RESTResponse: TRESTResponse;
-  JSONValue: TJSONValue;
-  JSONProducts: TJSONArray;
-  Product: TJSONObject;
-  Price, Title: string;
-  i_col, col, row: Integer;
-  Panel: TPanel;
-  titleText: TLabel;
-  priceText: TLabel;
-  Image: TImage;
-  Image_url, InputImagePath, OutputImagePath, FileName: string;
-  PanelWidth, PanelHeight, Padding, Columns: Integer;
-
+ProductsArray: TJSONArray;
+brand, category, subcategory: string;
 begin
-  RESTClient := TRESTClient.Create(nil);
-  RESTRequest := TRESTRequest.Create(nil);
-  RESTResponse := TRESTResponse.Create(nil);
-
-  PanelWidth := 250;
-  PanelHeight := 330;
-  Padding := 10;
-  Columns := 5;
-
-  FileName := '';
-
-  InputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\input_image_path';
-  OutputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\output_image_path';
+  brand := BrandsCombobox.Text;
+  category := CategoryCombobox.Text;
+  subcategory := SubcategoryCombobox.Text;
   try
-
-    RESTClient.BaseURL := 'http://127.0.0.1:5000/maxtitanium?category=pre-workouts';
-
-
-    RESTRequest.Client := RESTClient;
-    RESTRequest.Response := RESTResponse;
-    RESTRequest.Method := rmGET;
-
-    RESTRequest.Execute;
-
-    JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
-    try
-      if JSONValue is TJSONObject then
-      begin
-
-        var ProductsArray := JSONValue.GetValue<TJSONArray>('products');
-        if Assigned(ProductsArray) then
-        begin
-          var ProductsList: string := '';
-
-          for var i := 0 to ProductsArray.Count - 1 do
-          begin
-            Product := ProductsArray.Items[i] as TJSONObject;
-            Title := Product.GetValue<string>('title');
-            Price := Product.GetValue<string>('price');
-            Image_url := Product.GetValue<string>('image_src');
-
-
-
-            col := i mod Columns;
-            row := i div Columns;
-
-
-            Panel := TPanel.Create(Self);
-
-            Panel.Parent := CardsBox;
-            Panel.Width := PanelWidth;
-            Panel.Height := PanelHeight;
-            Panel.Left := col * (PanelWidth + Padding);
-            Panel.Top := row * (PanelHeight + Padding);
-            Panel.BevelOuter := bvRaised;
-            Panel.Color := clBlack;
-
-            Image := TImage.Create(Panel);
-
-            FileName := extractUrl(Image_url);
-            DownloadImageFromURL(Image_url, InputImagePath, FileName);
-            RunResizeImgPy;
-
-            Image.Picture.LoadFromFile('C:\Users\Parafal\Documents\GitHub\Gym-App\Win64\Debug\Scripts Py\output_image_path\'+ FileName + '.png');
-
-            titleText := TLabel.Create(Panel);
-            titleText.AlignWithMargins := True;
-            titleText.Margins.Top := 3;
-            titleText.Margins.Bottom := 3;
-            titleText.Margins.Left := 3;
-            titleText.Margins.Right := 3;
-            titleText.Parent := Panel;
-            titleText.Caption :=  Title;
-            titleText.Font.Style := [fsBold];
-            titleText.Font.Color := clWhite;
-            titleText.Font.Size := 10;
-            titleText.WordWrap := True;
-            titleText.Alignment := taCenter;
-            titleText.Align := alTop;
-
-            Image.AlignWithMargins := True;
-            Image.Height := 250;
-            Image.Width := 250;
-            Image.Margins.Top := 3;
-            Image.Margins.Bottom := 3;
-            Image.Margins.Left := 3;
-            Image.Margins.Right := 3;
-            Image.Parent := Panel;
-            Image.Align := alTop;
-            Image.Proportional := False;
-
-            priceText := TLabel.Create(Panel);
-            priceText.AlignWithMargins := True;
-            priceText.Margins.Top := 3;
-            priceText.Margins.Bottom := 3;
-            priceText.Margins.Left := 3;
-            priceText.Margins.Right := 3;
-            priceText.Parent := Panel;
-            priceText.Caption := Price;
-            priceText.Font.Size := 18;
-            priceText.Font.Style := [fsBold];
-            priceText.Font.Color := clLime;
-            priceText.Alignment := taCenter;
-            priceText.Align := alBottom;
-
-          end;
-        end;
-      end
-      else
-        ShowMessage('Formato JSON inesperado.');
-    finally
-      JSONValue.Free;
-    end;
-
+    ProductsArray := APISupp('maxtitanium', 'acessories', '');
+    CreateCardProduct(CardsBox, ProductsArray);
   finally
-    // Libera os componentes REST
-    RESTClient.Free;
-    RESTRequest.Free;
-    RESTResponse.Free;
+
   end;
 end;
 

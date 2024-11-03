@@ -4,14 +4,12 @@ interface
 
 uses
   System.SysUtils, System.RegularExpressions, System.Hash, Vcl.Dialogs, Vcl.StdCtrls,FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, Vcl.Graphics, Vcl.ExtCtrls,
-  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.DApt,
-  Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, DM_Connection,System.IOUtils,
-  System.JSON, REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope, System.Classes,PythonEngine,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, Vcl.Graphics, Vcl.ExtCtrls, System.Generics.Collections,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.DApt,Vcl.Controls, Vcl.Forms,
+  Data.DB, FireDAC.Comp.Client,FireDAC.Stan.Param, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, DM_Connection,System.IOUtils,
+  Winapi.Windows, System.JSON, REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope, System.Classes,PythonEngine,
   IdHTTP, IdSSL, IdSSLOpenSSL, System.Net.HttpClient, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Winapi.GDIPAPI, Winapi.GDIPOBJ;
 
-var
-  url_value: string;
 
 function CheckIfUserExists(nameUser: TEdit): Boolean;
 function CheckIfUserAndPasswordIsCorrect(nameUser, passwordUser: TEdit): Boolean;
@@ -28,15 +26,18 @@ function CheckMatchPasswords(passwordEdit, passwordConfirmEdit: TEdit): Boolean;
 function CheckMatchAnswers(answerEdit, answerConfirmEdit: TEdit): Boolean;
 function GetUserID(nameUser: TEdit): integer;
 function GetUserName(id_user: integer): string;
-procedure GetMotivationMessageAPI(MessageLabel, AuthorLabel: TLabel);
-procedure GetMaxTitaniumProducts;
-procedure GetNewsAPI(titleLabel, paragraphLabel: TLabel);
+function APISupp(brand, category, subcategory: string): TJSONArray;
+function extractUrl(ImageUrl: string):string;
+function GetImageIcon(FileName: string): string;
+function FileExistsInFolder(const Folder, FileName: string): Boolean;
 procedure GetImageUser(id_user: integer; Image: TImage);
 procedure InsertImageUser(id_user: integer);
 procedure DownloadImageFromURL(const URL, SaveDirectory: string; FileName: string);
 procedure RunResizeImgPy;
-function extractUrl(ImageUrl: string):string;
-function GetImageIcon(FileName: string): string;
+procedure CreateCardProduct(CardsBox: TScrollBox; ProductsArray: TJSONArray);
+procedure HideScrollbars(ScrollBox: TScrollBox);
+
+
 
 
 implementation
@@ -92,31 +93,115 @@ begin
   end;
   queryTemp.Free;
 end;
-function CountImagesInDirectory(const Directory: string): Integer;
-var
-  SearchRec: TSearchRec;
-  ResultCode: Integer;
+
+procedure HideScrollbars(ScrollBox: TScrollBox);
 begin
-  Result := 0;
-  ResultCode := FindFirst(IncludeTrailingPathDelimiter(Directory) + '*.*', faAnyFile, SearchRec);
-  try
-    while ResultCode = 0 do
+
+  ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
+end;
+
+procedure CreateCardProduct(CardsBox: TScrollBox; ProductsArray: TJSONArray);
+var
+  PanelWidth, PanelHeight, Padding, Columns, col, row, i: Integer;
+  Image_url, InputImagePath, OutputImagePath, FileName, Title, Price: string;
+  Product: TJSONObject;
+  Panel: TPanel;
+  Image: TImage;
+  TitleLabel, PriceLabel: TLabel;
+begin
+  // Caminhos de entrada e saída para as imagens
+  InputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\input_image_path';
+  OutputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\output_image_path';
+
+  // Define as dimensões dos painéis e o layout
+  PanelWidth := 245;
+  PanelHeight := 350;
+  Padding := 25;
+  Columns := 5;
+
+  // Limpa os componentes filhos existentes de CardsBox antes de adicionar novos
+  while CardsBox.ControlCount > 0 do
+    CardsBox.Controls[0].Free;
+
+  for i := 0 to ProductsArray.Count - 1 do
+  begin
+    Product := ProductsArray.Items[i] as TJSONObject;
+    Title := Product.GetValue<string>('title');
+    Price := Product.GetValue<string>('price');
+    Image_url := Product.GetValue<string>('image_src');
+
+    col := i mod Columns;
+    row := i div Columns;
+
+    // Criação e configuração do painel
+    Panel := TPanel.Create(CardsBox);
+    Panel.Parent := CardsBox;
+    Panel.Width := PanelWidth;
+    Panel.Height := PanelHeight;
+    Panel.Left := col * (PanelWidth + Padding);
+    Panel.Top := row * (PanelHeight + Padding);
+    Panel.BevelOuter := bvNone;
+    Panel.Color := clBlack;
+
+    if i = 6 then
     begin
-      // Verifica se o arquivo é uma imagem, verificando a extensão
-      if (LowerCase(ExtractFileExt(SearchRec.Name)) = '.jpg') or
-         (LowerCase(ExtractFileExt(SearchRec.Name)) = '.jpeg') or
-         (LowerCase(ExtractFileExt(SearchRec.Name)) = '.png') or
-         (LowerCase(ExtractFileExt(SearchRec.Name)) = '.bmp') or
-         (LowerCase(ExtractFileExt(SearchRec.Name)) = '.gif') then
-      begin
-        Inc(Result);
-      end;
-      ResultCode := FindNext(SearchRec);
+      HideScrollbars(CardsBox);
     end;
-  finally
-    FindClose(SearchRec);
+
+    // Criação e configuração do TLabel para o título
+    TitleLabel := TLabel.Create(Panel);
+    TitleLabel.AlignWithMargins := True;
+    TitleLabel.Margins.Top := 3;
+    TitleLabel.Margins.Bottom := 3;
+    TitleLabel.Margins.Left := 3;
+    TitleLabel.Margins.Right := 3;
+    TitleLabel.Parent := Panel;
+    TitleLabel.Caption := Title;
+    TitleLabel.Font.Style := [fsBold];
+    TitleLabel.Font.Color := clWhite;
+    TitleLabel.Font.Size := 11;
+    TitleLabel.WordWrap := True; // Permite quebra de linha
+    TitleLabel.Alignment := taCenter; // Centraliza o texto
+    TitleLabel.Align := alClient; // Ajusta o TLabel para ocupar todo o espaço disponível no painel
+
+    // Criação e configuração da imagem
+    Image := TImage.Create(Panel);
+    FileName := extractUrl(Image_url);
+    if not FileExistsInFolder(OutputImagePath, FileName) then
+    begin
+      DownloadImageFromURL(Image_url, InputImagePath, FileName);
+      RunResizeImgPy;
+    end;
+    Image.Picture.LoadFromFile(OutputImagePath + '\' + FileName + '.png');
+    Image.AlignWithMargins := True;
+    Image.Height := 250;
+    Image.Width := 250;
+    Image.Margins.Top := 3;
+    Image.Margins.Bottom := 3;
+    Image.Margins.Left := 3;
+    Image.Margins.Right := 3;
+    Image.Parent := Panel;
+    Image.Align := alTop;
+    Image.Center := True;
+    Image.Proportional := True;
+
+    // Criação e configuração do TLabel para o preço
+    PriceLabel := TLabel.Create(Panel);
+    PriceLabel.AlignWithMargins := True;
+    PriceLabel.Margins.Top := 3;
+    PriceLabel.Margins.Bottom := 12;
+    PriceLabel.Margins.Left := 3;
+    PriceLabel.Margins.Right := 3;
+    PriceLabel.Parent := Panel;
+    PriceLabel.Caption := Price;
+    PriceLabel.Font.Size := 18;
+    PriceLabel.Font.Style := [fsBold];
+    PriceLabel.Font.Color := clLime;
+    PriceLabel.Alignment := taCenter;
+    PriceLabel.Align := alBottom;
   end;
 end;
+
 
 function GetUserName(id_user: integer): string;
 var
@@ -191,20 +276,15 @@ begin
     SSLHandler.SSLOptions.VerifyMode := [];
     SSLHandler.SSLOptions.VerifyDepth := 0;
 
-    // Definindo cabeçalhos
     IdHTTP.Request.UserAgent := 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36';
-    IdHTTP.Request.Referer := URL; // Insira um URL que você deseja usar como referer
+    IdHTTP.Request.Referer := URL;
 
-    // Baixa a imagem da URL
     IdHTTP.Get(URL, MemoryStream);
 
-    // Define o caminho completo para salvar a imagem
-    // Assegura que o nome do arquivo termine com a extensão correta
     SavePath := IncludeTrailingPathDelimiter(SaveDirectory) + FileName + '.png';
 
-
-    MemoryStream.Position := 0; // Reseta a posição do stream antes de salvar
-    MemoryStream.SaveToFile(SavePath); // Salva a imagem no caminho especificado
+    MemoryStream.Position := 0;
+    MemoryStream.SaveToFile(SavePath);
   finally
     MemoryStream.Free;
     SSLHandler.Free;
@@ -259,7 +339,6 @@ begin
   Result := '';
   OriginalString := ImageUrl;
 
-  // Primeiro, vamos encontrar a última barra (/) e o último ponto (.) na string.
   var LastSlashPos := LastDelimiter('/', OriginalString);
   var LastDotPos := LastDelimiter('.', OriginalString);
 
@@ -306,18 +385,13 @@ var
 begin
   OpenDialog := TOpenDialog.Create(nil);
   try
-    // Define o filtro para exibir apenas arquivos de imagem
     OpenDialog.Filter := 'Imagens|*.jpg;*.jpeg;*.png;*.bmp;*.gif|Todos os Arquivos|*.*';
     OpenDialog.Title := 'Selecione uma imagem';
     OpenDialog.Options := [ofFileMustExist, ofHideReadOnly];
 
-    // Exibe o diálogo para o usuário selecionar o arquivo
     if OpenDialog.Execute then
     begin
-      // Aqui você terá o caminho do arquivo selecionado
-
-
-      InsertImageUser(id_user); // passando o caminho do arquivo selecionado
+      InsertImageUser(id_user);
     end;
   finally
     OpenDialog.Free;
@@ -530,7 +604,7 @@ var
   RESTResponse: TRESTResponse;
 begin
   Result := '';
-  // Cria os componentes REST temporariamente
+
   RESTClient := TRESTClient.Create(nil);
   RESTRequest := TRESTRequest.Create(nil);
   RESTResponse := TRESTResponse.Create(nil);
@@ -543,235 +617,58 @@ begin
   end;
 end;
 
-procedure GetMotivationMessageAPI(MessageLabel, AuthorLabel: TLabel);
+function FileExistsInFolder(const Folder, FileName: string): Boolean;
+var
+  FullPath: string;
+begin
+  FullPath := IncludeTrailingPathDelimiter(Folder) + FileName + '.png';
+  // Verifica se o arquivo existe
+  Result := FileExists(FullPath);
+end;
+
+function APISupp(brand, category, subcategory: string): TJSONArray;
 var
   RESTClient: TRESTClient;
   RESTRequest: TRESTRequest;
   RESTResponse: TRESTResponse;
   JSONValue: TJSONValue;
-  JSONObject: TJSONObject;
-  Author, Quote: string;
+  ProductsArray: TJSONArray;
+  URL: String;
 begin
-  // Cria os componentes REST temporariamente
   RESTClient := TRESTClient.Create(nil);
   RESTRequest := TRESTRequest.Create(nil);
   RESTResponse := TRESTResponse.Create(nil);
-
-  RESTClient.BaseURL := 'http://127.0.0.1:5000/motivationmessage';
+  Result := TJSONArray.Create;
 
   try
-    // Configura o RESTClient
-    RESTClient.BaseURL := 'http://127.0.0.1:5000/motivationmessage'; // Substitua pela URL da API
+    if subcategory = '' then
+      URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category
+    else
+      URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category + '&subcategory=' + subcategory;
 
-    // Configura o RESTRequest
+    RESTClient.BaseURL := URL;
     RESTRequest.Client := RESTClient;
     RESTRequest.Response := RESTResponse;
-    RESTRequest.Method := rmGET; // Define o método como GET
-
-    // Executa a requisição
+    RESTRequest.Method := rmGET;
     RESTRequest.Execute;
 
-    // Obtém a resposta como JSON
     JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
     try
-      if JSONValue is TJSONObject then
+      if (JSONValue is TJSONObject) and (TJSONObject(JSONValue).GetValue('products') <> nil) then
       begin
-        JSONObject := TJSONObject(JSONValue);
-
-        // Acessa o valor da chave "Quote"
-        if JSONObject.TryGetValue('quote', Quote) then
-        begin
-          MessageLabel.Caption := Quote;
-        end
-        else
-        begin
-          MessageLabel.Caption := 'Quote não encontrado';
-        end;
-
-        // Acessa o valor da chave "Author"
-        if JSONObject.TryGetValue('author', Author) then
-        begin
-          AuthorLabel.Caption := Author;
-        end
-        else
-        begin
-          AuthorLabel.Caption := 'Author não encontrado';
-        end;
-      end
-      else
-      begin
-        MessageLabel.Caption := 'Resposta inválida';
-        AuthorLabel.Caption := 'Resposta inválida';
+        ProductsArray := TJSONObject(JSONValue).GetValue<TJSONArray>('products');
+        Result := ProductsArray.Clone as TJSONArray;
       end;
     finally
       JSONValue.Free;
     end;
-
-
   finally
-    // Libera os componentes REST
     RESTClient.Free;
     RESTRequest.Free;
     RESTResponse.Free;
   end;
 end;
 
-procedure GetMaxTitaniumProducts;
-var
-  RESTClient: TRESTClient;
-  RESTRequest: TRESTRequest;
-  RESTResponse: TRESTResponse;
-  JSONValue: TJSONValue;
-  JSONProducts: TJSONArray;
-  Product: TJSONObject;
-  Price, Title: string;
-begin
-  // Cria os componentes REST temporariamente
-  RESTClient := TRESTClient.Create(nil);
-  RESTRequest := TRESTRequest.Create(nil);
-  RESTResponse := TRESTResponse.Create(nil);
-
-  try
-    // Configura o RESTClient
-    RESTClient.BaseURL := 'http://127.0.0.1:5000/all?category=proteins'; // Ajuste conforme necessário
-
-    // Configura o RESTRequest
-    RESTRequest.Client := RESTClient;
-    RESTRequest.Response := RESTResponse;
-    RESTRequest.Method := rmGET; // Define o método como GET
-
-    // Executa a requisição
-    RESTRequest.Execute;
-
-    // Obtém a resposta como JSON
-  // Obtém a resposta como JSON
-    JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
-    try
-      if JSONValue is TJSONObject then
-      begin
-        // Acesse o array "products" dentro do objeto JSON
-        var ProductsArray := JSONValue.GetValue<TJSONArray>('products');
-        if Assigned(ProductsArray) then
-        begin
-          var ProductsList: string := ''; // String para armazenar os produtos
-
-          // Itera sobre cada produto no JSONArray
-          for var i := 0 to ProductsArray.Count - 1 do
-          begin
-            Product := ProductsArray.Items[i] as TJSONObject;
-            Title := Product.GetValue<string>('title');
-            Price := Product.GetValue<string>('price');
-
-
-
-
-
-
-
-
-
-
-
-
-
-          end;
-        end;
-      end
-      else
-        ShowMessage('Formato JSON inesperado.');
-    finally
-      JSONValue.Free;
-    end;
-
-  finally
-    // Libera os componentes REST
-    RESTClient.Free;
-    RESTRequest.Free;
-    RESTResponse.Free;
-  end;
-end;
-
-procedure GetNewsAPI(titleLabel, paragraphLabel: TLabel);
-var
-  RESTClient: TRESTClient;
-  RESTRequest: TRESTRequest;
-  RESTResponse: TRESTResponse;
-  JSONValue: TJSONValue;
-  JSONObject: TJSONObject;
-  title, paragraph, url, cleanedText: string;
-begin
-  // Cria os componentes REST temporariamente
-  RESTClient := TRESTClient.Create(nil);
-  RESTRequest := TRESTRequest.Create(nil);
-  RESTResponse := TRESTResponse.Create(nil);
-
-  try
-    // Configura o RESTClient
-    RESTClient.BaseURL := 'http://127.0.0.1:5000/news'; // Substitua pela URL da API
-
-    // Configura o RESTRequest
-    RESTRequest.Client := RESTClient;
-    RESTRequest.Response := RESTResponse;
-    RESTRequest.Method := rmGET; // Define o método como GET
-
-    // Executa a requisição
-    RESTRequest.Execute;
-
-    // Obtém a resposta como JSON
-    JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
-    try
-      if JSONValue is TJSONObject then
-      begin
-        JSONObject := TJSONObject(JSONValue);
-
-        // Acessa o valor da chave "Quote"
-        if JSONObject.TryGetValue('title', title) then
-        begin
-          titleLabel.Caption := title;
-        end
-        else
-        begin
-          titleLabel.Caption := 'Title not found';
-        end;
-
-        // Acessa o valor da chave "Author"
-        if JSONObject.TryGetValue('paragraph', paragraph) then
-        begin
-          cleanedText := StringReplace(Trim(paragraph), #13#10, ' ', [rfReplaceAll]);
-          cleanedText := StringReplace(cleanedText, #9, ' ', [rfReplaceAll]); // remover tabulações, se houver
-          paragraphLabel.Caption := cleanedText;
-        end
-        else
-        begin
-          paragraphLabel.Caption := 'paragraph not found';
-        end;
-
-        if JSONObject.TryGetValue('url', url) then
-        begin
-          url_value := url
-        end
-        else
-        begin
-          ShowMessage('Url not found');
-        end;
-
-      end
-      else
-      begin
-        titleLabel.Caption := 'Resposta inválida';
-        paragraphLabel.Caption := 'Resposta inválida';
-      end;
-    finally
-      JSONValue.Free;
-    end;
-
-  finally
-    // Libera os componentes REST
-    RESTClient.Free;
-    RESTRequest.Free;
-    RESTResponse.Free;
-  end;
-end;
 
 function CheckIfAnswerSecurityQuestionIsCorrect(nameUser, answerSecurityQuestionUser: TEdit): Boolean;
 var

@@ -97,7 +97,7 @@ object Supplements: TSupplements
         TabOrder = 1
         object SubcategoriesPanel: TPanel
           AlignWithMargins = True
-          Left = 426
+          Left = 480
           Top = 0
           Width = 193
           Height = 86
@@ -110,6 +110,7 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 0
+          ExplicitLeft = 426
           object Label4: TLabel
             AlignWithMargins = True
             Left = 3
@@ -128,7 +129,7 @@ object Supplements: TSupplements
             ExplicitWidth = 183
             ExplicitHeight = 33
           end
-          object SubcategoriesCombobox: TDBComboBox
+          object SubcategoryCombobox: TDBComboBox
             AlignWithMargins = True
             Left = 3
             Top = 45
@@ -150,7 +151,7 @@ object Supplements: TSupplements
           AlignWithMargins = True
           Left = 0
           Top = 0
-          Width = 193
+          Width = 220
           Height = 86
           Margins.Left = 0
           Margins.Top = 0
@@ -165,7 +166,7 @@ object Supplements: TSupplements
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 187
+            Width = 214
             Height = 36
             Align = alClient
             Caption = 'Brands'
@@ -183,7 +184,7 @@ object Supplements: TSupplements
             AlignWithMargins = True
             Left = 3
             Top = 45
-            Width = 187
+            Width = 214
             Height = 38
             Style = csDropDownList
             Align = alBottom
@@ -195,11 +196,12 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ExplicitWidth = 187
           end
         end
         object MaxPricePanel: TPanel
           AlignWithMargins = True
-          Left = 639
+          Left = 693
           Top = 0
           Width = 138
           Height = 86
@@ -212,6 +214,7 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 2
+          ExplicitLeft = 639
           object Label6: TLabel
             AlignWithMargins = True
             Left = 3
@@ -249,7 +252,7 @@ object Supplements: TSupplements
         end
         object MinPricePanel: TPanel
           AlignWithMargins = True
-          Left = 797
+          Left = 851
           Top = 0
           Width = 120
           Height = 86
@@ -262,6 +265,7 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 3
+          ExplicitLeft = 797
           object Label5: TLabel
             AlignWithMargins = True
             Left = 3
@@ -299,9 +303,9 @@ object Supplements: TSupplements
         end
         object CategoryPanel: TPanel
           AlignWithMargins = True
-          Left = 213
+          Left = 240
           Top = 0
-          Width = 193
+          Width = 220
           Height = 86
           Margins.Left = 20
           Margins.Top = 0
@@ -312,11 +316,12 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 4
+          ExplicitLeft = 213
           object Label3: TLabel
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 187
+            Width = 214
             Height = 36
             Align = alClient
             Caption = 'Categories'
@@ -334,7 +339,7 @@ object Supplements: TSupplements
             AlignWithMargins = True
             Left = 3
             Top = 45
-            Width = 187
+            Width = 214
             Height = 38
             Style = csDropDownList
             Align = alBottom
@@ -346,6 +351,7 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ExplicitWidth = 187
           end
         end
         object Panel4: TPanel
@@ -397,6 +403,10 @@ object Supplements: TSupplements
           Height = 629
           HorzScrollBar.ButtonSize = 10
           HorzScrollBar.Visible = False
+          VertScrollBar.Color = clNone
+          VertScrollBar.ParentColor = False
+          VertScrollBar.Smooth = True
+          VertScrollBar.Style = ssFlat
           Align = alClient
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -404,12 +414,9 @@ object Supplements: TSupplements
           Color = 1184274
           ParentColor = False
           TabOrder = 0
+          UseWheelForScrolling = True
         end
       end
     end
-  end
-  object ImageList1: TImageList
-    Left = 200
-    Top = 40
   end
 end

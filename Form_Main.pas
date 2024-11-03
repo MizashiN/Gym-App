@@ -53,7 +53,6 @@ end;
 procedure TMain.SideBarButtonClick(Sender: TObject);
 var
   TargetFrame: TFrame;
-  Frame: TFrame;
 begin
   if Sender is TStyledButton then
   begin
@@ -125,7 +124,6 @@ begin
 
   if TargetFrame = Home then
   begin
-    GetMotivationMessageAPI(Home.QuoteLabel, Home.AuthorLabel);
   end;
 
 end;

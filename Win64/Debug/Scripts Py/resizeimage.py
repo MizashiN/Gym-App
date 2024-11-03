@@ -1,7 +1,5 @@
 import os
 from PIL import Image
-import rembg
-import numpy as np
 
 
 def get_icon_img(input_image_path, output_path):
@@ -24,13 +22,25 @@ def get_icon_img(input_image_path, output_path):
                 # Caminho completo para o arquivo de entrada
                 full_image_path = os.path.join(input_image_path, filename)
 
-                # Abre a imagem e converte para RGB
-                input_image = Image.open(full_image_path).convert("RGB")
+                # Abre a imagem e converte para RGBA para garantir o canal alpha
+                input_image = Image.open(full_image_path).convert("RGBA")
 
-              
                 # Redimensiona a imagem
-                output_image_resized = input_image.resize(
-                    (250, 250), Image.LANCZOS
+                output_image_resized = input_image.resize((250, 250), Image.LANCZOS)
+
+                # Cria uma nova imagem com fundo branco
+                output_image_with_background = Image.new(
+                    "RGBA", (250, 250), (255, 255, 255, 255)
+                )
+
+                # Paster a imagem redimensionada na nova imagem, preservando a transparência
+                output_image_with_background.paste(
+                    output_image_resized, (0, 0), output_image_resized
+                )
+
+                # Converte para RGB antes de salvar
+                output_image_with_background = output_image_with_background.convert(
+                    "RGB"
                 )
 
                 # Define o caminho de saída com o prefixo 'photo_'
@@ -38,8 +48,8 @@ def get_icon_img(input_image_path, output_path):
                     output_path, f"{filename.rsplit('.', 1)[0]}.png"
                 )
 
-                # Salva a imagem redimensionada com fundo cinza escuro como PNG
-                output_image_resized.save(output_file_path, format="PNG")
+                # Salva a imagem redimensionada com fundo branco como PNG
+                output_image_with_background.save(output_file_path, format="PNG")
                 print(f"Imagem salva em: {output_file_path}")
             except Exception as e:
                 print(f"Erro ao processar a imagem {filename}: {e}")

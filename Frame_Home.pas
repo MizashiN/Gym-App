@@ -38,7 +38,6 @@ type
     Image2: TImage;
     StyledButton1: TStyledButton;
     Panel5: TPanel;
-    procedure TitleLabelClick(Sender: TObject);
   private
     { Private declaration }
   public
@@ -48,10 +47,5 @@ type
 implementation
 
 {$R *.dfm}
-
-procedure THome.TitleLabelClick(Sender: TObject);
-begin
-  ShellExecute(0, 'open', PChar(Global_Functions.url_value) , nil, nil, SW_SHOWNORMAL);
-end;
 
 end.
