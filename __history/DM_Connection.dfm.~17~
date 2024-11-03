@@ -1,0 +1,40 @@
+object DM_Con: TDM_Con
+  Height = 256
+  Width = 393
+  object ConnectionMySQL: TFDConnection
+    Params.Strings = (
+      'Database=gym_app'
+      'User_Name=parafalpwladmin'
+      'Password=@D3adlift'
+      'Server=gym-app.mysql.uhserver.com'
+      'DriverID=MySQL')
+    LoginPrompt = False
+    Transaction = TransactionMySQL
+    UpdateTransaction = TransactionMySQL
+    Left = 56
+    Top = 32
+  end
+  object TransactionMySQL: TFDTransaction
+    Connection = ConnectionMySQL
+    Left = 48
+    Top = 104
+  end
+  object ConnectionSQLite: TFDConnection
+    Params.Strings = (
+      'Database=gym_app'
+      'User_Name=parafalpwladmin'
+      'Password=@D3adlift'
+      'Server=gym-app.mysql.uhserver.com'
+      'DriverID=MySQL')
+    LoginPrompt = False
+    Transaction = TransactionSQLite
+    UpdateTransaction = TransactionSQLite
+    Left = 272
+    Top = 40
+  end
+  object TransactionSQLite: TFDTransaction
+    Connection = ConnectionSQLite
+    Left = 264
+    Top = 112
+  end
+end

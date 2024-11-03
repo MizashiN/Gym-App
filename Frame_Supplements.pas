@@ -22,11 +22,8 @@ type
     MaxPricePanel: TPanel;
     MinPricePanel: TPanel;
     CategoryPanel: TPanel;
-    BrandsCombobox: TDBComboBox;
     Label1: TLabel;
-    CategoryCombobox: TDBComboBox;
     Label3: TLabel;
-    SubcategoryCombobox: TDBComboBox;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
@@ -36,6 +33,12 @@ type
     CardsBox: TScrollBox;
     Panel4: TPanel;
     Button1: TButton;
+    BrandsCombobox: TComboBox;
+    CategoriesCombobox: TComboBox;
+    SubcategoriesCombobox: TComboBox;
+    Panel5: TPanel;
+    Label7: TLabel;
+    TypesCombobox: TComboBox;
     procedure GetProducts;
     procedure Button1Click(Sender: TObject);
   private
@@ -55,14 +58,14 @@ end;
 
 procedure TSupplements.GetProducts;
 var
-ProductsArray: TJSONArray;
-brand, category, subcategory: string;
+  ProductsArray: TJSONArray;
+  brand, category, subcategory: string;
 begin
-  brand := BrandsCombobox.Text;
-  category := CategoryCombobox.Text;
-  subcategory := SubcategoryCombobox.Text;
+  brand := StringReplace(LowerCase(BrandsCombobox.Text), ' ', '', [rfReplaceAll]);
+  category := StringReplace(LowerCase(CategoriesCombobox.Text), ' ', '', [rfReplaceAll]);
+  subcategory := StringReplace(LowerCase(SubcategoriesCombobox.Text), ' ', '', [rfReplaceAll]);
   try
-    ProductsArray := APISupp('maxtitanium', 'acessories', '');
+    ProductsArray := APISupp(brand, category, subcategory);
     CreateCardProduct(CardsBox, ProductsArray);
   finally
 

@@ -110,7 +110,6 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 0
-          ExplicitLeft = 426
           object Label4: TLabel
             AlignWithMargins = True
             Left = 3
@@ -129,22 +128,23 @@ object Supplements: TSupplements
             ExplicitWidth = 183
             ExplicitHeight = 33
           end
-          object SubcategoryCombobox: TDBComboBox
+          object SubcategoriesCombobox: TComboBox
             AlignWithMargins = True
             Left = 3
             Top = 45
             Width = 187
             Height = 38
-            Style = csDropDownList
             Align = alBottom
-            Color = clWhite
+            AutoCloseUp = True
+            Style = csDropDownList
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
+            Font.Color = clWindowText
             Font.Height = -24
             Font.Name = 'Hammersmith One'
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ExplicitTop = 48
           end
         end
         object BrandPanel: TPanel
@@ -177,31 +177,30 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             Layout = tlBottom
-            ExplicitWidth = 87
-            ExplicitHeight = 33
+            ExplicitHeight = 30
           end
-          object BrandsCombobox: TDBComboBox
+          object BrandsCombobox: TComboBox
             AlignWithMargins = True
             Left = 3
             Top = 45
             Width = 214
             Height = 38
-            Style = csDropDownList
             Align = alBottom
-            Color = clWhite
+            AutoCloseUp = True
+            Style = csDropDownList
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
+            Font.Color = clWindowText
             Font.Height = -24
             Font.Name = 'Hammersmith One'
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            ExplicitWidth = 187
+            ExplicitTop = 56
           end
         end
         object MaxPricePanel: TPanel
           AlignWithMargins = True
-          Left = 693
+          Left = 906
           Top = 0
           Width = 138
           Height = 86
@@ -214,7 +213,7 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 2
-          ExplicitLeft = 639
+          ExplicitLeft = 693
           object Label6: TLabel
             AlignWithMargins = True
             Left = 3
@@ -252,7 +251,7 @@ object Supplements: TSupplements
         end
         object MinPricePanel: TPanel
           AlignWithMargins = True
-          Left = 851
+          Left = 1064
           Top = 0
           Width = 120
           Height = 86
@@ -265,7 +264,7 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 3
-          ExplicitLeft = 797
+          ExplicitLeft = 851
           object Label5: TLabel
             AlignWithMargins = True
             Left = 3
@@ -316,7 +315,6 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 4
-          ExplicitLeft = 213
           object Label3: TLabel
             AlignWithMargins = True
             Left = 3
@@ -335,23 +333,23 @@ object Supplements: TSupplements
             ExplicitWidth = 137
             ExplicitHeight = 33
           end
-          object CategoryCombobox: TDBComboBox
+          object CategoriesCombobox: TComboBox
             AlignWithMargins = True
             Left = 3
             Top = 45
             Width = 214
             Height = 38
-            Style = csDropDownList
             Align = alBottom
-            Color = clWhite
+            AutoCloseUp = True
+            Style = csDropDownList
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
+            Font.Color = clWindowText
             Font.Height = -24
             Font.Name = 'Hammersmith One'
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            ExplicitWidth = 187
+            ExplicitTop = 48
           end
         end
         object Panel4: TPanel
@@ -378,6 +376,60 @@ object Supplements: TSupplements
             Caption = 'Button1'
             TabOrder = 0
             OnClick = Button1Click
+            ExplicitTop = 24
+            ExplicitHeight = 62
+          end
+        end
+        object Panel5: TPanel
+          AlignWithMargins = True
+          Left = 693
+          Top = 0
+          Width = 193
+          Height = 86
+          Margins.Left = 20
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alLeft
+          BevelOuter = bvNone
+          Color = 1184274
+          ParentBackground = False
+          TabOrder = 6
+          ExplicitLeft = 736
+          object Label7: TLabel
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 187
+            Height = 36
+            Align = alClient
+            Caption = 'Types'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -27
+            Font.Name = 'Hammersmith One'
+            Font.Style = []
+            ParentFont = False
+            Layout = tlBottom
+            ExplicitWidth = 74
+            ExplicitHeight = 33
+          end
+          object TypesCombobox: TComboBox
+            AlignWithMargins = True
+            Left = 3
+            Top = 45
+            Width = 187
+            Height = 38
+            Align = alBottom
+            AutoCloseUp = True
+            Style = csDropDownList
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -24
+            Font.Name = 'Hammersmith One'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
           end
         end
       end
@@ -415,6 +467,8 @@ object Supplements: TSupplements
           ParentColor = False
           TabOrder = 0
           UseWheelForScrolling = True
+          ExplicitLeft = -64
+          ExplicitTop = 88
         end
       end
     end

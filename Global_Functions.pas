@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.RegularExpressions, System.Hash, Vcl.Dialogs, Vcl.StdCtrls,FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, Vcl.Graphics, Vcl.ExtCtrls, System.Generics.Collections,
-  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.DApt,Vcl.Controls, Vcl.Forms,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.DApt,Vcl.Controls, Vcl.Forms,Vcl.DBCtrls,
   Data.DB, FireDAC.Comp.Client,FireDAC.Stan.Param, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, DM_Connection,System.IOUtils,
   Winapi.Windows, System.JSON, REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope, System.Classes,PythonEngine,
   IdHTTP, IdSSL, IdSSLOpenSSL, System.Net.HttpClient, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Winapi.GDIPAPI, Winapi.GDIPOBJ;
@@ -28,39 +28,87 @@ function GetUserID(nameUser: TEdit): integer;
 function GetUserName(id_user: integer): string;
 function APISupp(brand, category, subcategory: string): TJSONArray;
 function extractUrl(ImageUrl: string):string;
-function GetImageIcon(FileName: string): string;
 function FileExistsInFolder(const Folder, FileName: string): Boolean;
+function VerifyImgSrc(image_src: string): Boolean;
 procedure GetImageUser(id_user: integer; Image: TImage);
 procedure InsertImageUser(id_user: integer);
 procedure DownloadImageFromURL(const URL, SaveDirectory: string; FileName: string);
 procedure RunResizeImgPy;
 procedure CreateCardProduct(CardsBox: TScrollBox; ProductsArray: TJSONArray);
 procedure HideScrollbars(ScrollBox: TScrollBox);
-
-
-
+procedure InsertImg(image_src, FilePath: string);
+procedure LoadImage(image_src: string; Image: TImage);
+procedure SelectBrands(ComboBox: TComboBox);
+procedure SelectCategories(Combobox: TComboBox);
 
 implementation
 var
   PythonEngine: TPythonEngine;
 
-function CheckIfUserExists(nameUser: TEdit): Boolean;
+//              APIs
+
+function APISupp(brand, category, subcategory: string): TJSONArray;
+var
+  RESTClient: TRESTClient;
+  RESTRequest: TRESTRequest;
+  RESTResponse: TRESTResponse;
+  JSONValue: TJSONValue;
+  ProductsArray: TJSONArray;
+  URL: String;
+begin
+  RESTClient := TRESTClient.Create(nil);
+  RESTRequest := TRESTRequest.Create(nil);
+  RESTResponse := TRESTResponse.Create(nil);
+  Result := TJSONArray.Create;
+
+  try
+    if subcategory = '' then
+      URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category
+    else
+      URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category + '&subcategory=' + subcategory;
+
+    RESTClient.BaseURL := URL;
+    RESTRequest.Client := RESTClient;
+    RESTRequest.Response := RESTResponse;
+    RESTRequest.Method := rmGET;
+    RESTRequest.Execute;
+
+    JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
+    try
+      if (JSONValue is TJSONObject) and (TJSONObject(JSONValue).GetValue('products') <> nil) then
+      begin
+        ProductsArray := TJSONObject(JSONValue).GetValue<TJSONArray>('products');
+        Result := ProductsArray.Clone as TJSONArray;
+      end;
+    finally
+      JSONValue.Free;
+    end;
+  finally
+    RESTClient.Free;
+    RESTRequest.Free;
+    RESTResponse.Free;
+  end;
+end;
+
+//              Database SQLite Operations
+
+function VerifyImgSrc(image_src: string): Boolean;
 var
   queryTemp: TFDQuery;
 begin
+  queryTemp := TFDQuery.Create(nil);
   Result := False;
-  queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.Connection;
+    queryTemp.Connection := DM_Con.ConnectionSQLite;
 
-    queryTemp.SQL.Text := 'SELECT COUNT(*) AS Count FROM users WHERE name_user = :name_user';
-    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
+    queryTemp.SQL.Text := 'SELECT image_src FROM images WHERE image_src = :image_src';
+    queryTemp.ParamByName('image_src').AsString := image_src;
     queryTemp.Open;
 
-    if queryTemp.FieldByName('Count').AsInteger > 0 then
-      begin
+    if not queryTemp.IsEmpty then
+    begin
       Result := True;
-      end;
+    end;
     except
       on E: Exception do
       begin
@@ -70,35 +118,69 @@ begin
   queryTemp.Free;
 end;
 
-function GetUserID(nameUser: TEdit): integer;
+procedure InsertImg(image_src, FilePath: string);
 var
   queryTemp: TFDQuery;
+  MemStream: TMemoryStream;
 begin
-  queryTemp := TFDQuery.Create(nil);
-  Result := 0;
-  try
-    queryTemp.Connection := DM_Con.Connection;
+ if not FileExists(FilePath) then
+  begin
+    ShowMessage('Arquivo de imagem não encontrado.');
+    Exit;
+  end;
 
-    queryTemp.SQL.Text := 'SELECT id_user FROM users WHERE name_user = :name_user';
-    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
+  queryTemp := TFDQuery.Create(nil);
+  MemStream := TMemoryStream.Create;
+  try
+
+    MemStream.LoadFromFile(FilePath);
+
+    queryTemp.Connection := DM_Con.ConnectionSQLite;
+
+    queryTemp.SQL.Text := 'INSERT INTO images (image_src, image_blob) VALUES (:image_src, :image_blob)';
+    queryTemp.ParamByName('image_src').AsString := image_src;
+
+    MemStream.Position := 0;
+    queryTemp.ParamByName('image_blob').LoadFromStream(MemStream, ftBlob);
+
+    queryTemp.ExecSQL;
+  finally
+    MemStream.Free;
+  end;
+end;
+
+procedure LoadImage(image_src: string; Image: TImage);
+var
+  MemStream: TMemoryStream;
+  queryTemp: TFDQuery;
+begin
+  MemStream := TMemoryStream.Create;
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.ConnectionSQLite;
+
+    queryTemp.SQL.Text := 'SELECT image_blob FROM images WHERE image_src = :image_src';
+    queryTemp.ParamByName('image_src').AsString := image_src;
     queryTemp.Open;
 
-    Result := queryTemp.FieldByName('id_user').AsInteger;
+    if not queryTemp.IsEmpty then
+    begin
+      TBlobField(queryTemp.FieldByName('image_blob')).SaveToStream(MemStream);
 
-    except
-      on E: Exception do
-      begin
-      ShowMessage('Erro: ' + E.Message);
-      end;
+      MemStream.Position := 0;
+
+      Image.Picture.Graphic := nil;
+      Image.Picture.LoadFromStream(MemStream);
+    end
+    else
+      ShowMessage('Imagem não encontrada.');
+  finally
+    MemStream.Free;
+    queryTemp.Free;
   end;
-  queryTemp.Free;
 end;
 
-procedure HideScrollbars(ScrollBox: TScrollBox);
-begin
-
-  ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
-end;
+//              Design Frames Procedures
 
 procedure CreateCardProduct(CardsBox: TScrollBox; ProductsArray: TJSONArray);
 var
@@ -119,7 +201,6 @@ begin
   Padding := 25;
   Columns := 5;
 
-  // Limpa os componentes filhos existentes de CardsBox antes de adicionar novos
   while CardsBox.ControlCount > 0 do
     CardsBox.Controls[0].Free;
 
@@ -133,7 +214,6 @@ begin
     col := i mod Columns;
     row := i div Columns;
 
-    // Criação e configuração do painel
     Panel := TPanel.Create(CardsBox);
     Panel.Parent := CardsBox;
     Panel.Width := PanelWidth;
@@ -148,7 +228,6 @@ begin
       HideScrollbars(CardsBox);
     end;
 
-    // Criação e configuração do TLabel para o título
     TitleLabel := TLabel.Create(Panel);
     TitleLabel.AlignWithMargins := True;
     TitleLabel.Margins.Top := 3;
@@ -160,19 +239,25 @@ begin
     TitleLabel.Font.Style := [fsBold];
     TitleLabel.Font.Color := clWhite;
     TitleLabel.Font.Size := 11;
-    TitleLabel.WordWrap := True; // Permite quebra de linha
-    TitleLabel.Alignment := taCenter; // Centraliza o texto
-    TitleLabel.Align := alClient; // Ajusta o TLabel para ocupar todo o espaço disponível no painel
+    TitleLabel.WordWrap := True;
+    TitleLabel.Alignment := taCenter;
+    TitleLabel.Align := alClient;
 
-    // Criação e configuração da imagem
     Image := TImage.Create(Panel);
     FileName := extractUrl(Image_url);
-    if not FileExistsInFolder(OutputImagePath, FileName) then
+
+    if VerifyImgSrc(image_url) then
+    begin
+      LoadImage(image_url, Image);
+    end
+    else
     begin
       DownloadImageFromURL(Image_url, InputImagePath, FileName);
       RunResizeImgPy;
+      InsertImg(Image_url, OutputImagePath + '\' + FileName + '.png');
+      LoadImage(Image_url, Image);
     end;
-    Image.Picture.LoadFromFile(OutputImagePath + '\' + FileName + '.png');
+
     Image.AlignWithMargins := True;
     Image.Height := 250;
     Image.Width := 250;
@@ -185,7 +270,6 @@ begin
     Image.Center := True;
     Image.Proportional := True;
 
-    // Criação e configuração do TLabel para o preço
     PriceLabel := TLabel.Create(Panel);
     PriceLabel.AlignWithMargins := True;
     PriceLabel.Margins.Top := 3;
@@ -200,8 +284,10 @@ begin
     PriceLabel.Alignment := taCenter;
     PriceLabel.Align := alBottom;
   end;
+
 end;
 
+//         Database MySQL Operations
 
 function GetUserName(id_user: integer): string;
 var
@@ -210,7 +296,7 @@ begin
   queryTemp := TFDQuery.Create(nil);
   Result := '';
   try
-    queryTemp.Connection := DM_Con.Connection;
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
 
     queryTemp.SQL.Text := 'SELECT name_user FROM users WHERE id_user = :id_user';
     queryTemp.ParamByName('id_user').AsInteger := id_user;
@@ -260,144 +346,55 @@ begin
     ShowMessage('Imagem not found');
 end;
 
-procedure DownloadImageFromURL(const URL, SaveDirectory: string; FileName: string);
+function CheckIfUserExists(nameUser: TEdit): Boolean;
 var
-  IdHTTP: TIdHTTP;
-  SSLHandler: TIdSSLIOHandlerSocketOpenSSL;
-  MemoryStream: TMemoryStream;
-  SavePath: string;
-begin
-  IdHTTP := TIdHTTP.Create(nil);
-  SSLHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
-  MemoryStream := TMemoryStream.Create;
-  try
-    IdHTTP.IOHandler := SSLHandler;
-    SSLHandler.SSLOptions.Method := sslvTLSv1_2;
-    SSLHandler.SSLOptions.VerifyMode := [];
-    SSLHandler.SSLOptions.VerifyDepth := 0;
-
-    IdHTTP.Request.UserAgent := 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36';
-    IdHTTP.Request.Referer := URL;
-
-    IdHTTP.Get(URL, MemoryStream);
-
-    SavePath := IncludeTrailingPathDelimiter(SaveDirectory) + FileName + '.png';
-
-    MemoryStream.Position := 0;
-    MemoryStream.SaveToFile(SavePath);
-  finally
-    MemoryStream.Free;
-    SSLHandler.Free;
-    IdHTTP.Free;
-  end;
-
-end;
-
-procedure InitializePython;
-begin
-  PythonEngine := TPythonEngine.Create(nil);
-  try
-    PythonEngine.DllName := 'python312.dll';  // Verifique se a DLL está no caminho correto
-    PythonEngine.LoadDll;  // Carrega a DLL do Python
-  except
-    on E: Exception do
-      ShowMessage('Erro ao inicializar o Python: ' + E.Message);
-  end;
-end;
-
-procedure FinalizePython;
-begin
-  if Assigned(PythonEngine) then
-  begin
-    PythonEngine.UnloadDll;  // Descarrega a DLL do Python
-    PythonEngine.Free;        // Libera a instância do PythonEngine
-  end;
-end;
-
-procedure RunResizeImgPy;
-var
-  FilePy: string;
-begin
-  FilePy := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\resizeimage.py';
-  try
-    if not Assigned(PythonEngine) then
-      InitializePython;  // Inicializa apenas se ainda não estiver inicializado
-
-    PythonEngine.ExecFile(FilePy);
-  except
-    on E: Exception do
-      ShowMessage('Erro ao executar o script: ' + E.Message);
-  end;
-end;
-
-function extractUrl(ImageUrl: string): string;
-var
-  OriginalString: string;
-  ExtractedString: string;
-begin
-
-  Result := '';
-  OriginalString := ImageUrl;
-
-  var LastSlashPos := LastDelimiter('/', OriginalString);
-  var LastDotPos := LastDelimiter('.', OriginalString);
-
-  // Extraímos a substring entre a última barra e o último ponto.
-  ExtractedString := Copy(OriginalString, LastSlashPos + 1, LastDotPos - LastSlashPos - 1);
-
-  Result := ExtractedString;
-end;
-
-
-
-procedure InsertImageUser(id_user: integer);
-var
-  FileStream:  TFileStream;
   queryTemp: TFDQuery;
 begin
-   FileStream := nil;
+  Result := False;
   queryTemp := TFDQuery.Create(nil);
-
-  queryTemp.Close;
-  queryTemp.SQL.Text := 'INSERT INTO image_user  VALUES :image_user FROM users WHERE id_user = :id_user';
-  queryTemp.ParamByName('id_user').AsInteger := id_user;
-
-
   try
-    try
-      queryTemp.ParamByName('image_user').LoadFromStream(FileStream, ftBlob);
-    finally
-      FileStream.Free;
-      queryTemp.Free;
-    end;
-  except
-  on E: Exception do
-    begin
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    queryTemp.SQL.Text := 'SELECT COUNT(*) AS Count FROM users WHERE name_user = :name_user';
+    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
+    queryTemp.Open;
+
+    if queryTemp.FieldByName('Count').AsInteger > 0 then
+      begin
+      Result := True;
+      end;
+    except
+      on E: Exception do
+      begin
       ShowMessage('Erro: ' + E.Message);
-   end;
-
+      end;
   end;
+  queryTemp.Free;
 end;
 
-procedure SelectImageExplorer(id_user: integer);
+function GetUserID(nameUser: TEdit): integer;
 var
-  OpenDialog: TOpenDialog;
+  queryTemp: TFDQuery;
 begin
-  OpenDialog := TOpenDialog.Create(nil);
+  queryTemp := TFDQuery.Create(nil);
+  Result := 0;
   try
-    OpenDialog.Filter := 'Imagens|*.jpg;*.jpeg;*.png;*.bmp;*.gif|Todos os Arquivos|*.*';
-    OpenDialog.Title := 'Selecione uma imagem';
-    OpenDialog.Options := [ofFileMustExist, ofHideReadOnly];
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
 
-    if OpenDialog.Execute then
-    begin
-      InsertImageUser(id_user);
-    end;
-  finally
-    OpenDialog.Free;
+    queryTemp.SQL.Text := 'SELECT id_user FROM users WHERE name_user = :name_user';
+    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
+    queryTemp.Open;
+
+    Result := queryTemp.FieldByName('id_user').AsInteger;
+
+    except
+      on E: Exception do
+      begin
+      ShowMessage('Erro: ' + E.Message);
+      end;
   end;
+  queryTemp.Free;
 end;
-
 
 function CheckIfUserAndPasswordIsCorrect(nameUser, passwordUser: TEdit): Boolean;
 var
@@ -411,7 +408,7 @@ begin
   queryTemp := TFDQuery.Create(nil);
 
   try
-    queryTemp.Connection := DM_Con.Connection;
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
 
     queryTemp.SQL.Text := 'SELECT password_user AS password FROM users WHERE name_user = :name_user';
     queryTemp.ParamByName('name_user').AsString := nameUser.Text;
@@ -434,7 +431,6 @@ begin
    queryTemp.Free;
 end;
 
-
 function SignUpUser(nameUser, passwordUser, questionUser, questionAnswerUser: TEdit): Boolean;
 var
   queryTemp: TFDQuery;
@@ -448,10 +444,10 @@ begin
   questionAnswerUserEncrypted := Encrypter(questionAnswerUser.Text);
 
   try
-    queryTemp.Connection := DM_Con.Connection;
-    queryTemp.Transaction := DM_Con.Transaction;
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+    queryTemp.Transaction := DM_Con.TransactionMySQL;
 
-    DM_Con.Connection.StartTransaction;
+    DM_Con.ConnectionMySQL.StartTransaction;
     try
       queryTemp.SQL.Text := 'INSERT INTO users (name_user, password_user, question_user, question_answer_user) VALUES (:name_user, :password_user, :question_user, :question_answer_user)';
       queryTemp.ParamByName('name_user').AsString := nameUser.Text;
@@ -460,13 +456,13 @@ begin
       queryTemp.ParamByName('question_answer_user').AsString := questionAnswerUserEncrypted;
 
       queryTemp.ExecSQL;
-      DM_Con.Connection.Commit;
+      DM_Con.ConnectionMySQL.Commit;
 
       Result := True;
     except
       on E: Exception do
       begin
-        DM_Con.Connection.Rollback;
+        DM_Con.ConnectionMySQL.Rollback;
         ShowMessage(E.Message);
       end;
     end;
@@ -474,12 +470,6 @@ begin
     queryTemp.Free;
   end;
 end;
-
-function Encrypter(const passwordUser: string): string;
-begin
-  Result := THashSHA2.GetHashString(passwordUser);
-end;
-
 
 function CheckMatchPasswords(passwordEdit, passwordConfirmEdit: TEdit): Boolean;
 var
@@ -578,7 +568,7 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.Connection;
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
 
     queryTemp.SQL.Text := 'SELECT question_user AS question FROM users WHERE name_user = :name_user';
     queryTemp.ParamByName('name_user').AsString := nameUser.Text;
@@ -597,79 +587,6 @@ begin
   queryTemp.Free;
 end;
 
-function GetImageIcon(FileName: string): string;
-var
-  RESTClient: TRESTClient;
-  RESTRequest: TRESTRequest;
-  RESTResponse: TRESTResponse;
-begin
-  Result := '';
-
-  RESTClient := TRESTClient.Create(nil);
-  RESTRequest := TRESTRequest.Create(nil);
-  RESTResponse := TRESTResponse.Create(nil);
-  try
-     //
-  finally
-    RESTClient.Free;
-    RESTRequest.Free;
-    RESTResponse.Free;
-  end;
-end;
-
-function FileExistsInFolder(const Folder, FileName: string): Boolean;
-var
-  FullPath: string;
-begin
-  FullPath := IncludeTrailingPathDelimiter(Folder) + FileName + '.png';
-  // Verifica se o arquivo existe
-  Result := FileExists(FullPath);
-end;
-
-function APISupp(brand, category, subcategory: string): TJSONArray;
-var
-  RESTClient: TRESTClient;
-  RESTRequest: TRESTRequest;
-  RESTResponse: TRESTResponse;
-  JSONValue: TJSONValue;
-  ProductsArray: TJSONArray;
-  URL: String;
-begin
-  RESTClient := TRESTClient.Create(nil);
-  RESTRequest := TRESTRequest.Create(nil);
-  RESTResponse := TRESTResponse.Create(nil);
-  Result := TJSONArray.Create;
-
-  try
-    if subcategory = '' then
-      URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category
-    else
-      URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category + '&subcategory=' + subcategory;
-
-    RESTClient.BaseURL := URL;
-    RESTRequest.Client := RESTClient;
-    RESTRequest.Response := RESTResponse;
-    RESTRequest.Method := rmGET;
-    RESTRequest.Execute;
-
-    JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
-    try
-      if (JSONValue is TJSONObject) and (TJSONObject(JSONValue).GetValue('products') <> nil) then
-      begin
-        ProductsArray := TJSONObject(JSONValue).GetValue<TJSONArray>('products');
-        Result := ProductsArray.Clone as TJSONArray;
-      end;
-    finally
-      JSONValue.Free;
-    end;
-  finally
-    RESTClient.Free;
-    RESTRequest.Free;
-    RESTResponse.Free;
-  end;
-end;
-
-
 function CheckIfAnswerSecurityQuestionIsCorrect(nameUser, answerSecurityQuestionUser: TEdit): Boolean;
 var
   queryTemp: TFDQuery;
@@ -682,7 +599,7 @@ begin
   queryTemp := TFDQuery.Create(nil);
 
   try
-    queryTemp.Connection := DM_Con.Connection;
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
 
     queryTemp.SQL.Text := 'SELECT question_answer_user AS answer FROM users WHERE name_user = :name_user';
     queryTemp.ParamByName('name_user').AsString := nameUser.Text;
@@ -716,23 +633,23 @@ begin
   passwordUserEncrypted := Encrypter(newPasswordUser.Text);
 
   try
-    queryTemp.Connection := DM_Con.Connection;
-    queryTemp.Transaction := DM_Con.Transaction;
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+    queryTemp.Transaction := DM_Con.TransactionMySQL;
 
-    DM_Con.Connection.StartTransaction;
+    DM_Con.ConnectionMySQL.StartTransaction;
     try
       queryTemp.SQL.Text := 'UPDATE users SET password_user = :password_user WHERE name_user = :name_user';
       queryTemp.ParamByName('name_user').AsString := nameUser.Text;
       queryTemp.ParamByName('password_user').AsString := passwordUserEncrypted;
 
       queryTemp.ExecSQL;
-      DM_Con.Connection.Commit;
+      DM_Con.ConnectionMySQL.Commit;
 
       Result := True;
     except
       on E: Exception do
       begin
-        DM_Con.Connection.Rollback;
+        DM_Con.ConnectionMySQL.Rollback;
         ShowMessage(E.Message);
       end;
     end;
@@ -741,5 +658,219 @@ begin
   end;
 end;
 
+procedure SelectImageExplorer(id_user: integer);
+var
+  OpenDialog: TOpenDialog;
+begin
+  OpenDialog := TOpenDialog.Create(nil);
+  try
+    OpenDialog.Filter := 'Imagens|*.jpg;*.jpeg;*.png;*.bmp;*.gif|Todos os Arquivos|*.*';
+    OpenDialog.Title := 'Selecione uma imagem';
+    OpenDialog.Options := [ofFileMustExist, ofHideReadOnly];
+
+    if OpenDialog.Execute then
+    begin
+      InsertImageUser(id_user);
+    end;
+  finally
+    OpenDialog.Free;
+  end;
+end;
+
+procedure InsertImageUser(id_user: integer);
+var
+  FileStream:  TFileStream;
+  queryTemp: TFDQuery;
+begin
+   FileStream := nil;
+  queryTemp := TFDQuery.Create(nil);
+
+  queryTemp.Close;
+  queryTemp.SQL.Text := 'INSERT INTO image_user  VALUES :image_user FROM users WHERE id_user = :id_user';
+  queryTemp.ParamByName('id_user').AsInteger := id_user;
+
+
+  try
+    try
+      queryTemp.ParamByName('image_user').LoadFromStream(FileStream, ftBlob);
+    finally
+      FileStream.Free;
+      queryTemp.Free;
+    end;
+  except
+  on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+   end;
+
+  end;
+end;
+
+procedure SelectBrands(ComboBox: TComboBox);
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    queryTemp.SQL.Text := 'SELECT brand FROM brands';
+    queryTemp.Open;
+
+    ComboBox.Clear;
+
+    while not queryTemp.Eof do
+    begin
+      ComboBox.Items.Add(queryTemp.FieldByName('brand').AsString);
+      queryTemp.Next;
+    end;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+procedure SelectCategories(Combobox: TComboBox);
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    queryTemp.SQL.Text := 'SELECT category FROM categories';
+    queryTemp.Open;
+
+    ComboBox.Clear;
+
+    while not queryTemp.Eof do
+    begin
+      ComboBox.Items.Add(queryTemp.FieldByName('category').AsString);
+      queryTemp.Next;
+    end;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+procedure SelectSubcategories(Combobox: TComboBox; id_category: integer);
+begin
+
+end;
+
+procedure SelectTypes(Combobox: TDBCombobox; id_subcategory: integer);
+begin
+
+end;
+
+
+//                  Others
+
+function FileExistsInFolder(const Folder, FileName: string): Boolean;
+var
+  FullPath: string;
+begin
+  FullPath := IncludeTrailingPathDelimiter(Folder) + FileName + '.png';
+  // Verifica se o arquivo existe
+  Result := FileExists(FullPath);
+end;
+
+function Encrypter(const passwordUser: string): string;
+begin
+  Result := THashSHA2.GetHashString(passwordUser);
+end;
+
+function extractUrl(ImageUrl: string): string;
+var
+  OriginalString: string;
+  ExtractedString: string;
+begin
+
+  Result := '';
+  OriginalString := ImageUrl;
+
+  var LastSlashPos := LastDelimiter('/', OriginalString);
+  var LastDotPos := LastDelimiter('.', OriginalString);
+
+  // Extraímos a substring entre a última barra e o último ponto.
+  ExtractedString := Copy(OriginalString, LastSlashPos + 1, LastDotPos - LastSlashPos - 1);
+
+  Result := ExtractedString;
+end;
+
+procedure HideScrollbars(ScrollBox: TScrollBox);
+begin
+  ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
+end;
+
+procedure DownloadImageFromURL(const URL, SaveDirectory: string; FileName: string);
+var
+  IdHTTP: TIdHTTP;
+  SSLHandler: TIdSSLIOHandlerSocketOpenSSL;
+  MemoryStream: TMemoryStream;
+  SavePath: string;
+begin
+  IdHTTP := TIdHTTP.Create(nil);
+  SSLHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+  MemoryStream := TMemoryStream.Create;
+  try
+    IdHTTP.IOHandler := SSLHandler;
+    SSLHandler.SSLOptions.Method := sslvTLSv1_2;
+    SSLHandler.SSLOptions.VerifyMode := [];
+    SSLHandler.SSLOptions.VerifyDepth := 0;
+
+    IdHTTP.Request.UserAgent := 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36';
+    IdHTTP.Request.Referer := URL;
+
+    IdHTTP.Get(URL, MemoryStream);
+
+    SavePath := IncludeTrailingPathDelimiter(SaveDirectory) + FileName + '.png';
+
+    MemoryStream.Position := 0;
+    MemoryStream.SaveToFile(SavePath);
+  finally
+    MemoryStream.Free;
+    SSLHandler.Free;
+    IdHTTP.Free;
+  end;
+
+end;
+
+//                  Python
+
+procedure InitializePython;
+begin
+  PythonEngine := TPythonEngine.Create(nil);
+  try
+    PythonEngine.DllName := 'python312.dll';  // Verifique se a DLL está no caminho correto
+    PythonEngine.LoadDll;  // Carrega a DLL do Python
+  except
+    on E: Exception do
+      ShowMessage('Erro ao inicializar o Python: ' + E.Message);
+  end;
+end;
+
+procedure RunResizeImgPy;
+var
+  FilePy: string;
+begin
+  FilePy := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\resizeimage.py';
+  try
+    if not Assigned(PythonEngine) then
+      InitializePython;  // Inicializa apenas se ainda não estiver inicializado
+
+    PythonEngine.ExecFile(FilePy);
+  except
+    on E: Exception do
+      ShowMessage('Erro ao executar o script: ' + E.Message);
+  end;
+end;
 
 end.

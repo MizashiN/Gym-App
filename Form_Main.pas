@@ -53,25 +53,24 @@ end;
 procedure TMain.SideBarButtonClick(Sender: TObject);
 var
   TargetFrame: TFrame;
+  Frame: TFrame;
 begin
   if Sender is TStyledButton then
   begin
     // Atualiza o estado do botão
     StatusButton(TStyledButton(Sender));
 
-    // Desativa e oculta todos os frames antes de ativar o selecionado
-//    for Frame in [Home, Supplements] do
-//    begin
-//      Frame.Visible := False;
-//      Frame.Enabled := False;
-//    end;
+    for Frame in [Home, Supplements] do
+    begin
+      Frame.Visible := False;
+      Frame.Enabled := False;
+    end;
 
-    // Verifica qual Frame será ativado baseado na propriedade Tag do botão
     case TStyledButton(Sender).Tag of
       1: TargetFrame := Home;
       2: TargetFrame := Supplements;
       else
-        Exit; // Se o Tag não corresponder a nenhum Frame, sai do método
+        Exit;
     end;
 
     // Ativa e exibe o frame selecionado
@@ -105,6 +104,13 @@ begin
     begin
          FrameHomeShow;
     end;
+
+    if TargetFrame = Supplements then
+    begin
+      SelectBrands(Supplements.BrandsCombobox);
+      SelectCategories(Supplements.CategoriesCombobox);
+    end;
+
     Exit; // Se já estiver ativo, sai do método
   end;
 

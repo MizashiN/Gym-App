@@ -1,8 +1,7 @@
 object DM_Con: TDM_Con
-  OldCreateOrder = False
-  Height = 150
-  Width = 215
-  object Connection: TFDConnection
+  Height = 256
+  Width = 393
+  object ConnectionMySQL: TFDConnection
     Params.Strings = (
       'Database=gym_app'
       'User_Name=parafalpwladmin'
@@ -10,14 +9,31 @@ object DM_Con: TDM_Con
       'Server=gym-app.mysql.uhserver.com'
       'DriverID=MySQL')
     LoginPrompt = False
-    Transaction = Transaction
-    UpdateTransaction = Transaction
-    Left = 48
+    Transaction = TransactionMySQL
+    UpdateTransaction = TransactionMySQL
+    Left = 72
+    Top = 64
+  end
+  object TransactionMySQL: TFDTransaction
+    Connection = ConnectionMySQL
+    Left = 72
+    Top = 128
+  end
+  object ConnectionSQLite: TFDConnection
+    Params.Strings = (
+      
+        'Database=C:\Users\Parafal\Documents\GitHub\Gym-App\Win64\Debug\D' +
+        'atabase-SQLite\database.db'
+      'DriverID=SQLite')
+    LoginPrompt = False
+    Transaction = TransactionSQLite
+    UpdateTransaction = TransactionSQLite
+    Left = 272
     Top = 72
   end
-  object Transaction: TFDTransaction
-    Connection = Connection
-    Left = 136
-    Top = 72
+  object TransactionSQLite: TFDTransaction
+    Connection = ConnectionSQLite
+    Left = 272
+    Top = 128
   end
 end
