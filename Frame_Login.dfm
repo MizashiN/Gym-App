@@ -642,7 +642,6 @@ object AceSignIn: TAceSignIn
           OnMouseEnter = DontHaveAccountSignUpButtonMouseEnter
           OnMouseLeave = DontHaveAccountSignUpButtonMouseLeave
           ExplicitLeft = 94
-          ExplicitTop = 356
           ExplicitWidth = 286
         end
         object UserPassWarningLabel: TLabel

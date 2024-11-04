@@ -6,8 +6,8 @@ uses
   System.SysUtils, System.RegularExpressions, System.Hash, Vcl.Dialogs, Vcl.StdCtrls,FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, Vcl.Graphics, Vcl.ExtCtrls, System.Generics.Collections,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.DApt,Vcl.Controls, Vcl.Forms,Vcl.DBCtrls,
-  Data.DB, FireDAC.Comp.Client,FireDAC.Stan.Param, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, DM_Connection,System.IOUtils,
-  Winapi.Windows, System.JSON, REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope, System.Classes,PythonEngine,
+  Data.DB, FireDAC.Comp.Client,FireDAC.Stan.Param, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, DM_Connection,System.IOUtils,IdCoderMIME,
+  Winapi.Windows, System.JSON, REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope, System.Classes,  System.NetEncoding,
   IdHTTP, IdSSL, IdSSLOpenSSL, System.Net.HttpClient, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Winapi.GDIPAPI, Winapi.GDIPOBJ;
 
 
@@ -32,8 +32,6 @@ function FileExistsInFolder(const Folder, FileName: string): Boolean;
 function VerifyImgSrc(image_src: string): Boolean;
 procedure GetImageUser(id_user: integer; Image: TImage);
 procedure InsertImageUser(id_user: integer);
-procedure DownloadImageFromURL(const URL, SaveDirectory: string; FileName: string);
-procedure RunResizeImgPy;
 procedure CreateCardProduct(CardsBox: TScrollBox; ProductsArray: TJSONArray);
 procedure HideScrollbars(ScrollBox: TScrollBox);
 procedure InsertImg(image_src, FilePath: string);
@@ -42,8 +40,6 @@ procedure SelectBrands(ComboBox: TComboBox);
 procedure SelectCategories(Combobox: TComboBox);
 
 implementation
-var
-  PythonEngine: TPythonEngine;
 
 //              APIs
 
@@ -53,7 +49,6 @@ var
   RESTRequest: TRESTRequest;
   RESTResponse: TRESTResponse;
   JSONValue: TJSONValue;
-  ProductsArray: TJSONArray;
   URL: String;
 begin
   RESTClient := TRESTClient.Create(nil);
@@ -62,6 +57,7 @@ begin
   Result := TJSONArray.Create;
 
   try
+    // Construindo a URL
     if subcategory = '' then
       URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category
     else
@@ -73,12 +69,12 @@ begin
     RESTRequest.Method := rmGET;
     RESTRequest.Execute;
 
+    // Parse JSON response
     JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
     try
       if (JSONValue is TJSONObject) and (TJSONObject(JSONValue).GetValue('products') <> nil) then
       begin
-        ProductsArray := TJSONObject(JSONValue).GetValue<TJSONArray>('products');
-        Result := ProductsArray.Clone as TJSONArray;
+        Result := TJSONObject(JSONValue).GetValue<TJSONArray>('products').Clone as TJSONArray;
       end;
     finally
       JSONValue.Free;
@@ -89,6 +85,7 @@ begin
     RESTResponse.Free;
   end;
 end;
+
 
 //              Database SQLite Operations
 
@@ -156,8 +153,12 @@ var
 begin
   MemStream := TMemoryStream.Create;
   queryTemp := TFDQuery.Create(nil);
+
+//  image_src := StringReplace(image_src, '?', '', [rfReplaceAll]);
+//  image_src := StringReplace(image_src, '&', '', [rfReplaceAll]);
+
   try
-    queryTemp.Connection := DM_Con.ConnectionSQLite;
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
 
     queryTemp.SQL.Text := 'SELECT image_blob FROM images WHERE image_src = :image_src';
     queryTemp.ParamByName('image_src').AsString := image_src;
@@ -185,17 +186,15 @@ end;
 procedure CreateCardProduct(CardsBox: TScrollBox; ProductsArray: TJSONArray);
 var
   PanelWidth, PanelHeight, Padding, Columns, col, row, i: Integer;
-  Image_url, InputImagePath, OutputImagePath, FileName, Title, Price: string;
+  InputImagePath, OutputImagePath, Title, Price, Image_Src, Url: string;
   Product: TJSONObject;
   Panel: TPanel;
   Image: TImage;
   TitleLabel, PriceLabel: TLabel;
 begin
-  // Caminhos de entrada e saída para as imagens
   InputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\input_image_path';
   OutputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\output_image_path';
 
-  // Define as dimensões dos painéis e o layout
   PanelWidth := 245;
   PanelHeight := 350;
   Padding := 25;
@@ -209,7 +208,8 @@ begin
     Product := ProductsArray.Items[i] as TJSONObject;
     Title := Product.GetValue<string>('title');
     Price := Product.GetValue<string>('price');
-    Image_url := Product.GetValue<string>('image_src');
+    Image_Src := Product.GetValue<string>('image_src');
+    Url := Product.GetValue<string>('url');
 
     col := i mod Columns;
     row := i div Columns;
@@ -244,19 +244,8 @@ begin
     TitleLabel.Align := alClient;
 
     Image := TImage.Create(Panel);
-    FileName := extractUrl(Image_url);
 
-    if VerifyImgSrc(image_url) then
-    begin
-      LoadImage(image_url, Image);
-    end
-    else
-    begin
-      DownloadImageFromURL(Image_url, InputImagePath, FileName);
-      RunResizeImgPy;
-      InsertImg(Image_url, OutputImagePath + '\' + FileName + '.png');
-      LoadImage(Image_url, Image);
-    end;
+    //LoadImage(Image_Src, Image);
 
     Image.AlignWithMargins := True;
     Image.Height := 250;
@@ -807,70 +796,7 @@ end;
 
 procedure HideScrollbars(ScrollBox: TScrollBox);
 begin
-  ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
-end;
-
-procedure DownloadImageFromURL(const URL, SaveDirectory: string; FileName: string);
-var
-  IdHTTP: TIdHTTP;
-  SSLHandler: TIdSSLIOHandlerSocketOpenSSL;
-  MemoryStream: TMemoryStream;
-  SavePath: string;
-begin
-  IdHTTP := TIdHTTP.Create(nil);
-  SSLHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
-  MemoryStream := TMemoryStream.Create;
-  try
-    IdHTTP.IOHandler := SSLHandler;
-    SSLHandler.SSLOptions.Method := sslvTLSv1_2;
-    SSLHandler.SSLOptions.VerifyMode := [];
-    SSLHandler.SSLOptions.VerifyDepth := 0;
-
-    IdHTTP.Request.UserAgent := 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36';
-    IdHTTP.Request.Referer := URL;
-
-    IdHTTP.Get(URL, MemoryStream);
-
-    SavePath := IncludeTrailingPathDelimiter(SaveDirectory) + FileName + '.png';
-
-    MemoryStream.Position := 0;
-    MemoryStream.SaveToFile(SavePath);
-  finally
-    MemoryStream.Free;
-    SSLHandler.Free;
-    IdHTTP.Free;
-  end;
-
-end;
-
-//                  Python
-
-procedure InitializePython;
-begin
-  PythonEngine := TPythonEngine.Create(nil);
-  try
-    PythonEngine.DllName := 'python312.dll';  // Verifique se a DLL está no caminho correto
-    PythonEngine.LoadDll;  // Carrega a DLL do Python
-  except
-    on E: Exception do
-      ShowMessage('Erro ao inicializar o Python: ' + E.Message);
-  end;
-end;
-
-procedure RunResizeImgPy;
-var
-  FilePy: string;
-begin
-  FilePy := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\resizeimage.py';
-  try
-    if not Assigned(PythonEngine) then
-      InitializePython;  // Inicializa apenas se ainda não estiver inicializado
-
-    PythonEngine.ExecFile(FilePy);
-  except
-    on E: Exception do
-      ShowMessage('Erro ao executar o script: ' + E.Message);
-  end;
+ // ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
 end;
 
 end.

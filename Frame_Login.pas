@@ -5,8 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Buttons, Vcl.Imaging.pngimage, Vcl.ButtonStylesAttributes, Global_Functions,
-  Vcl.StyledButton;
+  Vcl.Buttons, Vcl.Imaging.pngimage, Global_Functions,
+  Vcl.StyledButton, Vcl.ButtonStylesAttributes;
 
 type
   TAceSignIn = class(TFrame)

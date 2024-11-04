@@ -144,7 +144,6 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            ExplicitTop = 48
           end
         end
         object BrandPanel: TPanel
@@ -177,7 +176,8 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             Layout = tlBottom
-            ExplicitHeight = 30
+            ExplicitWidth = 87
+            ExplicitHeight = 33
           end
           object BrandsCombobox: TComboBox
             AlignWithMargins = True
@@ -195,7 +195,6 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            ExplicitTop = 56
           end
         end
         object MaxPricePanel: TPanel
@@ -213,7 +212,6 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 2
-          ExplicitLeft = 693
           object Label6: TLabel
             AlignWithMargins = True
             Left = 3
@@ -264,7 +262,6 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 3
-          ExplicitLeft = 851
           object Label5: TLabel
             AlignWithMargins = True
             Left = 3
@@ -349,7 +346,6 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            ExplicitTop = 48
           end
         end
         object Panel4: TPanel
@@ -376,8 +372,6 @@ object Supplements: TSupplements
             Caption = 'Button1'
             TabOrder = 0
             OnClick = Button1Click
-            ExplicitTop = 24
-            ExplicitHeight = 62
           end
         end
         object Panel5: TPanel
@@ -395,7 +389,6 @@ object Supplements: TSupplements
           Color = 1184274
           ParentBackground = False
           TabOrder = 6
-          ExplicitLeft = 736
           object Label7: TLabel
             AlignWithMargins = True
             Left = 3
@@ -455,10 +448,10 @@ object Supplements: TSupplements
           Height = 629
           HorzScrollBar.ButtonSize = 10
           HorzScrollBar.Visible = False
-          VertScrollBar.Color = clNone
+          VertScrollBar.Color = clWhite
           VertScrollBar.ParentColor = False
           VertScrollBar.Smooth = True
-          VertScrollBar.Style = ssFlat
+          VertScrollBar.Tracking = True
           Align = alClient
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -466,9 +459,6 @@ object Supplements: TSupplements
           Color = 1184274
           ParentColor = False
           TabOrder = 0
-          UseWheelForScrolling = True
-          ExplicitLeft = -64
-          ExplicitTop = 88
         end
       end
     end

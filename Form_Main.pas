@@ -6,8 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
   Vcl.ButtonStylesAttributes, Vcl.StyledButton, Vcl.Imaging.jpeg, Vcl.StdCtrls,
-  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, Vcl.ComCtrls,
-  AdvPageControl, Frame_Home, Global_Functions, Frame_Supplements;
+  System.ImageList, Vcl.ImgList, Vcl.Imaging.pngimage, Vcl.ComCtrls, Frame_Home, Global_Functions, Frame_Supplements;
 
 type
   TMain = class(TForm)
@@ -53,18 +52,18 @@ end;
 procedure TMain.SideBarButtonClick(Sender: TObject);
 var
   TargetFrame: TFrame;
-  Frame: TFrame;
+//  Frame: TFrame;
 begin
   if Sender is TStyledButton then
   begin
     // Atualiza o estado do botão
     StatusButton(TStyledButton(Sender));
 
-    for Frame in [Home, Supplements] do
-    begin
-      Frame.Visible := False;
-      Frame.Enabled := False;
-    end;
+//    for Frame in [Home, Supplements] do
+//    begin
+//      Frame.Visible := False;
+//      Frame.Enabled := False;
+//    end;
 
     case TStyledButton(Sender).Tag of
       1: TargetFrame := Home;

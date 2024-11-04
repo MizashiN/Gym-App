@@ -11,8 +11,10 @@ object Main: TMain
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OldCreateOrder = True
   Position = poDesktopCenter
   OnShow = FormShow
+  PixelsPerInch = 96
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
@@ -883,60 +885,44 @@ object Main: TMain
       ParentColor = False
       TabOrder = 0
       inherited Panel1: TPanel
-        StyleElements = [seFont, seClient, seBorder]
         inherited Panel2: TPanel
-          StyleElements = [seFont, seClient, seBorder]
           inherited Panel6: TPanel
-            StyleElements = [seFont, seClient, seBorder]
             inherited Label2: TLabel
-              StyleElements = [seFont, seClient, seBorder]
+              Width = 470
             end
           end
           inherited Panel9: TPanel
-            StyleElements = [seFont, seClient, seBorder]
             inherited Panel7: TPanel
-              StyleElements = [seFont, seClient, seBorder]
               inherited Panel14: TPanel
-                StyleElements = [seFont, seClient, seBorder]
                 inherited Label3: TLabel
-                  StyleElements = [seFont, seClient, seBorder]
+                  Width = 369
                 end
               end
             end
             inherited Panel8: TPanel
-              StyleElements = [seFont, seClient, seBorder]
               inherited Panel10: TPanel
-                StyleElements = [seFont, seClient, seBorder]
                 inherited AuthorLabel: TLabel
-                  StyleElements = [seFont, seClient, seBorder]
+                  Width = 457
                 end
                 inherited QuoteLabel: TLabel
-                  StyleElements = [seFont, seClient, seBorder]
+                  Width = 457
+                  Height = 150
                 end
                 inherited Label1: TLabel
-                  StyleElements = [seFont, seClient, seBorder]
+                  Width = 457
                 end
               end
             end
           end
-          inherited Panel5: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-          end
-        end
-        inherited Panel4: TPanel
-          StyleElements = [seFont, seClient, seBorder]
         end
         inherited Panel3: TPanel
-          StyleElements = [seFont, seClient, seBorder]
           inherited Panel11: TPanel
-            StyleElements = [seFont, seClient, seBorder]
             inherited Image1: TImage
               ExplicitLeft = 8
               ExplicitHeight = 210
             end
           end
           inherited Panel12: TPanel
-            StyleElements = [seFont, seClient, seBorder]
             inherited SignInButton: TStyledButton
               Top = 15
               Height = 74
@@ -947,9 +933,8 @@ object Main: TMain
             end
           end
           inherited Panel13: TPanel
-            StyleElements = [seFont, seClient, seBorder]
             inherited UsernameLabel: TLabel
-              StyleElements = [seFont, seClient, seBorder]
+              Width = 394
             end
           end
         end
@@ -965,83 +950,6 @@ object Main: TMain
       ParentBackground = False
       ParentColor = False
       TabOrder = 1
-      inherited Panel1: TPanel
-        StyleElements = [seFont, seClient, seBorder]
-        inherited Panel2: TPanel
-          StyleElements = [seFont, seClient, seBorder]
-          inherited Panel6: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-            inherited Label2: TLabel
-              StyleElements = [seFont, seClient, seBorder]
-            end
-          end
-          inherited Panel3: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-            inherited SubcategoriesPanel: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              inherited Label4: TLabel
-                StyleElements = [seFont, seClient, seBorder]
-              end
-              inherited SubcategoriesCombobox: TComboBox
-                StyleElements = [seFont, seClient, seBorder]
-                ExplicitTop = 45
-              end
-            end
-            inherited BrandPanel: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              inherited Label1: TLabel
-                StyleElements = [seFont, seClient, seBorder]
-              end
-              inherited BrandsCombobox: TComboBox
-                StyleElements = [seFont, seClient, seBorder]
-              end
-            end
-            inherited MaxPricePanel: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              inherited Label6: TLabel
-                StyleElements = [seFont, seClient, seBorder]
-              end
-              inherited MaxPriceEdit: TEdit
-                StyleElements = [seFont, seClient, seBorder]
-              end
-            end
-            inherited MinPricePanel: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              inherited Label5: TLabel
-                StyleElements = [seFont, seClient, seBorder]
-              end
-              inherited MinPriceEdit: TEdit
-                StyleElements = [seFont, seClient, seBorder]
-              end
-            end
-            inherited CategoryPanel: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              inherited Label3: TLabel
-                StyleElements = [seFont, seClient, seBorder]
-              end
-              inherited CategoriesCombobox: TComboBox
-                StyleElements = [seFont, seClient, seBorder]
-                ExplicitTop = 45
-              end
-            end
-            inherited Panel4: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-            end
-            inherited Panel5: TPanel
-              StyleElements = [seFont, seClient, seBorder]
-              inherited Label7: TLabel
-                StyleElements = [seFont, seClient, seBorder]
-              end
-              inherited TypesCombobox: TComboBox
-                StyleElements = [seFont, seClient, seBorder]
-              end
-            end
-          end
-          inherited CardsPanel: TPanel
-            StyleElements = [seFont, seClient, seBorder]
-          end
-        end
-      end
     end
   end
 end

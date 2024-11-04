@@ -1,4 +1,5 @@
 object DM_Con: TDM_Con
+  OldCreateOrder = True
   Height = 256
   Width = 393
   object ConnectionMySQL: TFDConnection
@@ -21,9 +22,7 @@ object DM_Con: TDM_Con
   end
   object ConnectionSQLite: TFDConnection
     Params.Strings = (
-      
-        'Database=C:\Users\Parafal\Documents\GitHub\Gym-App\Win64\Debug\D' +
-        'atabase-SQLite\database.db'
+      'Database=C:\GitHub\Gym-App\Win64\Debug\GymApp-API\database.db'
       'DriverID=SQLite')
     LoginPrompt = False
     Transaction = TransactionSQLite

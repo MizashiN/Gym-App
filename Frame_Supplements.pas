@@ -4,10 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  AdvCombo, AdvDBComboBox, AdvDBLookupComboBox, Vcl.DBCtrls, System.ImageList,
-  Vcl.ImgList,System.JSON, REST.Client, REST.Types, Global_Functions,
-  PythonEngine;
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.DBCtrls, System.ImageList,
+  Vcl.ImgList,System.JSON, REST.Client, REST.Types, Global_Functions;
 
 type
   TSupplements = class(TFrame)
