@@ -136,6 +136,8 @@ object Supplements: TSupplements
             Height = 38
             Align = alBottom
             AutoCloseUp = True
+            BevelInner = bvNone
+            BevelOuter = bvNone
             Style = csDropDownList
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -195,6 +197,7 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ExplicitTop = 48
           end
         end
         object MaxPricePanel: TPanel
@@ -338,6 +341,8 @@ object Supplements: TSupplements
             Height = 38
             Align = alBottom
             AutoCloseUp = True
+            BevelInner = bvNone
+            BevelOuter = bvNone
             Style = csDropDownList
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -415,6 +420,8 @@ object Supplements: TSupplements
             Height = 38
             Align = alBottom
             AutoCloseUp = True
+            BevelInner = bvNone
+            BevelOuter = bvNone
             Style = csDropDownList
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -459,6 +466,7 @@ object Supplements: TSupplements
           Color = 1184274
           ParentColor = False
           TabOrder = 0
+          UseWheelForScrolling = True
         end
       end
     end

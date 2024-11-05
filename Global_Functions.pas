@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.RegularExpressions, System.Hash, Vcl.Dialogs, Vcl.StdCtrls,FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, Vcl.Graphics, Vcl.ExtCtrls, System.Generics.Collections,
-  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.DApt,Vcl.Controls, Vcl.Forms,Vcl.DBCtrls,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.DApt,Vcl.Controls, Vcl.Forms,Vcl.DBCtrls, ShellAPI,
   Data.DB, FireDAC.Comp.Client,FireDAC.Stan.Param, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, DM_Connection,System.IOUtils,IdCoderMIME,
   Winapi.Windows, System.JSON, REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope, System.Classes,  System.NetEncoding,
   IdHTTP, IdSSL, IdSSLOpenSSL, System.Net.HttpClient, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Winapi.GDIPAPI, Winapi.GDIPOBJ;
@@ -38,6 +38,7 @@ procedure InsertImg(image_src, FilePath: string);
 procedure LoadImage(image_src: string; Image: TImage);
 procedure SelectBrands(ComboBox: TComboBox);
 procedure SelectCategories(Combobox: TComboBox);
+procedure OpenURLOnClick(Sender: TObject);
 
 implementation
 
@@ -64,6 +65,7 @@ begin
       URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category + '&subcategory=' + subcategory;
 
     RESTClient.BaseURL := URL;
+    RESTClient.ReadTimeout := 60000000;
     RESTRequest.Client := RESTClient;
     RESTRequest.Response := RESTResponse;
     RESTRequest.Method := rmGET;
@@ -158,7 +160,7 @@ begin
 //  image_src := StringReplace(image_src, '&', '', [rfReplaceAll]);
 
   try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
+    queryTemp.Connection := DM_Con.ConnectionSQLite;
 
     queryTemp.SQL.Text := 'SELECT image_blob FROM images WHERE image_src = :image_src';
     queryTemp.ParamByName('image_src').AsString := image_src;
@@ -209,12 +211,15 @@ begin
     Title := Product.GetValue<string>('title');
     Price := Product.GetValue<string>('price');
     Image_Src := Product.GetValue<string>('image_src');
-    Url := Product.GetValue<string>('url');
+    URL := Product.GetValue<string>('url');
 
     col := i mod Columns;
     row := i div Columns;
 
     Panel := TPanel.Create(CardsBox);
+
+
+
     Panel.Parent := CardsBox;
     Panel.Width := PanelWidth;
     Panel.Height := PanelHeight;
@@ -222,6 +227,24 @@ begin
     Panel.Top := row * (PanelHeight + Padding);
     Panel.BevelOuter := bvNone;
     Panel.Color := clBlack;
+
+    Panel.Tag := NativeInt(StrNew(PChar(URL)));
+    Panel.OnClick := OpenURLOnClick;
+
+    Image := TImage.Create(Panel);
+
+    Image.AlignWithMargins := True;
+    Image.Height := 250;
+    Image.Width := 250;
+    Image.Margins.Top := 3;
+    Image.Margins.Bottom := 3;
+    Image.Margins.Left := 3;
+    Image.Margins.Right := 3;
+    Image.Parent := Panel;
+    Image.Align := alTop;
+    Image.Center := True;
+    Image.Proportional := True;
+
 
     if i = 6 then
     begin
@@ -243,21 +266,7 @@ begin
     TitleLabel.Alignment := taCenter;
     TitleLabel.Align := alClient;
 
-    Image := TImage.Create(Panel);
 
-    //LoadImage(Image_Src, Image);
-
-    Image.AlignWithMargins := True;
-    Image.Height := 250;
-    Image.Width := 250;
-    Image.Margins.Top := 3;
-    Image.Margins.Bottom := 3;
-    Image.Margins.Left := 3;
-    Image.Margins.Right := 3;
-    Image.Parent := Panel;
-    Image.Align := alTop;
-    Image.Center := True;
-    Image.Proportional := True;
 
     PriceLabel := TLabel.Create(Panel);
     PriceLabel.AlignWithMargins := True;
@@ -272,6 +281,9 @@ begin
     PriceLabel.Font.Color := clLime;
     PriceLabel.Alignment := taCenter;
     PriceLabel.Align := alBottom;
+
+
+    LoadImage(Image_Src, Image);
   end;
 
 end;
@@ -797,6 +809,14 @@ end;
 procedure HideScrollbars(ScrollBox: TScrollBox);
 begin
  // ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
+end;
+
+procedure TGlobalFunctions.OpenURLOnClick(Sender: TObject);
+var
+  URL: string;
+begin
+  URL := PChar(TPanel(Sender).Tag);  // Recupera a URL armazenada no Tag
+  ShellExecute(0, 'open', PChar(URL), nil, nil, SW_SHOWNORMAL);
 end;
 
 end.

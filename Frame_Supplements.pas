@@ -31,12 +31,12 @@ type
     CardsBox: TScrollBox;
     Panel4: TPanel;
     Button1: TButton;
-    BrandsCombobox: TComboBox;
     CategoriesCombobox: TComboBox;
     SubcategoriesCombobox: TComboBox;
     Panel5: TPanel;
     Label7: TLabel;
     TypesCombobox: TComboBox;
+    BrandsCombobox: TComboBox;
     procedure GetProducts;
     procedure Button1Click(Sender: TObject);
   private
