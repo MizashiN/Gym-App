@@ -124,7 +124,7 @@ var
 begin
  if not FileExists(FilePath) then
   begin
-    ShowMessage('Arquivo de imagem não encontrado.');
+    ShowMessage('Arquivo de imagem nÃ£o encontrado.');
     Exit;
   end;
 
@@ -160,7 +160,7 @@ begin
 //  image_src := StringReplace(image_src, '&', '', [rfReplaceAll]);
 
   try
-    queryTemp.Connection := DM_Con.ConnectionSQLite;
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
 
     queryTemp.SQL.Text := 'SELECT image_blob FROM images WHERE image_src = :image_src';
     queryTemp.ParamByName('image_src').AsString := image_src;
@@ -176,7 +176,7 @@ begin
       Image.Picture.LoadFromStream(MemStream);
     end
     else
-      ShowMessage('Imagem não encontrada.');
+      ShowMessage('Imagem nÃ£o encontrada.');
   finally
     MemStream.Free;
     queryTemp.Free;
@@ -800,7 +800,7 @@ begin
   var LastSlashPos := LastDelimiter('/', OriginalString);
   var LastDotPos := LastDelimiter('.', OriginalString);
 
-  // Extraímos a substring entre a última barra e o último ponto.
+  // ExtraÃ­mos a substring entre a Ãºltima barra e o Ãºltimo ponto.
   ExtractedString := Copy(OriginalString, LastSlashPos + 1, LastDotPos - LastSlashPos - 1);
 
   Result := ExtractedString;
@@ -815,7 +815,7 @@ procedure TGlobal_Functions.OpenURLOnClick(Sender: TObject);
 var
   URL: string;
 begin
-  // Recupera a URL armazenada no Tag usando NativeInt para conversão
+  // Recupera a URL armazenada no Tag usando NativeInt para conversÃ£o
   URL := PChar(TPanel(Sender).Tag);
   ShellExecute(0, 'open', PChar(URL), nil, nil, SW_SHOWNORMAL);
 end;
