@@ -38,7 +38,7 @@ procedure InsertImg(image_src, FilePath: string);
 procedure LoadImage(image_src: string; Image: TImage);
 procedure SelectBrands(ComboBox: TComboBox);
 procedure SelectCategories(Combobox: TComboBox);
-procedure OpenURL(Sender: TObject);
+procedure OpenURLOnClick(Sender: TObject);
 
 implementation
 
@@ -228,10 +228,8 @@ begin
     Panel.BevelOuter := bvNone;
     Panel.Color := clBlack;
 
-    Panel.OnClick := procedure(Sender: TObject)
-    begin
-      ShellExecute(0, 'open', PChar(URL), nil, nil, SW_SHOWNORMAL);
-    end;
+    Panel.Tag := NativeInt(StrNew(PChar(URL)));
+    Panel.OnClick := OpenURLOnClick;
 
     Image := TImage.Create(Panel);
 
@@ -813,15 +811,12 @@ begin
  // ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
 end;
 
-procedure OpenURL(Sender: TObject);
+procedure TGlobalFunctions.OpenURLOnClick(Sender: TObject);
 var
   URL: string;
 begin
-  if Sender is TPanel then
-    URL := TPanel(Sender).Hint; // Armazena a URL no Hint do painel
-
-  if URL <> '' then
-    ShellExecute(0, 'open', PChar(URL), nil, nil, SW_SHOWNORMAL);
+  URL := PChar(TPanel(Sender).Tag);  // Recupera a URL armazenada no Tag
+  ShellExecute(0, 'open', PChar(URL), nil, nil, SW_SHOWNORMAL);
 end;
 
 end.

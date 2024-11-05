@@ -811,11 +811,12 @@ begin
  // ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
 end;
 
-procedure TGlobalFunctions.OpenURLOnClick(Sender: TObject);
+procedure TGlobal_Functions.OpenURLOnClick(Sender: TObject);
 var
   URL: string;
 begin
-  URL := PChar(TPanel(Sender).Tag);  // Recupera a URL armazenada no Tag
+  // Recupera a URL armazenada no Tag usando NativeInt para conversão
+  URL := PChar(TPanel(Sender).Tag);
   ShellExecute(0, 'open', PChar(URL), nil, nil, SW_SHOWNORMAL);
 end;
 
