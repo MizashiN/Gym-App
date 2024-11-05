@@ -1,4 +1,4 @@
-unit Global_Functions;
+﻿unit Global_Functions;
 
 interface
 
@@ -27,18 +27,16 @@ function CheckMatchAnswers(answerEdit, answerConfirmEdit: TEdit): Boolean;
 function GetUserID(nameUser: TEdit): integer;
 function GetUserName(id_user: integer): string;
 function APISupp(brand, category, subcategory: string): TJSONArray;
-function extractUrl(ImageUrl: string):string;
-function FileExistsInFolder(const Folder, FileName: string): Boolean;
-function VerifyImgSrc(image_src: string): Boolean;
+function GetCategoryID(Combobox: TComboBox): integer;
+function GetSubcategoryID(Combobox: TComboBox): integer;
 procedure GetImageUser(id_user: integer; Image: TImage);
 procedure InsertImageUser(id_user: integer);
-procedure CreateCardProduct(CardsBox: TScrollBox; ProductsArray: TJSONArray);
 procedure HideScrollbars(ScrollBox: TScrollBox);
-procedure InsertImg(image_src, FilePath: string);
 procedure LoadImage(image_src: string; Image: TImage);
 procedure SelectBrands(ComboBox: TComboBox);
 procedure SelectCategories(Combobox: TComboBox);
-procedure OpenURLOnClick(Sender: TObject);
+procedure SelectSubcategories(Combobox: TComboBox; id_category: integer);
+procedure CheckConnection;
 
 implementation
 
@@ -65,7 +63,6 @@ begin
       URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category + '&subcategory=' + subcategory;
 
     RESTClient.BaseURL := URL;
-    RESTClient.ReadTimeout := 60000000;
     RESTRequest.Client := RESTClient;
     RESTRequest.Response := RESTResponse;
     RESTRequest.Method := rmGET;
@@ -88,63 +85,21 @@ begin
   end;
 end;
 
+//         Database MySQL Operations
 
-//              Database SQLite Operations
-
-function VerifyImgSrc(image_src: string): Boolean;
-var
-  queryTemp: TFDQuery;
+procedure CheckConnection;
 begin
-  queryTemp := TFDQuery.Create(nil);
-  Result := False;
-  try
-    queryTemp.Connection := DM_Con.ConnectionSQLite;
-
-    queryTemp.SQL.Text := 'SELECT image_src FROM images WHERE image_src = :image_src';
-    queryTemp.ParamByName('image_src').AsString := image_src;
-    queryTemp.Open;
-
-    if not queryTemp.IsEmpty then
-    begin
-      Result := True;
-    end;
+  // Verifica se a conexão está ativa
+  if not DM_Con.ConnectionMySQL.Connected then
+  begin
+    try
+      DM_Con.ConnectionMySQL.Connected := True; // Conecta, se não estiver conectado
     except
       on E: Exception do
       begin
-      ShowMessage('Erro: ' + E.Message);
+        ShowMessage('Erro ao conectar ao banco de dados: ' + E.Message);
       end;
-  end;
-  queryTemp.Free;
-end;
-
-procedure InsertImg(image_src, FilePath: string);
-var
-  queryTemp: TFDQuery;
-  MemStream: TMemoryStream;
-begin
- if not FileExists(FilePath) then
-  begin
-    ShowMessage('Arquivo de imagem não encontrado.');
-    Exit;
-  end;
-
-  queryTemp := TFDQuery.Create(nil);
-  MemStream := TMemoryStream.Create;
-  try
-
-    MemStream.LoadFromFile(FilePath);
-
-    queryTemp.Connection := DM_Con.ConnectionSQLite;
-
-    queryTemp.SQL.Text := 'INSERT INTO images (image_src, image_blob) VALUES (:image_src, :image_blob)';
-    queryTemp.ParamByName('image_src').AsString := image_src;
-
-    MemStream.Position := 0;
-    queryTemp.ParamByName('image_blob').LoadFromStream(MemStream, ftBlob);
-
-    queryTemp.ExecSQL;
-  finally
-    MemStream.Free;
+    end;
   end;
 end;
 
@@ -161,6 +116,8 @@ begin
 
   try
     queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
 
     queryTemp.SQL.Text := 'SELECT image_blob FROM images WHERE image_src = :image_src';
     queryTemp.ParamByName('image_src').AsString := image_src;
@@ -183,112 +140,6 @@ begin
   end;
 end;
 
-//              Design Frames Procedures
-
-procedure CreateCardProduct(CardsBox: TScrollBox; ProductsArray: TJSONArray);
-var
-  PanelWidth, PanelHeight, Padding, Columns, col, row, i: Integer;
-  InputImagePath, OutputImagePath, Title, Price, Image_Src, Url: string;
-  Product: TJSONObject;
-  Panel: TPanel;
-  Image: TImage;
-  TitleLabel, PriceLabel: TLabel;
-begin
-  InputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\input_image_path';
-  OutputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\output_image_path';
-
-  PanelWidth := 245;
-  PanelHeight := 350;
-  Padding := 25;
-  Columns := 5;
-
-  while CardsBox.ControlCount > 0 do
-    CardsBox.Controls[0].Free;
-
-  for i := 0 to ProductsArray.Count - 1 do
-  begin
-    Product := ProductsArray.Items[i] as TJSONObject;
-    Title := Product.GetValue<string>('title');
-    Price := Product.GetValue<string>('price');
-    Image_Src := Product.GetValue<string>('image_src');
-    URL := Product.GetValue<string>('url');
-
-    col := i mod Columns;
-    row := i div Columns;
-
-    Panel := TPanel.Create(CardsBox);
-
-
-
-    Panel.Parent := CardsBox;
-    Panel.Width := PanelWidth;
-    Panel.Height := PanelHeight;
-    Panel.Left := col * (PanelWidth + Padding);
-    Panel.Top := row * (PanelHeight + Padding);
-    Panel.BevelOuter := bvNone;
-    Panel.Color := clBlack;
-
-    Panel.Tag := NativeInt(StrNew(PChar(URL)));
-    Panel.OnClick := OpenURLOnClick;
-
-    Image := TImage.Create(Panel);
-
-    Image.AlignWithMargins := True;
-    Image.Height := 250;
-    Image.Width := 250;
-    Image.Margins.Top := 3;
-    Image.Margins.Bottom := 3;
-    Image.Margins.Left := 3;
-    Image.Margins.Right := 3;
-    Image.Parent := Panel;
-    Image.Align := alTop;
-    Image.Center := True;
-    Image.Proportional := True;
-
-
-    if i = 6 then
-    begin
-      HideScrollbars(CardsBox);
-    end;
-
-    TitleLabel := TLabel.Create(Panel);
-    TitleLabel.AlignWithMargins := True;
-    TitleLabel.Margins.Top := 3;
-    TitleLabel.Margins.Bottom := 3;
-    TitleLabel.Margins.Left := 3;
-    TitleLabel.Margins.Right := 3;
-    TitleLabel.Parent := Panel;
-    TitleLabel.Caption := Title;
-    TitleLabel.Font.Style := [fsBold];
-    TitleLabel.Font.Color := clWhite;
-    TitleLabel.Font.Size := 11;
-    TitleLabel.WordWrap := True;
-    TitleLabel.Alignment := taCenter;
-    TitleLabel.Align := alClient;
-
-
-
-    PriceLabel := TLabel.Create(Panel);
-    PriceLabel.AlignWithMargins := True;
-    PriceLabel.Margins.Top := 3;
-    PriceLabel.Margins.Bottom := 12;
-    PriceLabel.Margins.Left := 3;
-    PriceLabel.Margins.Right := 3;
-    PriceLabel.Parent := Panel;
-    PriceLabel.Caption := Price;
-    PriceLabel.Font.Size := 18;
-    PriceLabel.Font.Style := [fsBold];
-    PriceLabel.Font.Color := clLime;
-    PriceLabel.Alignment := taCenter;
-    PriceLabel.Align := alBottom;
-
-
-    LoadImage(Image_Src, Image);
-  end;
-
-end;
-
-//         Database MySQL Operations
 
 function GetUserName(id_user: integer): string;
 var
@@ -298,6 +149,8 @@ begin
   Result := '';
   try
     queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
 
     queryTemp.SQL.Text := 'SELECT name_user FROM users WHERE id_user = :id_user';
     queryTemp.ParamByName('id_user').AsInteger := id_user;
@@ -322,29 +175,39 @@ begin
 
   queryTemp := TFDQuery.Create(nil);
 
-  queryTemp.Close;
-  queryTemp.SQL.Text := 'SELECT image_user FROM users WHERE id_user = :id_user';
-  queryTemp.ParamByName('id_user').AsInteger := id_user; // Exemplo de ID
-  queryTemp.Open;
+
+  try
+
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
 
 
-  if not queryTemp.FieldByName('image_user').IsNull then
-  begin
-    ImagemStream := TMemoryStream.Create;
-    try
+    queryTemp.Close;
+    queryTemp.SQL.Text := 'SELECT image_user FROM users WHERE id_user = :id_user';
+    queryTemp.ParamByName('id_user').AsInteger := id_user; // Exemplo de ID
+    queryTemp.Open;
 
-      TBlobField(queryTemp.FieldByName('image_user')).SaveToStream(ImagemStream);
+    if not queryTemp.FieldByName('image_user').IsNull then
+    begin
+      ImagemStream := TMemoryStream.Create;
+      try
 
-      ImagemStream.Position := 0;
+        TBlobField(queryTemp.FieldByName('image_user')).SaveToStream(ImagemStream);
+
+        ImagemStream.Position := 0;
 
 
-      Image.Picture.LoadFromStream(ImagemStream);
-    finally
-      ImagemStream.Free;
-    end;
-  end
-  else
-    ShowMessage('Imagem not found');
+        Image.Picture.LoadFromStream(ImagemStream);
+      finally
+        ImagemStream.Free;
+      end;
+    end
+    else
+      ShowMessage('Imagem not found');
+  finally
+    queryTemp.Free;
+  end;
 end;
 
 function CheckIfUserExists(nameUser: TEdit): Boolean;
@@ -355,6 +218,8 @@ begin
   queryTemp := TFDQuery.Create(nil);
   try
     queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
 
     queryTemp.SQL.Text := 'SELECT COUNT(*) AS Count FROM users WHERE name_user = :name_user';
     queryTemp.ParamByName('name_user').AsString := nameUser.Text;
@@ -381,6 +246,8 @@ begin
   Result := 0;
   try
     queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
 
     queryTemp.SQL.Text := 'SELECT id_user FROM users WHERE name_user = :name_user';
     queryTemp.ParamByName('name_user').AsString := nameUser.Text;
@@ -410,6 +277,8 @@ begin
 
   try
     queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
 
     queryTemp.SQL.Text := 'SELECT password_user AS password FROM users WHERE name_user = :name_user';
     queryTemp.ParamByName('name_user').AsString := nameUser.Text;
@@ -441,12 +310,16 @@ begin
   Result := False;
   queryTemp := TFDQuery.Create(nil);
 
+  CheckConnection;
+
   passwordUserEncrypted := Encrypter(passwordUser.Text);
   questionAnswerUserEncrypted := Encrypter(questionAnswerUser.Text);
 
   try
     queryTemp.Connection := DM_Con.ConnectionMySQL;
     queryTemp.Transaction := DM_Con.TransactionMySQL;
+
+    CheckConnection;
 
     DM_Con.ConnectionMySQL.StartTransaction;
     try
@@ -470,6 +343,330 @@ begin
   finally
     queryTemp.Free;
   end;
+end;
+
+
+function LoadQuestion(nameUser: TEdit): string;
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
+
+    queryTemp.SQL.Text := 'SELECT question_user AS question FROM users WHERE name_user = :name_user';
+    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
+    queryTemp.Open;
+
+    if not queryTemp.IsEmpty then
+      begin
+      Result := queryTemp.FieldByName('question').AsString;
+      end;
+    except
+      on E: Exception do
+      begin
+      ShowMessage('Erro: ' + E.Message);
+      end;
+  end;
+  queryTemp.Free;
+end;
+
+function CheckIfAnswerSecurityQuestionIsCorrect(nameUser, answerSecurityQuestionUser: TEdit): Boolean;
+var
+  queryTemp: TFDQuery;
+  answerSecurityQuestionUserEncrypted: string;
+begin
+  Result := False;
+
+  answerSecurityQuestionUserEncrypted := Encrypter(answerSecurityQuestionUser.Text);
+
+  queryTemp := TFDQuery.Create(nil);
+
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
+
+    queryTemp.SQL.Text := 'SELECT question_answer_user AS answer FROM users WHERE name_user = :name_user';
+    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
+    queryTemp.Open;
+
+
+    if not queryTemp.IsEmpty then
+    begin
+      if queryTemp.FieldByName('answer').AsString = answerSecurityQuestionUserEncrypted then
+      begin
+        Result := True;
+      end;
+    end;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+   end;
+  end;
+   queryTemp.Free;
+end;
+
+function UpdatePasswordUser(nameUser, newPasswordUser: TEdit): Boolean;
+var
+  queryTemp: TFDQuery;
+  passwordUserEncrypted: string;
+begin
+  Result := False;
+  queryTemp := TFDQuery.Create(nil);
+
+  passwordUserEncrypted := Encrypter(newPasswordUser.Text);
+
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+    queryTemp.Transaction := DM_Con.TransactionMySQL;
+
+    CheckConnection;
+
+    DM_Con.ConnectionMySQL.StartTransaction;
+    try
+      queryTemp.SQL.Text := 'UPDATE users SET password_user = :password_user WHERE name_user = :name_user';
+      queryTemp.ParamByName('name_user').AsString := nameUser.Text;
+      queryTemp.ParamByName('password_user').AsString := passwordUserEncrypted;
+
+      queryTemp.ExecSQL;
+      DM_Con.ConnectionMySQL.Commit;
+
+      Result := True;
+    except
+      on E: Exception do
+      begin
+        DM_Con.ConnectionMySQL.Rollback;
+        ShowMessage(E.Message);
+      end;
+    end;
+  finally
+    queryTemp.Free;
+  end;
+end;
+
+procedure InsertImageUser(id_user: integer);
+var
+  FileStream:  TFileStream;
+  queryTemp: TFDQuery;
+begin
+   FileStream := nil;
+  queryTemp := TFDQuery.Create(nil);
+
+
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
+
+    queryTemp.Close;
+    queryTemp.SQL.Text := 'INSERT INTO image_user  VALUES :image_user FROM users WHERE id_user = :id_user';
+    queryTemp.ParamByName('id_user').AsInteger := id_user;
+
+    try
+      queryTemp.ParamByName('image_user').LoadFromStream(FileStream, ftBlob);
+    finally
+      FileStream.Free;
+      queryTemp.Free;
+    end;
+  except
+  on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+   end;
+
+  end;
+end;
+
+procedure SelectBrands(ComboBox: TComboBox);
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
+
+    queryTemp.SQL.Text := 'SELECT brand FROM brands';
+    queryTemp.Open;
+
+    ComboBox.Clear;
+
+    while not queryTemp.Eof do
+    begin
+      ComboBox.Items.Add(queryTemp.FieldByName('brand').AsString);
+      queryTemp.Next;
+    end;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+procedure SelectCategories(Combobox: TComboBox);
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
+
+    queryTemp.SQL.Text := 'SELECT category FROM categories';
+    queryTemp.Open;
+
+    ComboBox.Clear;
+
+    while not queryTemp.Eof do
+    begin
+      ComboBox.Items.Add(queryTemp.FieldByName('category').AsString);
+      queryTemp.Next;
+    end;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+procedure SelectSubcategories(Combobox: TComboBox; id_category: integer);
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
+
+    queryTemp.SQL.Text := 'SELECT subcategory FROM subcategories WHERE id_category = (SELECT id_category FROM categories WHERE id_category = :id_category)';
+    queryTemp.ParamByName('id_category').AsInteger := id_category;
+    queryTemp.Open;
+
+    ComboBox.Clear;
+
+    while not queryTemp.Eof do
+    begin
+      ComboBox.Items.Add(queryTemp.FieldByName('subcategory').AsString);
+      queryTemp.Next;
+    end;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+procedure SelectTypes(Combobox: TComboBox; id_subcategory: integer);
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
+
+    queryTemp.SQL.Text := 'SELECT type FROM tyoes WHERE id_type = (SELECT id_subcategory FROM subcategories WHERE id_subcategory = :id_subcategory)';
+    queryTemp.ParamByName('id_subcategory').AsInteger := id_subcategory;
+    queryTemp.Open;
+
+    ComboBox.Clear;
+
+    while not queryTemp.Eof do
+    begin
+      ComboBox.Items.Add(queryTemp.FieldByName('type').AsString);
+      queryTemp.Next;
+    end;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+
+function GetCategoryID(Combobox: TComboBox): integer;
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  Result := 0;
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
+
+    queryTemp.SQL.Text := 'SELECT id_category FROM categories WHERE category = :category';
+    queryTemp.ParamByName('category').AsString := Combobox.Text;
+    queryTemp.Open;
+
+    if not queryTemp.IsEmpty then
+      Result := queryTemp.FieldByName('id_category').AsInteger
+    else
+      ShowMessage('Nenhuma categoria encontrada com o nome: ' + Combobox.Text);
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+function GetSubcategoryID(Combobox: TComboBox): integer;
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  Result := 0;
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
+
+    queryTemp.SQL.Text := 'SELECT id_subcategory FROM subcategories WHERE subcategory = :subcategory';
+    queryTemp.ParamByName('subcategory').AsString := Combobox.Text;
+    queryTemp.Open;
+
+    if not queryTemp.IsEmpty then
+      Result := queryTemp.FieldByName('id_subcategory').AsInteger
+    else
+      ShowMessage('Nenhuma categoria encontrada com o nome: ' + Combobox.Text);
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+
+//                  Others
+
+function Encrypter(const passwordUser: string): string;
+begin
+  Result := THashSHA2.GetHashString(passwordUser);
+end;
+
+procedure HideScrollbars(ScrollBox: TScrollBox);
+begin
+ // ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
 end;
 
 function CheckMatchPasswords(passwordEdit, passwordConfirmEdit: TEdit): Boolean;
@@ -563,261 +760,6 @@ begin
     end;
 end;
 
-function LoadQuestion(nameUser: TEdit): string;
-var
-  queryTemp: TFDQuery;
-begin
-  queryTemp := TFDQuery.Create(nil);
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
 
-    queryTemp.SQL.Text := 'SELECT question_user AS question FROM users WHERE name_user = :name_user';
-    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
-    queryTemp.Open;
-
-    if not queryTemp.IsEmpty then
-      begin
-      Result := queryTemp.FieldByName('question').AsString;
-      end;
-    except
-      on E: Exception do
-      begin
-      ShowMessage('Erro: ' + E.Message);
-      end;
-  end;
-  queryTemp.Free;
-end;
-
-function CheckIfAnswerSecurityQuestionIsCorrect(nameUser, answerSecurityQuestionUser: TEdit): Boolean;
-var
-  queryTemp: TFDQuery;
-  answerSecurityQuestionUserEncrypted: string;
-begin
-  Result := False;
-
-  answerSecurityQuestionUserEncrypted := Encrypter(answerSecurityQuestionUser.Text);
-
-  queryTemp := TFDQuery.Create(nil);
-
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    queryTemp.SQL.Text := 'SELECT question_answer_user AS answer FROM users WHERE name_user = :name_user';
-    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
-    queryTemp.Open;
-
-
-    if not queryTemp.IsEmpty then
-    begin
-      if queryTemp.FieldByName('answer').AsString = answerSecurityQuestionUserEncrypted then
-      begin
-        Result := True;
-      end;
-    end;
-  except
-    on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-   end;
-  end;
-   queryTemp.Free;
-end;
-
-function UpdatePasswordUser(nameUser, newPasswordUser: TEdit): Boolean;
-var
-  queryTemp: TFDQuery;
-  passwordUserEncrypted: string;
-begin
-  Result := False;
-  queryTemp := TFDQuery.Create(nil);
-
-  passwordUserEncrypted := Encrypter(newPasswordUser.Text);
-
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-    queryTemp.Transaction := DM_Con.TransactionMySQL;
-
-    DM_Con.ConnectionMySQL.StartTransaction;
-    try
-      queryTemp.SQL.Text := 'UPDATE users SET password_user = :password_user WHERE name_user = :name_user';
-      queryTemp.ParamByName('name_user').AsString := nameUser.Text;
-      queryTemp.ParamByName('password_user').AsString := passwordUserEncrypted;
-
-      queryTemp.ExecSQL;
-      DM_Con.ConnectionMySQL.Commit;
-
-      Result := True;
-    except
-      on E: Exception do
-      begin
-        DM_Con.ConnectionMySQL.Rollback;
-        ShowMessage(E.Message);
-      end;
-    end;
-  finally
-    queryTemp.Free;
-  end;
-end;
-
-procedure SelectImageExplorer(id_user: integer);
-var
-  OpenDialog: TOpenDialog;
-begin
-  OpenDialog := TOpenDialog.Create(nil);
-  try
-    OpenDialog.Filter := 'Imagens|*.jpg;*.jpeg;*.png;*.bmp;*.gif|Todos os Arquivos|*.*';
-    OpenDialog.Title := 'Selecione uma imagem';
-    OpenDialog.Options := [ofFileMustExist, ofHideReadOnly];
-
-    if OpenDialog.Execute then
-    begin
-      InsertImageUser(id_user);
-    end;
-  finally
-    OpenDialog.Free;
-  end;
-end;
-
-procedure InsertImageUser(id_user: integer);
-var
-  FileStream:  TFileStream;
-  queryTemp: TFDQuery;
-begin
-   FileStream := nil;
-  queryTemp := TFDQuery.Create(nil);
-
-  queryTemp.Close;
-  queryTemp.SQL.Text := 'INSERT INTO image_user  VALUES :image_user FROM users WHERE id_user = :id_user';
-  queryTemp.ParamByName('id_user').AsInteger := id_user;
-
-
-  try
-    try
-      queryTemp.ParamByName('image_user').LoadFromStream(FileStream, ftBlob);
-    finally
-      FileStream.Free;
-      queryTemp.Free;
-    end;
-  except
-  on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-   end;
-
-  end;
-end;
-
-procedure SelectBrands(ComboBox: TComboBox);
-var
-  queryTemp: TFDQuery;
-begin
-  queryTemp := TFDQuery.Create(nil);
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    queryTemp.SQL.Text := 'SELECT brand FROM brands';
-    queryTemp.Open;
-
-    ComboBox.Clear;
-
-    while not queryTemp.Eof do
-    begin
-      ComboBox.Items.Add(queryTemp.FieldByName('brand').AsString);
-      queryTemp.Next;
-    end;
-  except
-    on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-    end;
-  end;
-  queryTemp.Free;
-end;
-
-procedure SelectCategories(Combobox: TComboBox);
-var
-  queryTemp: TFDQuery;
-begin
-  queryTemp := TFDQuery.Create(nil);
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    queryTemp.SQL.Text := 'SELECT category FROM categories';
-    queryTemp.Open;
-
-    ComboBox.Clear;
-
-    while not queryTemp.Eof do
-    begin
-      ComboBox.Items.Add(queryTemp.FieldByName('category').AsString);
-      queryTemp.Next;
-    end;
-  except
-    on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-    end;
-  end;
-  queryTemp.Free;
-end;
-
-procedure SelectSubcategories(Combobox: TComboBox; id_category: integer);
-begin
-
-end;
-
-procedure SelectTypes(Combobox: TDBCombobox; id_subcategory: integer);
-begin
-
-end;
-
-
-//                  Others
-
-function FileExistsInFolder(const Folder, FileName: string): Boolean;
-var
-  FullPath: string;
-begin
-  FullPath := IncludeTrailingPathDelimiter(Folder) + FileName + '.png';
-  // Verifica se o arquivo existe
-  Result := FileExists(FullPath);
-end;
-
-function Encrypter(const passwordUser: string): string;
-begin
-  Result := THashSHA2.GetHashString(passwordUser);
-end;
-
-function extractUrl(ImageUrl: string): string;
-var
-  OriginalString: string;
-  ExtractedString: string;
-begin
-
-  Result := '';
-  OriginalString := ImageUrl;
-
-  var LastSlashPos := LastDelimiter('/', OriginalString);
-  var LastDotPos := LastDelimiter('.', OriginalString);
-
-  // Extraímos a substring entre a última barra e o último ponto.
-  ExtractedString := Copy(OriginalString, LastSlashPos + 1, LastDotPos - LastSlashPos - 1);
-
-  Result := ExtractedString;
-end;
-
-procedure HideScrollbars(ScrollBox: TScrollBox);
-begin
- // ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
-end;
-
-procedure TGlobal_Functions.OpenURLOnClick(Sender: TObject);
-var
-  URL: string;
-begin
-  // Recupera a URL armazenada no Tag usando NativeInt para conversão
-  URL := PChar(TPanel(Sender).Tag);
-  ShellExecute(0, 'open', PChar(URL), nil, nil, SW_SHOWNORMAL);
-end;
 
 end.

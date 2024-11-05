@@ -52,18 +52,18 @@ end;
 procedure TMain.SideBarButtonClick(Sender: TObject);
 var
   TargetFrame: TFrame;
-  Frame: TFrame;
+//  Frame: TFrame;
 begin
   if Sender is TStyledButton then
   begin
     // Atualiza o estado do botão
     StatusButton(TStyledButton(Sender));
 
-    for Frame in [Home, Supplements] do
-    begin
-      Frame.Visible := False;
-      Frame.Enabled := False;
-    end;
+//    for Frame in [Home, Supplements] do
+//    begin
+//      Frame.Visible := False;
+//      Frame.Enabled := False;
+//    end;
 
     case TStyledButton(Sender).Tag of
       1: TargetFrame := Home;
@@ -105,7 +105,6 @@ begin
     if TargetFrame = Supplements then
     begin
       SelectBrands(Supplements.BrandsCombobox);
-      SelectCategories(Supplements.CategoriesCombobox);
     end;
 
     Exit; // Se já estiver ativo, sai do método
