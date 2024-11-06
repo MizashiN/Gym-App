@@ -132,7 +132,7 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <UWP_DelphiLogo44>GymApp.Artwork\Windows\Uwp_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>GymApp.Artwork\Windows\Uwp_150.png</UWP_DelphiLogo150>
-        <Icon_MainIcon>GymApp_Icon22.ico</Icon_MainIcon>
+        <Icon_MainIcon>GymApp.Artwork\Windows\AppIcon.ico</Icon_MainIcon>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
