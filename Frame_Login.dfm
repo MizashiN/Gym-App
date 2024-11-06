@@ -552,7 +552,7 @@ object AceSignIn: TAceSignIn
       object Label1: TLabel
         Left = 0
         Top = 220
-        Width = 475
+        Width = 300
         Height = 92
         Align = alTop
         Alignment = taCenter
@@ -564,7 +564,6 @@ object AceSignIn: TAceSignIn
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 300
       end
       object Panel3: TPanel
         AlignWithMargins = True
@@ -586,7 +585,7 @@ object AceSignIn: TAceSignIn
           AlignWithMargins = True
           Left = 3
           Top = 138
-          Width = 379
+          Width = 144
           Height = 42
           Margins.Top = 10
           Margins.Bottom = 0
@@ -599,13 +598,12 @@ object AceSignIn: TAceSignIn
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 144
         end
         object Label3: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 379
+          Width = 154
           Height = 42
           Margins.Bottom = 0
           Align = alTop
@@ -617,13 +615,12 @@ object AceSignIn: TAceSignIn
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitWidth = 154
         end
         object DontHaveAccountSignUpButton: TLabel
           AlignWithMargins = True
-          Left = 0
+          Left = 94
           Top = 354
-          Width = 380
+          Width = 286
           Height = 26
           Cursor = crHandPoint
           Margins.Left = 0
@@ -641,14 +638,12 @@ object AceSignIn: TAceSignIn
           ParentFont = False
           OnMouseEnter = DontHaveAccountSignUpButtonMouseEnter
           OnMouseLeave = DontHaveAccountSignUpButtonMouseLeave
-          ExplicitLeft = 94
-          ExplicitWidth = 286
         end
         object UserPassWarningLabel: TLabel
           AlignWithMargins = True
-          Left = 0
+          Left = 189
           Top = 108
-          Width = 380
+          Width = 191
           Height = 20
           Margins.Left = 0
           Margins.Top = 0
@@ -664,14 +659,12 @@ object AceSignIn: TAceSignIn
           Font.Style = []
           ParentFont = False
           Visible = False
-          ExplicitLeft = 189
-          ExplicitWidth = 191
         end
         object ForgetPasswordButtonLabel: TLabel
           AlignWithMargins = True
-          Left = 0
+          Left = 221
           Top = 243
-          Width = 380
+          Width = 159
           Height = 20
           Cursor = crHandPoint
           Margins.Left = 0
@@ -690,8 +683,6 @@ object AceSignIn: TAceSignIn
           Layout = tlCenter
           OnMouseEnter = ForgetPasswordButtonLabelMouseEnter
           OnMouseLeave = ForgetPasswordButtonLabelMouseLeave
-          ExplicitLeft = 221
-          ExplicitWidth = 159
         end
         object Panel5: TPanel
           Left = 0

@@ -11,36 +11,54 @@ uses
   IdHTTP, IdSSL, IdSSLOpenSSL, System.Net.HttpClient, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Winapi.GDIPAPI, Winapi.GDIPOBJ;
 
 
-function CheckIfUserExists(nameUser: TEdit): Boolean;
-function CheckIfUserAndPasswordIsCorrect(nameUser, passwordUser: TEdit): Boolean;
-function SignUpUser(nameUser, passwordUser, questionUser, questionAnswerUser: TEdit): Boolean;
-function Encrypter(const passwordUser: string): string;
-function CheckPasswordCharacters(passwordConfirmEdit: TEdit): Boolean;
-function CheckUserCharacters(userEdit: TEdit): Boolean;
-function CheckAnswerCharacters(answerConfirmEdit: TEdit): Boolean;
-function CheckQuestionCharacters(questionEdit: TEdit): Boolean;
-function LoadQuestion(nameUser: TEdit): string;
-function CheckIfAnswerSecurityQuestionIsCorrect(nameUser, answerSecurityQuestionUser: TEdit): Boolean;
-function UpdatePasswordUser(nameUser, newPasswordUser: TEdit): Boolean;
-function CheckMatchPasswords(passwordEdit, passwordConfirmEdit: TEdit): Boolean;
-function CheckMatchAnswers(answerEdit, answerConfirmEdit: TEdit): Boolean;
-function GetUserID(nameUser: TEdit): integer;
-function GetUserName(id_user: integer): string;
 function APISupp(brand, category, subcategory: string): TJSONArray;
 function GetCategoryID(Combobox: TComboBox): integer;
 function GetSubcategoryID(Combobox: TComboBox): integer;
-procedure GetImageUser(id_user: integer; Image: TImage);
-procedure InsertImageUser(id_user: integer);
-procedure HideScrollbars(ScrollBox: TScrollBox);
 procedure LoadImage(image_src: string; Image: TImage);
 procedure SelectBrands(ComboBox: TComboBox);
 procedure SelectCategories(Combobox: TComboBox);
 procedure SelectSubcategories(Combobox: TComboBox; id_category: integer);
+procedure HideScrollbars(ScrollBox: TScrollBox);
 procedure CheckConnection;
 
 implementation
 
-//              APIs
+procedure LoadImage(image_src: string; Image: TImage);
+var
+  MemStream: TMemoryStream;
+  queryTemp: TFDQuery;
+begin
+  MemStream := TMemoryStream.Create;
+  queryTemp := TFDQuery.Create(nil);
+
+//  image_src := StringReplace(image_src, '?', '', [rfReplaceAll]);
+//  image_src := StringReplace(image_src, '&', '', [rfReplaceAll]);
+
+  try
+    queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
+
+    queryTemp.SQL.Text := 'SELECT image_blob FROM images WHERE image_src = :image_src';
+    queryTemp.ParamByName('image_src').AsString := image_src;
+    queryTemp.Open;
+
+    if not queryTemp.IsEmpty then
+    begin
+      TBlobField(queryTemp.FieldByName('image_blob')).SaveToStream(MemStream);
+
+      MemStream.Position := 0;
+
+      Image.Picture.Graphic := nil;
+      Image.Picture.LoadFromStream(MemStream);
+    end
+    else
+      ShowMessage('Imagem não encontrada.');
+  finally
+    MemStream.Free;
+    queryTemp.Free;
+  end;
+end;
 
 function APISupp(brand, category, subcategory: string): TJSONArray;
 var
@@ -86,7 +104,11 @@ begin
   end;
 end;
 
-//         Database MySQL Operations
+procedure HideScrollbars(ScrollBox: TScrollBox);
+begin
+ ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
+end;
+
 
 procedure CheckConnection;
 begin
@@ -94,7 +116,7 @@ begin
   if not DM_Con.ConnectionMySQL.Connected then
   begin
     try
-      DM_Con.ConnectionMySQL.Connected := True; // Conecta, se não estiver conectado
+      DM_Con.ConnectionMySQL.Connected := True;
     except
       on E: Exception do
       begin
@@ -104,383 +126,7 @@ begin
   end;
 end;
 
-procedure LoadImage(image_src: string; Image: TImage);
-var
-  MemStream: TMemoryStream;
-  queryTemp: TFDQuery;
-begin
-  MemStream := TMemoryStream.Create;
-  queryTemp := TFDQuery.Create(nil);
 
-//  image_src := StringReplace(image_src, '?', '', [rfReplaceAll]);
-//  image_src := StringReplace(image_src, '&', '', [rfReplaceAll]);
-
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    CheckConnection;
-
-    queryTemp.SQL.Text := 'SELECT image_blob FROM images WHERE image_src = :image_src';
-    queryTemp.ParamByName('image_src').AsString := image_src;
-    queryTemp.Open;
-
-    if not queryTemp.IsEmpty then
-    begin
-      TBlobField(queryTemp.FieldByName('image_blob')).SaveToStream(MemStream);
-
-      MemStream.Position := 0;
-
-      Image.Picture.Graphic := nil;
-      Image.Picture.LoadFromStream(MemStream);
-    end
-    else
-      ShowMessage('Imagem não encontrada.');
-  finally
-    MemStream.Free;
-    queryTemp.Free;
-  end;
-end;
-
-
-function GetUserName(id_user: integer): string;
-var
-  queryTemp: TFDQuery;
-begin
-  queryTemp := TFDQuery.Create(nil);
-  Result := '';
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    CheckConnection;
-
-    queryTemp.SQL.Text := 'SELECT name_user FROM users WHERE id_user = :id_user';
-    queryTemp.ParamByName('id_user').AsInteger := id_user;
-    queryTemp.Open;
-
-    Result := queryTemp.FieldByName('name_user').AsString;
-
-    except
-      on E: Exception do
-      begin
-      ShowMessage('Erro: ' + E.Message);
-      end;
-  end;
-  queryTemp.Free;
-end;
-
-procedure GetImageUser(id_user: integer; Image: TImage);
-var
-  ImagemStream: TMemoryStream;
-  queryTemp: TFDQuery;
-begin
-
-  queryTemp := TFDQuery.Create(nil);
-
-
-  try
-
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    CheckConnection;
-
-
-    queryTemp.Close;
-    queryTemp.SQL.Text := 'SELECT image_user FROM users WHERE id_user = :id_user';
-    queryTemp.ParamByName('id_user').AsInteger := id_user; // Exemplo de ID
-    queryTemp.Open;
-
-    if not queryTemp.FieldByName('image_user').IsNull then
-    begin
-      ImagemStream := TMemoryStream.Create;
-      try
-
-        TBlobField(queryTemp.FieldByName('image_user')).SaveToStream(ImagemStream);
-
-        ImagemStream.Position := 0;
-
-
-        Image.Picture.LoadFromStream(ImagemStream);
-      finally
-        ImagemStream.Free;
-      end;
-    end
-    else
-      ShowMessage('Imagem not found');
-  finally
-    queryTemp.Free;
-  end;
-end;
-
-function CheckIfUserExists(nameUser: TEdit): Boolean;
-var
-  queryTemp: TFDQuery;
-begin
-  Result := False;
-  queryTemp := TFDQuery.Create(nil);
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    CheckConnection;
-
-    queryTemp.SQL.Text := 'SELECT COUNT(*) AS Count FROM users WHERE name_user = :name_user';
-    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
-    queryTemp.Open;
-
-    if queryTemp.FieldByName('Count').AsInteger > 0 then
-      begin
-      Result := True;
-      end;
-    except
-      on E: Exception do
-      begin
-      ShowMessage('Erro: ' + E.Message);
-      end;
-  end;
-  queryTemp.Free;
-end;
-
-function GetUserID(nameUser: TEdit): integer;
-var
-  queryTemp: TFDQuery;
-begin
-  queryTemp := TFDQuery.Create(nil);
-  Result := 0;
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    CheckConnection;
-
-    queryTemp.SQL.Text := 'SELECT id_user FROM users WHERE name_user = :name_user';
-    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
-    queryTemp.Open;
-
-    Result := queryTemp.FieldByName('id_user').AsInteger;
-
-    except
-      on E: Exception do
-      begin
-      ShowMessage('Erro: ' + E.Message);
-      end;
-  end;
-  queryTemp.Free;
-end;
-
-function CheckIfUserAndPasswordIsCorrect(nameUser, passwordUser: TEdit): Boolean;
-var
-  queryTemp: TFDQuery;
-  passwordUserEncrypted: string;
-begin
-  Result := False;
-
-  passwordUserEncrypted := Encrypter(passwordUser.Text);
-
-  queryTemp := TFDQuery.Create(nil);
-
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    CheckConnection;
-
-    queryTemp.SQL.Text := 'SELECT password_user AS password FROM users WHERE name_user = :name_user';
-    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
-    queryTemp.Open;
-
-
-    if not queryTemp.IsEmpty then
-    begin
-      if queryTemp.FieldByName('password').AsString = passwordUserEncrypted then
-      begin
-        Result := True;
-      end;
-    end;
-  except
-    on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-   end;
-  end;
-   queryTemp.Free;
-end;
-
-function SignUpUser(nameUser, passwordUser, questionUser, questionAnswerUser: TEdit): Boolean;
-var
-  queryTemp: TFDQuery;
-  passwordUserEncrypted: string;
-  questionAnswerUserEncrypted: string;
-begin
-  Result := False;
-  queryTemp := TFDQuery.Create(nil);
-
-  CheckConnection;
-
-  passwordUserEncrypted := Encrypter(passwordUser.Text);
-  questionAnswerUserEncrypted := Encrypter(questionAnswerUser.Text);
-
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-    queryTemp.Transaction := DM_Con.TransactionMySQL;
-
-    CheckConnection;
-
-    DM_Con.ConnectionMySQL.StartTransaction;
-    try
-      queryTemp.SQL.Text := 'INSERT INTO users (name_user, password_user, question_user, question_answer_user) VALUES (:name_user, :password_user, :question_user, :question_answer_user)';
-      queryTemp.ParamByName('name_user').AsString := nameUser.Text;
-      queryTemp.ParamByName('password_user').AsString := passwordUserEncrypted;
-      queryTemp.ParamByName('question_user').AsString := questionUser.Text;
-      queryTemp.ParamByName('question_answer_user').AsString := questionAnswerUserEncrypted;
-
-      queryTemp.ExecSQL;
-      DM_Con.ConnectionMySQL.Commit;
-
-      Result := True;
-    except
-      on E: Exception do
-      begin
-        DM_Con.ConnectionMySQL.Rollback;
-        ShowMessage(E.Message);
-      end;
-    end;
-  finally
-    queryTemp.Free;
-  end;
-end;
-
-
-function LoadQuestion(nameUser: TEdit): string;
-var
-  queryTemp: TFDQuery;
-begin
-  queryTemp := TFDQuery.Create(nil);
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    CheckConnection;
-
-    queryTemp.SQL.Text := 'SELECT question_user AS question FROM users WHERE name_user = :name_user';
-    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
-    queryTemp.Open;
-
-    if not queryTemp.IsEmpty then
-      begin
-      Result := queryTemp.FieldByName('question').AsString;
-      end;
-    except
-      on E: Exception do
-      begin
-      ShowMessage('Erro: ' + E.Message);
-      end;
-  end;
-  queryTemp.Free;
-end;
-
-function CheckIfAnswerSecurityQuestionIsCorrect(nameUser, answerSecurityQuestionUser: TEdit): Boolean;
-var
-  queryTemp: TFDQuery;
-  answerSecurityQuestionUserEncrypted: string;
-begin
-  Result := False;
-
-  answerSecurityQuestionUserEncrypted := Encrypter(answerSecurityQuestionUser.Text);
-
-  queryTemp := TFDQuery.Create(nil);
-
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    CheckConnection;
-
-    queryTemp.SQL.Text := 'SELECT question_answer_user AS answer FROM users WHERE name_user = :name_user';
-    queryTemp.ParamByName('name_user').AsString := nameUser.Text;
-    queryTemp.Open;
-
-
-    if not queryTemp.IsEmpty then
-    begin
-      if queryTemp.FieldByName('answer').AsString = answerSecurityQuestionUserEncrypted then
-      begin
-        Result := True;
-      end;
-    end;
-  except
-    on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-   end;
-  end;
-   queryTemp.Free;
-end;
-
-function UpdatePasswordUser(nameUser, newPasswordUser: TEdit): Boolean;
-var
-  queryTemp: TFDQuery;
-  passwordUserEncrypted: string;
-begin
-  Result := False;
-  queryTemp := TFDQuery.Create(nil);
-
-  passwordUserEncrypted := Encrypter(newPasswordUser.Text);
-
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-    queryTemp.Transaction := DM_Con.TransactionMySQL;
-
-    CheckConnection;
-
-    DM_Con.ConnectionMySQL.StartTransaction;
-    try
-      queryTemp.SQL.Text := 'UPDATE users SET password_user = :password_user WHERE name_user = :name_user';
-      queryTemp.ParamByName('name_user').AsString := nameUser.Text;
-      queryTemp.ParamByName('password_user').AsString := passwordUserEncrypted;
-
-      queryTemp.ExecSQL;
-      DM_Con.ConnectionMySQL.Commit;
-
-      Result := True;
-    except
-      on E: Exception do
-      begin
-        DM_Con.ConnectionMySQL.Rollback;
-        ShowMessage(E.Message);
-      end;
-    end;
-  finally
-    queryTemp.Free;
-  end;
-end;
-
-procedure InsertImageUser(id_user: integer);
-var
-  FileStream:  TFileStream;
-  queryTemp: TFDQuery;
-begin
-   FileStream := nil;
-  queryTemp := TFDQuery.Create(nil);
-
-
-  try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    CheckConnection;
-
-    queryTemp.Close;
-    queryTemp.SQL.Text := 'INSERT INTO image_user  VALUES :image_user FROM users WHERE id_user = :id_user';
-    queryTemp.ParamByName('id_user').AsInteger := id_user;
-
-    try
-      queryTemp.ParamByName('image_user').LoadFromStream(FileStream, ftBlob);
-    finally
-      FileStream.Free;
-      queryTemp.Free;
-    end;
-  except
-  on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-   end;
-
-  end;
-end;
 
 procedure SelectBrands(ComboBox: TComboBox);
 var
@@ -656,111 +302,5 @@ begin
   end;
   queryTemp.Free;
 end;
-
-
-//                  Others
-
-function Encrypter(const passwordUser: string): string;
-begin
-  Result := THashSHA2.GetHashString(passwordUser);
-end;
-
-procedure HideScrollbars(ScrollBox: TScrollBox);
-begin
- // ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
-end;
-
-function CheckMatchPasswords(passwordEdit, passwordConfirmEdit: TEdit): Boolean;
-var
-  inputText: string;
-  inputTextConfirm: string;
-begin
-  inputText := passwordEdit.Text;
-  inputTextConfirm := passwordConfirmEdit.Text;
-
-  if inputText = inputTextConfirm then
-    begin
-      Result := True;
-    end
-    else
-    begin
-      Exit(False)
-    end;
-end;
-
-function CheckPasswordCharacters(passwordConfirmEdit: TEdit): Boolean;
-var
-  inputText: string;
-begin
-  inputText := passwordConfirmEdit.Text;
-
-  if not Length(inputText) < 8 then
-    begin
-      Result := TRegEx.IsMatch(inputText, '[a-zA-Z]') and
-                TRegEx.IsMatch(inputText, '\d') and
-                TRegEx.IsMatch(inputText, '[!@#$%^&*(),.?":{}|<>]');
-    end
-    else
-    begin
-      Exit(False)
-    end;
-end;
-
-function CheckUserCharacters(userEdit: TEdit): Boolean;
-var
-  inputUser: string;
-begin
-  inputUser := userEdit.Text;
-
-  if Length(inputUser) < 5 then
-    Exit(False);
-
-  Result := TRegEx.IsMatch(inputUser, '[a-zA-Z]') and
-            TRegEx.IsMatch(inputUser, '\d');
-end;
-
-function CheckQuestionCharacters(questionEdit: TEdit): Boolean;
-var
-  inputText: string;
-begin
-  inputText := questionEdit.Text;
-
-  if Length(inputText) < 8 then
-    Exit(False);
-
-  Result := TRegEx.IsMatch(inputText, '[a-zA-Z]')
-end;
-
-function CheckAnswerCharacters(answerConfirmEdit: TEdit): Boolean;
-var
-  inputText: string;
-begin
-  inputText := answerConfirmEdit.Text;
-  if Length(inputText) < 3 then
-    begin
-      Exit(False);
-    end;
-    Result := True;
-end;
-
-function CheckMatchAnswers(answerEdit, answerConfirmEdit: TEdit): Boolean;
-var
-  inputText: string;
-  inputTextConfirm: string;
-begin
-  inputText := answerEdit.Text;
-  inputTextConfirm := answerConfirmEdit.Text;
-
-  if inputText = inputTextConfirm then
-    begin
-      Result := True;
-    end
-    else
-    begin
-      Exit(False)
-    end;
-end;
-
-
 
 end.
