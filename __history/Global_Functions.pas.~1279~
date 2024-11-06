@@ -27,13 +27,10 @@ function CheckMatchAnswers(answerEdit, answerConfirmEdit: TEdit): Boolean;
 function GetUserID(nameUser: TEdit): integer;
 function GetUserName(id_user: integer): string;
 function APISupp(brand, category, subcategory: string): TJSONArray;
-function extractUrl(ImageUrl: string):string;
-function FileExistsInFolder(const Folder, FileName: string): Boolean;
 function GetCategoryID(Combobox: TComboBox): integer;
 function GetSubcategoryID(Combobox: TComboBox): integer;
 procedure GetImageUser(id_user: integer; Image: TImage);
 procedure InsertImageUser(id_user: integer);
-procedure CreateCardProduct(CardsBox: TScrollBox; ProductsArray: TJSONArray; UrlClick: TProc<string>);
 procedure HideScrollbars(ScrollBox: TScrollBox);
 procedure LoadImage(image_src: string; Image: TImage);
 procedure SelectBrands(ComboBox: TComboBox);
@@ -88,131 +85,6 @@ begin
   end;
 end;
 
-//              Design Frames Procedures
-
-procedure CreateCardProduct(CardsBox: TScrollBox; ProductsArray: TJSONArray; UrlClick: TProc<string>);
-var
-  PanelWidth, PanelHeight, Padding, Columns, col, row, i: Integer;
-  InputImagePath, OutputImagePath, Title, Price, Image_Src, Url: string;
-  Product: TJSONObject;
-  Panel: TPanel;
-  Image: TImage;
-  TitleLabel, PriceLabel: TLabel;
-
-  procedure PanelClick(Sender: TObject);
-  var
-    Panel: TPanel;
-    ProductIndex: Integer;
-    URL: string;
-  begin
-    // Recupera o painel e o índice do produto armazenado no Tag
-    Panel := Sender as TPanel;
-    ProductIndex := Panel.Tag;
-
-    // Obtém o URL do produto correspondente
-    URL := ProductsArray.Items[ProductIndex].GetValue<string>('url');
-
-    // Chama a função passada como parâmetro para abrir o URL
-    UrlClick(URL);
-  end;
-
-begin
-  InputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\input_image_path';
-  OutputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\output_image_path';
-
-  PanelWidth := 245;
-  PanelHeight := 350;
-  Padding := 25;
-  Columns := 5;
-
-  while CardsBox.ControlCount > 0 do
-    CardsBox.Controls[0].Free;
-
-  for i := 0 to ProductsArray.Count - 1 do
-  begin
-    Product := ProductsArray.Items[i] as TJSONObject;
-    Title := Product.GetValue<string>('title');
-    Price := Product.GetValue<string>('price');
-    Image_Src := Product.GetValue<string>('image_src');
-    URL := Product.GetValue<string>('url');
-
-    col := i mod Columns;
-    row := i div Columns;
-
-    Panel := TPanel.Create(CardsBox);
-
-
-
-    Panel.Parent := CardsBox;
-    Panel.Width := PanelWidth;
-    Panel.Height := PanelHeight;
-    Panel.Left := col * (PanelWidth + Padding);
-    Panel.Top := row * (PanelHeight + Padding);
-    Panel.BevelOuter := bvNone;
-    Panel.Color := clBlack;
-
-    Panel.Tag := i;
-
-
-    //Panel.OnClick := PanelClick;
-
-    Image := TImage.Create(Panel);
-
-    Image.AlignWithMargins := True;
-    Image.Height := 250;
-    Image.Width := 250;
-    Image.Margins.Top := 3;
-    Image.Margins.Bottom := 3;
-    Image.Margins.Left := 3;
-    Image.Margins.Right := 3;
-    Image.Parent := Panel;
-    Image.Align := alTop;
-    Image.Center := True;
-    Image.Proportional := True;
-
-
-    if i = 6 then
-    begin
-      HideScrollbars(CardsBox);
-    end;
-
-    TitleLabel := TLabel.Create(Panel);
-    TitleLabel.AlignWithMargins := True;
-    TitleLabel.Margins.Top := 3;
-    TitleLabel.Margins.Bottom := 3;
-    TitleLabel.Margins.Left := 3;
-    TitleLabel.Margins.Right := 3;
-    TitleLabel.Parent := Panel;
-    TitleLabel.Caption := Title;
-    TitleLabel.Font.Style := [fsBold];
-    TitleLabel.Font.Color := clWhite;
-    TitleLabel.Font.Size := 11;
-    TitleLabel.WordWrap := True;
-    TitleLabel.Alignment := taCenter;
-    TitleLabel.Align := alClient;
-
-
-
-    PriceLabel := TLabel.Create(Panel);
-    PriceLabel.AlignWithMargins := True;
-    PriceLabel.Margins.Top := 3;
-    PriceLabel.Margins.Bottom := 12;
-    PriceLabel.Margins.Left := 3;
-    PriceLabel.Margins.Right := 3;
-    PriceLabel.Parent := Panel;
-    PriceLabel.Caption := Price;
-    PriceLabel.Font.Size := 18;
-    PriceLabel.Font.Style := [fsBold];
-    PriceLabel.Font.Color := clLime;
-    PriceLabel.Alignment := taCenter;
-    PriceLabel.Align := alBottom;
-
-
-    LoadImage(Image_Src, Image);
-  end;
-
-end;
-
 //         Database MySQL Operations
 
 procedure CheckConnection;
@@ -243,9 +115,7 @@ begin
 //  image_src := StringReplace(image_src, '&', '', [rfReplaceAll]);
 
   try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
-
-    CheckConnection;
+    queryTemp.Connection := DM_Con.ConnectionSQLite;
 
     queryTemp.SQL.Text := 'SELECT image_blob FROM images WHERE image_src = :image_src';
     queryTemp.ParamByName('image_src').AsString := image_src;
@@ -447,6 +317,8 @@ begin
     queryTemp.Connection := DM_Con.ConnectionMySQL;
     queryTemp.Transaction := DM_Con.TransactionMySQL;
 
+    CheckConnection;
+
     DM_Con.ConnectionMySQL.StartTransaction;
     try
       queryTemp.SQL.Text := 'INSERT INTO users (name_user, password_user, question_user, question_answer_user) VALUES (:name_user, :password_user, :question_user, :question_answer_user)';
@@ -479,6 +351,8 @@ begin
   queryTemp := TFDQuery.Create(nil);
   try
     queryTemp.Connection := DM_Con.ConnectionMySQL;
+
+    CheckConnection;
 
     queryTemp.SQL.Text := 'SELECT question_user AS question FROM users WHERE name_user = :name_user';
     queryTemp.ParamByName('name_user').AsString := nameUser.Text;
@@ -581,7 +455,7 @@ begin
   queryTemp := TFDQuery.Create(nil);
 
 
-  try                             ]
+  try
     queryTemp.Connection := DM_Con.ConnectionMySQL;
 
     CheckConnection;
@@ -783,36 +657,9 @@ end;
 
 //                  Others
 
-function FileExistsInFolder(const Folder, FileName: string): Boolean;
-var
-  FullPath: string;
-begin
-  FullPath := IncludeTrailingPathDelimiter(Folder) + FileName + '.png';
-  // Verifica se o arquivo existe
-  Result := FileExists(FullPath);
-end;
-
 function Encrypter(const passwordUser: string): string;
 begin
   Result := THashSHA2.GetHashString(passwordUser);
-end;
-
-function extractUrl(ImageUrl: string): string;
-var
-  OriginalString: string;
-  ExtractedString: string;
-begin
-
-  Result := '';
-  OriginalString := ImageUrl;
-
-  var LastSlashPos := LastDelimiter('/', OriginalString);
-  var LastDotPos := LastDelimiter('.', OriginalString);
-
-  // Extraímos a substring entre a última barra e o último ponto.
-  ExtractedString := Copy(OriginalString, LastSlashPos + 1, LastDotPos - LastSlashPos - 1);
-
-  Result := ExtractedString;
 end;
 
 procedure HideScrollbars(ScrollBox: TScrollBox);

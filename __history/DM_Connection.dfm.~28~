@@ -19,21 +19,22 @@ object DM_Con: TDM_Con
     Left = 72
     Top = 128
   end
-  object ConnectionSQLite: TFDConnection
+  object TransactionSQLite: TFDTransaction
+    Connection = FDConnection1
+    Left = 280
+    Top = 136
+  end
+  object FDConnection1: TFDConnection
     Params.Strings = (
-      
-        'Database=C:\Users\Parafal\Documents\GitHub\Gym-App\Win64\Debug\D' +
-        'atabase-SQLite\database.db'
-      'DriverID=SQLite')
+      'Database=gym_app'
+      'User_Name=parafalpwladmin'
+      'Password=@D3adlift'
+      'Server=gym-app.mysql.uhserver.com'
+      'DriverID=ConnectionSQLite')
     LoginPrompt = False
     Transaction = TransactionSQLite
     UpdateTransaction = TransactionSQLite
-    Left = 272
+    Left = 280
     Top = 72
-  end
-  object TransactionSQLite: TFDTransaction
-    Connection = ConnectionSQLite
-    Left = 272
-    Top = 128
   end
 end
