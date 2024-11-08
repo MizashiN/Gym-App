@@ -1,6 +1,7 @@
 object Supplements: TSupplements
   Left = 0
   Top = 0
+  ActiveControl = BrandsCombobox
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Supplements'
@@ -12,9 +13,11 @@ object Supplements: TSupplements
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OldCreateOrder = True
   Position = poDesktopCenter
   Visible = True
   OnCreate = FormCreate
+  PixelsPerInch = 96
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
@@ -405,7 +408,6 @@ object Supplements: TSupplements
           Color = 1184274
           ParentColor = False
           TabOrder = 0
-          UseWheelForScrolling = True
         end
       end
     end

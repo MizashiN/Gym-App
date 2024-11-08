@@ -81,7 +81,6 @@ begin
       URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category + '&subcategory=' + subcategory;
 
     RESTClient.BaseURL := URL;
-    RESTClient.ReadTimeout := 600000;
     RESTRequest.Client := RESTClient;
     RESTRequest.Response := RESTResponse;
     RESTRequest.Method := rmGET;

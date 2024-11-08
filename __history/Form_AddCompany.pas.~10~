@@ -1,0 +1,31 @@
+unit Form_AddCompany;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TSetupCompany = class(TForm)
+    PageControl1: TPageControl;
+    Tab1: TTabSheet;
+    Tab2: TTabSheet;
+    Tab3: TTabSheet;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  SetupCompany: TSetupCompany;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,4 +1,5 @@
 object DM_Con: TDM_Con
+  OldCreateOrder = True
   Height = 256
   Width = 187
   object ConnectionMySQL: TFDConnection
