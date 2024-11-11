@@ -1,22 +1,20 @@
 object DM_Con: TDM_Con
-  OldCreateOrder = True
   Height = 256
-  Width = 187
-  object ConnectionMySQL: TFDConnection
+  Width = 398
+  object ConnectionScrappTest: TFDConnection
     Params.Strings = (
-      'Database=gym_app'
-      'User_Name=parafalpwladmin'
-      'Password=@D3adlift'
-      'Server=gym-app.mysql.uhserver.com'
-      'DriverID=MySQL')
+      
+        'Database=C:\Users\Parafal\Documents\GitHub\Gym-App\Win64\Debug\S' +
+        'cripts Py\testscrapp.db'
+      'DriverID=SQLite')
     LoginPrompt = False
-    Transaction = TransactionMySQL
-    UpdateTransaction = TransactionMySQL
+    Transaction = TransactionScrappTest
+    UpdateTransaction = TransactionScrappTest
     Left = 72
     Top = 64
   end
-  object TransactionMySQL: TFDTransaction
-    Connection = ConnectionMySQL
+  object TransactionScrappTest: TFDTransaction
+    Connection = ConnectionScrappTest
     Left = 72
     Top = 128
   end

@@ -20,6 +20,15 @@ procedure SelectCategories(Combobox: TComboBox);
 procedure SelectSubcategories(Combobox: TComboBox; id_category: integer);
 procedure HideScrollbars(ScrollBox: TScrollBox);
 procedure CheckConnection;
+procedure DeleteConfig;
+procedure InsertScrappTest(
+  parent_tag, parent_class,  title_tag, title_class, price_tag, price_class,
+  img_tag, img_class,img_attribute, url_tag, url_class, url_attribute, url_base,
+  alt_parent_tag, alt_parent_class, alt_parent_tag_2,alt_parent_class_2,
+  alt_img_tag, alt_img_class,alt_img_tag_2, alt_img_class_2, price_parent_tag,
+  price_parent_class,alt_price_parent_tag, alt_price_parent_class,
+  price_code, price_integer, price_decimal, price_fraction, url_test: string
+);
 
 implementation
 
@@ -35,7 +44,7 @@ begin
 //  image_src := StringReplace(image_src, '&', '', [rfReplaceAll]);
 
   try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
+    queryTemp.Connection := DM_Con.ConnectionScrappTest;
 
     CheckConnection;
 
@@ -112,10 +121,10 @@ end;
 procedure CheckConnection;
 begin
   // Verifica se a conexão está ativa
-  if not DM_Con.ConnectionMySQL.Connected then
+  if not DM_Con.ConnectionScrappTest.Connected then
   begin
     try
-      DM_Con.ConnectionMySQL.Connected := True;
+      DM_Con.ConnectionScrappTest.Connected := True;
     except
       on E: Exception do
       begin
@@ -133,7 +142,7 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
+    queryTemp.Connection := DM_Con.ConnectionScrappTest;
 
     CheckConnection;
 
@@ -162,7 +171,7 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
+    queryTemp.Connection := DM_Con.ConnectionScrappTest;
 
     CheckConnection;
 
@@ -191,7 +200,7 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
+    queryTemp.Connection := DM_Con.ConnectionScrappTest;
 
     CheckConnection;
 
@@ -221,7 +230,7 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
+    queryTemp.Connection := DM_Con.ConnectionScrappTest;
 
     CheckConnection;
 
@@ -253,7 +262,7 @@ begin
   queryTemp := TFDQuery.Create(nil);
   Result := 0;
   try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
+    queryTemp.Connection := DM_Con.ConnectionScrappTest;
 
     CheckConnection;
 
@@ -281,7 +290,7 @@ begin
   queryTemp := TFDQuery.Create(nil);
   Result := 0;
   try
-    queryTemp.Connection := DM_Con.ConnectionMySQL;
+    queryTemp.Connection := DM_Con.ConnectionScrappTest;
 
     CheckConnection;
 
@@ -293,6 +302,107 @@ begin
       Result := queryTemp.FieldByName('id_subcategory').AsInteger
     else
       ShowMessage('Nenhuma categoria encontrada com o nome: ' + Combobox.Text);
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+procedure InsertScrappTest(
+  parent_tag, parent_class,  title_tag, title_class, price_tag, price_class,
+  img_tag, img_class,img_attribute, url_tag, url_class, url_attribute, url_base,
+  alt_parent_tag, alt_parent_class, alt_parent_tag_2,alt_parent_class_2,
+  alt_img_tag, alt_img_class,alt_img_tag_2, alt_img_class_2, price_parent_tag,
+  price_parent_class,alt_price_parent_tag, alt_price_parent_class,
+  price_code, price_integer, price_decimal, price_fraction, url_test: string
+);
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.ConnectionScrappTest;
+
+    CheckConnection;
+
+    queryTemp.SQL.Text :=
+      'INSERT INTO ScrappTest (' +
+      '    parent_tag, title_tag, img_tag, price_tag, url_tag, ' +
+      '    url_attribute, url_base, url_class, price_parent_tag, ' +
+      '    price_parent_class, price_code, price_integer, price_decimal, ' +
+      '    price_fraction, img_attribute, parent_class, title_class, ' +
+      '    price_class, img_class, alt_price_parent_tag, alt_price_parent_class, ' +
+      '    alt_img_tag, alt_img_class, alt_parent_class_2, alt_img_tag_2, ' +
+      '    alt_img_class_2, alt_parent_tag_2, alt_parent_tag, alt_parent_class, url_test' +
+      ') VALUES (' +
+      '    :parent_tag, :title_tag, :img_tag, :price_tag, :url_tag, ' +
+      '    :url_attribute, :url_base, :url_class, :price_parent_tag, ' +
+      '    :price_parent_class, :price_code, :price_integer, :price_decimal, ' +
+      '    :price_fraction, :img_attribute, :parent_class, :title_class, ' +
+      '    :price_class, :img_class, :alt_price_parent_tag, :alt_price_parent_class, ' +
+      '    :alt_img_tag, :alt_img_class, :alt_parent_class_2, :alt_img_tag_2, ' +
+      '    :alt_img_class_2, :alt_parent_tag_2, :alt_parent_tag, :alt_parent_class, :url_test' +
+      ');';
+
+    // Atribui valores aos parâmetros
+    queryTemp.ParamByName('parent_tag').AsString := parent_tag;
+    queryTemp.ParamByName('title_tag').AsString := title_tag;
+    queryTemp.ParamByName('img_tag').AsString := img_tag;
+    queryTemp.ParamByName('price_tag').AsString := price_tag;
+    queryTemp.ParamByName('url_tag').AsString := url_tag;
+    queryTemp.ParamByName('url_attribute').AsString := url_attribute;
+    queryTemp.ParamByName('url_base').AsString := url_base;
+    queryTemp.ParamByName('url_class').AsString := url_class;
+    queryTemp.ParamByName('price_parent_tag').AsString := price_parent_tag;
+    queryTemp.ParamByName('price_parent_class').AsString := price_parent_class;
+    queryTemp.ParamByName('price_code').AsString := price_code;
+    queryTemp.ParamByName('price_integer').AsString := price_integer;
+    queryTemp.ParamByName('price_decimal').AsString := price_decimal;
+    queryTemp.ParamByName('price_fraction').AsString := price_fraction;
+    queryTemp.ParamByName('img_attribute').AsString := img_attribute;
+    queryTemp.ParamByName('parent_class').AsString := parent_class;
+    queryTemp.ParamByName('title_class').AsString := title_class;
+    queryTemp.ParamByName('price_class').AsString := price_class;
+    queryTemp.ParamByName('img_class').AsString := img_class;
+    queryTemp.ParamByName('alt_price_parent_tag').AsString := alt_price_parent_tag;
+    queryTemp.ParamByName('alt_price_parent_class').AsString := alt_price_parent_class;
+    queryTemp.ParamByName('alt_img_tag').AsString := alt_img_tag;
+    queryTemp.ParamByName('alt_img_class').AsString := alt_img_class;
+    queryTemp.ParamByName('alt_parent_class_2').AsString := alt_parent_class_2;
+    queryTemp.ParamByName('alt_img_tag_2').AsString := alt_img_tag_2;
+    queryTemp.ParamByName('alt_img_class_2').AsString := alt_img_class_2;
+    queryTemp.ParamByName('alt_parent_tag_2').AsString := alt_parent_tag_2;
+    queryTemp.ParamByName('alt_parent_tag').AsString := alt_parent_tag;
+    queryTemp.ParamByName('alt_parent_class').AsString := alt_parent_class;
+    queryTemp.ParamByName('url_test').AsString := url_test;
+
+    queryTemp.ExecSQL;
+
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+
+
+procedure DeleteConfig;
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  try
+    queryTemp.Connection := DM_Con.ConnectionScrappTest;
+
+    CheckConnection;
+
+    queryTemp.SQL.Text := 'DELETE FROM ScrappTest';
   except
     on E: Exception do
     begin
