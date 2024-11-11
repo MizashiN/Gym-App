@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.WinXCtrls, Global_Functions;
+  Vcl.WinXCtrls, Global_Functions, PythonEngine, Vcl.PythonGUIInputOutput;
 
 type
   TSetupCompany = class(TForm)
@@ -198,8 +198,11 @@ type
     Label37: TLabel;
     Panel83: TPanel;
     PriceParentTagEdit: TEdit;
+    Python: TPythonEngine;
+    OutputGui: TPythonGUIInputOutput;
     procedure SearchBox1InvokeSearch(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -225,6 +228,25 @@ InsertScrappTest(ParentTagEdit.Text, ParentClassEdit.Text, TitleTagEdit.Text, Ti
   PriceIntegerEdit.Text, PriceDecimalEdit.Text, PriceFractionEdit.Text, UrlTestEdit.Text
   )
 end;
+
+procedure TSetupCompany.Button5Click(Sender: TObject);
+var
+  PythonScript: TStringList;
+begin
+    try
+      PythonScript.LoadFromFile('Scripts Py\testscsrapp.py');
+      Python.ExecString(PythonScript.Text);  // Executa o script carregado
+    finally
+      PythonScript.Free;
+    end;
+
+    // Exibe a saída do script no DebugMemo
+    DebugMemo.Lines.Assign(OutputGui.Output);
+end;
+
+
+
+
 
 procedure TSetupCompany.SearchBox1InvokeSearch(Sender: TObject);
 var

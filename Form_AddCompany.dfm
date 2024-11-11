@@ -30,7 +30,6 @@ object SetupCompany: TSetupCompany
     TabHeight = 40
     TabOrder = 0
     TabWidth = 210
-    ExplicitHeight = 673
     object Tab1: TTabSheet
       AlignWithMargins = True
       Caption = 'New Company'
@@ -51,7 +50,6 @@ object SetupCompany: TSetupCompany
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 611
         object Panel2: TPanel
           AlignWithMargins = True
           Left = 3
@@ -61,7 +59,6 @@ object SetupCompany: TSetupCompany
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitHeight = 401
           object Panel5: TPanel
             AlignWithMargins = True
             Left = 3
@@ -71,7 +68,6 @@ object SetupCompany: TSetupCompany
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitHeight = 395
             object PriceFragmentedCheckBox: TCheckBox
               AlignWithMargins = True
               Left = 3
@@ -196,7 +192,6 @@ object SetupCompany: TSetupCompany
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitHeight = 395
             object Button1: TButton
               AlignWithMargins = True
               Left = 200
@@ -213,7 +208,6 @@ object SetupCompany: TSetupCompany
               Font.Style = [fsBold]
               ParentFont = False
               TabOrder = 0
-              ExplicitTop = 330
             end
           end
         end
@@ -457,8 +451,6 @@ object SetupCompany: TSetupCompany
               Font.Style = []
               ParentFont = False
               TabOrder = 0
-              ExplicitLeft = 0
-              ExplicitTop = -1
             end
           end
         end
@@ -477,7 +469,6 @@ object SetupCompany: TSetupCompany
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 611
         object DataHtmlPanel: TPanel
           AlignWithMargins = True
           Left = 3
@@ -487,7 +478,6 @@ object SetupCompany: TSetupCompany
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitHeight = 605
           object UrlBasePanel: TPanel
             AlignWithMargins = True
             Left = 3
@@ -498,7 +488,6 @@ object SetupCompany: TSetupCompany
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitTop = 537
             object Panel17: TPanel
               AlignWithMargins = True
               Left = 3
@@ -569,7 +558,6 @@ object SetupCompany: TSetupCompany
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitTop = 341
             object Panel29: TPanel
               AlignWithMargins = True
               Left = 3
@@ -594,7 +582,7 @@ object SetupCompany: TSetupCompany
                 Font.Name = 'JetBrains Mono'
                 Font.Style = []
                 ParentFont = False
-                ExplicitLeft = 0
+                ExplicitWidth = 132
               end
               object Panel30: TPanel
                 AlignWithMargins = True
@@ -607,7 +595,6 @@ object SetupCompany: TSetupCompany
                 Color = clGray
                 ParentBackground = False
                 TabOrder = 0
-                ExplicitWidth = 112
                 object ImgAtrEdit: TEdit
                   AlignWithMargins = True
                   Left = 2
@@ -628,7 +615,6 @@ object SetupCompany: TSetupCompany
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 0
-                  ExplicitWidth = 108
                 end
               end
             end
@@ -1191,7 +1177,6 @@ object SetupCompany: TSetupCompany
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 7
-            ExplicitTop = 372
             object Panel31: TPanel
               AlignWithMargins = True
               Left = 127
@@ -1248,8 +1233,6 @@ object SetupCompany: TSetupCompany
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 0
-                  ExplicitLeft = -4
-                  ExplicitTop = 3
                 end
               end
             end
@@ -1324,7 +1307,6 @@ object SetupCompany: TSetupCompany
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 8
-            ExplicitTop = 580
             object Panel28: TPanel
               AlignWithMargins = True
               Left = 3
@@ -1397,7 +1379,6 @@ object SetupCompany: TSetupCompany
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitTop = 51
           object PriceFragmentedPanel: TPanel
             AlignWithMargins = True
             Left = 3
@@ -1408,7 +1389,6 @@ object SetupCompany: TSetupCompany
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitTop = 440
             object Panel21: TPanel
               AlignWithMargins = True
               Left = 3
@@ -1798,7 +1778,6 @@ object SetupCompany: TSetupCompany
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 2
-            ExplicitTop = 363
             object Panel55: TPanel
               AlignWithMargins = True
               Left = 191
@@ -1929,7 +1908,6 @@ object SetupCompany: TSetupCompany
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 3
-            ExplicitTop = 286
             object Panel60: TPanel
               AlignWithMargins = True
               Left = 191
@@ -2060,8 +2038,6 @@ object SetupCompany: TSetupCompany
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 4
-            ExplicitLeft = 0
-            ExplicitTop = 453
             object Panel65: TPanel
               AlignWithMargins = True
               Left = 191
@@ -2351,7 +2327,6 @@ object SetupCompany: TSetupCompany
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 7
-            ExplicitTop = 533
             object Panel86: TPanel
               AlignWithMargins = True
               Left = 3
@@ -2362,7 +2337,6 @@ object SetupCompany: TSetupCompany
               Align = alLeft
               BevelOuter = bvNone
               TabOrder = 0
-              ExplicitLeft = 0
               object Label33: TLabel
                 AlignWithMargins = True
                 Left = 3
@@ -2442,8 +2416,6 @@ object SetupCompany: TSetupCompany
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 8
-            ExplicitLeft = 14
-            ExplicitTop = 480
             object Panel64: TPanel
               AlignWithMargins = True
               Left = 191
@@ -2577,7 +2549,6 @@ object SetupCompany: TSetupCompany
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 2
-          ExplicitHeight = 526
           object Shape1: TShape
             Left = 0
             Top = 0
@@ -2604,7 +2575,6 @@ object SetupCompany: TSetupCompany
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 611
         object Panel20: TPanel
           AlignWithMargins = True
           Left = 3
@@ -2675,7 +2645,6 @@ object SetupCompany: TSetupCompany
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 2
-          ExplicitHeight = 49
           object Button4: TButton
             AlignWithMargins = True
             Left = 749
@@ -2691,7 +2660,6 @@ object SetupCompany: TSetupCompany
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 0
-            ExplicitHeight = 43
           end
           object Button5: TButton
             AlignWithMargins = True
@@ -2708,10 +2676,27 @@ object SetupCompany: TSetupCompany
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 1
-            ExplicitHeight = 43
+            OnClick = Button5Click
+            ExplicitTop = 32
+            ExplicitHeight = 73
           end
         end
       end
     end
+  end
+  object Python: TPythonEngine
+    DllPath = 
+      'C:\Users\\Parafal\AppData\Local\Programs\Python\Python312\python' +
+      '312.dll'
+    IO = OutputGui
+    Left = 802
+    Top = 341
+  end
+  object OutputGui: TPythonGUIInputOutput
+    UnicodeIO = True
+    RawOutput = False
+    Output = DebugMemo
+    Left = 866
+    Top = 349
   end
 end

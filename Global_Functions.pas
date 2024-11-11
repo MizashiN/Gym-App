@@ -403,6 +403,8 @@ begin
     CheckConnection;
 
     queryTemp.SQL.Text := 'DELETE FROM ScrappTest';
+
+    queryTemp.ExecSQL;
   except
     on E: Exception do
     begin
