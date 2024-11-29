@@ -148,6 +148,10 @@
             <Form>Supplements</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Form_ConfigCompanies.pas">
+            <Form>Form1</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
