@@ -5,8 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, ShellAPI,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.DBCtrls, System.ImageList,
-  Vcl.ImgList,System.JSON, REST.Client, REST.Types, Global_Functions, System.Generics.Collections,
-  Vcl.ButtonStylesAttributes, Vcl.StyledButton;
+  Vcl.ImgList,System.JSON, REST.Client, REST.Types, Global_Functions, System.Generics.Collections;
 
 type
   TSupplements = class(TForm)
@@ -31,7 +30,6 @@ type
     TypesLabel: TLabel;
     TypesCombobox: TComboBox;
     BrandsCombobox: TComboBox;
-    SearchButton: TStyledButton;
     procedure GetProducts;
     procedure OpenURL(URL: string);
     procedure PanelClick(Sender: TObject);
@@ -59,8 +57,6 @@ procedure TSupplements.BrandsComboboxSelect(Sender: TObject);
 begin
   CategoriesLabel.Visible := True;
   CategoriesCombobox.Visible := True;
-
-  SearchButton.Visible := True;
 
   SelectCategories(CategoriesCombobox);
 end;

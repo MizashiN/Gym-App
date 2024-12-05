@@ -1,11 +1,10 @@
 object DM_Con: TDM_Con
+  OldCreateOrder = True
   Height = 256
   Width = 398
   object Connection: TFDConnection
     Params.Strings = (
-      
-        'Database=C:\Users\Parafal\Documents\GitHub\GymApp-API\database.d' +
-        'b'
+      'Database=Z:\GymApp-API\database.db'
       'DriverID=SQLite')
     LoginPrompt = False
     Transaction = Transaction

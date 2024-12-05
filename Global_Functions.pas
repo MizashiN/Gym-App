@@ -44,7 +44,7 @@ begin
 //  image_src := StringReplace(image_src, '&', '', [rfReplaceAll]);
 
   try
-    queryTemp.Connection := DM_Con.ConnectionScrappTest;
+    queryTemp.Connection := DM_Con.Connection;
 
     CheckConnection;
 
@@ -121,10 +121,10 @@ end;
 procedure CheckConnection;
 begin
   // Verifica se a conexão está ativa
-  if not DM_Con.ConnectionScrappTest.Connected then
+  if not DM_Con.Connection.Connected then
   begin
     try
-      DM_Con.ConnectionScrappTest.Connected := True;
+      DM_Con.Connection.Connected := True;
     except
       on E: Exception do
       begin
@@ -142,7 +142,7 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.ConnectionScrappTest;
+    queryTemp.Connection := DM_Con.Connection;
 
     CheckConnection;
 
@@ -171,7 +171,7 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.ConnectionScrappTest;
+    queryTemp.Connection := DM_Con.Connection;
 
     CheckConnection;
 
@@ -200,7 +200,7 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.ConnectionScrappTest;
+    queryTemp.Connection := DM_Con.Connection;
 
     CheckConnection;
 
@@ -230,7 +230,7 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.ConnectionScrappTest;
+    queryTemp.Connection := DM_Con.Connection;
 
     CheckConnection;
 
@@ -262,7 +262,7 @@ begin
   queryTemp := TFDQuery.Create(nil);
   Result := 0;
   try
-    queryTemp.Connection := DM_Con.ConnectionScrappTest;
+    queryTemp.Connection := DM_Con.Connection;
 
     CheckConnection;
 
@@ -290,7 +290,7 @@ begin
   queryTemp := TFDQuery.Create(nil);
   Result := 0;
   try
-    queryTemp.Connection := DM_Con.ConnectionScrappTest;
+    queryTemp.Connection := DM_Con.Connection;
 
     CheckConnection;
 
@@ -324,7 +324,7 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.ConnectionScrappTest;
+    queryTemp.Connection := DM_Con.Connection;
 
     CheckConnection;
 
@@ -398,7 +398,7 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   try
-    queryTemp.Connection := DM_Con.ConnectionScrappTest;
+    queryTemp.Connection := DM_Con.Connection;
 
     CheckConnection;
 

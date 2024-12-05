@@ -8,7 +8,8 @@ uses
   Vcl.StdCtrls, Vcl.Mask, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.Generics.Collections;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.Generics.Collections, Vcl.Grids, Vcl.DBGrids,
+  Vcl.DBCtrls;
 
 type
   TForm1 = class(TForm)
@@ -20,13 +21,7 @@ type
     CompanyName: TLabeledEdit;
     ScrappConfig: TPanel;
     CategoriesPanel: TPanel;
-    Panel13: TPanel;
-    PreWorkParam: TLabeledEdit;
     Panel14: TPanel;
-    AminoacidParam: TLabeledEdit;
-    Scrap: TPanel;
-    Label2: TLabel;
-    Panel7: TPanel;
     Title: TPanel;
     Panel15: TPanel;
     TitleTag: TLabeledEdit;
@@ -92,24 +87,33 @@ type
     Panel42: TPanel;
     UrlAttribute: TLabeledEdit;
     Panel43: TPanel;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    Panel12: TPanel;
     UrlClass: TLabeledEdit;
-    AddConfig: TButton;
-    TestScrap: TButton;
-    Q_InsertConfig: TFDQuery;
-    Q_InsertCompany: TFDQuery;
-    Q_InsertCategoryParams: TFDQuery;
-    SubCategoriesPanel: TPanel;
+    Panel7: TPanel;
+    Q_CategParams: TFDQuery;
+    Q_SubCategParams: TFDQuery;
     Panel11: TPanel;
-    WheyParam: TLabeledEdit;
+    Panel13: TPanel;
+    DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
+    D_CategParams: TDataSource;
+    D_SubCategParams: TDataSource;
+    Q_CategParamscompany: TStringField;
+    Q_CategParamscategory: TStringField;
+    Q_CategParamscompanyparam: TStringField;
+    Q_SubCategParamscompany: TStringField;
+    Q_SubCategParamscategory: TStringField;
+    Q_SubCategParamssubcategory: TStringField;
+    Q_SubCategParamscompanyparam: TStringField;
+    Panel20: TPanel;
     Panel37: TPanel;
-    Panel38: TPanel;
-    TresDablioParam: TLabeledEdit;
-    Panel39: TPanel;
-    IsoTitleParam: TLabeledEdit;
-    Panel41: TPanel;
-    ConcentratedTitleParam: TLabeledEdit;
-    Q_InsertSubCategoryParams: TFDQuery;
-    CreatineTitleParam: TLabeledEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    DBComboBox1: TDBComboBox;
+    DBComboBox2: TDBComboBox;
     procedure AddConfigClick(Sender: TObject);
   private
     { Private declarations }
@@ -136,65 +140,6 @@ var
   LabeledEdit: TLabeledEdit;
 begin
    Categories := [27,28,29];
-   SubCategories := [58,60,61,62];
-  try
-
-  Q_InsertCompany.Close;
-  Q_InsertCompany.ParamByName('company').AsString := CompanyName.Text;
-  Q_InsertCompany.ExecSQL;
-
-
-    for a := 0 to CategoriesPanel.ControlCount - 1 do
-    begin
-    if CategoriesPanel.Controls[a] is TPanel then
-      begin
-        SubPanel := TPanel(CategoriesPanel.Controls[a]);
-        for I in Categories do
-        begin
-          for j := 0 to SubPanel.ControlCount - 1 do
-          begin
-            if SubPanel.Controls[j] is TLabeledEdit then
-            begin
-              LabeledEdit := TLabeledEdit(SubPanel.Controls[j]);
-
-              Q_InsertCategoryParams.Close;
-              Q_InsertCategoryParams.ParamByName('company').AsString := CompanyName.Text;
-              Q_InsertCategoryParams.ParamByName('id_category').AsInteger := I;
-              Q_InsertCategoryParams.ParamByName('companyparam').AsString := LabeledEdit.Text;
-              Q_InsertCategoryParams.ExecSQL;
-            end;
-          end;
-        end;
-      end;
-
-    for b := 0 to SubCategoriesPanel.ControlCount - 1 do
-      begin
-      if SubCategoriesPanel.Controls[b] is TPanel then
-        begin
-          SubPanel := TPanel(SubCategoriesPanel.Controls[b]);
-          for c in SubCategories do
-          begin
-            for d := 0 to SubPanel.ControlCount - 1 do
-            begin
-              if SubPanel.Controls[d] is TLabeledEdit then
-              begin
-                LabeledEdit := TLabeledEdit(SubPanel.Controls[d]);
-
-                Q_InsertSubCategoryParams.Close;
-                Q_InsertSubCategoryParams.ParamByName('company').AsString := CompanyName.Text;
-                Q_InsertSubCategoryParams.ParamByName('id_category').AsInteger := I;
-                Q_InsertSubCategoryParams.ParamByName('id_category').AsInteger := I;
-                Q_InsertSubCategoryParams.ParamByName('companyparam').AsString := LabeledEdit.Text;
-                Q_InsertSubCategoryParams.ExecSQL;
-              end;
-            end;
-          end;
-        end;
-      end;
-    end;
-  finally
-
-  end;
 end;
 
 end.
