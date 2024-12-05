@@ -1398,7 +1398,7 @@ object Form1: TForm1
         Value = Null
       end>
   end
-  object Q_InsertSubCategoryParams: TFDQuery
+  object Q_InsertSubCategoryParam: TFDQuery
     Connection = DM_Con.Connection
     Transaction = DM_Con.Transaction
     UpdateTransaction = DM_Con.Transaction

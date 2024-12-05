@@ -839,7 +839,7 @@ object Form1: TForm1
         end
       end
     end
-    object CategoriesPanel: TPanel
+    object Products: TPanel
       AlignWithMargins = True
       Left = 3
       Top = 63
@@ -849,6 +849,16 @@ object Form1: TForm1
       BevelOuter = bvNone
       TabOrder = 2
       ExplicitLeft = 6
+      object Panel12: TPanel
+        AlignWithMargins = True
+        Left = 568
+        Top = 3
+        Width = 182
+        Height = 44
+        Align = alLeft
+        BevelOuter = bvNone
+        TabOrder = 0
+      end
       object Panel13: TPanel
         AlignWithMargins = True
         Left = 192
@@ -857,7 +867,7 @@ object Form1: TForm1
         Height = 44
         Align = alLeft
         BevelOuter = bvNone
-        TabOrder = 0
+        TabOrder = 1
         ExplicitLeft = 380
         object PreWorkParam: TLabeledEdit
           AlignWithMargins = True
@@ -881,7 +891,7 @@ object Form1: TForm1
         Height = 44
         Align = alLeft
         BevelOuter = bvNone
-        TabOrder = 1
+        TabOrder = 2
         ExplicitLeft = 472
         ExplicitTop = 0
         object AminoacidParam: TLabeledEdit
@@ -896,7 +906,6 @@ object Form1: TForm1
           EditLabel.Caption = ' Aminoacid Param'
           TabOrder = 0
           Text = 'creatina'
-          ExplicitLeft = 6
         end
       end
       object Panel11: TPanel
@@ -907,7 +916,7 @@ object Form1: TForm1
         Height = 44
         Align = alLeft
         BevelOuter = bvNone
-        TabOrder = 2
+        TabOrder = 3
         ExplicitTop = 0
         object WheyParam: TLabeledEdit
           AlignWithMargins = True
@@ -921,7 +930,6 @@ object Form1: TForm1
           EditLabel.Caption = 'Whey-Protein Param'
           TabOrder = 0
           Text = 'whey-protein'
-          ExplicitLeft = 6
         end
       end
     end
@@ -934,8 +942,6 @@ object Form1: TForm1
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitLeft = 0
-      ExplicitTop = 172
       object Label2: TLabel
         AlignWithMargins = True
         Left = 10
@@ -998,7 +1004,7 @@ object Form1: TForm1
         TabOrder = 1
       end
     end
-    object SubCategoriesPanel: TPanel
+    object Panel20: TPanel
       AlignWithMargins = True
       Left = 3
       Top = 110
@@ -1007,18 +1013,15 @@ object Form1: TForm1
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 5
-      ExplicitLeft = 9
       object Panel37: TPanel
         AlignWithMargins = True
-        Left = 3
+        Left = 570
         Top = 3
         Width = 183
         Height = 53
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitLeft = -38
-        ExplicitTop = 6
         object CreatineTitleParam: TLabeledEdit
           AlignWithMargins = True
           Left = 3
@@ -1035,14 +1038,13 @@ object Form1: TForm1
       end
       object Panel38: TPanel
         AlignWithMargins = True
-        Left = 570
+        Left = 381
         Top = 3
         Width = 183
         Height = 53
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitLeft = 381
         object TresDablioParam: TLabeledEdit
           AlignWithMargins = True
           Left = 3
@@ -1082,15 +1084,13 @@ object Form1: TForm1
       end
       object Panel41: TPanel
         AlignWithMargins = True
-        Left = 381
+        Left = 3
         Top = 3
         Width = 183
         Height = 53
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 3
-        ExplicitLeft = 384
-        ExplicitTop = 6
         object ConcentratedTitleParam: TLabeledEdit
           AlignWithMargins = True
           Left = 3
@@ -1398,7 +1398,7 @@ object Form1: TForm1
         Value = Null
       end>
   end
-  object Q_InsertSubCategoryParams: TFDQuery
+  object Q_InsertSubCategoryParam: TFDQuery
     Connection = DM_Con.Connection
     Transaction = DM_Con.Transaction
     UpdateTransaction = DM_Con.Transaction

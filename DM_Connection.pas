@@ -12,8 +12,8 @@ uses
 
 type
   TDM_Con = class(TDataModule)
-    ConnectionScrappTest: TFDConnection;
-    TransactionScrappTest: TFDTransaction;
+    Connection: TFDConnection;
+    Transaction: TFDTransaction;
   private
     { Private declarations }
   public

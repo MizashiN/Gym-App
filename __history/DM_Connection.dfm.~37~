@@ -8,12 +8,12 @@ object DM_Con: TDM_Con
         'b'
       'DriverID=SQLite')
     LoginPrompt = False
-    Transaction = Transaction
-    UpdateTransaction = Transaction
+    Transaction = TransactionScrappTest
+    UpdateTransaction = TransactionScrappTest
     Left = 72
     Top = 64
   end
-  object Transaction: TFDTransaction
+  object TransactionScrappTest: TFDTransaction
     Connection = Connection
     Left = 72
     Top = 128

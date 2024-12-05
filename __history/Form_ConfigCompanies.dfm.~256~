@@ -839,7 +839,7 @@ object Form1: TForm1
         end
       end
     end
-    object CategoriesPanel: TPanel
+    object Products: TPanel
       AlignWithMargins = True
       Left = 3
       Top = 63
@@ -934,8 +934,6 @@ object Form1: TForm1
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitLeft = 0
-      ExplicitTop = 172
       object Label2: TLabel
         AlignWithMargins = True
         Left = 10
@@ -998,7 +996,7 @@ object Form1: TForm1
         TabOrder = 1
       end
     end
-    object SubCategoriesPanel: TPanel
+    object Panel20: TPanel
       AlignWithMargins = True
       Left = 3
       Top = 110
@@ -1007,7 +1005,6 @@ object Form1: TForm1
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 5
-      ExplicitLeft = 9
       object Panel37: TPanel
         AlignWithMargins = True
         Left = 3
@@ -1398,7 +1395,7 @@ object Form1: TForm1
         Value = Null
       end>
   end
-  object Q_InsertSubCategoryParams: TFDQuery
+  object Q_InsertSubCategoryParam: TFDQuery
     Connection = DM_Con.Connection
     Transaction = DM_Con.Transaction
     UpdateTransaction = DM_Con.Transaction

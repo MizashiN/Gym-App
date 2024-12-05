@@ -146,9 +146,9 @@ begin
 
     for a := 0 to CategoriesPanel.ControlCount - 1 do
     begin
-    if CategoriesPanel.Controls[a] is TPanel then
+    if CategoriesPanel.Controls[i] is TPanel then
       begin
-        SubPanel := TPanel(CategoriesPanel.Controls[a]);
+        SubPanel := TPanel(CategoriesPanel.Controls[i]);
         for I in Categories do
         begin
           for j := 0 to SubPanel.ControlCount - 1 do
@@ -164,34 +164,37 @@ begin
               Q_InsertCategoryParams.ExecSQL;
             end;
           end;
-        end;
-      end;
 
-    for b := 0 to SubCategoriesPanel.ControlCount - 1 do
-      begin
-      if SubCategoriesPanel.Controls[b] is TPanel then
-        begin
-          SubPanel := TPanel(SubCategoriesPanel.Controls[b]);
-          for c in SubCategories do
+          for b := 0 to SubCategoriesPanel.ControlCount - 1 do
           begin
-            for d := 0 to SubPanel.ControlCount - 1 do
+          if SubCategoriesPanel.Controls[b] is TPanel then
             begin
-              if SubPanel.Controls[d] is TLabeledEdit then
+              SubPanel := TPanel(SubCategoriesPanel.Controls[b]);
+              for c in SubCategories do
               begin
-                LabeledEdit := TLabeledEdit(SubPanel.Controls[d]);
+                for d := 0 to SubPanel.ControlCount - 1 do
+                begin
+                  if SubPanel.Controls[d] is TLabeledEdit then
+                  begin
+                    LabeledEdit := TLabeledEdit(SubPanel.Controls[d]);
 
-                Q_InsertSubCategoryParams.Close;
-                Q_InsertSubCategoryParams.ParamByName('company').AsString := CompanyName.Text;
-                Q_InsertSubCategoryParams.ParamByName('id_category').AsInteger := I;
-                Q_InsertSubCategoryParams.ParamByName('id_category').AsInteger := I;
-                Q_InsertSubCategoryParams.ParamByName('companyparam').AsString := LabeledEdit.Text;
-                Q_InsertSubCategoryParams.ExecSQL;
+                    Q_InsertSubCategoryParams.Close;
+                    Q_InsertSubCategoryParams.ParamByName('company').AsString := CompanyName.Text;
+                    Q_InsertSubCategoryParams.ParamByName('id_category').AsInteger := I;
+                    Q_InsertSubCategoryParams.ParamByName('id_category').AsInteger := I;
+                    Q_InsertSubCategoryParams.ParamByName('companyparam').AsString := LabeledEdit.Text;
+                    Q_InsertSubCategoryParams.ExecSQL;
+                  end;
+                end;
               end;
             end;
           end;
         end;
       end;
     end;
+
+
+
   finally
 
   end;
