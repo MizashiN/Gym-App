@@ -112,9 +112,16 @@ type
     Panel37: TPanel;
     Label1: TLabel;
     Label2: TLabel;
-    DBComboBox1: TDBComboBox;
-    DBComboBox2: TDBComboBox;
-    procedure AddConfigClick(Sender: TObject);
+    SubCategCombobox: TComboBox;
+    CategCombobox: TComboBox;
+    Panel38: TPanel;
+    ParamEdit: TLabeledEdit;
+    Button1: TButton;
+    Q_InsertCategoryParam: TFDQuery;
+    Q_InsertSubCategoryParam: TFDQuery;
+    procedure FormCreate(Sender: TObject);
+    procedure CategComboboxSelect(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -129,17 +136,49 @@ implementation
 {$R *.dfm}
 
 uses
-  DM_Connection;
+  DM_Connection, Global_Functions;
 
-procedure TForm1.AddConfigClick(Sender: TObject);
+procedure TForm1.Button1Click(Sender: TObject);
 var
-  Categories: array of Integer;
-  SubCategories: array of Integer;
-  i,a,j,b,c,d: Integer;
-  SubPanel: TPanel;
-  LabeledEdit: TLabeledEdit;
+  company, param, category, subcategory: string;
 begin
-   Categories := [27,28,29];
+  company := CompanyName.Text;
+  param := ParamEdit.Text;
+  category := CategCombobox.Text;
+  subcategory := SubCategCombobox.Text;
+
+  if subcategory = '' then
+  begin
+    Q_InsertCategoryParam.Close;
+    Q_InsertCategoryParam.ParamByName('company').AsString := company;
+    Q_InsertCategoryParam.ParamByName('category').AsString := category;
+    Q_InsertCategoryParam.ParamByName('companyparam').AsString := param;
+    Q_InsertCategoryParam.ExecSQL;
+    ShowMessage('Succest CategoryParam Insert')
+  end
+  else
+  begin
+    Q_InsertSubCategoryParam.Close;
+    Q_InsertSubCategoryParam.ParamByName('company').AsString := company;
+    Q_InsertSubCategoryParam.ParamByName('category').AsString := category;
+    Q_InsertSubCategoryParam.ParamByName('subcategory').AsString := subcategory;
+    Q_InsertSubCategoryParam.ParamByName('companyparam').AsString := param;
+    Q_InsertSubCategoryParam.ExecSQL;
+    ShowMessage('Succest SubCategoryParam Insert')
+  end;
+end;
+
+procedure TForm1.CategComboboxSelect(Sender: TObject);
+var
+id_category: integer;
+begin
+  id_category := GetCategoryID(CategCombobox);
+  SelectSubCategories(SubCategCombobox, id_category);
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  SelectCategories(CategCombobox);
 end;
 
 end.

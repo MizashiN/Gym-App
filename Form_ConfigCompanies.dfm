@@ -12,9 +12,8 @@ object Form1: TForm1
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  OldCreateOrder = True
-  Position = poDesigned
-  PixelsPerInch = 96
+  Position = poDesktopCenter
+  OnCreate = FormCreate
   TextHeight = 15
   object PageControl1: TPageControl
     Left = 0
@@ -39,7 +38,6 @@ object Form1: TForm1
         ParentBiDiMode = False
         ParentBackground = False
         TabOrder = 0
-        ExplicitHeight = 337
         object CategoriesPanel: TPanel
           AlignWithMargins = True
           Left = 3
@@ -49,17 +47,35 @@ object Form1: TForm1
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitLeft = -21
           object Panel14: TPanel
             AlignWithMargins = True
-            Left = 379
+            Left = 703
             Top = 3
             Width = 182
             Height = 54
-            Align = alLeft
+            Align = alRight
             BevelOuter = bvNone
+            Caption = 'Insert'
             TabOrder = 0
-            ExplicitLeft = 380
-            ExplicitHeight = 44
+            object Button1: TButton
+              AlignWithMargins = True
+              Left = 3
+              Top = 3
+              Width = 176
+              Height = 48
+              Align = alClient
+              Caption = 'Insert'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -19
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+              OnClick = Button1Click
+              ExplicitTop = -3
+            end
           end
           object Panel20: TPanel
             AlignWithMargins = True
@@ -70,9 +86,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitLeft = 11
-            ExplicitTop = 6
-            ExplicitHeight = 44
             object Label2: TLabel
               AlignWithMargins = True
               Left = 3
@@ -89,7 +102,7 @@ object Form1: TForm1
               ParentFont = False
               ExplicitWidth = 98
             end
-            object DBComboBox2: TDBComboBox
+            object SubCategCombobox: TComboBox
               AlignWithMargins = True
               Left = 3
               Top = 30
@@ -97,8 +110,6 @@ object Form1: TForm1
               Height = 23
               Align = alClient
               TabOrder = 0
-              ExplicitLeft = 6
-              ExplicitTop = 31
             end
           end
           object Panel37: TPanel
@@ -110,9 +121,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 2
-            ExplicitLeft = 11
-            ExplicitTop = 6
-            ExplicitHeight = 44
             object Label1: TLabel
               AlignWithMargins = True
               Left = 3
@@ -129,7 +137,7 @@ object Form1: TForm1
               ParentFont = False
               ExplicitWidth = 74
             end
-            object DBComboBox1: TDBComboBox
+            object CategCombobox: TComboBox
               AlignWithMargins = True
               Left = 3
               Top = 30
@@ -137,9 +145,39 @@ object Form1: TForm1
               Height = 23
               Align = alClient
               TabOrder = 0
-              ExplicitLeft = 48
-              ExplicitTop = 40
-              ExplicitWidth = 145
+              OnSelect = CategComboboxSelect
+            end
+          end
+          object Panel38: TPanel
+            AlignWithMargins = True
+            Left = 379
+            Top = 3
+            Width = 182
+            Height = 54
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 3
+            ExplicitLeft = 376
+            ExplicitTop = 0
+            object ParamEdit: TLabeledEdit
+              AlignWithMargins = True
+              Left = 3
+              Top = 30
+              Width = 176
+              Height = 23
+              Margins.Bottom = 1
+              Align = alBottom
+              EditLabel.Width = 34
+              EditLabel.Height = 15
+              EditLabel.Caption = 'Param'
+              EditLabel.Font.Charset = DEFAULT_CHARSET
+              EditLabel.Font.Color = clMaroon
+              EditLabel.Font.Height = -12
+              EditLabel.Font.Name = 'Segoe UI'
+              EditLabel.Font.Style = []
+              EditLabel.ParentFont = False
+              TabOrder = 0
+              Text = ''
             end
           end
         end
@@ -190,6 +228,7 @@ object Form1: TForm1
               Top = 22
               Width = 128
               Height = 23
+              Align = alBottom
               EditLabel.Width = 87
               EditLabel.Height = 15
               EditLabel.Caption = 'Company Name'
@@ -206,10 +245,6 @@ object Form1: TForm1
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 2
-          ExplicitLeft = 528
-          ExplicitTop = 352
-          ExplicitWidth = 185
-          ExplicitHeight = 41
           object Panel11: TPanel
             Left = 0
             Top = 0
@@ -218,7 +253,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitHeight = 337
             object DBGrid1: TDBGrid
               AlignWithMargins = True
               Left = 10
@@ -291,9 +325,6 @@ object Form1: TForm1
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitLeft = 448
-            ExplicitWidth = 446
-            ExplicitHeight = 337
             object DBGrid2: TDBGrid
               AlignWithMargins = True
               Left = 10
@@ -376,8 +407,6 @@ object Form1: TForm1
     object TabSheet2: TTabSheet
       Caption = 'TabSheet2'
       ImageIndex = 1
-      ExplicitWidth = 281
-      ExplicitHeight = 163
       object Panel1: TPanel
         AlignWithMargins = True
         Left = 3
@@ -387,8 +416,6 @@ object Form1: TForm1
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 275
-        ExplicitHeight = 157
         object ScrappConfig: TPanel
           AlignWithMargins = True
           Left = 3
@@ -398,9 +425,6 @@ object Form1: TForm1
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitTop = -264
-          ExplicitWidth = 269
-          ExplicitHeight = 418
           object Title: TPanel
             AlignWithMargins = True
             Left = 151
@@ -410,7 +434,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitHeight = 412
             object Panel15: TPanel
               AlignWithMargins = True
               Left = 3
@@ -430,6 +453,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Title Tag'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel16: TPanel
@@ -451,6 +475,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Title Class'
                 TabOrder = 0
+                Text = ''
               end
             end
           end
@@ -463,7 +488,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitHeight = 412
             object Panel21: TPanel
               AlignWithMargins = True
               Left = 3
@@ -483,6 +507,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Parent Tag 2'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel22: TPanel
@@ -504,6 +529,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Parent Class'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel23: TPanel
@@ -525,6 +551,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Parent Class 2'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel24: TPanel
@@ -546,6 +573,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Parent Tag'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel25: TPanel
@@ -567,6 +595,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Parent Class'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel26: TPanel
@@ -588,6 +617,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Parent Tag'
                 TabOrder = 0
+                Text = ''
               end
             end
           end
@@ -600,7 +630,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 2
-            ExplicitHeight = 412
             object Panel18: TPanel
               AlignWithMargins = True
               Left = 3
@@ -620,6 +649,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Price Class'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel27: TPanel
@@ -641,6 +671,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Price Tag'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel28: TPanel
@@ -662,6 +693,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Price Class'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel29: TPanel
@@ -683,6 +715,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Price Tag'
                 TabOrder = 0
+                Text = ''
               end
             end
           end
@@ -695,7 +728,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 3
-            ExplicitHeight = 412
             object Panel5: TPanel
               AlignWithMargins = True
               Left = 3
@@ -715,6 +747,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Price Parent Class @'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel6: TPanel
@@ -736,6 +769,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Price Fraction'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel8: TPanel
@@ -757,6 +791,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Price Decimal'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel9: TPanel
@@ -778,6 +813,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Price Parent Tag @'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel2: TPanel
@@ -799,6 +835,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Price Integer'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel10: TPanel
@@ -820,6 +857,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Price Code'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel17: TPanel
@@ -841,6 +879,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Price Parent Class @'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel19: TPanel
@@ -862,6 +901,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Price Parent Tag @'
                 TabOrder = 0
+                Text = ''
               end
             end
           end
@@ -874,7 +914,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 4
-            ExplicitHeight = 412
             object Panel30: TPanel
               AlignWithMargins = True
               Left = 3
@@ -894,6 +933,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Img Class 2'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel31: TPanel
@@ -915,6 +955,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Img Tag 2'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel32: TPanel
@@ -936,6 +977,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Img Class'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel33: TPanel
@@ -957,6 +999,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Img Tag'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel34: TPanel
@@ -978,6 +1021,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Alt Img Tag '
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel35: TPanel
@@ -999,6 +1043,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Img Attribute'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel36: TPanel
@@ -1020,6 +1065,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Img Class'
                 TabOrder = 0
+                Text = ''
               end
             end
           end
@@ -1032,7 +1078,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 5
-            ExplicitHeight = 412
             object Panel40: TPanel
               AlignWithMargins = True
               Left = 3
@@ -1052,6 +1097,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Url Tag'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel42: TPanel
@@ -1073,6 +1119,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Url Attribute'
                 TabOrder = 0
+                Text = ''
               end
             end
             object Panel43: TPanel
@@ -1094,6 +1141,7 @@ object Form1: TForm1
                 EditLabel.Height = 15
                 EditLabel.Caption = 'Url Class'
                 TabOrder = 0
+                Text = ''
               end
             end
           end
@@ -1111,8 +1159,8 @@ object Form1: TForm1
       'JOIN companies m ON sp.id_company = m.id_company'
       'JOIN categories c ON sp.id_category = c.id_category'
       'WHERE sp.id_company = :id_company')
-    Left = 26
-    Top = 500
+    Left = 42
+    Top = 476
     ParamData = <
       item
         Name = 'ID_COMPANY'
@@ -1150,8 +1198,8 @@ object Form1: TForm1
       'JOIN categories c ON sp.id_category = c.id_category'
       'JOIN subcategories s ON sp.id_subcategory = s.id_subcategory'
       'WHERE sp.id_company = :id_company')
-    Left = 445
-    Top = 495
+    Left = 453
+    Top = 487
     ParamData = <
       item
         Name = 'ID_COMPANY'
@@ -1186,12 +1234,93 @@ object Form1: TForm1
   end
   object D_CategParams: TDataSource
     DataSet = Q_CategParams
-    Left = 55
-    Top = 500
+    Left = 119
+    Top = 484
   end
   object D_SubCategParams: TDataSource
     DataSet = Q_SubCategParams
-    Left = 474
-    Top = 495
+    Left = 570
+    Top = 487
+  end
+  object Q_InsertCategoryParam: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      
+        'INSERT INTO categoryparams (id_company, id_category, companypara' +
+        'm)'
+      'VALUES '
+      '('
+      '(SELECT id_company FROM companies WHERE company = :company),'
+      '(SELECT id_category FROM categories WHERE category = :category),'
+      ':companyparam'
+      ')')
+    Left = 642
+    Top = 108
+    ParamData = <
+      item
+        Name = 'COMPANY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'CATEGORY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'COMPANYPARAM'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object Q_InsertSubCategoryParam: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      
+        'INSERT INTO subcategoryparams (id_company, id_category, id_subca' +
+        'tegory, companyparam)'
+      'VALUES '
+      '('
+      '(SELECT id_company FROM companies WHERE company = :company),'
+      '(SELECT id_category FROM categories WHERE category = :category),'
+      
+        '(SELECT id_subcategory FROM subcategories WHERE subcategory = :s' +
+        'ubcategory),'
+      ':companyparam'
+      ')')
+    Left = 672
+    Top = 108
+    ParamData = <
+      item
+        Name = 'COMPANY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'CATEGORY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'SUBCATEGORY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'COMPANYPARAM'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
   end
 end
