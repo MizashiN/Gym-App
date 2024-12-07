@@ -15,41 +15,166 @@ object Form1: TForm1
   Position = poDesktopCenter
   OnCreate = FormCreate
   TextHeight = 15
-  object PageControl1: TPageControl
+  object PageControl: TPageControl
     Left = 0
     Top = 0
     Width = 908
     Height = 554
-    ActivePage = TabSheet1
+    ActivePage = BasicInformations
     Align = alClient
     TabOrder = 0
-    object TabSheet1: TTabSheet
-      AlignWithMargins = True
-      Caption = 'Basic Informations'
-      object Panel12: TPanel
-        Left = 0
-        Top = 0
+    OnChange = PageControlChange
+    object BrandRegistration: TTabSheet
+      Caption = 'Brand Registration'
+      ImageIndex = 2
+      object Panel39: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
         Width = 894
         Height = 518
         Align = alClient
-        BevelOuter = bvNone
+        TabOrder = 0
+        ExplicitLeft = 320
+        ExplicitTop = 192
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+        object Company: TPanel
+          AlignWithMargins = True
+          Left = 4
+          Top = 4
+          Width = 886
+          Height = 54
+          Align = alTop
+          BevelOuter = bvNone
+          TabOrder = 0
+          ExplicitLeft = 0
+          object Panel4: TPanel
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 134
+            Height = 48
+            Align = alLeft
+            AutoSize = True
+            BevelOuter = bvNone
+            TabOrder = 0
+            object CompanyName: TLabeledEdit
+              AlignWithMargins = True
+              Left = 3
+              Top = 22
+              Width = 128
+              Height = 23
+              Align = alBottom
+              EditLabel.Width = 87
+              EditLabel.Height = 15
+              EditLabel.Caption = 'Company Name'
+              TabOrder = 0
+              Text = 'Growth Supplements'
+              ExplicitLeft = 6
+              ExplicitTop = 28
+            end
+          end
+          object Button2: TButton
+            AlignWithMargins = True
+            Left = 693
+            Top = 3
+            Width = 190
+            Height = 48
+            Align = alRight
+            Caption = 'Insert Brand'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            OnClick = Button2Click
+            ExplicitTop = 6
+          end
+        end
+        object Panel41: TPanel
+          AlignWithMargins = True
+          Left = 4
+          Top = 64
+          Width = 886
+          Height = 450
+          Align = alClient
+          TabOrder = 1
+          ExplicitLeft = 32
+          ExplicitTop = 304
+          ExplicitWidth = 185
+          ExplicitHeight = 41
+          object DBGrid3: TDBGrid
+            AlignWithMargins = True
+            Left = 4
+            Top = 4
+            Width = 878
+            Height = 442
+            Align = alClient
+            DataSource = D_Companies
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -12
+            TitleFont.Name = 'Segoe UI'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'company'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = 'Segoe UI'
+                Font.Style = []
+                Title.Caption = 'Company'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -16
+                Title.Font.Name = 'Segoe UI'
+                Title.Font.Style = []
+                Visible = True
+              end>
+          end
+        end
+      end
+    end
+    object BasicInformations: TTabSheet
+      AlignWithMargins = True
+      Caption = 'Url Params Informations'
+      object Panel12: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 888
+        Height = 512
+        Align = alClient
         BiDiMode = bdLeftToRight
         Color = clWhite
         ParentBiDiMode = False
         ParentBackground = False
         TabOrder = 0
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 894
+        ExplicitHeight = 518
         object CategoriesPanel: TPanel
           AlignWithMargins = True
-          Left = 3
-          Top = 63
-          Width = 888
+          Left = 4
+          Top = 4
+          Width = 880
           Height = 60
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitLeft = 3
+          ExplicitTop = 63
+          ExplicitWidth = 888
           object Panel14: TPanel
             AlignWithMargins = True
-            Left = 703
+            Left = 695
             Top = 3
             Width = 182
             Height = 54
@@ -57,6 +182,7 @@ object Form1: TForm1
             BevelOuter = bvNone
             Caption = 'Insert'
             TabOrder = 0
+            ExplicitLeft = 703
             object Button1: TButton
               AlignWithMargins = True
               Left = 3
@@ -73,7 +199,6 @@ object Form1: TForm1
               ParentFont = False
               TabOrder = 0
               OnClick = Button1Click
-              ExplicitTop = -3
             end
           end
           object Panel20: TPanel
@@ -156,8 +281,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 3
-            ExplicitLeft = 376
-            ExplicitTop = 0
             object ParamEdit: TLabeledEdit
               AlignWithMargins = True
               Left = 3
@@ -180,84 +303,35 @@ object Form1: TForm1
             end
           end
         end
-        object Company: TPanel
-          AlignWithMargins = True
-          Left = 3
-          Top = 3
-          Width = 888
-          Height = 54
-          Align = alTop
-          BevelOuter = bvNone
-          TabOrder = 1
-          object Panel3: TPanel
-            AlignWithMargins = True
-            Left = 143
-            Top = 3
-            Width = 226
-            Height = 48
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 0
-            object UrlBase: TLabeledEdit
-              AlignWithMargins = True
-              Left = 3
-              Top = 22
-              Width = 220
-              Height = 23
-              EditLabel.Width = 42
-              EditLabel.Height = 15
-              EditLabel.Caption = 'Url Base'
-              TabOrder = 0
-              Text = 'https://www.gsuplementos.com.br'
-            end
-          end
-          object Panel4: TPanel
-            AlignWithMargins = True
-            Left = 3
-            Top = 3
-            Width = 134
-            Height = 48
-            Align = alLeft
-            AutoSize = True
-            BevelOuter = bvNone
-            TabOrder = 1
-            object CompanyName: TLabeledEdit
-              AlignWithMargins = True
-              Left = 3
-              Top = 22
-              Width = 128
-              Height = 23
-              Align = alBottom
-              EditLabel.Width = 87
-              EditLabel.Height = 15
-              EditLabel.Caption = 'Company Name'
-              TabOrder = 0
-              Text = 'Growth Supplements'
-            end
-          end
-        end
         object Panel7: TPanel
-          Left = 0
-          Top = 126
-          Width = 894
-          Height = 392
+          AlignWithMargins = True
+          Left = 4
+          Top = 70
+          Width = 880
+          Height = 438
           Align = alClient
-          BevelOuter = bvNone
-          TabOrder = 2
+          TabOrder = 1
+          ExplicitLeft = 0
+          ExplicitTop = 126
+          ExplicitWidth = 894
+          ExplicitHeight = 392
           object Panel11: TPanel
-            Left = 0
-            Top = 0
+            Left = 1
+            Top = 1
             Width = 409
-            Height = 392
+            Height = 436
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 0
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitHeight = 392
             object DBGrid1: TDBGrid
               AlignWithMargins = True
               Left = 10
               Top = 10
               Width = 389
-              Height = 372
+              Height = 416
               Margins.Left = 10
               Margins.Top = 10
               Margins.Right = 10
@@ -317,19 +391,23 @@ object Form1: TForm1
             end
           end
           object Panel13: TPanel
-            Left = 409
-            Top = 0
-            Width = 485
-            Height = 392
+            Left = 410
+            Top = 1
+            Width = 469
+            Height = 436
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
+            ExplicitLeft = 409
+            ExplicitTop = 0
+            ExplicitWidth = 485
+            ExplicitHeight = 392
             object DBGrid2: TDBGrid
               AlignWithMargins = True
               Left = 10
               Top = 10
-              Width = 465
-              Height = 372
+              Width = 449
+              Height = 416
               Margins.Left = 10
               Margins.Top = 10
               Margins.Right = 10
@@ -395,7 +473,7 @@ object Form1: TForm1
                   Title.Font.Height = -15
                   Title.Font.Name = 'Segoe UI'
                   Title.Font.Style = []
-                  Width = 111
+                  Width = 97
                   Visible = True
                 end>
             end
@@ -968,8 +1046,8 @@ object Form1: TForm1
               TabOrder = 2
               object AltImgClass: TLabeledEdit
                 AlignWithMargins = True
-                Left = 3
-                Top = 20
+                Left = 9
+                Top = 23
                 Width = 130
                 Height = 23
                 EditLabel.Width = 69
@@ -1102,12 +1180,14 @@ object Form1: TForm1
             object Panel42: TPanel
               AlignWithMargins = True
               Left = 3
-              Top = 107
+              Top = 159
               Width = 136
               Height = 46
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 1
+              ExplicitLeft = 0
+              ExplicitTop = 104
               object UrlAttribute: TLabeledEdit
                 AlignWithMargins = True
                 Left = 3
@@ -1143,6 +1223,30 @@ object Form1: TForm1
                 Text = ''
               end
             end
+            object Panel44: TPanel
+              AlignWithMargins = True
+              Left = 3
+              Top = 107
+              Width = 136
+              Height = 46
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 3
+              ExplicitLeft = 6
+              ExplicitTop = 115
+              object UrlBase: TLabeledEdit
+                AlignWithMargins = True
+                Left = 5
+                Top = 23
+                Width = 130
+                Height = 23
+                EditLabel.Width = 42
+                EditLabel.Height = 15
+                EditLabel.Caption = 'Url Base'
+                TabOrder = 0
+                Text = ''
+              end
+            end
           end
         end
       end
@@ -1158,8 +1262,8 @@ object Form1: TForm1
       'JOIN companies m ON sp.id_company = m.id_company'
       'JOIN categories c ON sp.id_category = c.id_category'
       'WHERE sp.id_company = :id_company')
-    Left = 42
-    Top = 476
+    Left = 90
+    Top = 484
     ParamData = <
       item
         Name = 'ID_COMPANY'
@@ -1197,7 +1301,7 @@ object Form1: TForm1
       'JOIN categories c ON sp.id_category = c.id_category'
       'JOIN subcategories s ON sp.id_subcategory = s.id_subcategory'
       'WHERE sp.id_company = :id_company')
-    Left = 453
+    Left = 541
     Top = 487
     ParamData = <
       item
@@ -1241,8 +1345,122 @@ object Form1: TForm1
     Left = 570
     Top = 487
   end
-  object FDQuery1: TFDQuery
-    Left = 682
-    Top = 116
+  object Q_InsertCategoryParam: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      
+        'INSERT INTO categoryparams (id_company, id_category, companypara' +
+        'm)'
+      'VALUES '
+      '('
+      '(SELECT id_company FROM companies WHERE company = :company),'
+      '(SELECT id_category FROM categories WHERE category = :category),'
+      ':companyparam'
+      ')')
+    Left = 848
+    Top = 82
+    ParamData = <
+      item
+        Name = 'COMPANY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'CATEGORY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'COMPANYPARAM'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object Q_InsertSubCategoryParam: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      
+        'INSERT INTO subcategoryparams (id_company, id_category, id_subca' +
+        'tegory, companyparam)'
+      'VALUES '
+      '('
+      '(SELECT id_company FROM companies WHERE company = :company),'
+      '(SELECT id_category FROM categories WHERE category = :category),'
+      
+        '(SELECT id_subcategory FROM subcategories WHERE subcategory = :s' +
+        'ubcategory),'
+      ':companyparam'
+      ')')
+    Left = 848
+    Top = 52
+    ParamData = <
+      item
+        Name = 'COMPANY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'CATEGORY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'SUBCATEGORY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'COMPANYPARAM'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object Q_Companies: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      'SELECT company FROM companies')
+    Left = 122
+    Top = 268
+    object Q_Companiescompany: TStringField
+      FieldName = 'company'
+      Origin = 'company'
+      Required = True
+      Size = 200
+    end
+  end
+  object D_Companies: TDataSource
+    DataSet = Q_Companies
+    Left = 151
+    Top = 268
+  end
+  object Q_InsertCompany: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      'INSERT INTO companies (company)'
+      'VALUES (:company)')
+    Left = 669
+    Top = 47
+    ParamData = <
+      item
+        Name = 'COMPANY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
   end
 end
