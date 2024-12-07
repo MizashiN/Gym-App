@@ -13,11 +13,9 @@ object Supplements: TSupplements
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  OldCreateOrder = True
   Position = poDesktopCenter
   Visible = True
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
@@ -65,8 +63,8 @@ object Supplements: TSupplements
         object Label2: TLabel
           Left = 0
           Top = 0
-          Width = 347
-          Height = 67
+          Width = 1110
+          Height = 75
           Align = alClient
           Caption = 'Supplements'
           Font.Charset = DEFAULT_CHARSET
@@ -75,6 +73,7 @@ object Supplements: TSupplements
           Font.Name = 'Hammersmith One'
           Font.Style = []
           ParentFont = False
+          ExplicitWidth = 365
         end
         object Shape2: TShape
           AlignWithMargins = True
@@ -123,8 +122,8 @@ object Supplements: TSupplements
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 174
-            Height = 32
+            Width = 187
+            Height = 36
             Align = alClient
             Caption = 'Subcategories'
             Font.Charset = DEFAULT_CHARSET
@@ -135,6 +134,8 @@ object Supplements: TSupplements
             ParentFont = False
             Layout = tlBottom
             Visible = False
+            ExplicitWidth = 183
+            ExplicitHeight = 33
           end
           object SubcategoriesCombobox: TComboBox
             AlignWithMargins = True
@@ -177,8 +178,8 @@ object Supplements: TSupplements
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 86
-            Height = 32
+            Width = 187
+            Height = 36
             Align = alClient
             Caption = 'Brands'
             Font.Charset = DEFAULT_CHARSET
@@ -188,6 +189,8 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             Layout = tlBottom
+            ExplicitWidth = 87
+            ExplicitHeight = 33
           end
           object BrandsCombobox: TComboBox
             AlignWithMargins = True
@@ -227,8 +230,8 @@ object Supplements: TSupplements
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 132
-            Height = 32
+            Width = 187
+            Height = 36
             Align = alClient
             Caption = 'Categories'
             Font.Charset = DEFAULT_CHARSET
@@ -239,6 +242,8 @@ object Supplements: TSupplements
             ParentFont = False
             Layout = tlBottom
             Visible = False
+            ExplicitWidth = 137
+            ExplicitHeight = 33
           end
           object CategoriesCombobox: TComboBox
             AlignWithMargins = True
@@ -297,8 +302,8 @@ object Supplements: TSupplements
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 73
-            Height = 32
+            Width = 187
+            Height = 36
             Align = alClient
             Caption = 'Types'
             Font.Charset = DEFAULT_CHARSET
@@ -309,6 +314,8 @@ object Supplements: TSupplements
             ParentFont = False
             Layout = tlBottom
             Visible = False
+            ExplicitWidth = 74
+            ExplicitHeight = 33
           end
           object TypesCombobox: TComboBox
             AlignWithMargins = True

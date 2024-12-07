@@ -10,17 +10,12 @@ uses
   Winapi.Windows, System.JSON, REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope, System.Classes,  System.NetEncoding,
   IdHTTP, IdSSL, IdSSLOpenSSL, System.Net.HttpClient, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Winapi.GDIPAPI, Winapi.GDIPOBJ;
 
-
-function APISupp(brand, category, subcategory: string): TJSONArray;
-function GetCategoryID(Combobox: TComboBox): integer;
-function GetSubcategoryID(Combobox: TComboBox): integer;
+function GetCompanyID(company: string): integer;
+function GetCategoryID(category: string): integer;
+function GetSubcategoryID(subcategory: string): integer;
+procedure FetchCombobox(Query: TFDQuery; ComboBox: TComboBox; ParamInt: integer  = -1);
 procedure LoadImage(image_src: string; Image: TImage);
-procedure SelectBrands(ComboBox: TComboBox);
-procedure SelectCategories(Combobox: TComboBox);
-procedure SelectSubcategories(Combobox: TComboBox; id_category: integer);
 procedure HideScrollbars(ScrollBox: TScrollBox);
-procedure CheckConnection;
-procedure DeleteConfig;
 procedure InsertScrappTest(
   parent_tag, parent_class,  title_tag, title_class, price_tag, price_class,
   img_tag, img_class,img_attribute, url_tag, url_class, url_attribute, url_base,
@@ -40,13 +35,8 @@ begin
   MemStream := TMemoryStream.Create;
   queryTemp := TFDQuery.Create(nil);
 
-//  image_src := StringReplace(image_src, '?', '', [rfReplaceAll]);
-//  image_src := StringReplace(image_src, '&', '', [rfReplaceAll]);
-
   try
     queryTemp.Connection := DM_Con.Connection;
-
-    CheckConnection;
 
     queryTemp.SQL.Text := 'SELECT image_blob FROM images WHERE image_src = :image_src';
     queryTemp.ParamByName('image_src').AsString := image_src;
@@ -69,46 +59,28 @@ begin
   end;
 end;
 
-function APISupp(brand, category, subcategory: string): TJSONArray;
-var
-  RESTClient: TRESTClient;
-  RESTRequest: TRESTRequest;
-  RESTResponse: TRESTResponse;
-  JSONValue: TJSONValue;
-  URL: String;
+procedure FetchCombobox(Query: TFDQuery; ComboBox: TComboBox; ParamInt: integer  = -1);
 begin
-  RESTClient := TRESTClient.Create(nil);
-  RESTRequest := TRESTRequest.Create(nil);
-  RESTResponse := TRESTResponse.Create(nil);
-  Result := TJSONArray.Create;
-
   try
-    // Construindo a URL
-    if subcategory = '' then
-      URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category
-    else
-      URL := 'http://127.0.0.1:5000/' + brand + '?category=' + category + '&subcategory=' + subcategory;
+    Query.Close;
 
-    RESTClient.BaseURL := URL;
-    RESTRequest.Client := RESTClient;
-    RESTRequest.Response := RESTResponse;
-    RESTRequest.Method := rmGET;
-    RESTRequest.Execute;
+    if ParamInt <> -1 then
+      Query.Params[0].AsInteger := ParamInt;
 
-    // Parse JSON response
-    JSONValue := TJSONObject.ParseJSONValue(RESTResponse.Content);
-    try
-      if (JSONValue is TJSONObject) and (TJSONObject(JSONValue).GetValue('products') <> nil) then
-      begin
-        Result := TJSONObject(JSONValue).GetValue<TJSONArray>('products').Clone as TJSONArray;
-      end;
-    finally
-      JSONValue.Free;
+    Query.Open;
+
+    ComboBox.Clear;
+
+    while not Query.Eof do
+    begin
+      ComboBox.Items.Add(Query.Fields[0].AsString);
+      Query.Next;
     end;
-  finally
-    RESTClient.Free;
-    RESTRequest.Free;
-    RESTResponse.Free;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
   end;
 end;
 
@@ -117,145 +89,7 @@ begin
  ShowScrollBar(ScrollBox.Handle, SB_BOTH, False);
 end;
 
-
-procedure CheckConnection;
-begin
-  // Verifica se a conexão está ativa
-  if not DM_Con.Connection.Connected then
-  begin
-    try
-      DM_Con.Connection.Connected := True;
-    except
-      on E: Exception do
-      begin
-        ShowMessage('Erro ao conectar ao banco de dados: ' + E.Message);
-      end;
-    end;
-  end;
-end;
-
-
-
-procedure SelectBrands(ComboBox: TComboBox);
-var
-  queryTemp: TFDQuery;
-begin
-  queryTemp := TFDQuery.Create(nil);
-  try
-    queryTemp.Connection := DM_Con.Connection;
-
-    CheckConnection;
-
-    queryTemp.SQL.Text := 'SELECT brand FROM brands';
-    queryTemp.Open;
-
-    ComboBox.Clear;
-
-    while not queryTemp.Eof do
-    begin
-      ComboBox.Items.Add(queryTemp.FieldByName('brand').AsString);
-      queryTemp.Next;
-    end;
-  except
-    on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-    end;
-  end;
-  queryTemp.Free;
-end;
-
-procedure SelectCategories(Combobox: TComboBox);
-var
-  queryTemp: TFDQuery;
-begin
-  queryTemp := TFDQuery.Create(nil);
-  try
-    queryTemp.Connection := DM_Con.Connection;
-
-    CheckConnection;
-
-    queryTemp.SQL.Text := 'SELECT category FROM categories';
-    queryTemp.Open;
-
-    ComboBox.Clear;
-
-    while not queryTemp.Eof do
-    begin
-      ComboBox.Items.Add(queryTemp.FieldByName('category').AsString);
-      queryTemp.Next;
-    end;
-  except
-    on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-    end;
-  end;
-  queryTemp.Free;
-end;
-
-procedure SelectSubcategories(Combobox: TComboBox; id_category: integer);
-var
-  queryTemp: TFDQuery;
-begin
-  queryTemp := TFDQuery.Create(nil);
-  try
-    queryTemp.Connection := DM_Con.Connection;
-
-    CheckConnection;
-
-    queryTemp.SQL.Text := 'SELECT subcategory FROM subcategories WHERE id_category = (SELECT id_category FROM categories WHERE id_category = :id_category)';
-    queryTemp.ParamByName('id_category').AsInteger := id_category;
-    queryTemp.Open;
-
-    ComboBox.Clear;
-
-    while not queryTemp.Eof do
-    begin
-      ComboBox.Items.Add(queryTemp.FieldByName('subcategory').AsString);
-      queryTemp.Next;
-    end;
-  except
-    on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-    end;
-  end;
-  queryTemp.Free;
-end;
-
-procedure SelectTypes(Combobox: TComboBox; id_subcategory: integer);
-var
-  queryTemp: TFDQuery;
-begin
-  queryTemp := TFDQuery.Create(nil);
-  try
-    queryTemp.Connection := DM_Con.Connection;
-
-    CheckConnection;
-
-    queryTemp.SQL.Text := 'SELECT type FROM tyoes WHERE id_type = (SELECT id_subcategory FROM subcategories WHERE id_subcategory = :id_subcategory)';
-    queryTemp.ParamByName('id_subcategory').AsInteger := id_subcategory;
-    queryTemp.Open;
-
-    ComboBox.Clear;
-
-    while not queryTemp.Eof do
-    begin
-      ComboBox.Items.Add(queryTemp.FieldByName('type').AsString);
-      queryTemp.Next;
-    end;
-  except
-    on E: Exception do
-    begin
-      ShowMessage('Erro: ' + E.Message);
-    end;
-  end;
-  queryTemp.Free;
-end;
-
-
-function GetCategoryID(Combobox: TComboBox): integer;
+function GetCategoryID(category: string): integer;
 var
   queryTemp: TFDQuery;
 begin
@@ -264,16 +98,14 @@ begin
   try
     queryTemp.Connection := DM_Con.Connection;
 
-    CheckConnection;
-
     queryTemp.SQL.Text := 'SELECT id_category FROM categories WHERE category = :category';
-    queryTemp.ParamByName('category').AsString := Combobox.Text;
+    queryTemp.ParamByName('category').AsString := category;
     queryTemp.Open;
 
     if not queryTemp.IsEmpty then
       Result := queryTemp.FieldByName('id_category').AsInteger
     else
-      ShowMessage('Nenhuma categoria encontrada com o nome: ' + Combobox.Text);
+      ShowMessage('Nenhuma categoria encontrada com o nome: ' + category);
   except
     on E: Exception do
     begin
@@ -283,7 +115,8 @@ begin
   queryTemp.Free;
 end;
 
-function GetSubcategoryID(Combobox: TComboBox): integer;
+
+function GetCompanyID(company: string): integer;
 var
   queryTemp: TFDQuery;
 begin
@@ -292,16 +125,46 @@ begin
   try
     queryTemp.Connection := DM_Con.Connection;
 
-    CheckConnection;
+    queryTemp.SQL.Text := 'SELECT id_company FROM companies WHERE company = :company';
+    queryTemp.ParamByName('company').AsString := company;
+    queryTemp.Open;
+
+    if not queryTemp.IsEmpty then
+    begin
+      Result := queryTemp.FieldByName('id_company').AsInteger;
+    end
+    else
+    begin
+      ShowMessage('Nenhuma categoria encontrada com o nome: ' + company);
+    end;
+
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+
+function GetSubcategoryID(subcategory: string): integer;
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  Result := 0;
+  try
+    queryTemp.Connection := DM_Con.Connection;
 
     queryTemp.SQL.Text := 'SELECT id_subcategory FROM subcategories WHERE subcategory = :subcategory';
-    queryTemp.ParamByName('subcategory').AsString := Combobox.Text;
+    queryTemp.ParamByName('subcategory').AsString := subcategory;
     queryTemp.Open;
 
     if not queryTemp.IsEmpty then
       Result := queryTemp.FieldByName('id_subcategory').AsInteger
     else
-      ShowMessage('Nenhuma categoria encontrada com o nome: ' + Combobox.Text);
+      ShowMessage('Nenhuma categoria encontrada com o nome: ' + subcategory);
   except
     on E: Exception do
     begin
@@ -326,8 +189,6 @@ begin
   try
     queryTemp.Connection := DM_Con.Connection;
 
-    CheckConnection;
-
     queryTemp.SQL.Text :=
       'INSERT INTO ScrappTest (' +
       '    parent_tag, title_tag, img_tag, price_tag, url_tag, ' +
@@ -347,7 +208,6 @@ begin
       '    :alt_img_class_2, :alt_parent_tag_2, :alt_parent_tag, :alt_parent_class, :url_test' +
       ');';
 
-    // Atribui valores aos parâmetros
     queryTemp.ParamByName('parent_tag').AsString := parent_tag;
     queryTemp.ParamByName('title_tag').AsString := title_tag;
     queryTemp.ParamByName('img_tag').AsString := img_tag;
@@ -390,8 +250,6 @@ begin
   queryTemp.Free;
 end;
 
-
-
 procedure DeleteConfig;
 var
   queryTemp: TFDQuery;
@@ -399,8 +257,6 @@ begin
   queryTemp := TFDQuery.Create(nil);
   try
     queryTemp.Connection := DM_Con.Connection;
-
-    CheckConnection;
 
     queryTemp.SQL.Text := 'DELETE FROM ScrappTest';
 
@@ -413,7 +269,5 @@ begin
   end;
   queryTemp.Free;
 end;
-
-
 
 end.

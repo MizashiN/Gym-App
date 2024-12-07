@@ -16,7 +16,6 @@ type
     Panel1: TPanel;
     Company: TPanel;
     Panel4: TPanel;
-    CompanyName: TLabeledEdit;
     ScrappConfig: TPanel;
     CategoriesPanel: TPanel;
     Panel14: TPanel;
@@ -120,19 +119,35 @@ type
     BrandRegistration: TTabSheet;
     Panel39: TPanel;
     Panel41: TPanel;
-    DBGrid3: TDBGrid;
-    Button2: TButton;
+    CompaniesGrid: TDBGrid;
     Q_Companies: TFDQuery;
     D_Companies: TDataSource;
-    Q_InsertCompany: TFDQuery;
     Panel44: TPanel;
     UrlBase: TLabeledEdit;
     Q_Companiescompany: TStringField;
+    Panel3: TPanel;
+    Panel45: TPanel;
+    Button3: TButton;
+    Button2: TButton;
+    CompaniesCombobox: TComboBox;
+    Label3: TLabel;
+    Q_Categories: TFDQuery;
+    Q_Subcategories: TFDQuery;
+    Q_Categoriescategory: TStringField;
+    Q_Subcategoriessubcategory: TStringField;
+    Panel46: TPanel;
+    Panel47: TPanel;
+    Panel48: TPanel;
+    Panel49: TPanel;
+    Label4: TLabel;
+    ComboBox1: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure CategComboboxSelect(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure PageControlChange(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure CompaniesComboboxSelect(Sender: TObject);
   private
     { Private declarations }
   public
@@ -152,19 +167,18 @@ uses
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  company, param, category, subcategory: string;
+  id_company, id_category, id_subcategory: integer;
 begin
-  company := CompanyName.Text;
-  param := ParamEdit.Text;
-  category := CategCombobox.Text;
-  subcategory := SubCategCombobox.Text;
+  id_category := GetCategoryID(CategCombobox.Text);
+  id_subcategory := GetSubcategoryID(SubCategCombobox.Text);
+  id_company := GetCompanyID(CompaniesCombobox.Text);
 
-  if subcategory = '' then
+  if SubCategCombobox.Text = '' then
   begin
     Q_InsertCategoryParam.Close;
-    Q_InsertCategoryParam.ParamByName('company').AsString := company;
-    Q_InsertCategoryParam.ParamByName('category').AsString := category;
-    Q_InsertCategoryParam.ParamByName('companyparam').AsString := param;
+    Q_InsertCategoryParam.ParamByName('id_company').AsInteger := id_company;
+    Q_InsertCategoryParam.ParamByName('id_category').AsInteger := id_category;
+    Q_InsertCategoryParam.ParamByName('companyparam').AsString := CompaniesCombobox.Text;
     Q_InsertCategoryParam.ExecSQL;
     ShowMessage('Succest CategoryParam Insert');
     Q_CategParams.Refresh;
@@ -172,10 +186,10 @@ begin
   else
   begin
     Q_InsertSubCategoryParam.Close;
-    Q_InsertSubCategoryParam.ParamByName('company').AsString := company;
-    Q_InsertSubCategoryParam.ParamByName('category').AsString := category;
-    Q_InsertSubCategoryParam.ParamByName('subcategory').AsString := subcategory;
-    Q_InsertSubCategoryParam.ParamByName('companyparam').AsString := param;
+    Q_InsertSubCategoryParam.ParamByName('id_company').AsInteger := id_company;
+    Q_InsertSubCategoryParam.ParamByName('id_category').AsInteger := id_category;
+    Q_InsertSubCategoryParam.ParamByName('id_subcategory').AsInteger := id_subcategory;
+    Q_InsertSubCategoryParam.ParamByName('companyparam').AsString := CompaniesCombobox.Text;
     Q_InsertSubCategoryParam.ExecSQL;
     ShowMessage('Succest SubCategoryParam Insert');
     Q_SubCategParams.Refresh;
@@ -183,29 +197,47 @@ begin
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
-var
-  company: string;
 begin
-  company := CompanyName.Text;
+  if MessageDlg('Deseja realmente excluir o registro selecionado?',
+                mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    // Exclui o registro
+    D_Companies.DataSet.Delete;
+  end;
+end;
 
-  Q_InsertCompany.Close;
-  Q_InsertCompany.ParamByName('company').AsString := company;
-  Q_InsertCompany.ExecSQL;
-
-  PageControl.ActivePage := UrlParamsInformations;
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  D_Companies.DataSet.Insert;
+  CompaniesGrid.SetFocus;
 end;
 
 procedure TForm1.CategComboboxSelect(Sender: TObject);
 var
   id_category: integer;
 begin
-  id_category := GetCategoryID(CategCombobox);
-  SelectSubCategories(SubCategCombobox, id_category);
+  id_category := GetCategoryID(CategCombobox.Text);
+  FetchCombobox(Q_SubCategories, SubCategCombobox, id_category);
+end;
+
+procedure TForm1.CompaniesComboboxSelect(Sender: TObject);
+var
+id_company: integer;
+begin
+   id_company := GetCompanyID(CompaniesCombobox.Text);
+
+   Q_CategParams.Close;
+   Q_CategParams.ParamByName('id_company').AsInteger := id_company;
+   Q_CategParams.Open;
+
+   Q_SubCategParams.Close;
+   Q_SubCategParams.ParamByName('id_company').AsInteger := id_company;
+   Q_SubCategParams.Open;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  SelectCategories(CategCombobox);
+  //SelectCategories(CategCombobox);
 
   Q_Companies.Close;
   Q_Companies.Open;
@@ -213,10 +245,7 @@ begin
 end;
 
 procedure TForm1.PageControlChange(Sender: TObject);
-var
- company: string;
 begin
- company := CompanyName.Text;
 
  if PageControl.TabIndex = 0 then
  begin
@@ -225,13 +254,8 @@ begin
  end
  else if PageControl.TabIndex = 1 then
  begin
-   Q_CategParams.Close;
-   Q_CategParams.ParamByName('company').AsString := company;
-   Q_CategParams.Open;
-
-   Q_SubCategParams.Close;
-   Q_SubCategParams.ParamByName('company').AsString := company;
-   Q_SubCategParams.Open;
+   FetchCombobox(Q_Companies, CompaniesCombobox);
+   FetchCombobox(Q_Categories, CategCombobox);
  end
  else if PageControl.TabIndex = 2 then
  begin

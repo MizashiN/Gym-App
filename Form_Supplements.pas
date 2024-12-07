@@ -58,7 +58,7 @@ begin
   CategoriesLabel.Visible := True;
   CategoriesCombobox.Visible := True;
 
-  SelectCategories(CategoriesCombobox);
+  //SelectCategories(CategoriesCombobox);
 end;
 procedure TSupplements.PanelClick(Sender: TObject);
 var
@@ -108,8 +108,8 @@ begin
   SubcategoriesLabel.Visible := True;
   SubcategoriesCombobox.Visible := True;
 
-  id_category := GetCategoryID(CategoriesCombobox);
-  SelectSubCategories(SubcategoriesCombobox, id_category);
+  id_category := GetCategoryID(CategoriesCombobox.Text);
+  //SelectSubCategories(SubcategoriesCombobox, id_category);
 end;
 
 procedure TSupplements.CreateCardsProduct;
@@ -208,7 +208,7 @@ end;
 
 procedure TSupplements.FormCreate(Sender: TObject);
 begin
-  SelectBrands(BrandsCombobox);
+  //SelectBrands(BrandsCombobox);
 end;
 
 procedure TSupplements.OpenURL(URL: string);
@@ -224,7 +224,7 @@ begin
   category := StringReplace(LowerCase(CategoriesCombobox.Text), ' ', '', [rfReplaceAll]);
   subcategory := StringReplace(LowerCase(SubcategoriesCombobox.Text), ' ', '', [rfReplaceAll]);
 
-  ProductsArray := APISupp(brand, category, subcategory);
+  //ProductsArray := APISupp(brand, category, subcategory);
   CreateCardsProduct;
 end;
 

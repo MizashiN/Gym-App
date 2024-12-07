@@ -4,7 +4,7 @@ object Form1: TForm1
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Config Companies'
-  ClientHeight = 554
+  ClientHeight = 597
   ClientWidth = 908
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,8 +19,8 @@ object Form1: TForm1
     Left = 0
     Top = 0
     Width = 908
-    Height = 554
-    ActivePage = BrandRegistration
+    Height = 597
+    ActivePage = TabSheet2
     Align = alClient
     TabOrder = 0
     OnChange = PageControlChange
@@ -32,86 +32,23 @@ object Form1: TForm1
         Left = 3
         Top = 3
         Width = 894
-        Height = 518
+        Height = 561
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 320
-        ExplicitTop = 192
-        ExplicitWidth = 185
-        ExplicitHeight = 41
-        object Company: TPanel
-          AlignWithMargins = True
-          Left = 4
-          Top = 4
-          Width = 886
-          Height = 54
-          Align = alTop
-          BevelOuter = bvNone
-          TabOrder = 0
-          ExplicitLeft = 0
-          object Panel4: TPanel
-            AlignWithMargins = True
-            Left = 3
-            Top = 3
-            Width = 134
-            Height = 48
-            Align = alLeft
-            AutoSize = True
-            BevelOuter = bvNone
-            TabOrder = 0
-            object CompanyName: TLabeledEdit
-              AlignWithMargins = True
-              Left = 3
-              Top = 22
-              Width = 128
-              Height = 23
-              Align = alBottom
-              EditLabel.Width = 87
-              EditLabel.Height = 15
-              EditLabel.Caption = 'Company Name'
-              TabOrder = 0
-              Text = 'Growth Supplements'
-              ExplicitLeft = 6
-              ExplicitTop = 28
-            end
-          end
-          object Button2: TButton
-            AlignWithMargins = True
-            Left = 693
-            Top = 3
-            Width = 190
-            Height = 48
-            Align = alRight
-            Caption = 'Insert Brand'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -19
-            Font.Name = 'Segoe UI'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 1
-            OnClick = Button2Click
-            ExplicitTop = 6
-          end
-        end
         object Panel41: TPanel
           AlignWithMargins = True
           Left = 4
-          Top = 64
+          Top = 55
           Width = 886
-          Height = 450
+          Height = 502
           Align = alClient
-          TabOrder = 1
-          ExplicitLeft = 32
-          ExplicitTop = 304
-          ExplicitWidth = 185
-          ExplicitHeight = 41
-          object DBGrid3: TDBGrid
+          TabOrder = 0
+          object CompaniesGrid: TDBGrid
             AlignWithMargins = True
             Left = 4
             Top = 4
             Width = 878
-            Height = 442
+            Height = 494
             Align = alClient
             DataSource = D_Companies
             TabOrder = 0
@@ -124,11 +61,6 @@ object Form1: TForm1
               item
                 Expanded = False
                 FieldName = 'company'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = []
                 Title.Caption = 'Company'
                 Title.Font.Charset = DEFAULT_CHARSET
                 Title.Font.Color = clWindowText
@@ -139,6 +71,61 @@ object Form1: TForm1
               end>
           end
         end
+        object Panel3: TPanel
+          AlignWithMargins = True
+          Left = 4
+          Top = 4
+          Width = 886
+          Height = 45
+          Align = alTop
+          BevelOuter = bvNone
+          TabOrder = 1
+          object Panel45: TPanel
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 87
+            Height = 39
+            Align = alLeft
+            AutoSize = True
+            BevelOuter = bvNone
+            TabOrder = 0
+          end
+          object Button3: TButton
+            AlignWithMargins = True
+            Left = 616
+            Top = 3
+            Width = 130
+            Height = 39
+            Align = alRight
+            Caption = 'Insert'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            OnClick = Button3Click
+          end
+          object Button2: TButton
+            AlignWithMargins = True
+            Left = 752
+            Top = 3
+            Width = 131
+            Height = 39
+            Align = alRight
+            Caption = 'Delete'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 2
+            OnClick = Button2Click
+          end
+        end
       end
     end
     object UrlParamsInformations: TTabSheet
@@ -147,19 +134,15 @@ object Form1: TForm1
       object Panel12: TPanel
         AlignWithMargins = True
         Left = 3
-        Top = 3
+        Top = 70
         Width = 888
-        Height = 512
+        Height = 488
         Align = alClient
         BiDiMode = bdLeftToRight
         Color = clWhite
         ParentBiDiMode = False
         ParentBackground = False
         TabOrder = 0
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 894
-        ExplicitHeight = 518
         object CategoriesPanel: TPanel
           AlignWithMargins = True
           Left = 4
@@ -169,9 +152,6 @@ object Form1: TForm1
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitLeft = 3
-          ExplicitTop = 63
-          ExplicitWidth = 888
           object Panel14: TPanel
             AlignWithMargins = True
             Left = 695
@@ -182,7 +162,6 @@ object Form1: TForm1
             BevelOuter = bvNone
             Caption = 'Insert'
             TabOrder = 0
-            ExplicitLeft = 703
             object Button1: TButton
               AlignWithMargins = True
               Left = 3
@@ -308,30 +287,23 @@ object Form1: TForm1
           Left = 4
           Top = 70
           Width = 880
-          Height = 438
+          Height = 414
           Align = alClient
           TabOrder = 1
-          ExplicitLeft = 0
-          ExplicitTop = 126
-          ExplicitWidth = 894
-          ExplicitHeight = 392
           object Panel11: TPanel
             Left = 1
             Top = 1
             Width = 409
-            Height = 436
+            Height = 412
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitHeight = 392
             object DBGrid1: TDBGrid
               AlignWithMargins = True
               Left = 10
-              Top = 10
+              Top = 54
               Width = 389
-              Height = 416
+              Height = 348
               Margins.Left = 10
               Margins.Top = 10
               Margins.Right = 10
@@ -385,29 +357,46 @@ object Form1: TForm1
                   Title.Font.Height = -15
                   Title.Font.Name = 'Segoe UI'
                   Title.Font.Style = []
-                  Width = 120
+                  Width = 115
                   Visible = True
                 end>
+            end
+            object Panel46: TPanel
+              AlignWithMargins = True
+              Left = 15
+              Top = 10
+              Width = 379
+              Height = 31
+              Margins.Left = 15
+              Margins.Top = 10
+              Margins.Right = 15
+              Align = alTop
+              Alignment = taLeftJustify
+              BevelOuter = bvNone
+              Caption = 'Categories'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -21
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 1
             end
           end
           object Panel13: TPanel
             Left = 410
             Top = 1
             Width = 469
-            Height = 436
+            Height = 412
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitLeft = 409
-            ExplicitTop = 0
-            ExplicitWidth = 485
-            ExplicitHeight = 392
             object DBGrid2: TDBGrid
               AlignWithMargins = True
               Left = 10
-              Top = 10
+              Top = 54
               Width = 449
-              Height = 416
+              Height = 348
               Margins.Left = 10
               Margins.Top = 10
               Margins.Right = 10
@@ -473,10 +462,78 @@ object Form1: TForm1
                   Title.Font.Height = -15
                   Title.Font.Name = 'Segoe UI'
                   Title.Font.Style = []
-                  Width = 97
+                  Width = 95
                   Visible = True
                 end>
             end
+            object Panel47: TPanel
+              AlignWithMargins = True
+              Left = 15
+              Top = 10
+              Width = 439
+              Height = 31
+              Margins.Left = 15
+              Margins.Top = 10
+              Margins.Right = 15
+              Align = alTop
+              Alignment = taLeftJustify
+              BevelOuter = bvNone
+              Caption = 'Subcategories'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -21
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 1
+            end
+          end
+        end
+      end
+      object Company: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 888
+        Height = 61
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 1
+        object Panel4: TPanel
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 185
+          Height = 55
+          Align = alLeft
+          AutoSize = True
+          BevelOuter = bvNone
+          TabOrder = 0
+          object Label3: TLabel
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 179
+            Height = 21
+            Align = alTop
+            Caption = 'Companies'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clMaroon
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            ExplicitWidth = 78
+          end
+          object CompaniesCombobox: TComboBox
+            AlignWithMargins = True
+            Left = 3
+            Top = 30
+            Width = 179
+            Height = 23
+            Align = alClient
+            TabOrder = 0
+            OnSelect = CompaniesComboboxSelect
           end
         end
       end
@@ -489,28 +546,31 @@ object Form1: TForm1
         Left = 3
         Top = 3
         Width = 894
-        Height = 518
+        Height = 561
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object ScrappConfig: TPanel
           AlignWithMargins = True
           Left = 3
-          Top = 3
+          Top = 70
           Width = 888
-          Height = 512
+          Height = 488
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitTop = 3
+          ExplicitHeight = 555
           object Title: TPanel
             AlignWithMargins = True
             Left = 151
             Top = 3
             Width = 142
-            Height = 506
+            Height = 482
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 0
+            ExplicitHeight = 549
             object Panel15: TPanel
               AlignWithMargins = True
               Left = 3
@@ -561,10 +621,11 @@ object Form1: TForm1
             Left = 3
             Top = 3
             Width = 142
-            Height = 506
+            Height = 482
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 1
+            ExplicitHeight = 549
             object Panel21: TPanel
               AlignWithMargins = True
               Left = 3
@@ -703,10 +764,11 @@ object Form1: TForm1
             Left = 299
             Top = 3
             Width = 142
-            Height = 506
+            Height = 482
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 2
+            ExplicitHeight = 549
             object Panel18: TPanel
               AlignWithMargins = True
               Left = 3
@@ -801,10 +863,11 @@ object Form1: TForm1
             Left = 447
             Top = 3
             Width = 142
-            Height = 506
+            Height = 482
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 3
+            ExplicitHeight = 549
             object Panel5: TPanel
               AlignWithMargins = True
               Left = 3
@@ -987,10 +1050,11 @@ object Form1: TForm1
             Left = 595
             Top = 3
             Width = 142
-            Height = 506
+            Height = 482
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 4
+            ExplicitHeight = 549
             object Panel30: TPanel
               AlignWithMargins = True
               Left = 3
@@ -1151,10 +1215,11 @@ object Form1: TForm1
             Left = 743
             Top = 3
             Width = 142
-            Height = 506
+            Height = 482
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 5
+            ExplicitHeight = 549
             object Panel40: TPanel
               AlignWithMargins = True
               Left = 3
@@ -1186,8 +1251,6 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 1
-              ExplicitLeft = 0
-              ExplicitTop = 104
               object UrlAttribute: TLabeledEdit
                 AlignWithMargins = True
                 Left = 3
@@ -1232,8 +1295,6 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 3
-              ExplicitLeft = 6
-              ExplicitTop = 115
               object UrlBase: TLabeledEdit
                 AlignWithMargins = True
                 Left = 5
@@ -1246,6 +1307,55 @@ object Form1: TForm1
                 TabOrder = 0
                 Text = ''
               end
+            end
+          end
+        end
+        object Panel48: TPanel
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 888
+          Height = 61
+          Align = alTop
+          BevelOuter = bvNone
+          TabOrder = 1
+          ExplicitLeft = 6
+          ExplicitTop = 11
+          object Panel49: TPanel
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 185
+            Height = 55
+            Align = alLeft
+            AutoSize = True
+            BevelOuter = bvNone
+            TabOrder = 0
+            object Label4: TLabel
+              AlignWithMargins = True
+              Left = 3
+              Top = 3
+              Width = 179
+              Height = 21
+              Align = alTop
+              Caption = 'Companies'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -16
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentFont = False
+              ExplicitWidth = 78
+            end
+            object ComboBox1: TComboBox
+              AlignWithMargins = True
+              Left = 3
+              Top = 30
+              Width = 179
+              Height = 23
+              Align = alClient
+              TabOrder = 0
+              OnSelect = CompaniesComboboxSelect
             end
           end
         end
@@ -1353,24 +1463,19 @@ object Form1: TForm1
       
         'INSERT INTO categoryparams (id_company, id_category, companypara' +
         'm)'
-      'VALUES '
-      '('
-      '(SELECT id_company FROM companies WHERE company = :company),'
-      '(SELECT id_category FROM categories WHERE category = :category),'
-      ':companyparam'
-      ')')
-    Left = 848
-    Top = 82
+      'VALUES (:id_company,:id_category,:companyparam)')
+    Left = 680
+    Top = 123
     ParamData = <
       item
-        Name = 'COMPANY'
-        DataType = ftString
+        Name = 'ID_COMPANY'
+        DataType = ftInteger
         ParamType = ptInput
         Value = Null
       end
       item
-        Name = 'CATEGORY'
-        DataType = ftString
+        Name = 'ID_CATEGORY'
+        DataType = ftInteger
         ParamType = ptInput
         Value = Null
       end
@@ -1389,33 +1494,25 @@ object Form1: TForm1
       
         'INSERT INTO subcategoryparams (id_company, id_category, id_subca' +
         'tegory, companyparam)'
-      'VALUES '
-      '('
-      '(SELECT id_company FROM companies WHERE company = :company),'
-      '(SELECT id_category FROM categories WHERE category = :category),'
-      
-        '(SELECT id_subcategory FROM subcategories WHERE subcategory = :s' +
-        'ubcategory),'
-      ':companyparam'
-      ')')
-    Left = 848
-    Top = 52
+      'VALUES (:id_company, :id_category,:id_subcategory,:companyparam)')
+    Left = 648
+    Top = 124
     ParamData = <
       item
-        Name = 'COMPANY'
-        DataType = ftString
+        Name = 'ID_COMPANY'
+        DataType = ftInteger
         ParamType = ptInput
         Value = Null
       end
       item
-        Name = 'CATEGORY'
-        DataType = ftString
+        Name = 'ID_CATEGORY'
+        DataType = ftInteger
         ParamType = ptInput
         Value = Null
       end
       item
-        Name = 'SUBCATEGORY'
-        DataType = ftString
+        Name = 'ID_SUBCATEGORY'
+        DataType = ftInteger
         ParamType = ptInput
         Value = Null
       end
@@ -1446,21 +1543,43 @@ object Form1: TForm1
     Left = 151
     Top = 268
   end
-  object Q_InsertCompany: TFDQuery
+  object Q_Categories: TFDQuery
     Connection = DM_Con.Connection
     Transaction = DM_Con.Transaction
     UpdateTransaction = DM_Con.Transaction
     SQL.Strings = (
-      'INSERT INTO companies (company)'
-      'VALUES (:company)')
-    Left = 669
-    Top = 47
+      'SELECT category FROM categories')
+    Left = 146
+    Top = 132
+    object Q_Categoriescategory: TStringField
+      FieldName = 'category'
+      Origin = 'category'
+      Required = True
+      Size = 255
+    end
+  end
+  object Q_Subcategories: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      
+        'SELECT subcategory FROM subcategories WHERE id_category = :id_ca' +
+        'tegory')
+    Left = 338
+    Top = 132
     ParamData = <
       item
-        Name = 'COMPANY'
-        DataType = ftString
+        Name = 'ID_CATEGORY'
+        DataType = ftInteger
         ParamType = ptInput
         Value = Null
       end>
+    object Q_Subcategoriessubcategory: TStringField
+      FieldName = 'subcategory'
+      Origin = 'subcategory'
+      Required = True
+      Size = 255
+    end
   end
 end
