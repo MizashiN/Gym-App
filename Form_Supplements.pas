@@ -53,7 +53,6 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
-    ProductsArray: TJSONArray;
   public
     { Public declarations }
   end;

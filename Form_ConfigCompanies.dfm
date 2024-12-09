@@ -5,7 +5,7 @@ object ConfigCompanies: TConfigCompanies
   BorderStyle = bsSingle
   Caption = 'Config Companies'
   ClientHeight = 597
-  ClientWidth = 1048
+  ClientWidth = 1049
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,12 +18,13 @@ object ConfigCompanies: TConfigCompanies
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 1048
+    Width = 1049
     Height = 597
     ActivePage = TabSheet2
     Align = alClient
     TabOrder = 0
     OnChange = PageControlChange
+    ExplicitWidth = 992
     object BrandRegistration: TTabSheet
       Caption = 'Brand Registration'
       ImageIndex = 2
@@ -31,23 +32,25 @@ object ConfigCompanies: TConfigCompanies
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 1034
+        Width = 1035
         Height = 561
         Align = alClient
         TabOrder = 0
+        ExplicitWidth = 978
         object Panel41: TPanel
           AlignWithMargins = True
           Left = 4
           Top = 55
-          Width = 1026
+          Width = 1027
           Height = 502
           Align = alClient
           TabOrder = 0
+          ExplicitWidth = 970
           object CompaniesGrid: TDBGrid
             AlignWithMargins = True
             Left = 4
             Top = 4
-            Width = 1018
+            Width = 1019
             Height = 494
             Align = alClient
             DataSource = D_Companies
@@ -75,11 +78,12 @@ object ConfigCompanies: TConfigCompanies
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 1026
+          Width = 1027
           Height = 45
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
+          ExplicitWidth = 970
           object Panel45: TPanel
             AlignWithMargins = True
             Left = 3
@@ -93,7 +97,7 @@ object ConfigCompanies: TConfigCompanies
           end
           object Button3: TButton
             AlignWithMargins = True
-            Left = 756
+            Left = 757
             Top = 3
             Width = 130
             Height = 39
@@ -107,10 +111,11 @@ object ConfigCompanies: TConfigCompanies
             ParentFont = False
             TabOrder = 1
             OnClick = Button3Click
+            ExplicitLeft = 700
           end
           object Button2: TButton
             AlignWithMargins = True
-            Left = 892
+            Left = 893
             Top = 3
             Width = 131
             Height = 39
@@ -124,6 +129,7 @@ object ConfigCompanies: TConfigCompanies
             ParentFont = False
             TabOrder = 2
             OnClick = Button2Click
+            ExplicitLeft = 836
           end
         end
       end
@@ -135,7 +141,7 @@ object ConfigCompanies: TConfigCompanies
         AlignWithMargins = True
         Left = 3
         Top = 70
-        Width = 1028
+        Width = 1029
         Height = 488
         Align = alClient
         BiDiMode = bdLeftToRight
@@ -143,18 +149,20 @@ object ConfigCompanies: TConfigCompanies
         ParentBiDiMode = False
         ParentBackground = False
         TabOrder = 0
+        ExplicitWidth = 972
         object CategoriesPanel: TPanel
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 1020
+          Width = 1021
           Height = 60
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitWidth = 964
           object Panel14: TPanel
             AlignWithMargins = True
-            Left = 835
+            Left = 836
             Top = 3
             Width = 182
             Height = 54
@@ -162,6 +170,7 @@ object ConfigCompanies: TConfigCompanies
             BevelOuter = bvNone
             Caption = 'Insert'
             TabOrder = 0
+            ExplicitLeft = 779
             object Button1: TButton
               AlignWithMargins = True
               Left = 3
@@ -281,19 +290,41 @@ object ConfigCompanies: TConfigCompanies
               Text = ''
             end
           end
+          object Panel27: TPanel
+            AlignWithMargins = True
+            Left = 697
+            Top = 3
+            Width = 133
+            Height = 54
+            Align = alRight
+            BevelOuter = bvNone
+            TabOrder = 4
+            ExplicitLeft = 640
+            object TitleSubCategParam: TCheckBox
+              Left = 0
+              Top = 0
+              Width = 133
+              Height = 54
+              Align = alClient
+              Caption = 'TitleSubCategParam'
+              TabOrder = 0
+              OnClick = TitleSubCategParamClick
+            end
+          end
         end
         object Panel7: TPanel
           AlignWithMargins = True
           Left = 4
           Top = 70
-          Width = 1020
+          Width = 1021
           Height = 414
           Align = alClient
           TabOrder = 1
+          ExplicitWidth = 964
           object Panel11: TPanel
             Left = 1
             Top = 1
-            Width = 409
+            Width = 480
             Height = 412
             Align = alLeft
             BevelOuter = bvNone
@@ -302,7 +333,7 @@ object ConfigCompanies: TConfigCompanies
               AlignWithMargins = True
               Left = 10
               Top = 54
-              Width = 389
+              Width = 460
               Height = 348
               Margins.Left = 10
               Margins.Top = 10
@@ -365,7 +396,7 @@ object ConfigCompanies: TConfigCompanies
               AlignWithMargins = True
               Left = 15
               Top = 10
-              Width = 379
+              Width = 450
               Height = 31
               Margins.Left = 15
               Margins.Top = 10
@@ -383,19 +414,19 @@ object ConfigCompanies: TConfigCompanies
               TabOrder = 1
             end
           end
-          object Panel13: TPanel
-            Left = 410
+          object SubCategPanel: TPanel
+            Left = 481
             Top = 1
-            Width = 609
+            Width = 536
             Height = 412
-            Align = alClient
+            Align = alLeft
             BevelOuter = bvNone
             TabOrder = 1
             object DBGrid2: TDBGrid
               AlignWithMargins = True
               Left = 10
               Top = 54
-              Width = 589
+              Width = 516
               Height = 348
               Margins.Left = 10
               Margins.Top = 10
@@ -470,7 +501,7 @@ object ConfigCompanies: TConfigCompanies
               AlignWithMargins = True
               Left = 15
               Top = 10
-              Width = 579
+              Width = 506
               Height = 31
               Margins.Left = 15
               Margins.Top = 10
@@ -486,6 +517,115 @@ object ConfigCompanies: TConfigCompanies
               Font.Style = []
               ParentFont = False
               TabOrder = 1
+              ExplicitLeft = 12
+              ExplicitWidth = 452
+            end
+          end
+          object SubCategTitlePanel: TPanel
+            Left = 1017
+            Top = 1
+            Width = 482
+            Height = 412
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 2
+            ExplicitLeft = 963
+            object DBGrid3: TDBGrid
+              AlignWithMargins = True
+              Left = 10
+              Top = 54
+              Width = 462
+              Height = 348
+              Margins.Left = 10
+              Margins.Top = 10
+              Margins.Right = 10
+              Margins.Bottom = 10
+              Align = alClient
+              DataSource = D_SubCategTitleParams
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -12
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clMaroon
+              TitleFont.Height = -16
+              TitleFont.Name = 'Segoe UI'
+              TitleFont.Style = []
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'company'
+                  Title.Caption = 'Marca'
+                  Title.Font.Charset = DEFAULT_CHARSET
+                  Title.Font.Color = clMaroon
+                  Title.Font.Height = -15
+                  Title.Font.Name = 'Segoe UI'
+                  Title.Font.Style = []
+                  Width = 111
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'category'
+                  Title.Caption = 'Categoria'
+                  Title.Font.Charset = DEFAULT_CHARSET
+                  Title.Font.Color = clMaroon
+                  Title.Font.Height = -15
+                  Title.Font.Name = 'Segoe UI'
+                  Title.Font.Style = []
+                  Width = 111
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'subcategory'
+                  Title.Caption = 'Subcategoria'
+                  Title.Font.Charset = DEFAULT_CHARSET
+                  Title.Font.Color = clMaroon
+                  Title.Font.Height = -15
+                  Title.Font.Name = 'Segoe UI'
+                  Title.Font.Style = []
+                  Width = 111
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'companyparam'
+                  Title.Caption = 'Parametro'
+                  Title.Font.Charset = DEFAULT_CHARSET
+                  Title.Font.Color = clMaroon
+                  Title.Font.Height = -15
+                  Title.Font.Name = 'Segoe UI'
+                  Title.Font.Style = []
+                  Width = 95
+                  Visible = True
+                end>
+            end
+            object Panel54: TPanel
+              AlignWithMargins = True
+              Left = 15
+              Top = 10
+              Width = 452
+              Height = 31
+              Margins.Left = 15
+              Margins.Top = 10
+              Margins.Right = 15
+              Align = alTop
+              Alignment = taLeftJustify
+              BevelOuter = bvNone
+              Caption = 'Subcategories Title'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -21
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 1
+              ExplicitWidth = 440
             end
           end
         end
@@ -494,11 +634,12 @@ object ConfigCompanies: TConfigCompanies
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 1028
+        Width = 1029
         Height = 61
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitWidth = 972
         object Panel4: TPanel
           AlignWithMargins = True
           Left = 3
@@ -545,20 +686,22 @@ object ConfigCompanies: TConfigCompanies
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 1034
+        Width = 1035
         Height = 561
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 978
         object ScrappConfig: TPanel
           AlignWithMargins = True
           Left = 3
           Top = 70
-          Width = 1028
+          Width = 1029
           Height = 488
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitWidth = 972
           object Title: TPanel
             AlignWithMargins = True
             Left = 151
@@ -1350,6 +1493,19 @@ object ConfigCompanies: TConfigCompanies
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 2
+              object page_param: TDBLabeledEdit
+                AlignWithMargins = True
+                Left = 3
+                Top = 20
+                Width = 130
+                Height = 23
+                Align = alBottom
+                DataField = 'page_param'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
+                EditLabel.Width = 65
+                EditLabel.Height = 15
+              end
             end
           end
         end
@@ -1357,11 +1513,12 @@ object ConfigCompanies: TConfigCompanies
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 1028
+          Width = 1029
           Height = 61
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
+          ExplicitWidth = 972
           object Panel49: TPanel
             AlignWithMargins = True
             Left = 3
@@ -1401,7 +1558,7 @@ object ConfigCompanies: TConfigCompanies
           end
           object Button5: TButton
             AlignWithMargins = True
-            Left = 883
+            Left = 884
             Top = 3
             Width = 142
             Height = 55
@@ -1415,10 +1572,11 @@ object ConfigCompanies: TConfigCompanies
             ParentFont = False
             TabOrder = 1
             OnClick = Button5Click
+            ExplicitLeft = 827
           end
           object Button6: TButton
             AlignWithMargins = True
-            Left = 735
+            Left = 736
             Top = 3
             Width = 142
             Height = 55
@@ -1432,10 +1590,11 @@ object ConfigCompanies: TConfigCompanies
             ParentFont = False
             TabOrder = 2
             OnClick = Button6Click
+            ExplicitLeft = 679
           end
           object Button4: TButton
             AlignWithMargins = True
-            Left = 587
+            Left = 588
             Top = 3
             Width = 142
             Height = 55
@@ -1449,6 +1608,7 @@ object ConfigCompanies: TConfigCompanies
             ParentFont = False
             TabOrder = 3
             OnClick = Button4Click
+            ExplicitLeft = 531
           end
         end
       end
@@ -1556,8 +1716,8 @@ object ConfigCompanies: TConfigCompanies
         'INSERT INTO categoryparams (id_company, id_category, companypara' +
         'm)'
       'VALUES (:id_company,:id_category,:companyparam)')
-    Left = 680
-    Top = 123
+    Left = 920
+    Top = 99
     ParamData = <
       item
         Name = 'ID_COMPANY'
@@ -1587,8 +1747,8 @@ object ConfigCompanies: TConfigCompanies
         'INSERT INTO subcategoryparams (id_company, id_category, id_subca' +
         'tegory, companyparam)'
       'VALUES (:id_company, :id_category,:id_subcategory,:companyparam)')
-    Left = 648
-    Top = 124
+    Left = 920
+    Top = 135
     ParamData = <
       item
         Name = 'ID_COMPANY'
@@ -1859,10 +2019,102 @@ object ConfigCompanies: TConfigCompanies
       Origin = 'unv_product_class'
       Size = 32767
     end
+    object Q_ConfigCompaniespage_param: TStringField
+      FieldName = 'page_param'
+      Origin = 'page_param'
+      Size = 255
+    end
   end
   object D_ConfigCompanies: TDataSource
     DataSet = Q_ConfigCompanies
     Left = 231
     Top = 60
+  end
+  object Q_InsertSubCategoryTitleParam: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      
+        'INSERT INTO subcategorytitleparams (id_company, id_category, id_' +
+        'subcategory, companyparam)'
+      'VALUES (:id_company, :id_category,:id_subcategory,:companyparam)')
+    Left = 920
+    Top = 172
+    ParamData = <
+      item
+        Name = 'ID_COMPANY'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ID_CATEGORY'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ID_SUBCATEGORY'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'COMPANYPARAM'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object Q_SubCategTitleParams: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      'SELECT m.company, c.category, s.subcategory, sp.companyparam'
+      'FROM subcategorytitleparams sp'
+      'JOIN companies m ON sp.id_company = m.id_company'
+      'JOIN categories c ON sp.id_category = c.id_category'
+      'JOIN subcategories s ON sp.id_subcategory = s.id_subcategory'
+      'WHERE sp.id_company = :id_company')
+    Left = 869
+    Top = 495
+    ParamData = <
+      item
+        Name = 'ID_COMPANY'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object StringField1: TStringField
+      FieldName = 'company'
+      Origin = 'company'
+      Required = True
+      Size = 200
+    end
+    object StringField2: TStringField
+      FieldName = 'category'
+      Origin = 'category'
+      Required = True
+      Size = 255
+    end
+    object StringField3: TStringField
+      FieldName = 'subcategory'
+      Origin = 'subcategory'
+      Required = True
+      Size = 255
+    end
+    object StringField4: TStringField
+      FieldName = 'companyparam'
+      Origin = 'companyparam'
+      Required = True
+      Size = 255
+    end
+  end
+  object D_SubCategTitleParams: TDataSource
+    DataSet = Q_SubCategTitleParams
+    Left = 898
+    Top = 495
   end
 end

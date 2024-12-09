@@ -30,7 +30,7 @@ procedure InsertScrapp(
   alt_parent_tag, alt_parent_class, alt_parent_tag_2,alt_parent_class_2,
   alt_img_tag, alt_img_class,alt_img_tag_2, alt_img_class_2, price_parent_tag,
   price_parent_class,alt_price_parent_tag, alt_price_parent_class,
-  price_code, price_integer, price_decimal, price_fraction, unv_product_tag, unv_product_class: string
+  price_code, price_integer, price_decimal, price_fraction, unv_product_tag, unv_product_class, page_param: string
 );
 
 implementation
@@ -47,6 +47,7 @@ begin
     queryTemp.Connection := DM_Con.Connection;
 
     queryTemp.SQL.Text := 'SELECT image_blob FROM images WHERE image_src = :image_src';
+    queryTemp.Close;
     queryTemp.ParamByName('image_src').AsString := image_src;
     queryTemp.Open;
 
@@ -107,13 +108,18 @@ begin
     queryTemp.Connection := DM_Con.Connection;
 
     queryTemp.SQL.Text := 'SELECT id_category FROM categories WHERE category = :category';
+    queryTemp.Close;
     queryTemp.ParamByName('category').AsString := category;
     queryTemp.Open;
 
     if not queryTemp.IsEmpty then
+    begin
       Result := queryTemp.FieldByName('id_category').AsInteger
+    end
     else
+    begin
       ShowMessage('Nenhuma categoria encontrada com o nome: ' + category);
+    end;
   except
     on E: Exception do
     begin
@@ -132,8 +138,8 @@ begin
   Result := 0;
   try
     queryTemp.Connection := DM_Con.Connection;
-
     queryTemp.SQL.Text := 'SELECT id_company FROM companies WHERE company = :company';
+    queryTemp.Close;
     queryTemp.ParamByName('company').AsString := company;
     queryTemp.Open;
 
@@ -162,21 +168,24 @@ var
 begin
   queryTemp := TFDQuery.Create(nil);
   Result := 0;
-  try
-    queryTemp.Connection := DM_Con.Connection;
-
-    queryTemp.SQL.Text := 'SELECT id_subcategory FROM subcategories WHERE subcategory = :subcategory';
-    queryTemp.ParamByName('subcategory').AsString := subcategory;
-    queryTemp.Open;
-
-    if not queryTemp.IsEmpty then
-      Result := queryTemp.FieldByName('id_subcategory').AsInteger
-    else
-      ShowMessage('Nenhuma categoria encontrada com o nome: ' + subcategory);
-  except
-    on E: Exception do
+  if subcategory <> '' then
     begin
-      ShowMessage('Erro: ' + E.Message);
+    try
+      queryTemp.Connection := DM_Con.Connection;
+      queryTemp.SQL.Text := 'SELECT id_subcategory FROM subcategories WHERE subcategory = :subcategory';
+      queryTemp.Close;
+      queryTemp.ParamByName('subcategory').AsString := subcategory;
+      queryTemp.Open;
+
+      if not queryTemp.IsEmpty then
+        Result := queryTemp.FieldByName('id_subcategory').AsInteger
+      else
+        ShowMessage('Nenhuma categoria encontrada com o nome: ' + subcategory);
+    except
+      on E: Exception do
+      begin
+        ShowMessage('Erro: ' + E.Message);
+      end;
     end;
   end;
   queryTemp.Free;
@@ -213,7 +222,7 @@ procedure InsertScrapp(
   alt_parent_tag, alt_parent_class, alt_parent_tag_2,alt_parent_class_2,
   alt_img_tag, alt_img_class,alt_img_tag_2, alt_img_class_2, price_parent_tag,
   price_parent_class,alt_price_parent_tag, alt_price_parent_class,
-  price_code, price_integer, price_decimal, price_fraction, unv_product_tag, unv_product_class: string
+  price_code, price_integer, price_decimal, price_fraction, unv_product_tag, unv_product_class, page_param: string
 );
 var
   queryTemp: TFDQuery;
@@ -234,7 +243,7 @@ begin
       '    price_class, img_class, alt_price_parent_tag, alt_price_parent_class, ' +
       '    alt_img_tag, alt_img_class, alt_parent_class_2, alt_img_tag_2, ' +
       '    alt_img_class_2, alt_parent_tag_2, alt_parent_tag, alt_parent_class,' +
-      '    unv_product_tag, unv_product_class' +
+      '    unv_product_tag, unv_product_class, page_param' +
       ') VALUES (' +
       '    :id_company, :parent_tag, :title_tag, :img_tag, :price_tag, :url_tag, ' +
       '    :url_attribute, :url_base, :url_class, :price_parent_tag, ' +
@@ -243,9 +252,9 @@ begin
       '    :price_class, :img_class, :alt_price_parent_tag, :alt_price_parent_class, ' +
       '    :alt_img_tag, :alt_img_class, :alt_parent_class_2, :alt_img_tag_2, ' +
       '    :alt_img_class_2, :alt_parent_tag_2, :alt_parent_tag, :alt_parent_class,' +
-      '    :unv_product_tag, :unv_product_class' +
+      '    :unv_product_tag, :unv_product_class, :page_param' +
       ');';
-
+    queryTemp.Close;
     queryTemp.ParamByName('id_company').AsInteger := id_company;
     queryTemp.ParamByName('parent_tag').AsString := parent_tag;
     queryTemp.ParamByName('title_tag').AsString := title_tag;
@@ -278,6 +287,7 @@ begin
     queryTemp.ParamByName('alt_parent_class').AsString := alt_parent_class;
     queryTemp.ParamByName('unv_product_tag').AsString := unv_product_tag;
     queryTemp.ParamByName('unv_product_class').AsString := unv_product_class;
+    queryTemp.ParamByName('page_param').AsString := page_param;
     queryTemp.ExecSQL;
     DM_Con.Connection.Commit;
 
@@ -301,8 +311,8 @@ begin
   Result := False;
   try
     queryTemp.Connection := DM_Con.Connection;
-
     queryTemp.SQL.Text := 'SELECT id_company FROM configcompanies WHERE id_company = :id_company';
+    queryTemp.Close;
     queryTemp.ParamByName('id_company').AsInteger := id_company;
     queryTemp.Open;
 
@@ -328,8 +338,8 @@ begin
   queryTemp := TFDQuery.Create(nil);
   try
     queryTemp.Connection := DM_Con.Connection;
-
     queryTemp.SQL.Text := 'DELETE FROM configcompanies WHERE id_company = :id_company';
+    queryTemp.Close;
     queryTemp.ParamByName('id_company').AsInteger := id_company;
     queryTemp.ExecSQL;
 

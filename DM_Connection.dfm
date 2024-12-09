@@ -6,7 +6,7 @@ object DM_Con: TDM_Con
       
         'Database=C:\Users\Parafal\Documents\GitHub\GymApp-API\database.d' +
         'b'
-      'BusyTimeout=1'
+      'BusyTimeout=30000'
       'DriverID=SQLite')
     LoginPrompt = False
     Transaction = Transaction

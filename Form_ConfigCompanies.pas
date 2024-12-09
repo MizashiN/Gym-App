@@ -3,7 +3,7 @@ unit Form_ConfigCompanies;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, System.UITypes,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.Mask, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
@@ -57,7 +57,7 @@ type
     Q_CategParams: TFDQuery;
     Q_SubCategParams: TFDQuery;
     Panel11: TPanel;
-    Panel13: TPanel;
+    SubCategPanel: TPanel;
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
     D_CategParams: TDataSource;
@@ -181,6 +181,20 @@ type
     Q_ConfigCompaniesunv_product_tag: TStringField;
     Q_ConfigCompaniesunv_product_class: TStringField;
     Button4: TButton;
+    page_param: TDBLabeledEdit;
+    Q_ConfigCompaniespage_param: TStringField;
+    Panel27: TPanel;
+    TitleSubCategParam: TCheckBox;
+    Q_InsertSubCategoryTitleParam: TFDQuery;
+    SubCategTitlePanel: TPanel;
+    DBGrid3: TDBGrid;
+    Panel54: TPanel;
+    Q_SubCategTitleParams: TFDQuery;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    D_SubCategTitleParams: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure CategComboboxSelect(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -192,6 +206,7 @@ type
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure TitleSubCategParamClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -216,27 +231,54 @@ begin
   id_category := GetCategoryID(CategCombobox.Text);
   id_subcategory := GetSubcategoryID(SubCategCombobox.Text);
   id_company := GetCompanyID(CompaniesCombobox.Text);
+  try
+    if not DM_Con.Connection.InTransaction then
+        DM_Con.Connection.StartTransaction;
 
-  if SubCategCombobox.Text = '' then
-  begin
-    Q_InsertCategoryParam.Close;
-    Q_InsertCategoryParam.ParamByName('id_company').AsInteger := id_company;
-    Q_InsertCategoryParam.ParamByName('id_category').AsInteger := id_category;
-    Q_InsertCategoryParam.ParamByName('companyparam').AsString := CompaniesCombobox.Text;
-    Q_InsertCategoryParam.ExecSQL;
-    ShowMessage('Succest CategoryParam Insert');
-    Q_CategParams.Refresh;
-  end
-  else
-  begin
-    Q_InsertSubCategoryParam.Close;
-    Q_InsertSubCategoryParam.ParamByName('id_company').AsInteger := id_company;
-    Q_InsertSubCategoryParam.ParamByName('id_category').AsInteger := id_category;
-    Q_InsertSubCategoryParam.ParamByName('id_subcategory').AsInteger := id_subcategory;
-    Q_InsertSubCategoryParam.ParamByName('companyparam').AsString := CompaniesCombobox.Text;
-    Q_InsertSubCategoryParam.ExecSQL;
-    ShowMessage('Succest SubCategoryParam Insert');
-    Q_SubCategParams.Refresh;
+    if SubCategCombobox.Text = '' then
+    begin
+      Q_InsertCategoryParam.Close;
+      Q_InsertCategoryParam.ParamByName('id_company').AsInteger := id_company;
+      Q_InsertCategoryParam.ParamByName('id_category').AsInteger := id_category;
+      Q_InsertCategoryParam.ParamByName('companyparam').AsString := ParamEdit.Text;
+      Q_InsertCategoryParam.ExecSQL;
+      DM_Con.Connection.Commit;
+      ShowMessage('Succest CategoryParam Insert');
+      Q_CategParams.Refresh;
+    end
+    else
+    begin
+      if TitleSubCategParam.Checked then
+      begin
+        Q_InsertSubCategoryTitleParam.Close;
+        Q_InsertSubCategoryTitleParam.ParamByName('id_company').AsInteger := id_company;
+        Q_InsertSubCategoryTitleParam.ParamByName('id_category').AsInteger := id_category;
+        Q_InsertSubCategoryTitleParam.ParamByName('id_subcategory').AsInteger := id_subcategory;
+        Q_InsertSubCategoryTitleParam.ParamByName('companyparam').AsString := ParamEdit.Text;
+        Q_InsertSubCategoryTitleParam.ExecSQL;
+        DM_Con.Connection.Commit;
+        ShowMessage('Succest SubCategoryTitleParam Insert');
+        Q_SubCategTitleParams.Refresh;
+      end
+      else
+      begin
+        Q_InsertSubCategoryParam.Close;
+        Q_InsertSubCategoryParam.ParamByName('id_company').AsInteger := id_company;
+        Q_InsertSubCategoryParam.ParamByName('id_category').AsInteger := id_category;
+        Q_InsertSubCategoryParam.ParamByName('id_subcategory').AsInteger := id_subcategory;
+        Q_InsertSubCategoryParam.ParamByName('companyparam').AsString := ParamEdit.Text;
+        Q_InsertSubCategoryParam.ExecSQL;
+        DM_Con.Connection.Commit;
+        ShowMessage('Succest SubCategoryParam Insert');
+        Q_SubCategParams.Refresh;
+      end;
+    end;
+  except
+    on E: Exception do
+    begin
+      DM_Con.Connection.Rollback;
+      ShowMessage('Erro: ' + E.Message);
+    end;
   end;
 end;
 
@@ -245,7 +287,6 @@ begin
   if MessageDlg('Deseja realmente excluir o registro selecionado?',
                 mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin
-    // Exclui o registro
     D_Companies.DataSet.Delete;
   end;
 end;
@@ -287,7 +328,7 @@ begin
     price_parent_tag.text, price_parent_class.text,
     alt_price_parent_tag.text, alt_price_parent_class.text,
     price_code.text, price_integer.text, price_decimal.text,
-    price_fraction.text, unv_product_tag.text, unv_product_class.text
+    price_fraction.text, unv_product_tag.text, unv_product_class.text, page_param.text
   );
   end
   else
@@ -334,15 +375,16 @@ begin
    Q_SubCategParams.Close;
    Q_SubCategParams.ParamByName('id_company').AsInteger := id_company;
    Q_SubCategParams.Open;
+
+   Q_SubCategTitleParams.Close;
+   Q_SubCategTitleParams.ParamByName('id_company').AsInteger := id_company;
+   Q_SubCategTitleParams.Open;
 end;
 
 procedure TConfigCompanies.FormCreate(Sender: TObject);
 begin
-  //SelectCategories(CategCombobox);
-
   Q_Companies.Close;
   Q_Companies.Open;
-
 end;
 
 procedure TConfigCompanies.PageControlChange(Sender: TObject);
@@ -355,8 +397,19 @@ begin
  end
  else if PageControl.TabIndex = 2 then
  begin
-  FetchCombobox(Q_Companies, CompanyConfigCombobox);
+   FetchCombobox(Q_Companies, CompanyConfigCombobox);
  end;
 end;
 
+procedure TConfigCompanies.TitleSubCategParamClick(Sender: TObject);
+begin
+  if TitleSubCategParam.Checked then
+  begin
+    SubCategPanel.Visible := False;
+  end
+  else
+  begin
+    SubCategPanel.Visible := True;
+  end;
+end;
 end.
