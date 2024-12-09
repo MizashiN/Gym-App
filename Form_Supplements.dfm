@@ -1,21 +1,23 @@
 object Supplements: TSupplements
   Left = 0
   Top = 0
-  ActiveControl = BrandsCombobox
-  BorderIcons = [biSystemMenu, biMinimize]
+  ActiveControl = CompaniesCombobox
   BorderStyle = bsSingle
   Caption = 'Supplements'
   ClientHeight = 900
   ClientWidth = 1600
-  Color = 1184274
+  Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  KeyPreview = True
   Position = poDesktopCenter
   Visible = True
+  WindowState = wsMaximized
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
@@ -28,7 +30,7 @@ object Supplements: TSupplements
     Margins.Bottom = 0
     Align = alClient
     BevelOuter = bvNone
-    Color = clBlack
+    Color = clWhite
     ParentBackground = False
     TabOrder = 0
     object Panel2: TPanel
@@ -42,7 +44,7 @@ object Supplements: TSupplements
       Margins.Bottom = 0
       Align = alClient
       BevelOuter = bvNone
-      Color = 1184274
+      Color = clWhite
       ParentBackground = False
       TabOrder = 0
       object Panel6: TPanel
@@ -57,7 +59,7 @@ object Supplements: TSupplements
         Margins.Bottom = 0
         Align = alTop
         BevelOuter = bvNone
-        Color = 1184274
+        Color = clWhite
         ParentBackground = False
         TabOrder = 0
         object Label2: TLabel
@@ -67,11 +69,13 @@ object Supplements: TSupplements
           Height = 75
           Align = alClient
           Caption = 'Supplements'
+          Color = clBlack
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
+          Font.Color = clBlack
           Font.Height = -60
           Font.Name = 'Hammersmith One'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
           ExplicitWidth = 365
         end
@@ -84,6 +88,7 @@ object Supplements: TSupplements
           Margins.Top = 70
           Margins.Right = 470
           Align = alClient
+          Brush.Color = clBlack
           Pen.Color = clWhite
           ExplicitWidth = 400
         end
@@ -100,7 +105,7 @@ object Supplements: TSupplements
         Margins.Bottom = 0
         Align = alTop
         BevelOuter = bvNone
-        Color = 1184274
+        Color = clWhite
         ParentBackground = False
         TabOrder = 1
         object SubcategoriesPanel: TPanel
@@ -115,7 +120,7 @@ object Supplements: TSupplements
           Margins.Bottom = 0
           Align = alLeft
           BevelOuter = bvNone
-          Color = 1184274
+          Color = clWhite
           ParentBackground = False
           TabOrder = 0
           object SubcategoriesLabel: TLabel
@@ -127,13 +132,12 @@ object Supplements: TSupplements
             Align = alClient
             Caption = 'Subcategories'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
+            Font.Color = clBlack
             Font.Height = -27
             Font.Name = 'Hammersmith One'
             Font.Style = []
             ParentFont = False
             Layout = tlBottom
-            Visible = False
             ExplicitWidth = 183
             ExplicitHeight = 33
           end
@@ -155,8 +159,6 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            Visible = False
-            OnSelect = SubcategoriesComboboxSelect
           end
         end
         object BrandPanel: TPanel
@@ -171,7 +173,7 @@ object Supplements: TSupplements
           Margins.Bottom = 0
           Align = alLeft
           BevelOuter = bvNone
-          Color = 1184274
+          Color = clWhite
           ParentBackground = False
           TabOrder = 1
           object Label1: TLabel
@@ -181,18 +183,20 @@ object Supplements: TSupplements
             Width = 187
             Height = 36
             Align = alClient
-            Caption = 'Brands'
+            Caption = 'Company'
+            Color = clBlack
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
+            Font.Color = clBlack
             Font.Height = -27
             Font.Name = 'Hammersmith One'
             Font.Style = []
+            ParentColor = False
             ParentFont = False
             Layout = tlBottom
-            ExplicitWidth = 87
+            ExplicitWidth = 117
             ExplicitHeight = 33
           end
-          object BrandsCombobox: TComboBox
+          object CompaniesCombobox: TComboBox
             AlignWithMargins = True
             Left = 3
             Top = 45
@@ -208,7 +212,7 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            OnSelect = BrandsComboboxSelect
+            OnSelect = CompaniesComboboxSelect
           end
         end
         object CategoryPanel: TPanel
@@ -223,7 +227,7 @@ object Supplements: TSupplements
           Margins.Bottom = 0
           Align = alLeft
           BevelOuter = bvNone
-          Color = 1184274
+          Color = clWhite
           ParentBackground = False
           TabOrder = 2
           object CategoriesLabel: TLabel
@@ -234,14 +238,15 @@ object Supplements: TSupplements
             Height = 36
             Align = alClient
             Caption = 'Categories'
+            Color = clBlack
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
+            Font.Color = clBlack
             Font.Height = -27
             Font.Name = 'Hammersmith One'
             Font.Style = []
+            ParentColor = False
             ParentFont = False
             Layout = tlBottom
-            Visible = False
             ExplicitWidth = 137
             ExplicitHeight = 33
           end
@@ -263,7 +268,6 @@ object Supplements: TSupplements
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            Visible = False
             OnSelect = CategoriesComboboxSelect
           end
         end
@@ -273,69 +277,31 @@ object Supplements: TSupplements
           Top = 0
           Width = 194
           Height = 86
-          Margins.Left = 20
+          Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alRight
           BevelOuter = bvNone
-          Color = 1184274
+          Color = clWhite
           ParentBackground = False
           TabOrder = 3
-        end
-        object Panel5: TPanel
-          AlignWithMargins = True
-          Left = 639
-          Top = 0
-          Width = 193
-          Height = 86
-          Margins.Left = 20
-          Margins.Top = 0
-          Margins.Right = 0
-          Margins.Bottom = 0
-          Align = alLeft
-          BevelOuter = bvNone
-          Color = 1184274
-          ParentBackground = False
-          TabOrder = 4
-          object TypesLabel: TLabel
+          object Button1: TButton
             AlignWithMargins = True
             Left = 3
-            Top = 3
-            Width = 187
-            Height = 36
-            Align = alClient
-            Caption = 'Types'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -27
-            Font.Name = 'Hammersmith One'
-            Font.Style = []
-            ParentFont = False
-            Layout = tlBottom
-            Visible = False
-            ExplicitWidth = 74
-            ExplicitHeight = 33
-          end
-          object TypesCombobox: TComboBox
-            AlignWithMargins = True
-            Left = 3
-            Top = 45
-            Width = 187
-            Height = 38
+            Top = 31
+            Width = 188
+            Height = 52
             Align = alBottom
-            AutoCloseUp = True
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Style = csDropDownList
+            Caption = 'Search'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -24
-            Font.Name = 'Hammersmith One'
+            Font.Height = -27
+            Font.Name = 'Segoe UI'
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            Visible = False
+            OnClick = Button1Click
           end
         end
       end
@@ -351,7 +317,7 @@ object Supplements: TSupplements
         Margins.Bottom = 20
         Align = alClient
         BevelOuter = bvNone
-        Color = 1184274
+        Color = clWhite
         ParentBackground = False
         TabOrder = 2
         object CardsBox: TScrollBox
@@ -372,8 +338,126 @@ object Supplements: TSupplements
           Color = 1184274
           ParentColor = False
           TabOrder = 0
+          UseWheelForScrolling = True
         end
       end
+    end
+  end
+  object Q_Products: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      
+        'SELECT p.title_product, p.price_product, i.image_src, p.url_prod' +
+        'uct '
+      'FROM products p '
+      'JOIN images i ON i.id_image = p.id_image '
+      'WHERE (:id_company = 0 OR p.id_company = :id_company)'
+      'AND (:id_category = 0 OR p.id_category = :id_category)'
+      'AND (:id_subcategory = 0 OR p.id_subcategory = :id_subcategory);'
+      '')
+    Left = 1548
+    Top = 157
+    ParamData = <
+      item
+        Name = 'ID_COMPANY'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ID_CATEGORY'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ID_SUBCATEGORY'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object Q_Productstitle_product: TStringField
+      FieldName = 'title_product'
+      Origin = 'title_product'
+      Required = True
+      Size = 255
+    end
+    object Q_Productsprice_product: TBCDField
+      FieldName = 'price_product'
+      Origin = 'price_product'
+      Required = True
+      Precision = 10
+      Size = 2
+    end
+    object Q_Productsimage_src: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'image_src'
+      Origin = 'image_src'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 255
+    end
+    object Q_Productsurl_product: TStringField
+      FieldName = 'url_product'
+      Origin = 'url_product'
+      Required = True
+      Size = 255
+    end
+  end
+  object Q_Companies: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      'SELECT company FROM companies')
+    Left = 164
+    Top = 165
+    object Q_Companiescompany: TStringField
+      FieldName = 'company'
+      Origin = 'company'
+      Required = True
+      Size = 200
+    end
+  end
+  object Q_Subcategories: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      
+        'SELECT subcategory FROM subcategories WHERE id_category = :id_ca' +
+        'tegory')
+    Left = 638
+    Top = 165
+    ParamData = <
+      item
+        Name = 'ID_CATEGORY'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object Q_Subcategoriessubcategory: TStringField
+      FieldName = 'subcategory'
+      Origin = 'subcategory'
+      Required = True
+      Size = 255
+    end
+  end
+  object Q_Categories: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      'SELECT category FROM categories')
+    Left = 376
+    Top = 165
+    object Q_Categoriescategory: TStringField
+      FieldName = 'category'
+      Origin = 'category'
+      Required = True
+      Size = 255
     end
   end
 end

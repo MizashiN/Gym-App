@@ -12,7 +12,7 @@ uses
   Vcl.DBCtrls;
 
 type
-  TForm1 = class(TForm)
+  TConfigCompanies = class(TForm)
     Panel1: TPanel;
     Company: TPanel;
     Panel4: TPanel;
@@ -21,74 +21,38 @@ type
     Panel14: TPanel;
     Title: TPanel;
     Panel15: TPanel;
-    TitleTag: TLabeledEdit;
     Panel16: TPanel;
-    TitleClass: TLabeledEdit;
     Parent: TPanel;
     Panel21: TPanel;
-    AltParentTag2: TLabeledEdit;
     Panel22: TPanel;
-    AltParentClass: TLabeledEdit;
     Panel23: TPanel;
-    AltParentClass2: TLabeledEdit;
     Panel24: TPanel;
-    AltParentTag: TLabeledEdit;
     Panel25: TPanel;
-    ParentClass: TLabeledEdit;
     Panel26: TPanel;
-    ParentTag: TLabeledEdit;
     Price: TPanel;
-    Panel18: TPanel;
-    AltPriceClass: TLabeledEdit;
-    Panel27: TPanel;
-    AltPriceTag: TLabeledEdit;
     Panel28: TPanel;
-    PriceClass: TLabeledEdit;
     Panel29: TPanel;
-    PriceTag: TLabeledEdit;
     PriceSeparately: TPanel;
-    Panel5: TPanel;
-    AltPriceParentClass: TLabeledEdit;
     Panel6: TPanel;
-    PriceFraction: TLabeledEdit;
     Panel8: TPanel;
-    PriceDecimal: TLabeledEdit;
     Panel9: TPanel;
-    PriceParentTag: TLabeledEdit;
     Panel2: TPanel;
-    PriceInteger: TLabeledEdit;
     Panel10: TPanel;
-    PriceCode: TLabeledEdit;
     Panel17: TPanel;
-    PriceParentClass: TLabeledEdit;
     Panel19: TPanel;
-    AltPriceParentTag: TLabeledEdit;
     Img: TPanel;
-    Panel30: TPanel;
-    AltImgClass2: TLabeledEdit;
-    Panel31: TPanel;
-    AltImgTag2: TLabeledEdit;
-    Panel32: TPanel;
-    AltImgClass: TLabeledEdit;
     Panel33: TPanel;
-    ImgTag: TLabeledEdit;
     Panel34: TPanel;
-    AltImgTag: TLabeledEdit;
     Panel35: TPanel;
-    ImgAttribute: TLabeledEdit;
     Panel36: TPanel;
-    ImgClass: TLabeledEdit;
     Url: TPanel;
     Panel40: TPanel;
-    UrlTag: TLabeledEdit;
     Panel42: TPanel;
-    UrlAttribute: TLabeledEdit;
     Panel43: TPanel;
     PageControl: TPageControl;
     UrlParamsInformations: TTabSheet;
     TabSheet2: TTabSheet;
     Panel12: TPanel;
-    UrlClass: TLabeledEdit;
     Panel7: TPanel;
     Q_CategParams: TFDQuery;
     Q_SubCategParams: TFDQuery;
@@ -123,7 +87,6 @@ type
     Q_Companies: TFDQuery;
     D_Companies: TDataSource;
     Panel44: TPanel;
-    UrlBase: TLabeledEdit;
     Q_Companiescompany: TStringField;
     Panel3: TPanel;
     Panel45: TPanel;
@@ -140,7 +103,84 @@ type
     Panel48: TPanel;
     Panel49: TPanel;
     Label4: TLabel;
-    ComboBox1: TComboBox;
+    CompanyConfigCombobox: TComboBox;
+    parent_tag: TDBLabeledEdit;
+    Q_ConfigCompanies: TFDQuery;
+    D_ConfigCompanies: TDataSource;
+    Button5: TButton;
+    parent_class: TDBLabeledEdit;
+    alt_parent_tag: TDBLabeledEdit;
+    alt_parent_class: TDBLabeledEdit;
+    alt_parent_tag_2: TDBLabeledEdit;
+    alt_parent_class_2: TDBLabeledEdit;
+    title_class: TDBLabeledEdit;
+    title_tag: TDBLabeledEdit;
+    price_tag: TDBLabeledEdit;
+    price_class: TDBLabeledEdit;
+    img_tag: TDBLabeledEdit;
+    img_class: TDBLabeledEdit;
+    img_attribute: TDBLabeledEdit;
+    alt_img_tag: TDBLabeledEdit;
+    alt_img_class: TDBLabeledEdit;
+    alt_img_tag_2: TDBLabeledEdit;
+    alt_img_class_2: TDBLabeledEdit;
+    url_tag: TDBLabeledEdit;
+    url_class: TDBLabeledEdit;
+    url_attribute: TDBLabeledEdit;
+    url_base: TDBLabeledEdit;
+    price_parent_tag: TDBLabeledEdit;
+    price_parent_class: TDBLabeledEdit;
+    alt_price_parent_tag: TDBLabeledEdit;
+    alt_price_parent_class: TDBLabeledEdit;
+    Panel50: TPanel;
+    price_fraction: TDBLabeledEdit;
+    Panel51: TPanel;
+    price_decimal: TDBLabeledEdit;
+    Panel52: TPanel;
+    price_integer: TDBLabeledEdit;
+    Panel53: TPanel;
+    price_code: TDBLabeledEdit;
+    Panel5: TPanel;
+    Panel18: TPanel;
+    unv_product_tag: TDBLabeledEdit;
+    Panel30: TPanel;
+    unv_product_class: TDBLabeledEdit;
+    Panel32: TPanel;
+    Button6: TButton;
+    Q_ConfigCompaniesid_config: TFDAutoIncField;
+    Q_ConfigCompaniesid_company: TIntegerField;
+    Q_ConfigCompaniesparent_tag: TStringField;
+    Q_ConfigCompaniestitle_tag: TStringField;
+    Q_ConfigCompaniesimg_tag: TStringField;
+    Q_ConfigCompaniesprice_tag: TStringField;
+    Q_ConfigCompaniesurl_tag: TStringField;
+    Q_ConfigCompaniesurl_attribute: TStringField;
+    Q_ConfigCompaniesurl_base: TStringField;
+    Q_ConfigCompaniesurl_class: TStringField;
+    Q_ConfigCompaniesprice_parent_tag: TStringField;
+    Q_ConfigCompaniesprice_parent_class: TStringField;
+    Q_ConfigCompaniesprice_code: TStringField;
+    Q_ConfigCompaniesprice_integer: TStringField;
+    Q_ConfigCompaniesprice_decimal: TStringField;
+    Q_ConfigCompaniesprice_fraction: TStringField;
+    Q_ConfigCompaniesimg_attribute: TStringField;
+    Q_ConfigCompaniesparent_class: TStringField;
+    Q_ConfigCompaniestitle_class: TStringField;
+    Q_ConfigCompaniesprice_class: TStringField;
+    Q_ConfigCompaniesimg_class: TStringField;
+    Q_ConfigCompaniesalt_price_parent_tag: TStringField;
+    Q_ConfigCompaniesalt_price_parent_class: TStringField;
+    Q_ConfigCompaniesalt_img_tag: TStringField;
+    Q_ConfigCompaniesalt_img_class: TStringField;
+    Q_ConfigCompaniesalt_parent_class_2: TStringField;
+    Q_ConfigCompaniesalt_img_tag_2: TStringField;
+    Q_ConfigCompaniesalt_img_class_2: TStringField;
+    Q_ConfigCompaniesalt_parent_tag_2: TStringField;
+    Q_ConfigCompaniesalt_parent_tag: TStringField;
+    Q_ConfigCompaniesalt_parent_class: TStringField;
+    Q_ConfigCompaniesunv_product_tag: TStringField;
+    Q_ConfigCompaniesunv_product_class: TStringField;
+    Button4: TButton;
     procedure FormCreate(Sender: TObject);
     procedure CategComboboxSelect(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -148,6 +188,10 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure CompaniesComboboxSelect(Sender: TObject);
+    procedure CompanyConfigComboboxSelect(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -156,7 +200,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  ConfigCompanies: TConfigCompanies;
 
 implementation
 
@@ -165,7 +209,7 @@ implementation
 uses
   DM_Connection, Global_Functions;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TConfigCompanies.Button1Click(Sender: TObject);
 var
   id_company, id_category, id_subcategory: integer;
 begin
@@ -196,7 +240,7 @@ begin
   end;
 end;
 
-procedure TForm1.Button2Click(Sender: TObject);
+procedure TConfigCompanies.Button2Click(Sender: TObject);
 begin
   if MessageDlg('Deseja realmente excluir o registro selecionado?',
                 mtConfirmation, [mbYes, mbNo], 0) = mrYes then
@@ -206,13 +250,59 @@ begin
   end;
 end;
 
-procedure TForm1.Button3Click(Sender: TObject);
+procedure TConfigCompanies.Button3Click(Sender: TObject);
 begin
   D_Companies.DataSet.Insert;
   CompaniesGrid.SetFocus;
 end;
 
-procedure TForm1.CategComboboxSelect(Sender: TObject);
+procedure TConfigCompanies.Button4Click(Sender: TObject);
+var
+  id_company: integer;
+begin
+  id_company := GetCompanyID(CompanyConfigCombobox.Text);
+  if MessageDlg('Deseja realmente excluir a config selecionada?',
+                mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    DeleteConfig(id_company);
+  end;
+end;
+
+procedure TConfigCompanies.Button5Click(Sender: TObject);
+var
+  id_company: integer;
+begin
+  id_company := GetCompanyID(CompanyConfigCombobox.Text);
+
+  if not VerifyIfConfigCompanyExists(id_company) then
+  begin
+    InsertScrapp(
+    id_company,
+    parent_tag.text, parent_class.text, title_tag.text, title_class.text,
+    price_tag.text, price_class.text, img_tag.text, img_class.text,
+    img_attribute.text, url_tag.text, url_class.text, url_attribute.text,
+    url_base.text, alt_parent_tag.text, alt_parent_class.text,
+    alt_parent_tag_2.text, alt_parent_class_2.text, alt_img_tag.text,
+    alt_img_class.text, alt_img_tag_2.text, alt_img_class_2.text,
+    price_parent_tag.text, price_parent_class.text,
+    alt_price_parent_tag.text, alt_price_parent_class.text,
+    price_code.text, price_integer.text, price_decimal.text,
+    price_fraction.text, unv_product_tag.text, unv_product_class.text
+  );
+  end
+  else
+  begin
+    ShowMessage('Já existe config para essa marca');
+  end;
+
+end;
+
+procedure TConfigCompanies.Button6Click(Sender: TObject);
+begin
+ SaveQuery(Q_ConfigCompanies);
+end;
+
+procedure TConfigCompanies.CategComboboxSelect(Sender: TObject);
 var
   id_category: integer;
 begin
@@ -220,9 +310,20 @@ begin
   FetchCombobox(Q_SubCategories, SubCategCombobox, id_category);
 end;
 
-procedure TForm1.CompaniesComboboxSelect(Sender: TObject);
+procedure TConfigCompanies.CompanyConfigComboboxSelect(Sender: TObject);
 var
-id_company: integer;
+  id_company: integer;
+begin
+  id_company := GetCompanyID(CompanyConfigCombobox.Text);
+
+  Q_ConfigCompanies.Close;
+  Q_ConfigCompanies.ParamByName('id_company').AsInteger := id_company;
+  Q_ConfigCompanies.Open;
+end;
+
+procedure TConfigCompanies.CompaniesComboboxSelect(Sender: TObject);
+var
+  id_company: integer;
 begin
    id_company := GetCompanyID(CompaniesCombobox.Text);
 
@@ -235,7 +336,7 @@ begin
    Q_SubCategParams.Open;
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TConfigCompanies.FormCreate(Sender: TObject);
 begin
   //SelectCategories(CategCombobox);
 
@@ -244,22 +345,17 @@ begin
 
 end;
 
-procedure TForm1.PageControlChange(Sender: TObject);
+procedure TConfigCompanies.PageControlChange(Sender: TObject);
 begin
 
- if PageControl.TabIndex = 0 then
- begin
-   Q_Companies.Close;
-   Q_Companies.Open;
- end
- else if PageControl.TabIndex = 1 then
+ if PageControl.TabIndex = 1 then
  begin
    FetchCombobox(Q_Companies, CompaniesCombobox);
    FetchCombobox(Q_Categories, CategCombobox);
  end
  else if PageControl.TabIndex = 2 then
  begin
-   //
+  FetchCombobox(Q_Companies, CompanyConfigCombobox);
  end;
 end;
 

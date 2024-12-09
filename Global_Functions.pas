@@ -10,19 +10,27 @@ uses
   Winapi.Windows, System.JSON, REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope, System.Classes,  System.NetEncoding,
   IdHTTP, IdSSL, IdSSLOpenSSL, System.Net.HttpClient, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Winapi.GDIPAPI, Winapi.GDIPOBJ;
 
+
+
+
+procedure DeleteConfig(id_company: integer);
+function VerifyIfConfigCompanyExists(id_company: integer): Boolean;
 function GetCompanyID(company: string): integer;
 function GetCategoryID(category: string): integer;
 function GetSubcategoryID(subcategory: string): integer;
+procedure EditQuery(Query: TFDQuery);
+procedure SaveQuery(Query: TFDQuery);
 procedure FetchCombobox(Query: TFDQuery; ComboBox: TComboBox; ParamInt: integer  = -1);
 procedure LoadImage(image_src: string; Image: TImage);
 procedure HideScrollbars(ScrollBox: TScrollBox);
-procedure InsertScrappTest(
+procedure InsertScrapp(
+  id_company: integer;
   parent_tag, parent_class,  title_tag, title_class, price_tag, price_class,
   img_tag, img_class,img_attribute, url_tag, url_class, url_attribute, url_base,
   alt_parent_tag, alt_parent_class, alt_parent_tag_2,alt_parent_class_2,
   alt_img_tag, alt_img_class,alt_img_tag_2, alt_img_class_2, price_parent_tag,
   price_parent_class,alt_price_parent_tag, alt_price_parent_class,
-  price_code, price_integer, price_decimal, price_fraction, url_test: string
+  price_code, price_integer, price_decimal, price_fraction, unv_product_tag, unv_product_class: string
 );
 
 implementation
@@ -44,12 +52,12 @@ begin
 
     if not queryTemp.IsEmpty then
     begin
-      TBlobField(queryTemp.FieldByName('image_blob')).SaveToStream(MemStream);
+     TBlobField(queryTemp.FieldByName('image_blob')).SaveToStream(MemStream);
 
-      MemStream.Position := 0;
+    MemStream.Position := 0;
 
-      Image.Picture.Graphic := nil;
-      Image.Picture.LoadFromStream(MemStream);
+    Image.Picture.Graphic := nil;
+    Image.Picture.LoadFromStream(MemStream);
     end
     else
       ShowMessage('Imagem não encontrada.');
@@ -174,40 +182,71 @@ begin
   queryTemp.Free;
 end;
 
-procedure InsertScrappTest(
+procedure EditQuery(Query: TFDQuery);
+begin
+  if not Query.IsEmpty then
+    Query.Edit;
+end;
+
+procedure SaveQuery(Query: TFDQuery);
+begin
+try
+  if not DM_Con.Connection.InTransaction then
+      DM_Con.Connection.StartTransaction;
+
+    Query.Post;
+    DM_Con.Connection.Commit;
+    ShowMessage('Alteração salva com sucesso!');
+  except
+    on E: Exception do
+    begin
+      DM_Con.Connection.Rollback;
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+end;
+
+procedure InsertScrapp(
+  id_company: integer;
   parent_tag, parent_class,  title_tag, title_class, price_tag, price_class,
   img_tag, img_class,img_attribute, url_tag, url_class, url_attribute, url_base,
   alt_parent_tag, alt_parent_class, alt_parent_tag_2,alt_parent_class_2,
   alt_img_tag, alt_img_class,alt_img_tag_2, alt_img_class_2, price_parent_tag,
   price_parent_class,alt_price_parent_tag, alt_price_parent_class,
-  price_code, price_integer, price_decimal, price_fraction, url_test: string
+  price_code, price_integer, price_decimal, price_fraction, unv_product_tag, unv_product_class: string
 );
 var
   queryTemp: TFDQuery;
 begin
   queryTemp := TFDQuery.Create(nil);
   try
+    if not DM_Con.Connection.InTransaction then
+      DM_Con.Connection.StartTransaction;
+
     queryTemp.Connection := DM_Con.Connection;
 
     queryTemp.SQL.Text :=
-      'INSERT INTO ScrappTest (' +
-      '    parent_tag, title_tag, img_tag, price_tag, url_tag, ' +
+      'INSERT INTO configcompanies (' +
+      '    id_company, parent_tag, title_tag, img_tag, price_tag, url_tag, ' +
       '    url_attribute, url_base, url_class, price_parent_tag, ' +
       '    price_parent_class, price_code, price_integer, price_decimal, ' +
       '    price_fraction, img_attribute, parent_class, title_class, ' +
       '    price_class, img_class, alt_price_parent_tag, alt_price_parent_class, ' +
       '    alt_img_tag, alt_img_class, alt_parent_class_2, alt_img_tag_2, ' +
-      '    alt_img_class_2, alt_parent_tag_2, alt_parent_tag, alt_parent_class, url_test' +
+      '    alt_img_class_2, alt_parent_tag_2, alt_parent_tag, alt_parent_class,' +
+      '    unv_product_tag, unv_product_class' +
       ') VALUES (' +
-      '    :parent_tag, :title_tag, :img_tag, :price_tag, :url_tag, ' +
+      '    :id_company, :parent_tag, :title_tag, :img_tag, :price_tag, :url_tag, ' +
       '    :url_attribute, :url_base, :url_class, :price_parent_tag, ' +
       '    :price_parent_class, :price_code, :price_integer, :price_decimal, ' +
       '    :price_fraction, :img_attribute, :parent_class, :title_class, ' +
       '    :price_class, :img_class, :alt_price_parent_tag, :alt_price_parent_class, ' +
       '    :alt_img_tag, :alt_img_class, :alt_parent_class_2, :alt_img_tag_2, ' +
-      '    :alt_img_class_2, :alt_parent_tag_2, :alt_parent_tag, :alt_parent_class, :url_test' +
+      '    :alt_img_class_2, :alt_parent_tag_2, :alt_parent_tag, :alt_parent_class,' +
+      '    :unv_product_tag, :unv_product_class' +
       ');';
 
+    queryTemp.ParamByName('id_company').AsInteger := id_company;
     queryTemp.ParamByName('parent_tag').AsString := parent_tag;
     queryTemp.ParamByName('title_tag').AsString := title_tag;
     queryTemp.ParamByName('img_tag').AsString := img_tag;
@@ -237,9 +276,41 @@ begin
     queryTemp.ParamByName('alt_parent_tag_2').AsString := alt_parent_tag_2;
     queryTemp.ParamByName('alt_parent_tag').AsString := alt_parent_tag;
     queryTemp.ParamByName('alt_parent_class').AsString := alt_parent_class;
-    queryTemp.ParamByName('url_test').AsString := url_test;
-
+    queryTemp.ParamByName('unv_product_tag').AsString := unv_product_tag;
+    queryTemp.ParamByName('unv_product_class').AsString := unv_product_class;
     queryTemp.ExecSQL;
+    DM_Con.Connection.Commit;
+
+    ShowMessage('Inserido com Sucesso');
+
+  except
+    on E: Exception do
+    begin
+      DM_Con.Connection.Rollback;
+      ShowMessage('Erro: ' + E.Message);
+    end;
+  end;
+  queryTemp.Free;
+end;
+
+function VerifyIfConfigCompanyExists(id_company: integer): Boolean;
+var
+  queryTemp: TFDQuery;
+begin
+  queryTemp := TFDQuery.Create(nil);
+  Result := False;
+  try
+    queryTemp.Connection := DM_Con.Connection;
+
+    queryTemp.SQL.Text := 'SELECT id_company FROM configcompanies WHERE id_company = :id_company';
+    queryTemp.ParamByName('id_company').AsInteger := id_company;
+    queryTemp.Open;
+
+    if not queryTemp.IsEmpty then
+    begin
+      Result := True;
+    end;
+
 
   except
     on E: Exception do
@@ -250,7 +321,7 @@ begin
   queryTemp.Free;
 end;
 
-procedure DeleteConfig;
+procedure DeleteConfig(id_company: integer);
 var
   queryTemp: TFDQuery;
 begin
@@ -258,9 +329,11 @@ begin
   try
     queryTemp.Connection := DM_Con.Connection;
 
-    queryTemp.SQL.Text := 'DELETE FROM ScrappTest';
-
+    queryTemp.SQL.Text := 'DELETE FROM configcompanies WHERE id_company = :id_company';
+    queryTemp.ParamByName('id_company').AsInteger := id_company;
     queryTemp.ExecSQL;
+
+    ShowMessage('Excluido com sucesso');
   except
     on E: Exception do
     begin
@@ -269,5 +342,6 @@ begin
   end;
   queryTemp.Free;
 end;
+
 
 end.

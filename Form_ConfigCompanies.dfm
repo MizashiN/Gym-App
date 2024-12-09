@@ -1,11 +1,11 @@
-object Form1: TForm1
+object ConfigCompanies: TConfigCompanies
   Left = 0
   Top = 166
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Config Companies'
   ClientHeight = 597
-  ClientWidth = 908
+  ClientWidth = 1048
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object Form1: TForm1
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 908
+    Width = 1048
     Height = 597
     ActivePage = TabSheet2
     Align = alClient
@@ -31,7 +31,7 @@ object Form1: TForm1
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 894
+        Width = 1034
         Height = 561
         Align = alClient
         TabOrder = 0
@@ -39,7 +39,7 @@ object Form1: TForm1
           AlignWithMargins = True
           Left = 4
           Top = 55
-          Width = 886
+          Width = 1026
           Height = 502
           Align = alClient
           TabOrder = 0
@@ -47,7 +47,7 @@ object Form1: TForm1
             AlignWithMargins = True
             Left = 4
             Top = 4
-            Width = 878
+            Width = 1018
             Height = 494
             Align = alClient
             DataSource = D_Companies
@@ -75,7 +75,7 @@ object Form1: TForm1
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 886
+          Width = 1026
           Height = 45
           Align = alTop
           BevelOuter = bvNone
@@ -93,7 +93,7 @@ object Form1: TForm1
           end
           object Button3: TButton
             AlignWithMargins = True
-            Left = 616
+            Left = 756
             Top = 3
             Width = 130
             Height = 39
@@ -110,7 +110,7 @@ object Form1: TForm1
           end
           object Button2: TButton
             AlignWithMargins = True
-            Left = 752
+            Left = 892
             Top = 3
             Width = 131
             Height = 39
@@ -135,7 +135,7 @@ object Form1: TForm1
         AlignWithMargins = True
         Left = 3
         Top = 70
-        Width = 888
+        Width = 1028
         Height = 488
         Align = alClient
         BiDiMode = bdLeftToRight
@@ -147,14 +147,14 @@ object Form1: TForm1
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 880
+          Width = 1020
           Height = 60
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
           object Panel14: TPanel
             AlignWithMargins = True
-            Left = 695
+            Left = 835
             Top = 3
             Width = 182
             Height = 54
@@ -286,7 +286,7 @@ object Form1: TForm1
           AlignWithMargins = True
           Left = 4
           Top = 70
-          Width = 880
+          Width = 1020
           Height = 414
           Align = alClient
           TabOrder = 1
@@ -386,7 +386,7 @@ object Form1: TForm1
           object Panel13: TPanel
             Left = 410
             Top = 1
-            Width = 469
+            Width = 609
             Height = 412
             Align = alClient
             BevelOuter = bvNone
@@ -395,7 +395,7 @@ object Form1: TForm1
               AlignWithMargins = True
               Left = 10
               Top = 54
-              Width = 449
+              Width = 589
               Height = 348
               Margins.Left = 10
               Margins.Top = 10
@@ -470,7 +470,7 @@ object Form1: TForm1
               AlignWithMargins = True
               Left = 15
               Top = 10
-              Width = 439
+              Width = 579
               Height = 31
               Margins.Left = 15
               Margins.Top = 10
@@ -494,7 +494,7 @@ object Form1: TForm1
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 888
+        Width = 1028
         Height = 61
         Align = alTop
         BevelOuter = bvNone
@@ -539,13 +539,13 @@ object Form1: TForm1
       end
     end
     object TabSheet2: TTabSheet
-      Caption = 'TabSheet2'
+      Caption = 'Config Company Registration'
       ImageIndex = 1
       object Panel1: TPanel
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 894
+        Width = 1034
         Height = 561
         Align = alClient
         BevelOuter = bvNone
@@ -554,13 +554,11 @@ object Form1: TForm1
           AlignWithMargins = True
           Left = 3
           Top = 70
-          Width = 888
+          Width = 1028
           Height = 488
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitTop = 3
-          ExplicitHeight = 555
           object Title: TPanel
             AlignWithMargins = True
             Left = 151
@@ -570,7 +568,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitHeight = 549
             object Panel15: TPanel
               AlignWithMargins = True
               Left = 3
@@ -580,17 +577,18 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 0
-              object TitleTag: TLabeledEdit
+              object title_tag: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 43
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Title Tag'
+                Align = alBottom
+                DataField = 'title_tag'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 42
+                EditLabel.Height = 15
               end
             end
             object Panel16: TPanel
@@ -602,17 +600,18 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 1
-              object TitleClass: TLabeledEdit
+              object title_class: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 24
                 Width = 130
                 Height = 23
-                EditLabel.Width = 52
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Title Class'
+                Align = alBottom
+                DataField = 'title_class'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 50
+                EditLabel.Height = 15
               end
             end
           end
@@ -625,7 +624,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitHeight = 549
             object Panel21: TPanel
               AlignWithMargins = True
               Left = 3
@@ -635,17 +633,18 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 0
-              object AltParentTag2: TLabeledEdit
+              object alt_parent_tag_2: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 24
                 Width = 130
                 Height = 23
-                EditLabel.Width = 82
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Parent Tag 2'
+                Align = alBottom
+                DataField = 'alt_parent_tag_2'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 85
+                EditLabel.Height = 15
               end
             end
             object Panel22: TPanel
@@ -657,17 +656,18 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 1
-              object AltParentClass: TLabeledEdit
+              object alt_parent_class: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
+                Align = alBottom
+                DataField = 'alt_parent_class'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
                 EditLabel.Width = 82
                 EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Parent Class'
-                TabOrder = 0
-                Text = ''
               end
             end
             object Panel23: TPanel
@@ -679,17 +679,18 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 2
-              object AltParentClass2: TLabeledEdit
+              object alt_parent_class_2: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 24
                 Width = 130
                 Height = 23
-                EditLabel.Width = 91
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Parent Class 2'
+                Align = alBottom
+                DataField = 'alt_parent_class_2'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 93
+                EditLabel.Height = 15
               end
             end
             object Panel24: TPanel
@@ -701,17 +702,18 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 3
-              object AltParentTag: TLabeledEdit
+              object alt_parent_tag: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 73
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Parent Tag'
+                Align = alBottom
+                DataField = 'alt_parent_tag'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 74
+                EditLabel.Height = 15
               end
             end
             object Panel25: TPanel
@@ -723,17 +725,18 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 4
-              object ParentClass: TLabeledEdit
+              object parent_class: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
+                Align = alBottom
+                DataField = 'parent_class'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
                 EditLabel.Width = 64
                 EditLabel.Height = 15
-                EditLabel.Caption = 'Parent Class'
-                TabOrder = 0
-                Text = ''
               end
             end
             object Panel26: TPanel
@@ -745,17 +748,18 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 5
-              object ParentTag: TLabeledEdit
+              object parent_tag: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 55
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Parent Tag'
+                Align = alBottom
+                DataField = 'parent_tag'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 56
+                EditLabel.Height = 15
               end
             end
           end
@@ -768,51 +772,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 2
-            ExplicitHeight = 549
-            object Panel18: TPanel
-              AlignWithMargins = True
-              Left = 3
-              Top = 159
-              Width = 136
-              Height = 46
-              Align = alTop
-              BevelOuter = bvNone
-              TabOrder = 0
-              object AltPriceClass: TLabeledEdit
-                AlignWithMargins = True
-                Left = 3
-                Top = 20
-                Width = 130
-                Height = 23
-                EditLabel.Width = 74
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Price Class'
-                TabOrder = 0
-                Text = ''
-              end
-            end
-            object Panel27: TPanel
-              AlignWithMargins = True
-              Left = 3
-              Top = 107
-              Width = 136
-              Height = 46
-              Align = alTop
-              BevelOuter = bvNone
-              TabOrder = 1
-              object AltPriceTag: TLabeledEdit
-                AlignWithMargins = True
-                Left = 3
-                Top = 20
-                Width = 130
-                Height = 23
-                EditLabel.Width = 65
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Price Tag'
-                TabOrder = 0
-                Text = ''
-              end
-            end
             object Panel28: TPanel
               AlignWithMargins = True
               Left = 3
@@ -821,18 +780,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 2
-              object PriceClass: TLabeledEdit
+              TabOrder = 0
+              object price_class: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
+                Align = alBottom
+                DataField = 'price_class'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
                 EditLabel.Width = 56
                 EditLabel.Height = 15
-                EditLabel.Caption = 'Price Class'
-                TabOrder = 0
-                Text = ''
               end
             end
             object Panel29: TPanel
@@ -843,18 +803,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 3
-              object PriceTag: TLabeledEdit
+              TabOrder = 1
+              object price_tag: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 47
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Price Tag'
+                Align = alBottom
+                DataField = 'price_tag'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 48
+                EditLabel.Height = 15
               end
             end
           end
@@ -867,29 +828,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 3
-            ExplicitHeight = 549
-            object Panel5: TPanel
-              AlignWithMargins = True
-              Left = 3
-              Top = 367
-              Width = 136
-              Height = 46
-              Align = alTop
-              BevelOuter = bvNone
-              TabOrder = 0
-              object AltPriceParentClass: TLabeledEdit
-                AlignWithMargins = True
-                Left = 3
-                Top = 20
-                Width = 130
-                Height = 23
-                EditLabel.Width = 125
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Price Parent Class @'
-                TabOrder = 0
-                Text = ''
-              end
-            end
             object Panel6: TPanel
               AlignWithMargins = True
               Left = 3
@@ -898,18 +836,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 1
-              object PriceFraction: TLabeledEdit
+              TabOrder = 0
+              object alt_img_tag_2: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
+                Align = alBottom
+                DataField = 'alt_img_tag_2'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
                 EditLabel.Width = 72
                 EditLabel.Height = 15
-                EditLabel.Caption = 'Price Fraction'
-                TabOrder = 0
-                Text = ''
               end
             end
             object Panel8: TPanel
@@ -920,18 +859,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 2
-              object PriceDecimal: TLabeledEdit
+              TabOrder = 1
+              object alt_img_class: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 72
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Price Decimal'
+                Align = alBottom
+                DataField = 'alt_img_class'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 69
+                EditLabel.Height = 15
               end
             end
             object Panel9: TPanel
@@ -942,18 +882,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 3
-              object PriceParentTag: TLabeledEdit
+              TabOrder = 2
+              object img_tag: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 98
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Price Parent Tag @'
+                Align = alBottom
+                DataField = 'img_tag'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 43
+                EditLabel.Height = 15
               end
             end
             object Panel2: TPanel
@@ -964,18 +905,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 4
-              object PriceInteger: TLabeledEdit
+              TabOrder = 3
+              object alt_img_tag: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 66
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Price Integer'
+                Align = alBottom
+                DataField = 'alt_img_tag'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 61
+                EditLabel.Height = 15
               end
             end
             object Panel10: TPanel
@@ -986,18 +928,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 5
-              object PriceCode: TLabeledEdit
+              TabOrder = 4
+              object img_attribute: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 57
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Price Code'
+                Align = alBottom
+                DataField = 'img_attribute'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 71
+                EditLabel.Height = 15
               end
             end
             object Panel17: TPanel
@@ -1008,18 +951,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 6
-              object PriceParentClass: TLabeledEdit
+              TabOrder = 5
+              object img_class: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 107
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Price Parent Class @'
+                Align = alBottom
+                DataField = 'img_class'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 51
+                EditLabel.Height = 15
               end
             end
             object Panel19: TPanel
@@ -1030,18 +974,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 7
-              object AltPriceParentTag: TLabeledEdit
+              TabOrder = 6
+              object alt_img_class_2: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 116
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Price Parent Tag @'
+                Align = alBottom
+                DataField = 'alt_img_class_2'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 80
+                EditLabel.Height = 15
               end
             end
           end
@@ -1054,73 +999,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 4
-            ExplicitHeight = 549
-            object Panel30: TPanel
-              AlignWithMargins = True
-              Left = 3
-              Top = 315
-              Width = 136
-              Height = 46
-              Align = alTop
-              BevelOuter = bvNone
-              TabOrder = 0
-              object AltImgClass2: TLabeledEdit
-                AlignWithMargins = True
-                Left = 3
-                Top = 20
-                Width = 130
-                Height = 23
-                EditLabel.Width = 78
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Img Class 2'
-                TabOrder = 0
-                Text = ''
-              end
-            end
-            object Panel31: TPanel
-              AlignWithMargins = True
-              Left = 3
-              Top = 263
-              Width = 136
-              Height = 46
-              Align = alTop
-              BevelOuter = bvNone
-              TabOrder = 1
-              object AltImgTag2: TLabeledEdit
-                AlignWithMargins = True
-                Left = 3
-                Top = 20
-                Width = 130
-                Height = 23
-                EditLabel.Width = 69
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Img Tag 2'
-                TabOrder = 0
-                Text = ''
-              end
-            end
-            object Panel32: TPanel
-              AlignWithMargins = True
-              Left = 3
-              Top = 211
-              Width = 136
-              Height = 46
-              Align = alTop
-              BevelOuter = bvNone
-              TabOrder = 2
-              object AltImgClass: TLabeledEdit
-                AlignWithMargins = True
-                Left = 9
-                Top = 23
-                Width = 130
-                Height = 23
-                EditLabel.Width = 69
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Img Class'
-                TabOrder = 0
-                Text = ''
-              end
-            end
             object Panel33: TPanel
               AlignWithMargins = True
               Left = 3
@@ -1129,18 +1007,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 3
-              object ImgTag: TLabeledEdit
+              TabOrder = 0
+              object url_tag: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 42
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Img Tag'
+                Align = alBottom
+                DataField = 'url_tag'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 36
+                EditLabel.Height = 15
               end
             end
             object Panel34: TPanel
@@ -1151,18 +1030,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 4
-              object AltImgTag: TLabeledEdit
+              TabOrder = 1
+              object url_base: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 63
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Alt Img Tag '
+                Align = alBottom
+                DataField = 'url_base'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 43
+                EditLabel.Height = 15
               end
             end
             object Panel35: TPanel
@@ -1173,18 +1053,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 5
-              object ImgAttribute: TLabeledEdit
+              TabOrder = 2
+              object url_attribute: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 71
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Img Attribute'
+                Align = alBottom
+                DataField = 'url_attribute'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 64
+                EditLabel.Height = 15
               end
             end
             object Panel36: TPanel
@@ -1195,18 +1076,19 @@ object Form1: TForm1
               Height = 46
               Align = alTop
               BevelOuter = bvNone
-              TabOrder = 6
-              object ImgClass: TLabeledEdit
+              TabOrder = 3
+              object url_class: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 51
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Img Class'
+                Align = alBottom
+                DataField = 'url_class'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 44
+                EditLabel.Height = 15
               end
             end
           end
@@ -1219,7 +1101,6 @@ object Form1: TForm1
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 5
-            ExplicitHeight = 549
             object Panel40: TPanel
               AlignWithMargins = True
               Left = 3
@@ -1229,17 +1110,18 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 0
-              object UrlTag: TLabeledEdit
+              object price_parent_tag: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 36
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Url Tag'
+                Align = alBottom
+                DataField = 'price_parent_tag'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 87
+                EditLabel.Height = 15
               end
             end
             object Panel42: TPanel
@@ -1251,17 +1133,18 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 1
-              object UrlAttribute: TLabeledEdit
+              object alt_price_parent_class: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 65
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Url Attribute'
+                Align = alBottom
+                DataField = 'alt_price_parent_class'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 113
+                EditLabel.Height = 15
               end
             end
             object Panel43: TPanel
@@ -1273,17 +1156,18 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 2
-              object UrlClass: TLabeledEdit
+              object price_parent_class: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
                 Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 45
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Url Class'
+                Align = alBottom
+                DataField = 'price_parent_class'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 95
+                EditLabel.Height = 15
               end
             end
             object Panel44: TPanel
@@ -1295,18 +1179,177 @@ object Form1: TForm1
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 3
-              object UrlBase: TLabeledEdit
+              object alt_price_parent_tag: TDBLabeledEdit
                 AlignWithMargins = True
-                Left = 5
-                Top = 23
+                Left = 3
+                Top = 20
                 Width = 130
                 Height = 23
-                EditLabel.Width = 42
-                EditLabel.Height = 15
-                EditLabel.Caption = 'Url Base'
+                Align = alBottom
+                DataField = 'alt_price_parent_tag'
+                DataSource = D_ConfigCompanies
                 TabOrder = 0
-                Text = ''
+                EditLabel.Width = 105
+                EditLabel.Height = 15
               end
+            end
+            object Panel50: TPanel
+              AlignWithMargins = True
+              Left = 3
+              Top = 367
+              Width = 136
+              Height = 46
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 4
+              object price_fraction: TDBLabeledEdit
+                AlignWithMargins = True
+                Left = 3
+                Top = 20
+                Width = 130
+                Height = 23
+                Align = alBottom
+                DataField = 'price_fraction'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
+                EditLabel.Width = 72
+                EditLabel.Height = 15
+              end
+            end
+            object Panel51: TPanel
+              AlignWithMargins = True
+              Left = 3
+              Top = 315
+              Width = 136
+              Height = 46
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 5
+              object price_decimal: TDBLabeledEdit
+                AlignWithMargins = True
+                Left = 3
+                Top = 20
+                Width = 130
+                Height = 23
+                Align = alBottom
+                DataField = 'price_decimal'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
+                EditLabel.Width = 73
+                EditLabel.Height = 15
+              end
+            end
+            object Panel52: TPanel
+              AlignWithMargins = True
+              Left = 3
+              Top = 263
+              Width = 136
+              Height = 46
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 6
+              object price_integer: TDBLabeledEdit
+                AlignWithMargins = True
+                Left = 3
+                Top = 20
+                Width = 130
+                Height = 23
+                Align = alBottom
+                DataField = 'price_integer'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
+                EditLabel.Width = 68
+                EditLabel.Height = 15
+              end
+            end
+            object Panel53: TPanel
+              AlignWithMargins = True
+              Left = 3
+              Top = 211
+              Width = 136
+              Height = 46
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 7
+              object price_code: TDBLabeledEdit
+                AlignWithMargins = True
+                Left = 3
+                Top = 20
+                Width = 130
+                Height = 23
+                Align = alBottom
+                DataField = 'price_code'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
+                EditLabel.Width = 57
+                EditLabel.Height = 15
+              end
+            end
+          end
+          object Panel5: TPanel
+            AlignWithMargins = True
+            Left = 891
+            Top = 3
+            Width = 142
+            Height = 482
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 6
+            object Panel18: TPanel
+              AlignWithMargins = True
+              Left = 3
+              Top = 3
+              Width = 136
+              Height = 46
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 0
+              object unv_product_tag: TDBLabeledEdit
+                AlignWithMargins = True
+                Left = 3
+                Top = 20
+                Width = 130
+                Height = 23
+                Align = alBottom
+                DataField = 'unv_product_tag'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
+                EditLabel.Width = 89
+                EditLabel.Height = 15
+              end
+            end
+            object Panel30: TPanel
+              AlignWithMargins = True
+              Left = 3
+              Top = 55
+              Width = 136
+              Height = 46
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 1
+              object unv_product_class: TDBLabeledEdit
+                AlignWithMargins = True
+                Left = 3
+                Top = 20
+                Width = 130
+                Height = 23
+                Align = alBottom
+                DataField = 'unv_product_class'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
+                EditLabel.Width = 97
+                EditLabel.Height = 15
+              end
+            end
+            object Panel32: TPanel
+              AlignWithMargins = True
+              Left = 3
+              Top = 107
+              Width = 136
+              Height = 46
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 2
             end
           end
         end
@@ -1314,13 +1357,11 @@ object Form1: TForm1
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 888
+          Width = 1028
           Height = 61
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitLeft = 6
-          ExplicitTop = 11
           object Panel49: TPanel
             AlignWithMargins = True
             Left = 3
@@ -1347,7 +1388,7 @@ object Form1: TForm1
               ParentFont = False
               ExplicitWidth = 78
             end
-            object ComboBox1: TComboBox
+            object CompanyConfigCombobox: TComboBox
               AlignWithMargins = True
               Left = 3
               Top = 30
@@ -1355,8 +1396,59 @@ object Form1: TForm1
               Height = 23
               Align = alClient
               TabOrder = 0
-              OnSelect = CompaniesComboboxSelect
+              OnSelect = CompanyConfigComboboxSelect
             end
+          end
+          object Button5: TButton
+            AlignWithMargins = True
+            Left = 883
+            Top = 3
+            Width = 142
+            Height = 55
+            Align = alRight
+            Caption = 'Insert Config'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            OnClick = Button5Click
+          end
+          object Button6: TButton
+            AlignWithMargins = True
+            Left = 735
+            Top = 3
+            Width = 142
+            Height = 55
+            Align = alRight
+            Caption = 'Save Config'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 2
+            OnClick = Button6Click
+          end
+          object Button4: TButton
+            AlignWithMargins = True
+            Left = 587
+            Top = 3
+            Width = 142
+            Height = 55
+            Align = alRight
+            Caption = 'Delete Config'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 3
+            OnClick = Button4Click
           end
         end
       end
@@ -1581,5 +1673,196 @@ object Form1: TForm1
       Required = True
       Size = 255
     end
+  end
+  object Q_ConfigCompanies: TFDQuery
+    Connection = DM_Con.Connection
+    Transaction = DM_Con.Transaction
+    UpdateTransaction = DM_Con.Transaction
+    SQL.Strings = (
+      'SELECT * FROM configcompanies WHERE id_company = :id_company')
+    Left = 202
+    Top = 60
+    ParamData = <
+      item
+        Name = 'ID_COMPANY'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object Q_ConfigCompaniesid_config: TFDAutoIncField
+      FieldName = 'id_config'
+      Origin = 'id_config'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = False
+    end
+    object Q_ConfigCompaniesid_company: TIntegerField
+      FieldName = 'id_company'
+      Origin = 'id_company'
+      Required = True
+    end
+    object Q_ConfigCompaniesparent_tag: TStringField
+      FieldName = 'parent_tag'
+      Origin = 'parent_tag'
+      Required = True
+      Size = 255
+    end
+    object Q_ConfigCompaniestitle_tag: TStringField
+      FieldName = 'title_tag'
+      Origin = 'title_tag'
+      Required = True
+      Size = 255
+    end
+    object Q_ConfigCompaniesimg_tag: TStringField
+      FieldName = 'img_tag'
+      Origin = 'img_tag'
+      Required = True
+      Size = 255
+    end
+    object Q_ConfigCompaniesprice_tag: TStringField
+      FieldName = 'price_tag'
+      Origin = 'price_tag'
+      Required = True
+      Size = 255
+    end
+    object Q_ConfigCompaniesurl_tag: TStringField
+      FieldName = 'url_tag'
+      Origin = 'url_tag'
+      Size = 255
+    end
+    object Q_ConfigCompaniesurl_attribute: TStringField
+      FieldName = 'url_attribute'
+      Origin = 'url_attribute'
+      Size = 255
+    end
+    object Q_ConfigCompaniesurl_base: TStringField
+      FieldName = 'url_base'
+      Origin = 'url_base'
+      Size = 255
+    end
+    object Q_ConfigCompaniesurl_class: TStringField
+      FieldName = 'url_class'
+      Origin = 'url_class'
+      Size = 255
+    end
+    object Q_ConfigCompaniesprice_parent_tag: TStringField
+      FieldName = 'price_parent_tag'
+      Origin = 'price_parent_tag'
+      Size = 255
+    end
+    object Q_ConfigCompaniesprice_parent_class: TStringField
+      FieldName = 'price_parent_class'
+      Origin = 'price_parent_class'
+      Size = 255
+    end
+    object Q_ConfigCompaniesprice_code: TStringField
+      FieldName = 'price_code'
+      Origin = 'price_code'
+      Size = 255
+    end
+    object Q_ConfigCompaniesprice_integer: TStringField
+      FieldName = 'price_integer'
+      Origin = 'price_integer'
+      Size = 255
+    end
+    object Q_ConfigCompaniesprice_decimal: TStringField
+      FieldName = 'price_decimal'
+      Origin = 'price_decimal'
+      Size = 255
+    end
+    object Q_ConfigCompaniesprice_fraction: TStringField
+      FieldName = 'price_fraction'
+      Origin = 'price_fraction'
+      Size = 255
+    end
+    object Q_ConfigCompaniesimg_attribute: TStringField
+      FieldName = 'img_attribute'
+      Origin = 'img_attribute'
+      Size = 255
+    end
+    object Q_ConfigCompaniesparent_class: TStringField
+      FieldName = 'parent_class'
+      Origin = 'parent_class'
+      Size = 255
+    end
+    object Q_ConfigCompaniestitle_class: TStringField
+      FieldName = 'title_class'
+      Origin = 'title_class'
+      Size = 255
+    end
+    object Q_ConfigCompaniesprice_class: TStringField
+      FieldName = 'price_class'
+      Origin = 'price_class'
+      Size = 255
+    end
+    object Q_ConfigCompaniesimg_class: TStringField
+      FieldName = 'img_class'
+      Origin = 'img_class'
+      Size = 255
+    end
+    object Q_ConfigCompaniesalt_price_parent_tag: TStringField
+      FieldName = 'alt_price_parent_tag'
+      Origin = 'alt_price_parent_tag'
+      Size = 255
+    end
+    object Q_ConfigCompaniesalt_price_parent_class: TStringField
+      FieldName = 'alt_price_parent_class'
+      Origin = 'alt_price_parent_class'
+      Size = 255
+    end
+    object Q_ConfigCompaniesalt_img_tag: TStringField
+      FieldName = 'alt_img_tag'
+      Origin = 'alt_img_tag'
+      Size = 255
+    end
+    object Q_ConfigCompaniesalt_img_class: TStringField
+      FieldName = 'alt_img_class'
+      Origin = 'alt_img_class'
+      Size = 255
+    end
+    object Q_ConfigCompaniesalt_parent_class_2: TStringField
+      FieldName = 'alt_parent_class_2'
+      Origin = 'alt_parent_class_2'
+      Size = 255
+    end
+    object Q_ConfigCompaniesalt_img_tag_2: TStringField
+      FieldName = 'alt_img_tag_2'
+      Origin = 'alt_img_tag_2'
+      Size = 255
+    end
+    object Q_ConfigCompaniesalt_img_class_2: TStringField
+      FieldName = 'alt_img_class_2'
+      Origin = 'alt_img_class_2'
+      Size = 255
+    end
+    object Q_ConfigCompaniesalt_parent_tag_2: TStringField
+      FieldName = 'alt_parent_tag_2'
+      Origin = 'alt_parent_tag_2'
+      Size = 255
+    end
+    object Q_ConfigCompaniesalt_parent_tag: TStringField
+      FieldName = 'alt_parent_tag'
+      Origin = 'alt_parent_tag'
+      Size = 255
+    end
+    object Q_ConfigCompaniesalt_parent_class: TStringField
+      FieldName = 'alt_parent_class'
+      Origin = 'alt_parent_class'
+      Size = 255
+    end
+    object Q_ConfigCompaniesunv_product_tag: TStringField
+      FieldName = 'unv_product_tag'
+      Origin = 'unv_product_tag'
+      Size = 32767
+    end
+    object Q_ConfigCompaniesunv_product_class: TStringField
+      FieldName = 'unv_product_class'
+      Origin = 'unv_product_class'
+      Size = 32767
+    end
+  end
+  object D_ConfigCompanies: TDataSource
+    DataSet = Q_ConfigCompanies
+    Left = 231
+    Top = 60
   end
 end

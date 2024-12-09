@@ -5,7 +5,11 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, ShellAPI,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.DBCtrls, System.ImageList,
-  Vcl.ImgList,System.JSON, REST.Client, REST.Types, Global_Functions, System.Generics.Collections;
+  Vcl.ImgList,System.JSON, REST.Client, REST.Types, System.Generics.Collections,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TSupplements = class(TForm)
@@ -26,19 +30,27 @@ type
     Panel4: TPanel;
     CategoriesCombobox: TComboBox;
     SubcategoriesCombobox: TComboBox;
-    Panel5: TPanel;
-    TypesLabel: TLabel;
-    TypesCombobox: TComboBox;
-    BrandsCombobox: TComboBox;
-    procedure GetProducts;
+    CompaniesCombobox: TComboBox;
+    Q_Products: TFDQuery;
+    Button1: TButton;
+    Q_Companies: TFDQuery;
+    Q_Companiescompany: TStringField;
+    Q_Subcategories: TFDQuery;
+    Q_Subcategoriessubcategory: TStringField;
+    Q_Categories: TFDQuery;
+    Q_Categoriescategory: TStringField;
+    Q_Productstitle_product: TStringField;
+    Q_Productsprice_product: TBCDField;
+    Q_Productsimage_src: TStringField;
+    Q_Productsurl_product: TStringField;
     procedure OpenURL(URL: string);
     procedure PanelClick(Sender: TObject);
     procedure CreateCardsProduct;
     procedure CategoriesComboboxSelect(Sender: TObject);
-    procedure BrandsComboboxSelect(Sender: TObject);
-    procedure SubcategoriesComboboxSelect(Sender: TObject);
-    procedure SearchButtonClick(Sender: TObject);
+    procedure CompaniesComboboxSelect(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
     ProductsArray: TJSONArray;
@@ -53,18 +65,17 @@ implementation
 
 {$R *.dfm}
 
-procedure TSupplements.BrandsComboboxSelect(Sender: TObject);
-begin
-  CategoriesLabel.Visible := True;
-  CategoriesCombobox.Visible := True;
+uses
+  DM_Connection, Global_Functions, Form_ConfigCompanies;
 
-  //SelectCategories(CategoriesCombobox);
+procedure TSupplements.CompaniesComboboxSelect(Sender: TObject);
+begin
+  FetchCombobox(Q_Categories, CategoriesCombobox);
 end;
 procedure TSupplements.PanelClick(Sender: TObject);
 var
   URL: string;
   ProductIndex: Integer;
-  Product: TJSONObject;
 begin
   if Sender is TPanel then
     ProductIndex := TPanel(Sender).Tag
@@ -75,72 +86,94 @@ begin
   else
     Exit;
 
-  // Obtém o URL do produto correspondente a partir do array
-  Product := ProductsArray.Items[ProductIndex] as TJSONObject;
-  URL := Product.GetValue<string>('url');
+  Q_Products.DisableControls;
+  try
+    Q_Products.First;
+    Q_Products.MoveBy(ProductIndex);
 
-  // Abre o URL usando OpenURL
+    URL := Q_Products.FieldByName('url_product').AsString;
+  finally
+    Q_Products.EnableControls;
+  end;
+
   OpenURL(URL);
 end;
 
-procedure TSupplements.SearchButtonClick(Sender: TObject);
+
+procedure TSupplements.Button1Click(Sender: TObject);
 begin
-GetProducts;
-end;
-
-procedure TSupplements.SubcategoriesComboboxSelect(Sender: TObject);
-//var
-// id_subcategory: integer;
-begin
-  TypesLabel.Visible := True;
-  TypesCombobox.Visible := True;
-
-//  id_subcategory := GetSubcategoryID(SubcategoriesCombobox);
-//  SelectTypes(TypesCombobox, id_subcategory);
-
+CreateCardsProduct;
 end;
 
 procedure TSupplements.CategoriesComboboxSelect(Sender: TObject);
 var
-id_category: integer;
+  id_category: integer;
 begin
 
   SubcategoriesLabel.Visible := True;
   SubcategoriesCombobox.Visible := True;
 
   id_category := GetCategoryID(CategoriesCombobox.Text);
-  //SelectSubCategories(SubcategoriesCombobox, id_category);
+  FetchCombobox(Q_SubCategories, SubcategoriesCombobox, id_category);
 end;
 
 procedure TSupplements.CreateCardsProduct;
 var
-  PanelWidth, PanelHeight, Padding, Columns, col, row, i: Integer;
-  InputImagePath, OutputImagePath, Title, Price, Image_Src, URL: string;
-  Product: TJSONObject;
+  PanelWidth, PanelHeight, Padding, Columns, col, row, I, id_category, id_subcategory, id_company: Integer;
+  Title, Image_Src, categ_value, subcateg_value, company_value: string;
+  Price: Double;
   Panel: TPanel;
   Image: TImage;
   TitleLabel, PriceLabel: TLabel;
 begin
-
-  InputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\input_image_path';
-  OutputImagePath := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Scripts Py\output_image_path';
-
-  PanelWidth := 245;
-  PanelHeight := 350;
-  Padding := 33;
-  Columns := 6;
-
+  PanelWidth := 250;
+  PanelHeight := 370;
+  Padding := 15;
+  Columns := 7;
 
   while CardsBox.ControlCount > 0 do
     CardsBox.Controls[0].Free;
 
-  for i := 0 to ProductsArray.Count - 1 do
+  categ_value := CategoriesCombobox.Text;
+  subcateg_value := SubcategoriesCombobox.Text;
+  company_value := CompaniesCombobox.Text;
+
+  id_category := 0;
+  id_subcategory := 0;
+  id_company := 0;
+
+  if categ_value <> '' then
   begin
-    Product := ProductsArray.Items[i] as TJSONObject;
-    Title := Product.GetValue<string>('title');
-    Price := Product.GetValue<string>('price');
-    Image_Src := Product.GetValue<string>('image_src');
-    URL := Product.GetValue<string>('url');
+     id_category := GetCategoryID(categ_value);
+  end;
+
+  if subcateg_value <> '' then
+  begin
+     id_subcategory := GetSubcategoryID(subcateg_value);
+  end;
+
+  if company_value <> '' then
+  begin
+     id_company := GetCompanyID(company_value);
+  end;
+
+  Q_Products.Close;
+  Q_Products.ParamByName('id_company').AsInteger := id_company;
+  Q_Products.ParamByName('id_category').AsInteger := id_category;
+  Q_Products.ParamByName('id_subcategory').AsInteger := id_subcategory;
+  Q_Products.Open;
+
+  I := 0;
+  while not Q_Products.Eof do
+  begin
+    if I = 6 then
+    begin
+      HideScrollbars(CardsBox);
+    end;
+
+    Title := Q_Products.FieldByName('title_product').AsString;
+    Price := Q_Products.FieldByName('price_product').AsFloat;
+    Image_Src := Q_Products.FieldByName('image_src').AsString;
 
     col := i mod Columns;
     row := i div Columns;
@@ -151,8 +184,9 @@ begin
     Panel.Height := PanelHeight;
     Panel.Left := col * (PanelWidth + Padding);
     Panel.Top := row * (PanelHeight + Padding);
-    Panel.BevelOuter := BvNone;
+    Panel.BevelOuter := bvRaised;
     Panel.ParentBackground := False;
+    Panel.Font.Name := 'Hammersmith One';
     Panel.Color := TColor($3b3b3b);
     Panel.Tag := i;
     Panel.OnClick := PanelClick;
@@ -169,11 +203,6 @@ begin
     Image.OnClick := PanelClick;
     LoadImage(Image_Src, Image);
 
-    if i = 6 then
-    begin
-      HideScrollbars(CardsBox);
-    end;
-
     TitleLabel := TLabel.Create(Panel);
     TitleLabel.AlignWithMargins := True;
     TitleLabel.Margins.Left := 5;
@@ -182,7 +211,6 @@ begin
     TitleLabel.Margins.Bottom := 0;
     TitleLabel.Parent := Panel;
     TitleLabel.Caption := Title;
-    TitleLabel.Font.Style := [fsBold];
     TitleLabel.Font.Color := clWhite;
     TitleLabel.Font.Size := 12;
     TitleLabel.WordWrap := True;
@@ -195,37 +223,43 @@ begin
     PriceLabel.AlignWithMargins := True;
     PriceLabel.Margins.Bottom := 12;
     PriceLabel.Parent := Panel;
-    PriceLabel.Caption := Price;
-    PriceLabel.Font.Size := 18;
-    PriceLabel.Font.Style := [fsBold];
-    PriceLabel.Font.Color := clLime;
+    PriceLabel.Font.Name := 'Hammersmith One';
+    PriceLabel.StyleElements := [];
+    PriceLabel.Caption := 'R$ ' + FloatToStr(Price);
+    PriceLabel.Font.Size :=18;
+    PriceLabel.Font.Color := TColor($002FF92F);
     PriceLabel.Alignment := taCenter;
     PriceLabel.Align := alBottom;
     PriceLabel.Tag := i;
     PriceLabel.OnClick := PanelClick;
+
+    Q_Products.Next;
+    Inc(I);
   end;
 end;
 
 procedure TSupplements.FormCreate(Sender: TObject);
 begin
-  //SelectBrands(BrandsCombobox);
+  FetchCombobox(Q_Companies, CompaniesCombobox);
+end;
+
+procedure TSupplements.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_F1 then
+  begin
+    ConfigCompanies := TConfigCompanies.Create(nil);
+    try
+      ConfigCompanies.ShowModal;
+    finally
+      ConfigCompanies.Free;
+    end;
+  end;
 end;
 
 procedure TSupplements.OpenURL(URL: string);
 begin
   ShellExecute(0, 'open', PChar(URL), nil, nil, SW_SHOWNORMAL);
-end;
-
-procedure TSupplements.GetProducts;
-var
-  brand, category, subcategory: string;
-begin
-  brand := StringReplace(LowerCase(BrandsCombobox.Text), ' ', '', [rfReplaceAll]);
-  category := StringReplace(LowerCase(CategoriesCombobox.Text), ' ', '', [rfReplaceAll]);
-  subcategory := StringReplace(LowerCase(SubcategoriesCombobox.Text), ' ', '', [rfReplaceAll]);
-
-  //ProductsArray := APISupp(brand, category, subcategory);
-  CreateCardsProduct;
 end;
 
 end.
