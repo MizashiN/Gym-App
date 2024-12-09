@@ -4,8 +4,8 @@ object DM_Con: TDM_Con
   object Connection: TFDConnection
     Params.Strings = (
       
-        'Database=C:\Users\Parafal\Documents\GitHub\GymApp-API\database.d' +
-        'b'
+        'Database=C:\Users\Parafal\Documents\GitHub\Gym-App\Win64\Release' +
+        '\database.db'
       'BusyTimeout=30000'
       'DriverID=SQLite')
     LoginPrompt = False

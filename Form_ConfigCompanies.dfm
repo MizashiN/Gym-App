@@ -20,11 +20,10 @@ object ConfigCompanies: TConfigCompanies
     Top = 0
     Width = 1049
     Height = 597
-    ActivePage = TabSheet2
+    ActivePage = BrandRegistration
     Align = alClient
     TabOrder = 0
     OnChange = PageControlChange
-    ExplicitWidth = 992
     object BrandRegistration: TTabSheet
       Caption = 'Brand Registration'
       ImageIndex = 2
@@ -36,7 +35,6 @@ object ConfigCompanies: TConfigCompanies
         Height = 561
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 978
         object Panel41: TPanel
           AlignWithMargins = True
           Left = 4
@@ -45,7 +43,6 @@ object ConfigCompanies: TConfigCompanies
           Height = 502
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 970
           object CompaniesGrid: TDBGrid
             AlignWithMargins = True
             Left = 4
@@ -83,7 +80,6 @@ object ConfigCompanies: TConfigCompanies
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 970
           object Panel45: TPanel
             AlignWithMargins = True
             Left = 3
@@ -111,7 +107,6 @@ object ConfigCompanies: TConfigCompanies
             ParentFont = False
             TabOrder = 1
             OnClick = Button3Click
-            ExplicitLeft = 700
           end
           object Button2: TButton
             AlignWithMargins = True
@@ -129,7 +124,6 @@ object ConfigCompanies: TConfigCompanies
             ParentFont = False
             TabOrder = 2
             OnClick = Button2Click
-            ExplicitLeft = 836
           end
         end
       end
@@ -149,7 +143,6 @@ object ConfigCompanies: TConfigCompanies
         ParentBiDiMode = False
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 972
         object CategoriesPanel: TPanel
           AlignWithMargins = True
           Left = 4
@@ -159,7 +152,6 @@ object ConfigCompanies: TConfigCompanies
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitWidth = 964
           object Panel14: TPanel
             AlignWithMargins = True
             Left = 836
@@ -170,7 +162,6 @@ object ConfigCompanies: TConfigCompanies
             BevelOuter = bvNone
             Caption = 'Insert'
             TabOrder = 0
-            ExplicitLeft = 779
             object Button1: TButton
               AlignWithMargins = True
               Left = 3
@@ -299,7 +290,6 @@ object ConfigCompanies: TConfigCompanies
             Align = alRight
             BevelOuter = bvNone
             TabOrder = 4
-            ExplicitLeft = 640
             object TitleSubCategParam: TCheckBox
               Left = 0
               Top = 0
@@ -320,7 +310,6 @@ object ConfigCompanies: TConfigCompanies
           Height = 414
           Align = alClient
           TabOrder = 1
-          ExplicitWidth = 964
           object Panel11: TPanel
             Left = 1
             Top = 1
@@ -517,8 +506,6 @@ object ConfigCompanies: TConfigCompanies
               Font.Style = []
               ParentFont = False
               TabOrder = 1
-              ExplicitLeft = 12
-              ExplicitWidth = 452
             end
           end
           object SubCategTitlePanel: TPanel
@@ -529,7 +516,6 @@ object ConfigCompanies: TConfigCompanies
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 2
-            ExplicitLeft = 963
             object DBGrid3: TDBGrid
               AlignWithMargins = True
               Left = 10
@@ -625,7 +611,6 @@ object ConfigCompanies: TConfigCompanies
               Font.Style = []
               ParentFont = False
               TabOrder = 1
-              ExplicitWidth = 440
             end
           end
         end
@@ -639,7 +624,6 @@ object ConfigCompanies: TConfigCompanies
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitWidth = 972
         object Panel4: TPanel
           AlignWithMargins = True
           Left = 3
@@ -691,7 +675,6 @@ object ConfigCompanies: TConfigCompanies
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 978
         object ScrappConfig: TPanel
           AlignWithMargins = True
           Left = 3
@@ -701,7 +684,6 @@ object ConfigCompanies: TConfigCompanies
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitWidth = 972
           object Title: TPanel
             AlignWithMargins = True
             Left = 151
@@ -1507,6 +1489,31 @@ object ConfigCompanies: TConfigCompanies
                 EditLabel.Height = 15
               end
             end
+            object Panel13: TPanel
+              AlignWithMargins = True
+              Left = 3
+              Top = 159
+              Width = 136
+              Height = 46
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 3
+              ExplicitLeft = 0
+              ExplicitTop = 185
+              object perc_pix: TDBLabeledEdit
+                AlignWithMargins = True
+                Left = 3
+                Top = 20
+                Width = 130
+                Height = 23
+                Align = alBottom
+                DataField = 'perc_pix'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
+                EditLabel.Width = 44
+                EditLabel.Height = 15
+              end
+            end
           end
         end
         object Panel48: TPanel
@@ -1518,7 +1525,6 @@ object ConfigCompanies: TConfigCompanies
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 972
           object Panel49: TPanel
             AlignWithMargins = True
             Left = 3
@@ -1572,7 +1578,6 @@ object ConfigCompanies: TConfigCompanies
             ParentFont = False
             TabOrder = 1
             OnClick = Button5Click
-            ExplicitLeft = 827
           end
           object Button6: TButton
             AlignWithMargins = True
@@ -1590,7 +1595,6 @@ object ConfigCompanies: TConfigCompanies
             ParentFont = False
             TabOrder = 2
             OnClick = Button6Click
-            ExplicitLeft = 679
           end
           object Button4: TButton
             AlignWithMargins = True
@@ -1608,7 +1612,24 @@ object ConfigCompanies: TConfigCompanies
             ParentFont = False
             TabOrder = 3
             OnClick = Button4Click
-            ExplicitLeft = 531
+          end
+          object Button7: TButton
+            AlignWithMargins = True
+            Left = 440
+            Top = 3
+            Width = 142
+            Height = 55
+            Align = alRight
+            Caption = 'Refresh Database'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 4
+            OnClick = Button7Click
+            ExplicitTop = 6
           end
         end
       end
@@ -2023,6 +2044,10 @@ object ConfigCompanies: TConfigCompanies
       FieldName = 'page_param'
       Origin = 'page_param'
       Size = 255
+    end
+    object Q_ConfigCompaniesperc_pix: TIntegerField
+      FieldName = 'perc_pix'
+      Origin = 'perc_pix'
     end
   end
   object D_ConfigCompanies: TDataSource
