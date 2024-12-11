@@ -193,7 +193,7 @@ object ConfigCompanies: TConfigCompanies
               AlignWithMargins = True
               Left = 3
               Top = 3
-              Width = 98
+              Width = 176
               Height = 21
               Align = alTop
               Caption = 'Subcategories'
@@ -203,6 +203,7 @@ object ConfigCompanies: TConfigCompanies
               Font.Name = 'Segoe UI'
               Font.Style = []
               ParentFont = False
+              ExplicitWidth = 98
             end
             object SubCategCombobox: TComboBox
               AlignWithMargins = True
@@ -227,7 +228,7 @@ object ConfigCompanies: TConfigCompanies
               AlignWithMargins = True
               Left = 3
               Top = 3
-              Width = 74
+              Width = 176
               Height = 21
               Align = alTop
               Caption = 'Categories'
@@ -237,6 +238,7 @@ object ConfigCompanies: TConfigCompanies
               Font.Name = 'Segoe UI'
               Font.Style = []
               ParentFont = False
+              ExplicitWidth = 74
             end
             object CategCombobox: TComboBox
               AlignWithMargins = True
@@ -622,7 +624,6 @@ object ConfigCompanies: TConfigCompanies
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitWidth = 604
         object Panel4: TPanel
           AlignWithMargins = True
           Left = 3
@@ -674,8 +675,6 @@ object ConfigCompanies: TConfigCompanies
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 610
-        ExplicitHeight = 405
         object ScrappConfig: TPanel
           AlignWithMargins = True
           Left = 3
@@ -885,6 +884,58 @@ object ConfigCompanies: TConfigCompanies
                 DataSource = D_ConfigCompanies
                 TabOrder = 0
                 EditLabel.Width = 56
+                EditLabel.Height = 15
+              end
+            end
+            object Panel31: TPanel
+              AlignWithMargins = True
+              Left = 3
+              Top = 323
+              Width = 136
+              Height = 50
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 6
+              ExplicitLeft = -9
+              ExplicitTop = 347
+              object grid_tag: TDBLabeledEdit
+                AlignWithMargins = True
+                Left = 3
+                Top = 24
+                Width = 130
+                Height = 23
+                Align = alBottom
+                DataField = 'grid_tag'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
+                EditLabel.Width = 43
+                EditLabel.Height = 15
+                ExplicitLeft = 9
+                ExplicitTop = 27
+              end
+            end
+            object Panel55: TPanel
+              AlignWithMargins = True
+              Left = 3
+              Top = 379
+              Width = 136
+              Height = 50
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 7
+              ExplicitLeft = -3
+              ExplicitTop = 427
+              object grid_class: TDBLabeledEdit
+                AlignWithMargins = True
+                Left = 3
+                Top = 24
+                Width = 130
+                Height = 23
+                Align = alBottom
+                DataField = 'grid_class'
+                DataSource = D_ConfigCompanies
+                TabOrder = 0
+                EditLabel.Width = 51
                 EditLabel.Height = 15
               end
             end
@@ -1499,8 +1550,6 @@ object ConfigCompanies: TConfigCompanies
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 3
-              ExplicitLeft = 0
-              ExplicitTop = 185
               object perc_pix: TDBLabeledEdit
                 AlignWithMargins = True
                 Left = 3
@@ -1526,7 +1575,6 @@ object ConfigCompanies: TConfigCompanies
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 604
           object Panel49: TPanel
             AlignWithMargins = True
             Left = 3
@@ -1614,24 +1662,6 @@ object ConfigCompanies: TConfigCompanies
             ParentFont = False
             TabOrder = 3
             OnClick = Button4Click
-          end
-          object Button7: TButton
-            AlignWithMargins = True
-            Left = 440
-            Top = 3
-            Width = 142
-            Height = 55
-            Align = alRight
-            Caption = 'Refresh Database'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -16
-            Font.Name = 'Segoe UI'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 4
-            OnClick = Button7Click
-            ExplicitTop = 6
           end
         end
       end
@@ -2050,6 +2080,16 @@ object ConfigCompanies: TConfigCompanies
     object Q_ConfigCompaniesperc_pix: TIntegerField
       FieldName = 'perc_pix'
       Origin = 'perc_pix'
+    end
+    object Q_ConfigCompaniesgrid_tag: TStringField
+      FieldName = 'grid_tag'
+      Origin = 'grid_tag'
+      Size = 32767
+    end
+    object Q_ConfigCompaniesgrid_class: TStringField
+      FieldName = 'grid_class'
+      Origin = 'grid_class'
+      Size = 32767
     end
   end
   object D_ConfigCompanies: TDataSource

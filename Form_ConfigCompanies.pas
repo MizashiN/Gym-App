@@ -198,7 +198,12 @@ type
     Panel13: TPanel;
     perc_pix: TDBLabeledEdit;
     Q_ConfigCompaniesperc_pix: TIntegerField;
-    Button7: TButton;
+    Panel31: TPanel;
+    grid_tag: TDBLabeledEdit;
+    Panel55: TPanel;
+    grid_class: TDBLabeledEdit;
+    Q_ConfigCompaniesgrid_tag: TStringField;
+    Q_ConfigCompaniesgrid_class: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure CategComboboxSelect(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -211,7 +216,6 @@ type
     procedure Button6Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure TitleSubCategParamClick(Sender: TObject);
-    procedure Button7Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -346,19 +350,6 @@ end;
 procedure TConfigCompanies.Button6Click(Sender: TObject);
 begin
  SaveQuery(Q_ConfigCompanies);
-end;
-
-procedure TConfigCompanies.Button7Click(Sender: TObject);
-var
-  ExePath: string;
-begin
-  ExePath := ExtractFilePath(Application.ExeName) + 'AddCompany.exe';
-  if FileExists(ExePath) then
-  begin
-    ShellExecute(0, 'open', PChar(ExePath), nil, nil, SW_SHOWNORMAL);
-  end
-  else
-    ShowMessage('Arquivo AddCompany.exe não encontrado.');
 end;
 
 procedure TConfigCompanies.CategComboboxSelect(Sender: TObject);
