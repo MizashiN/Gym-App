@@ -211,6 +211,8 @@ object Supplements: TSupplements
             Font.Name = 'Hammersmith One'
             Font.Style = []
             ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
             TabOrder = 0
             OnSelect = CompaniesComboboxSelect
           end

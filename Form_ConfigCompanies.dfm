@@ -193,7 +193,7 @@ object ConfigCompanies: TConfigCompanies
               AlignWithMargins = True
               Left = 3
               Top = 3
-              Width = 176
+              Width = 98
               Height = 21
               Align = alTop
               Caption = 'Subcategories'
@@ -203,7 +203,6 @@ object ConfigCompanies: TConfigCompanies
               Font.Name = 'Segoe UI'
               Font.Style = []
               ParentFont = False
-              ExplicitWidth = 98
             end
             object SubCategCombobox: TComboBox
               AlignWithMargins = True
@@ -228,7 +227,7 @@ object ConfigCompanies: TConfigCompanies
               AlignWithMargins = True
               Left = 3
               Top = 3
-              Width = 176
+              Width = 74
               Height = 21
               Align = alTop
               Caption = 'Categories'
@@ -238,7 +237,6 @@ object ConfigCompanies: TConfigCompanies
               Font.Name = 'Segoe UI'
               Font.Style = []
               ParentFont = False
-              ExplicitWidth = 74
             end
             object CategCombobox: TComboBox
               AlignWithMargins = True
@@ -624,6 +622,7 @@ object ConfigCompanies: TConfigCompanies
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitWidth = 604
         object Panel4: TPanel
           AlignWithMargins = True
           Left = 3
@@ -675,6 +674,8 @@ object ConfigCompanies: TConfigCompanies
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 610
+        ExplicitHeight = 405
         object ScrappConfig: TPanel
           AlignWithMargins = True
           Left = 3
@@ -1525,6 +1526,7 @@ object ConfigCompanies: TConfigCompanies
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
+          ExplicitWidth = 604
           object Panel49: TPanel
             AlignWithMargins = True
             Left = 3

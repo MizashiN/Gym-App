@@ -12,8 +12,9 @@ uses
 
 type
   TDM_Con = class(TDataModule)
-    ConnectionMySQL: TFDConnection;
-    TransactionMySQL: TFDTransaction;
+    Connection: TFDConnection;
+    Transaction: TFDTransaction;
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,5 +29,10 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TDM_Con.DataModuleCreate(Sender: TObject);
+begin
+as
+end;
 
 end.

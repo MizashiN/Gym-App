@@ -14,6 +14,7 @@ type
   TDM_Con = class(TDataModule)
     Connection: TFDConnection;
     Transaction: TFDTransaction;
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,5 +29,11 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TDM_Con.DataModuleCreate(Sender: TObject);
+begin
+Connection.Params.Database := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'database.db';
+Connection.Connected := True;
+end;
 
 end.

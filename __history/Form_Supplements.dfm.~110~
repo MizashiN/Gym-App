@@ -89,6 +89,7 @@ object Supplements: TSupplements
           Margins.Right = 470
           Align = alClient
           Brush.Color = clBlack
+          Pen.Color = clWhite
           ExplicitWidth = 400
         end
       end
@@ -210,7 +211,10 @@ object Supplements: TSupplements
             Font.Name = 'Hammersmith One'
             Font.Style = []
             ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
             TabOrder = 0
+            TextHint = 'Select Here'
             OnSelect = CompaniesComboboxSelect
           end
         end
@@ -240,14 +244,14 @@ object Supplements: TSupplements
             Color = clBlack
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -40
-            Font.Name = 'Segoe UI'
+            Font.Height = -27
+            Font.Name = 'Hammersmith One'
             Font.Style = []
             ParentColor = False
             ParentFont = False
             Layout = tlBottom
-            ExplicitWidth = 189
-            ExplicitHeight = 54
+            ExplicitWidth = 137
+            ExplicitHeight = 33
           end
           object CategoriesCombobox: TComboBox
             AlignWithMargins = True
@@ -276,7 +280,7 @@ object Supplements: TSupplements
           Top = 0
           Width = 194
           Height = 86
-          Margins.Left = 20
+          Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 0

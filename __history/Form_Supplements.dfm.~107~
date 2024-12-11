@@ -2,7 +2,6 @@ object Supplements: TSupplements
   Left = 0
   Top = 0
   ActiveControl = CompaniesCombobox
-  BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Supplements'
   ClientHeight = 900
@@ -90,6 +89,7 @@ object Supplements: TSupplements
           Margins.Right = 470
           Align = alClient
           Brush.Color = clBlack
+          Pen.Color = clWhite
           ExplicitWidth = 400
         end
       end
@@ -277,7 +277,7 @@ object Supplements: TSupplements
           Top = 0
           Width = 194
           Height = 86
-          Margins.Left = 20
+          Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 0

@@ -7,12 +7,14 @@ uses
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef,
-  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs;
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteWrapper.Stat;
 
 type
   TDM_Con = class(TDataModule)
-    ConnectionScrappTest: TFDConnection;
-    TransactionScrappTest: TFDTransaction;
+    Connection: TFDConnection;
+    Transaction: TFDTransaction;
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,5 +29,13 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TDM_Con.DataModuleCreate(Sender: TObject);
+begin
+Connection.Params.Database := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'Release\sqlite.db';
+
+  // Ativa a conexão
+  FDConnection1.Connected := True;
+end;
 
 end.

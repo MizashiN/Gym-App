@@ -1,11 +1,9 @@
 object DM_Con: TDM_Con
+  OnCreate = DataModuleCreate
   Height = 256
   Width = 398
   object Connection: TFDConnection
     Params.Strings = (
-      
-        'Database=C:\Users\Parafal\Documents\GitHub\Gym-App\Win64\Release' +
-        '\database.db'
       'BusyTimeout=30000'
       'DriverID=SQLite')
     LoginPrompt = False
